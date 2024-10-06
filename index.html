@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <title>Advanced Dungeon & Dragons 2ed</title>
+		<link rel="icon" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/ficha.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <meta property="og:title" content="Advanced Dungeon & Dragons 2ed" />
+    <meta property="og:image" content="img/adnd.jpg" />
+    <meta property="og:description" content="Rolador de personagens, NPCs, itens e calendário de AD&D 2ed."/>
+    <meta property="og:url" content="https://flechamagica.com.br/aded/"/>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+    <meta property="og:type" content="website"/>
+  </head>
+  <body>
+    <div class="loading" id="loading"></div>
+
+    <header>
+      <button type="button" id="header-botao-voltar">
+        <img src="img/arrow-left-solid.svg">
+      </button>
+      <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed">
+    </header>
+
+    <main class="texto" id="pagina-inicial">
+      <h2>Roladores de AD&D 2ed</h2>
+      <br>
+      <span>Conheça o Flecha Mágica</span>
+      <br>
+      Estes roladores foram desenvolvidos pelo Flecha Mágica! Acesse nosso canal do YouTube neste link <a href="https://www.youtube.com/@flechamagica">youtube.com/@flechamagica</a> para conhecer nossas campanhas de RPG. O desenvolvimento desses roladores e outros materiais relacionados ao RPG foram viabilizados pelo projeto Pega Essa Flecha no Catarse. Acesse este link <a href="https://catarse.me/flechamagica">catarse.me/flechamagica</a> para conhecer o projeto.
+      <br>
+    </main>
+
+    <main class="texto" id="pagina-personagens">
+      <h2>Gerador de personagens AD&D 2ed</h2>
+      <br>
+
+      <button type="button" class="mostrar" id="texto-botao-mostrar1">
+        <img src="img/arrow-down-wide-short-solid.svg">
+        <span>Mostrar</span>
+      </button>
+      <button type="button" class="mostrar" id="texto-botao-esconder1">
+        <img src="img/arrow-up-wide-short-solid.svg">
+        <span>Esconder</span>
+      </button>
+      <span>Sobre este gerador</span>
+
+      <br>
+      <div class="bloco-texto" id="texto-bloco1">
+        Este é um gerador aleatório de personagens para <b>Advanced Dungeons and Dragons 2ª edição</b>. Ele leva como base os livros <b>Livro do Jogador</b>, <b>Ravenloft: Domínios do Medo</b>, <b>The Complete Psionics Handbook</b> e o <b>DarkSun Rules Book (1991)</b>. Note que há algumas restrições em relação às classes e raças (ou seja, algumas classes não podem ser assumidas por certas raças). Isso é refletido automaticamente nos campos de seleção, caso você opte em forçar a rolagem com algumas classe ou raça em particular.
+      </div>
+
+      <br>
+
+      <button type="button" class="mostrar" id="texto-botao-mostrar2">
+        <img src="img/arrow-down-wide-short-solid.svg">
+        <span>Mostrar</span>
+      </button>
+      <button type="button" class="mostrar" id="texto-botao-esconder2">
+        <img src="img/arrow-up-wide-short-solid.svg">
+        <span>Esconder</span>
+      </button>
+      <span>Como usar este gerador?</span>
+
+      <br>
+      <div class="bloco-texto" id="texto-bloco2">
+        O botão <b>Exportar PDF</b> imprime um arquivo PDF contendo os dados gerados, de forma que você possa compartilhar sua ficha e guardá-la para uso posterior. Observe que ao atualizar esta página, a ficha rolada (e apresentada na tela) será perdida. O campo <b>Campanha Ravenloft</b> serve para ajustar a habilidade <b>Poder da Fé</b> dos Clérigos e Anacoretas às condições estabelecidas no livro <b>Ravenloft: Domínios do Medo</b> (enfraquecendo as mesmas). O campo <b>Campanha Dark Sun</b> serve para ajustar os atributos às condições estabelecidas no livro <b>DarkSun Rules Book (1991)</b> (fortalecendo os mesmos), entre outros elementos presentes neste cenário. O campo <b>Usar Multiclasse ou Classe Dupla</b> vai habilitar as opções de Multiclasse (apenas para as raças semi-humanas) ou definir os requisitos mínimos de atributos das Classes Duplas (apenas para as raças humanas). Mesmo que o nível escolhido seja superior ao 1, este rolador não permite escolher a segunda classe da Classe Dupla - ele só aplica os valores necessários para que o jogador escolha a posteriori.
+      </div>
+
+      <br>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-nome">Nome</label>
+        <input type="text" value="" name="texto-formulario-nome" id="texto-formulario-nome">
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-nivel">Nível</label>
+        <input type="number" class="pequeno" max="3" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel">
+      </div>
+
+      <div class="bloco bloco-campos bloco-checkbox">
+        <input type="checkbox" name="texto-formulario-ravenloft" id="texto-formulario-ravenloft">
+        <label for="texto-formulario-ravenloft">Campanha Ravenloft</label>
+      </div>
+      <div class="bloco bloco-campos bloco-checkbox direita">
+        <input type="checkbox" name="texto-formulario-darksun" id="texto-formulario-darksun">
+        <label for="texto-formulario-darksun">Campanha Dark Sun</label>
+      </div>
+
+      <div class="bloco bloco-campos bloco-checkbox">
+        <input type="checkbox" name="texto-formulario-vida" id="texto-formulario-vida">
+        <label for="texto-formulario-vida">Máximo PV no Nível 1</label>
+      </div>
+      <div class="bloco bloco-campos direita invisivel">
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-raca">Raça</label>
+        <select name="texto-formulario-raca" id="texto-formulario-raca">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-classe" id="texto-formulario-classe-label">Classe</label>
+        <select name="texto-formulario-classe" id="texto-formulario-classe">
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-tendencia">Tendência</label>
+        <select name="texto-formulario-tendencia" id="texto-formulario-tendencia">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-linhagem">Linhagem</label>
+        <select name="texto-formulario-linhagem" id="texto-formulario-linhagem">
+        </select>
+      </div>
+
+      <br>
+      <div class="atributos">
+        <span>Valor mínimo dos atributos</span>
+      </div>
+      <div class="bloco bloco-atributos primeiro">
+        <label for="texto-formulario-minimo-forca">Força</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-forca" id="texto-formulario-minimo-forca">
+      </div>
+      <div class="bloco bloco-atributos">
+        <label for="texto-formulario-minimo-destreza">Destreza</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-destreza" id="texto-formulario-minimo-destreza">
+      </div>
+      <div class="bloco bloco-atributos">
+        <label class="menor" for="texto-formulario-minimo-constituicao">Constituição</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-constituicao" id="texto-formulario-minimo-constituicao">
+      </div>
+      <div class="bloco bloco-atributos quarto segunda-linha">
+        <label for="texto-formulario-minimo-inteligencia">Inteligência</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-inteligencia" id="texto-formulario-minimo-inteligencia">
+      </div>
+      <div class="bloco bloco-atributos segunda-linha">
+        <label for="texto-formulario-minimo-sabedoria">Sabedoria</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-sabedoria" id="texto-formulario-minimo-sabedoria">
+      </div>
+      <div class="bloco bloco-atributos segunda-linha">
+        <label for="texto-formulario-minimo-carisma">Carisma</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-minimo-carisma" id="texto-formulario-minimo-carisma">
+      </div>
+
+      <br>
+      <div class="atributos">
+        <button type="button" class="mostrar" id="texto-botao-rolar-atributos">
+          <img src="img/dice-solid.svg">
+          <span>Rolar Atributos</span>
+        </button>
+        <span>Atributos do personagem</span>
+      </div>
+      <div class="bloco bloco-atributos primeiro">
+        <label for="texto-formulario-atributo-forca">Força</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-forca" id="texto-formulario-atributo-forca">
+      </div>
+      <div class="bloco bloco-atributos">
+        <label for="texto-formulario-atributo-destreza">Destreza</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-destreza" id="texto-formulario-atributo-destreza">
+      </div>
+      <div class="bloco bloco-atributos">
+        <label class="menor" for="texto-formulario-atributo-constituicao">Constituição</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-constituicao" id="texto-formulario-atributo-constituicao">
+      </div>
+      <div class="bloco bloco-atributos quarto segunda-linha">
+        <label for="texto-formulario-atributo-inteligencia">Inteligência</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-inteligencia" id="texto-formulario-atributo-inteligencia">
+      </div>
+      <div class="bloco bloco-atributos segunda-linha">
+        <label for="texto-formulario-atributo-sabedoria">Sabedoria</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-sabedoria" id="texto-formulario-atributo-sabedoria">
+      </div>
+      <div class="bloco bloco-atributos segunda-linha">
+        <label for="texto-formulario-atributo-carisma">Carisma</label>
+        <input type="number" max="18" min="3" value="3" name="texto-formulario-atributo-carisma" id="texto-formulario-atributo-carisma">
+      </div>
+
+      <div class="bloco bloco-botoes">
+        <button type="button" id="texto-botao-voltar">
+					<img src="img/arrow-left-solid.svg">
+					<span>Voltar</span>
+				</button>
+
+        <button type="button" id="texto-botao-rolar">
+					<img src="img/rolar.png">
+					<span>Rolar</span>
+				</button>
+        <button type="button" id="texto-botao-limpar">
+					<img src="img/eraser-solid.svg">
+					<span>Limpar</span>
+				</button>
+      </div>
+    </main>
+
+    <main class="menu" id="pagina-menus">
+      <a id="menu-personagens" class="menu menu-personagens" href="#">
+        <span>Rolador de Personagens</span>
+      </a>
+      <a id="menu-npcs" class="menu menu-npcs" href="#">
+        <span>Rolador de NPCs</span>
+      </a>
+      <a id="menu-itens" class="menu menu-itens" href="#">
+        <span>Rolador de Itens</span>
+      </a>
+      <a id="menu-calendario" class="menu menu-calendario" href="#">
+        <span>Calendário de D&D</span>
+      </a>
+    </main>
+
+    <div id="ficha"></div>
+
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <script type="text/javascript" src="js/prettyprint.js"></script>
+    <script type="text/javascript" src="js/dados.js"></script>
+    <script type="text/javascript" src="js/gerador.js"></script>
+
+    <script type="text/javascript" src="js/render.js"></script>
+  </body>
+</html>

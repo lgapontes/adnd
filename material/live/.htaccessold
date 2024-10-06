@@ -1,0 +1,10 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
+Header add Access-Control-Allow-Headers: "Content-Type"
+
+<IfModule mime_module>
+#AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+</IfModule>

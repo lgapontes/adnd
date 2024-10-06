@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <title>Controle Tempo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+		<link rel="icon" href="img/favicon.gif">
+    <style>
+      * {
+        border: 0;
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        margin: 0px auto;
+        overflow: hidden;
+      }
+
+      div {
+        position: fixed;
+        width: 540px;
+        height: 400px;
+        font-family: 'Bebas Neue', cursive;
+        font-weight: bold;
+        color: #bcaaa4;
+        text-shadow: 1px 1px 1px black;
+      }
+
+      div.gif {
+        position: fixed;
+        width: 540px;
+        height: 400px;
+        background-image: url(img/engrenagens_v1.gif);
+        background-repeat: no-repeat;
+        background-size: 540px;
+        z-index: 5;
+      }
+
+      div.background {
+        background-image: url(img/b1b.png);
+        background-repeat: no-repeat;
+        background-size: 540px;
+      }
+
+      div.background-2 {
+        background-image: url(img/b2b.png);
+        background-repeat: no-repeat;
+        background-size: 540px;
+        z-index: 2;
+      }
+
+      div.texto {
+        top: 45px;
+        width: 540px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 2.2em;
+        z-index: 1;
+      }
+
+      form {
+        display: block;
+        float: left;
+        margin-top: 420px;
+        margin-left: 30px;
+        padding: 10px;
+        border: 1px solid #000000;
+        background: #f5f5f5;
+      }
+
+      form::after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+      }
+
+      form#formulario-definir {
+        margin-top: 10px;
+      }
+
+      form#formulario-horas {
+        width: 250px;
+      }
+
+      button {
+        background: #a5a5a5;
+        padding: 4px;
+      }
+
+      div.tempo {
+        background-repeat: no-repeat;
+        background-size: 540px;
+        z-index: 3;
+      }
+
+      div.fade {
+        animation: fadeout 3s;
+      }
+
+      div#imagem-tempo-1 {
+        z-index: 4;
+      }
+
+      div#imagem-tempo-2 {
+        z-index: 3;
+      }
+
+      @keyframes fadeout {
+        from { opacity: 1; }
+        to   { opacity: 0; }
+      }
+
+      div.tempo01c {
+        background-image: url(img/tempo01c.png);
+      }
+      div.tempo02c {
+        background-image: url(img/tempo02c.png);
+      }
+      div.tempo03c {
+        background-image: url(img/tempo03c.png);
+      }
+      div.tempo04c {
+        background-image: url(img/tempo04c.png);
+      }
+      div.tempo05c {
+        background-image: url(img/tempo05c.png);
+      }
+      div.tempo06c {
+        background-image: url(img/tempo06c.png);
+      }
+      div.tempo07c {
+        background-image: url(img/tempo07c.png);
+      }
+      div.tempo08c {
+        background-image: url(img/tempo08c.png);
+      }
+      div.tempo09c {
+        background-image: url(img/tempo09c.png);
+      }
+      div.tempo10c {
+        background-image: url(img/tempo10c.png);
+      }
+      div.tempo11c {
+        background-image: url(img/tempo11c.png);
+      }
+      div.tempo12c {
+        background-image: url(img/tempo12c.png);
+      }
+      div.tempo13c {
+        background-image: url(img/tempo13c.png);
+      }
+      div.tempo14c {
+        background-image: url(img/tempo14c.png);
+      }
+      div.tempo15c {
+        background-image: url(img/tempo15c.png);
+      }
+      div.tempo16c {
+        background-image: url(img/tempo16c.png);
+      }
+      div.tempo17c {
+        background-image: url(img/tempo17c.png);
+      }
+      div.tempo18c {
+        background-image: url(img/tempo18c.png);
+      }
+      div.tempo19c {
+        background-image: url(img/tempo19c.png);
+      }
+      div.tempo20c {
+        background-image: url(img/tempo20c.png);
+      }
+      div.tempo21c {
+        background-image: url(img/tempo21c.png);
+      }
+      div.tempo22c {
+        background-image: url(img/tempo22c.png);
+      }
+      div.tempo23c {
+        background-image: url(img/tempo23c.png);
+      }
+      div.tempo24c {
+        background-image: url(img/tempo24c.png);
+      }
+
+      div#dados-bbb {
+        font-family: serif;
+        font-weight: normal;
+        color: #000;
+        text-shadow: 0 0 0 black;
+
+        padding: 4px;
+        box-sizing: border-box;
+        border: 1px solid #000;
+
+        width: 286px;
+        height: 580px;
+        position: fixed;
+        left: 840px;
+        top: 10px;
+        background-color: #fff;
+        overflow-y: visible;
+        overflow-x: hidden;
+      }
+
+      div#dados-bbb input[type=text], div#dados-bbb input[type=number], div#dados-bbb select {
+        border: 1px solid #000;
+      }
+
+      div#dados-bbb button {
+        background-color: #ccc;
+        font-size: 11px;
+        line-height: 13px;
+        margin-bottom: 2px;
+      }
+
+      div#dados-bbb h4 {
+        margin-bottom: 5px;
+      }
+      div#dados-bbb input[type=number], input[type=text] {
+          width: 70px;
+      }
+      div#dados-bbb img {
+          height: 12px;
+          margin: 0;
+          padding: 0;
+          border: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="gif"></div>
+
+    <div class="background">
+      <div id="data-descritiva" class="texto">10h, 15 Marpenoth, 1379 CV</div>
+      <div class="background-2"></div>
+      <div id="imagem-tempo-1" class="tempo tempo01c"></div>
+      <div id="imagem-tempo-2" class="tempo tempo01c"></div>
+    </div>
+
+    <form id="formulario-tempo">
+      <select id="tempo">
+        <option value="tempo01c">Dia / Sol aberto</option>
+        <option value="tempo02c">Dia / Sol com nuvens</option>
+        <option value="tempo03c">Dia / Nuvens</option>
+        <option value="tempo04c">Dia / Chovendo</option>
+        <option value="tempo05c">Dia / Tempestade</option>
+        <option value="tempo06c">Dia / Nevando</option>
+        <option value="tempo07c">Vento</option>
+        <option value="tempo08c">Furacão</option>
+        <option value="tempo09c">Noite / Lua minguante</option>
+        <option value="tempo10c">Noite / Lua quarto minguante</option>
+        <option value="tempo11c">Noite / Lua cheia</option>
+        <option value="tempo12c">Noite / Lua quarto crescente</option>
+        <option value="tempo13c">Noite / Lua crescente</option>
+        <option value="tempo14c">Noite / Lua nova</option>
+        <option value="tempo15c">Noite / Lua minguante com nuvens</option>
+        <option value="tempo16c">Noite / Lua quarto minguante com nuvens</option>
+        <option value="tempo17c">Noite / Lua cheia com nuvens</option>
+        <option value="tempo18c">Noite / Lua quarto crescente com nuvens</option>
+        <option value="tempo19c">Noite / Lua crescente com nuvens</option>
+        <option value="tempo20c">Noite / Lua nova com nuvens</option>
+        <option value="tempo21c">Noite / Nuvens</option>
+        <option value="tempo22c">Noite / Chovendo</option>
+        <option value="tempo23c">Noite / Tempestade</option>
+        <option value="tempo24c">Noite / Nevando</option>
+      </select>
+      <br><br>
+      <button type="submit">Alterar Lua</button>
+    </form>
+
+    <form id="formulario-calendario">
+      <select id="calendario">
+        <option value="CV">Cômputo dos Vales</option>
+        <option value="CB">Baroviano</option>
+      </select>
+      <br><br>
+      <button type="submit">Alterar Calendário</button>
+    </form>
+
+    <form id="formulario-horas">
+      <input type="number" min="1" id="somar-hora" value="1">hs
+      <br><br>
+      <button type="submit">Somar Horas</button>
+      &nbsp;
+      <input type="checkbox" id="tempo-barovia">&nbsp;Está em Baróvia
+    </form>
+
+    <br style="clear: both;">
+
+    <form id="formulario-definir">
+      <input type="number" max="23" min="0" id="definir-hora" value="0">h &nbsp;
+      <input type="number" min="1" id="definir-dia" value="1">d &nbsp;
+      <select id="definir-mes">
+      </select>&nbsp;
+      <input type="number" id="definir-ano" value="1380">
+      <br><br>
+      <button type="submit">Definir Horário</button>
+    </form>
+
+    <!--<div id="dados-bbb">
+    </div>-->
+
+    <script>
+
+      const DIA_CV_INVERNO = [ 'tempo01c', 'tempo02c', 'tempo03c', 'tempo04c', 'tempo05c', 'tempo06c', 'tempo07c' ];
+      const DIA_CV_VERAO = [ 'tempo01c', 'tempo02c', 'tempo03c', 'tempo04c', 'tempo05c', 'tempo07c' ];
+      const DIA_CB_INVERNO = [ 'tempo02c', 'tempo03c', 'tempo04c', 'tempo05c', 'tempo06c', 'tempo06c', 'tempo06c', 'tempo07c', 'tempo08c' ];
+      const DIA_CB_VERAO = [ 'tempo02c', 'tempo03c', 'tempo04c', 'tempo05c', 'tempo07c', 'tempo08c' ];
+
+      const DIA_CB_INVERNO_BAROVIA = [ 'tempo03c', 'tempo04c', 'tempo05c', 'tempo06c', 'tempo06c', 'tempo06c', 'tempo07c', 'tempo08c' ];
+      const DIA_CB_VERAO_BAROVIA = [ 'tempo03c', 'tempo04c', 'tempo05c', 'tempo07c', 'tempo08c' ];
+
+      const CV_INVERNO = [ 'Hammer', 'Midwinter', 'Alturiak', 'Ches', 'Uktar', 'Moonfest', 'Nightal' ];
+      const CB_INVERNO = [ 'Yinvar', 'Fivral', 'Mart', 'Apryl', 'Mai', 'Sintyavr', 'Octyavr', 'Neyavr', 'Dekavr' ];
+
+      function imagensPorHora(hora,calendario,mes,dia) {
+        if ( (hora >= 6) && (hora <= 18) ) {
+          if (calendario == 'CV') {
+            if (CV_INVERNO.includes(mes)) {
+              return DIA_CV_INVERNO;
+            } else {
+              return DIA_CV_VERAO;
+            }
+          } else {
+            let tempo_barovia = document.getElementById('tempo-barovia').checked;
+            if (CB_INVERNO.includes(mes)) {
+              if (tempo_barovia) {
+                return DIA_CB_INVERNO_BAROVIA;
+              } else {
+                return DIA_CB_INVERNO;
+              }
+            } else {
+              if (tempo_barovia) {
+                return DIA_CB_VERAO_BAROVIA;
+              } else {
+                return DIA_CB_VERAO;
+              }
+            }
+          }
+        } else {
+          if (calendario == 'CV') {
+            if (dia < 3) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo11c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo11c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 8) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo09c', 'tempo15c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo09c', 'tempo15c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 15) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo10c', 'tempo16c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo10c', 'tempo16c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 19) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo14c', 'tempo20c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo14c', 'tempo20c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 23) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo13c', 'tempo19c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo13c', 'tempo19c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 29) {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo12c', 'tempo18c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo12c', 'tempo18c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else {
+              if (CV_INVERNO.includes(mes)) {
+                return [ 'tempo11c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo11c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            }
+          } else {
+            if (dia < 3) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 8) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo15c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo15c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 15) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo16c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo16c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 19) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo20c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo20c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 23) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo19c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo19c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else if (dia < 29) {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo18c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo18c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            } else {
+              if (CB_INVERNO.includes(mes)) {
+                return [ 'tempo08c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c', 'tempo24c', 'tempo24c', 'tempo24c', 'tempo24c' ];
+              } else {
+                return [ 'tempo08c', 'tempo17c', 'tempo21c', 'tempo22c', 'tempo23c' ];
+              }
+            }
+          }
+        }
+      }
+
+      const MESES = {
+        'CV': [
+          { max: 30, index: 0, value:"Hammer", texto: "Hammer (Janeiro)" },
+          { max: 1, index: 0, value:"Midwinter", texto: "Midwinter (meio do inverno)" },
+          { max: 30, index: 1, value:"Alturiak", texto: "Alturiak (Fevereiro)" },
+          { max: 30, index: 2, value:"Ches", texto: "Ches (Março)" },
+          { max: 30, index: 3, value:"Tarsakh", texto: "Tarsakh (Abril)" },
+          { max: 1, index: 3, value:"Greengrass", texto: "Greengrass (dia 1 da primavera)" },
+          { max: 30, index: 4, value:"Mirtul", texto: "Mirtul (Maio)" },
+          { max: 30, index: 5, value:"Kythorn", texto: "Kythorn (Junho)" },
+          { max: 30, index: 6, value:"Flamerule", texto: "Flamerule (Julho)" },
+          { max: 1, index: 6, value:"Midsummer", texto: "Midsummer (meio do verão)" },
+          { max: 1, index: 6, value:"Shieldmeet", texto: "Shieldmeet (dia de ano bisiesto, 1380)" },
+          { max: 30, index: 7, value:"Eleasis", texto: "Eleasis (Agosto)" },
+          { max: 30, index: 8, value:"Eleint", texto: "Eleint (Setembro)" },
+          { max: 1, index: 8, value:"Highharvestide", texto: "Highharvestide (Abundância de alimentos)" },
+          { max: 30, index: 9, value:"Marpenoth", texto: "Marpenoth (Outubro)" },
+          { max: 30, index: 10, value:"Uktar", texto: "Uktar (Novembro)" },
+          { max: 1, index: 10, value:"Moonfest", texto: "Moonfest (início de inverno, grande festival)" },
+          { max: 30, index: 11, value:"Nightal", texto: "Nightal (Dezembro)" }
+        ],
+        'CB': [
+          { max: 31, index: 0, value:"Yinvar", texto: "Yinvar (Janeiro)" },
+          { max: 28, index: 1, value:"Fivral", texto: "Fivral (Fevereiro)" },
+          { max: 31, index: 2, value:"Mart", texto: "Mart (Março)" },
+          { max: 30, index: 3, value:"Apryl", texto: "Apryl (Abril)" },
+          { max: 31, index: 4, value:"Mai", texto: "Mai (Maio)" },
+          { max: 30, index: 5, value:"Eyune", texto: "Eyune (Junho)" },
+          { max: 31, index: 6, value:"Eyule", texto: "Eyule (Julho)" },
+          { max: 31, index: 7, value:"Avgust", texto: "Avgust (Agosto)" },
+          { max: 30, index: 8, value:"Sintyavr", texto: "Sintyavr (Setembro)" },
+          { max: 31, index: 9, value:"Octyavr", texto: "Octyavr (Outubro)" },
+          { max: 30, index: 10, value:"Neyavr", texto: "Neyavr (Novembro)" },
+          { max: 31, index: 11, value:"Dekavr", texto: "Dekavr (Dezembro)" },
+        ]
+      };
+
+      function sortearLua(horaAntiga,houveAlteracao,form) {
+        if (!BLOQUEIO) {
+          let chance = Math.floor(Math.random() * 10) + 1;
+          let hora = parseInt(document.getElementById('definir-hora').value);
+          if ( (horaAntiga < 6) || (horaAntiga > 18) ) {
+            if ( (hora >= 6) && (hora <= 18) ) {
+              chance = 10;
+            }
+          } else {
+            if ( (hora < 6) || (hora > 18) ) {
+              chance = 10;
+            }
+          }
+          if (!form) {
+            chance = 10;
+          }
+          if (houveAlteracao) {
+            chance = 10;
+          }
+
+          if (chance > 7) {
+            let dia = parseInt(document.getElementById('definir-dia').value);
+            let mes = document.getElementById('definir-mes').options[document.getElementById('definir-mes').selectedIndex].value;
+            let calendario = obterCalendario();
+            let imagens = imagensPorHora(hora,calendario,mes,dia);
+            let index = Math.floor(Math.random() * imagens.length);
+
+            let imagemTempo = imagens[index];
+            definirCombo('tempo',imagemTempo);
+            alterarImagemTempo(imagemTempo);
+          }
+        }
+      }
+
+      function criarOption(value,texto,index,selected,max) {
+        let option = document.createElement('option');
+        option.value = value;
+        option.innerHTML = texto;
+        option.setAttribute('index',index);
+        option.setAttribute('max',max);
+        if (selected) {
+          option.selected = "selected";
+        }
+        return option;
+      }
+
+      function obterCalendario() {
+        return document.getElementById('calendario').options[document.getElementById('calendario').selectedIndex].value;
+      }
+
+      function carregarCalendario(callback) {
+        fetch('https://flechamagica.com.br/live/calendario.php')
+          .then(response => response.json())
+          .then(data => {
+              callback(data);
+          });
+      }
+
+      function carregar(obterLocalStorage,callback) {
+        carregarCalendario(retrievedObject=>{
+
+          if (obterLocalStorage && !(retrievedObject === null)) {
+            let json = retrievedObject['calendario-dnd'];
+            json['tempo-barovia'] = !(json['tempo-barovia'] == 'nao');
+
+            definirCombo('tempo',json['tempo']);
+            definirCombo('calendario',json['calendario']);
+            document.getElementById('definir-hora').value = json['definir-hora'];
+            document.getElementById('definir-dia').value = json['definir-dia'];
+            document.getElementById('definir-ano').value = json['definir-ano'];
+            document.getElementById('tempo-barovia').checked = json['tempo-barovia'];
+          }
+
+          let calendario = obterCalendario();
+          let definirMes = document.getElementById('definir-mes');
+          let selectedIndex = 0;
+          if (definirMes.options.length > 0) {
+            selectedIndex = parseInt(definirMes.options[definirMes.selectedIndex].getAttribute("index"));
+          }
+          definirMes.innerHTML = '';
+          MESES[calendario].forEach((item, i) => {
+            let selected = false;
+            if ((selectedIndex == item.index) && !obterLocalStorage) {
+              selectedIndex = -1;
+              selected = true;
+            }
+            definirMes.appendChild(criarOption(item.value,item.texto,item.index,selected,item.max));
+            if (i == (MESES[calendario].length - 1)) {
+              if (obterLocalStorage && !(retrievedObject === null)) {
+                let json = retrievedObject['calendario-dnd'];
+                json['tempo-barovia'] = !(json['tempo-barovia'] == 'nao');
+
+                definirCombo('definir-mes',json['definir-mes']);
+              }
+              callback();
+            }
+          });
+        });
+      }
+
+      function calcularNovoDia(definirDia,optionDefinirMes,callback) {
+        if (definirDia > parseInt(optionDefinirMes.getAttribute('max'))) {
+          let novoDefinirDia = definirDia - parseInt(optionDefinirMes.getAttribute('max'));
+          let indexNovo = -1;
+          Array.prototype.forEach.call(document.getElementById('definir-mes').options, (item, i) => {
+            if (item.value == optionDefinirMes.value) {
+              if (parseInt(optionDefinirMes.index) == 11) {
+                indexNovo = 0;
+              } else {
+                indexNovo = parseInt(optionDefinirMes.index) + 1;
+              }
+            }
+            if (i == (document.getElementById('definir-mes').options.length - 1)) {
+              let novoOptionDefinirMes = document.getElementById('definir-mes').options[indexNovo];
+              document.getElementById('definir-mes').selectedIndex = indexNovo;
+              document.getElementById('definir-dia').value = novoDefinirDia;
+              calcularNovoDia(novoDefinirDia,novoOptionDefinirMes,callback);
+            }
+          });
+        } else {
+          callback(definirDia,optionDefinirMes);
+        }
+      }
+
+      function definirData(form,form_cv,horaAntiga,lua) {
+        if ( (form) && (form_cv) ) {
+          if (obterCalendario() == 'CV') {
+            document.getElementById('definir-ano').value = parseInt(document.getElementById('definir-ano').value) + 621;
+          } else {
+            document.getElementById('definir-ano').value = parseInt(document.getElementById('definir-ano').value) - 621;
+          }
+        }
+
+        let definirHora = document.getElementById('definir-hora').value;
+        let definirDia = parseInt(document.getElementById('definir-dia').value);
+        let diaAntigo = parseInt(document.getElementById('definir-dia').value);
+        let optionDefinirMes = document.getElementById('definir-mes').options[document.getElementById('definir-mes').selectedIndex];
+        let mesAntigo = optionDefinirMes.value;
+        let definirAno = document.getElementById('definir-ano').value;
+
+        calcularNovoDia(definirDia,optionDefinirMes,(novoDefinirDia,novoOptionDefinirMes)=>{
+          let definirMes = novoOptionDefinirMes.value;
+          document.getElementById('data-descritiva').innerHTML = ("0" + definirHora).slice(-2) + 'H, ' + novoDefinirDia + ' ' + definirMes + ', ' + definirAno + ' ' + obterCalendario();
+          let houveAlteracao = (definirDia != novoDefinirDia) || (mesAntigo != definirMes);
+          if (lua) {
+            sortearLua(horaAntiga,houveAlteracao,form);
+          } else {
+            alterarImagemTempo(obterCombo('tempo'));
+          }
+        });
+      }
+
+      let imagemTempoVez = 'imagem-tempo-1';
+      let BLOQUEIO = false;
+
+      function alterarImagemTempo(imagemTempo) {
+        if (!BLOQUEIO) {
+          let imagemTempoAntiga = imagemTempoVez;
+          if (imagemTempoVez == 'imagem-tempo-1') {
+            imagemTempoVez = 'imagem-tempo-2';
+          } else {
+            imagemTempoVez = 'imagem-tempo-1';
+          }
+          document.getElementById(imagemTempoVez).className = "tempo " + imagemTempo;
+          document.getElementById(imagemTempoAntiga).classList.add('fade');
+          BLOQUEIO = true;
+          setTimeout(()=>{
+            document.getElementById(imagemTempoVez).style.zIndex = "4";
+            document.getElementById(imagemTempoAntiga).style.zIndex = "3";
+            BLOQUEIO = false;
+          },2500);
+        }
+      }
+
+      document.getElementById('formulario-tempo').addEventListener('submit',event=>{
+        event.preventDefault();
+        alterarImagemTempo(event.target.tempo.value);
+        salvar_local();
+      });
+
+      document.getElementById('formulario-calendario').addEventListener('submit',event=>{
+        event.preventDefault();
+        carregar(false,()=>{
+          let definirHora = parseInt(document.getElementById('definir-hora').value);
+          definirData(true,true,definirHora,true);
+          salvar_local();
+        });
+      });
+
+      document.getElementById('formulario-definir').addEventListener('submit',event=>{
+        event.preventDefault();
+        let definirHora = parseInt(document.getElementById('definir-hora').value);
+        definirData(true,false,definirHora,true);
+        salvar_local();
+      });
+
+      document.getElementById('formulario-horas').addEventListener('submit',event=>{
+        event.preventDefault();
+        let horas = parseInt(document.getElementById('somar-hora').value);
+        let definirHora = parseInt(document.getElementById('definir-hora').value);
+        let novaHora = definirHora + horas;
+        let definirDia = parseInt(document.getElementById('definir-dia').value);
+        if (novaHora > 23) {
+          let multiplo = Math.floor(novaHora / 24);
+          definirDia = definirDia + multiplo;
+          novaHora = novaHora - (24 * multiplo);
+        }
+        document.getElementById('definir-hora').value = novaHora;
+        document.getElementById('definir-dia').value = definirDia;
+        definirData(true,false,definirHora,true);
+        salvar_local();
+      });
+
+      function definirCombo(combo,value) {
+        Array.prototype.forEach.call(document.getElementById(combo).options, (item, i) => {
+          if (item.value == value) {
+            document.getElementById(combo).selectedIndex = i;
+            return;
+          }
+        });
+      }
+
+      function obterCombo(combo) {
+        return document.getElementById(combo).options[document.getElementById(combo).selectedIndex].value;
+      }
+
+      function salvar_local() {
+        let json = {
+          'calendario-dnd': {
+            'tempo': obterCombo('tempo'),
+            'calendario': obterCombo('calendario'),
+            'definir-hora': document.getElementById('definir-hora').value,
+            'definir-dia': document.getElementById('definir-dia').value,
+            'definir-mes': obterCombo('definir-mes'),
+            'definir-ano': document.getElementById('definir-ano').value,
+            'tempo-barovia': document.getElementById('tempo-barovia').checked ? 'sim' : 'nao'
+          }
+        };
+
+        fetch(
+          'https://flechamagica.com.br/live/calendario.php',
+          {
+            method: 'PUT',
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(json)
+          }
+        )
+          .then(res => res)
+          .then(response => {
+            if (response.status == 200) {
+              console.log('Salvo com sucesso!');
+            } else {
+              console.log(response);
+            }
+          })
+          .catch(err => {
+            console.error('Erro ao salvar!');
+          });
+
+        //localStorage.setItem('calendario-dnd', JSON.stringify(json));
+      }
+
+      function carregarInterval() {
+        carregar(true,()=>{
+          let definirHora = parseInt(document.getElementById('definir-hora').value);
+          definirData(false,false,definirHora,false);
+        });
+      }
+
+      carregarInterval();
+      setInterval(carregarInterval, 5000);
+
+    </script>
+
+  </body>
+</html>

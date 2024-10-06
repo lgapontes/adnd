@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "RINGM___";
+  src: url("RINGM___.ttf");
+}
+
+body {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 2100px;
+  height: 1200px;
+
+  font-family: "RINGM___";
+  color: #573710;
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+main.pagina {
+  display: block;
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+}
+
+div.overlays {
+  position: absolute;
+  width: 1920px;
+  height: 1080px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1920px 1080px;
+}
+
+div.o2t1 {
+  background-image: url('o2t1.png');
+  z-index: 0;
+}
+div.o2t2 {
+  background-image: url('o2t2.png');
+  z-index: 0;
+}
+div.o2t3 {
+  background-image: url('o2t3.png');
+  z-index: 0;
+}
+div.o2t4 {
+  background-image: url('o2t4.png');
+  z-index: 0;
+}
+div.o2t5 {
+  background-image: url('o2t5.png');
+  z-index: 0;
+}
+
+div.overlays-esconder {
+  display: none;
+}
+
+span {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  text-align: center;
+}
+
+@-moz-keyframes spin {
+  100% { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform:rotate(360deg);
+  }
+}
+
+div.pre-formulario {
+  display: none;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #dedeff;
+}
+
+div.formulario {
+  display: none;
+  position: fixed;
+  background-color: #cccccc;
+  border: 2px solid #000000;
+  border-radius: 2px;
+  left: 10px;
+  top: 10px;
+  z-index: 10;
+  padding: 10px;
+  font-family: monospace;
+}
+
+div.formulario h1 {
+  font-size: 2em;
+  color: #993333;
+}
+
+div.formulario-idril {
+  left: 360px;
+  width: 230px;
+}
+div.formulario-nirah {
+  left: 610px;
+  width: 230px;
+}
+div.formulario-torteck {
+  left: 860px;
+  width: 230px;
+}
+div.formulario-bravos {
+  left: 1120px;
+  width: 230px;
+}
+
+div.formulario label {
+  color: #000000;
+  font-size: 1.4em;
+  line-height: 33px;
+  margin-top: 7px;
+
+  display: inline-block;
+  width: 110px;
+}
+
+div.formulario label:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+div.formulario input[type=button] {
+  height: 34px;
+  padding: 4px 16px 0 16px;
+  margin-top: 4px;
+  background-color: #eeeeee;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+}
+
+div.formulario input[type=button].grande {
+  width: 100%;
+  padding: 0;
+}
+
+div.formulario input[type=text], div.formulario input[type=number] {
+  width: 100px;
+  line-height: 30px;
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+div.formulario input[type=text].grande {
+  width: 200px;
+}
+
+div.formulario select {
+  width: 200px;
+  height: 30px;
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+div.formulario select.pequeno {
+  width: 100px;
+}

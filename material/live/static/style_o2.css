@@ -1,0 +1,179 @@
+main.fichas span.grande {
+  width: 70px;
+  line-height: 70px;
+}
+
+main.fichas span.fellowship {
+  font-size: 44px;
+  top: 9px;
+  left: 184px;
+}
+
+main.fichas div.frame {
+  position: absolute;
+  width: 580px;
+  height: 300px;
+  z-index: 2;
+}
+
+main.fichas div.frame-nirah {
+  top: 386px;
+  left: 1382px;
+}
+
+main.fichas div.frame-idril {
+  top: 766px;
+  left: -28px;
+}
+
+main.fichas div.frame-torteck {
+  top: 39px;
+  left: 1382px;
+}
+
+main.fichas div.frame-bravos {
+  top: 422px;
+  left: -26px;
+}
+
+main.fichas span.pequena {
+  width: 60px;
+  line-height: 60px;
+  font-size: 38px;
+}
+
+main.fichas span.endurance {
+  top: 0;
+  left: 469px;
+}
+
+main.fichas span.hope {
+  top: 91px;
+  left: 468px;
+}
+
+main.fichas span.shadow {
+  top: 180px;
+  left: 469px;
+}
+
+main.fichas img.status {
+  display: block;
+  position: absolute;
+  width: 40px;
+}
+
+main.fichas img.exausto {
+  top: 62px;
+  left: 426px;
+}
+
+main.fichas img.abatido {
+  top: 155px;
+  left: 426px;
+}
+
+main.fichas img.ferido {
+  top: 76px;
+  left: 28px;
+}
+
+main.fichas div.frame-tempo {
+  position: absolute;
+  width: 374px; /* maximo: 765px */
+  /* height: 379px;  maximo: 379px */
+  z-index: 4;
+
+  left: 886px;
+  top: 174px;
+}
+
+main.fichas img.frame-tempo-front {
+  position: absolute;
+  display: block;
+  max-width: 100%;
+  z-index: 6;
+}
+
+main.fichas img.frame-tempo-icons {
+  position: absolute;
+  max-width: 100%;
+  z-index: 4;
+}
+
+main.fichas span.frame-tempo-momento-dia {
+  position: absolute;
+  display: block;
+  top: 78px;
+  left: 40px;
+  width: 110px;
+  line-height: 47px;
+
+  font-size: 16px;
+  z-index: 7;
+}
+
+main.fichas span.frame-tempo-condicao {
+  position: absolute;
+  display: block;
+  top: 110px;
+  left: 18px;
+  width: 160px;
+  line-height: 47px;
+
+  font-size: 14px;
+  z-index: 7;
+}
+
+main.fichas span.frame-tempo-estacao-info {
+  position: absolute;
+  display: block;
+  top: 110px;
+  left: 202px;
+  width: 160px;
+  line-height: 47px;
+
+  font-size: 14px;
+  z-index: 7;
+}
+
+main.fichas span.frame-tempo-estacao {
+  position: absolute;
+  display: block;
+  top: 83px;
+  left: 228px;
+  width: 110px;
+  line-height: 47px;
+
+  font-size: 25px;
+  z-index: 7;
+}
+
+main.fichas span.frame-tempo-dados {
+  position: absolute;
+  display: block;
+  top: 138px;
+  left: 0;
+  width: 100%;
+
+  font-size: 24px;
+  z-index: 7;
+}
+
+main.fichas img.frame-tempo-rotacionar {
+    position: relative;
+    display: block;
+    width: 76px;
+    height: 76px;
+    margin: 66px auto 0 auto;
+    padding-left: 1px;
+
+    -webkit-animation:spin 30s linear infinite;
+    -moz-animation:spin 30s linear infinite;
+    animation:spin 30s linear infinite;
+    z-index: 7;
+}
+
+main.fichas img.frame-tempo-icons-frente {
+  z-index: 5;
+}

@@ -1,0 +1,146 @@
+[18-Apr-2024 10:41:31 America/Fortaleza] PHP Fatal error:  Uncaught TypeError: get_object_vars(): Argument #1 ($object) must be of type object, string given in /home2/linuc318/flechamagica.com.br/live/calendario.php:35
+Stack trace:
+#0 /home2/linuc318/flechamagica.com.br/live/calendario.php(35): get_object_vars('{\n\t"calendario-...')
+#1 {main}
+  thrown in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 35
+[18-Apr-2024 11:18:34 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type null in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 47
+[18-Apr-2024 11:18:34 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type null in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 47
+[18-Apr-2024 11:18:34 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/calendario.php:47) in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 63
+[18-Apr-2024 11:23:10 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type null in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 47
+[18-Apr-2024 11:23:10 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type null in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 47
+[18-Apr-2024 11:23:10 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/calendario.php:47) in /home2/linuc318/flechamagica.com.br/live/calendario.php on line 63
+[27-Apr-2024 23:01:03 America/Fortaleza] PHP Warning:  Undefined array key "threat-level" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[27-Apr-2024 23:01:03 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 63
+[27-Apr-2024 23:06:39 America/Fortaleza] PHP Warning:  Undefined array key "swarm-threat" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[27-Apr-2024 23:06:39 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 63
+[02-May-2024 12:21:37 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:21:37 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:23:04 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:23:04 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:25:15 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:25:15 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:25:29 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:25:29 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:25:33 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:25:33 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:25:49 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:25:49 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:25:58 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:25:58 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:26:05 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:26:05 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:26:07 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:26:07 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:40:21 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:40:21 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:40:28 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:40:28 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:40:31 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:40:31 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:40:33 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:40:33 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:40:37 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:40:37 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:44:47 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:44:47 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:46:10 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:46:10 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:47:46 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:47:46 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:47:58 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:47:58 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:00 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:00 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:02 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:02 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:04 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:04 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:17 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:17 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:24 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:24 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:34 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:34 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:48:50 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:48:50 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:51:39 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:51:39 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:51:58 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:51:58 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:52:03 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:52:03 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[02-May-2024 12:52:09 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[02-May-2024 12:52:09 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 21:49:36 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 21:49:36 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 21:57:01 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 21:57:01 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 22:06:16 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 22:06:16 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 22:18:52 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 22:18:52 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 22:34:23 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 22:34:23 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 22:34:24 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 22:34:24 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[07-May-2024 22:40:36 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[07-May-2024 22:40:36 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[12-May-2024 20:16:40 America/Fortaleza] PHP Warning:  Undefined array key "resident-evil" in /home2/linuc318/flechamagica.com.br/live/repositorio.php on line 214
+[12-May-2024 20:16:40 America/Fortaleza] PHP Warning:  Undefined array key "todos" in /home2/linuc318/flechamagica.com.br/live/repositorio.php on line 214
+[12-May-2024 20:16:40 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/repositorio.php:214) in /home2/linuc318/flechamagica.com.br/live/resident.php on line 29
+[12-May-2024 20:18:36 America/Fortaleza] PHP Fatal error:  Uncaught TypeError: json_decode(): Argument #1 ($json) must be of type string, array given in /home2/linuc318/flechamagica.com.br/live/repositorio.php:214
+Stack trace:
+#0 /home2/linuc318/flechamagica.com.br/live/repositorio.php(214): json_decode(Array)
+#1 /home2/linuc318/flechamagica.com.br/live/resident.php(28): resident(Object(mysqli))
+#2 {main}
+  thrown in /home2/linuc318/flechamagica.com.br/live/repositorio.php on line 214
+[12-May-2024 20:18:53 America/Fortaleza] PHP Warning:  Array to string conversion in /home2/linuc318/flechamagica.com.br/live/repositorio.php on line 214
+[12-May-2024 20:18:53 America/Fortaleza] PHP Fatal error:  Uncaught TypeError: json_decode(): Argument #1 ($json) must be of type string, array given in /home2/linuc318/flechamagica.com.br/live/repositorio.php:215
+Stack trace:
+#0 /home2/linuc318/flechamagica.com.br/live/repositorio.php(215): json_decode(Array)
+#1 /home2/linuc318/flechamagica.com.br/live/resident.php(28): resident(Object(mysqli))
+#2 {main}
+  thrown in /home2/linuc318/flechamagica.com.br/live/repositorio.php on line 215
+[12-May-2024 20:29:49 America/Fortaleza] PHP Warning:  Undefined array key "twd" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[12-May-2024 20:29:49 America/Fortaleza] PHP Warning:  Trying to access array offset on value of type null in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[12-May-2024 20:29:49 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 72
+[14-May-2024 15:54:11 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 15:54:11 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[14-May-2024 15:54:34 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 15:54:34 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[14-May-2024 21:07:59 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 21:07:59 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[14-May-2024 21:47:17 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 21:47:17 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[14-May-2024 22:16:58 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 22:16:58 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[14-May-2024 22:28:26 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[14-May-2024 22:28:26 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 21:02:59 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 21:02:59 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 21:34:16 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 21:34:16 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 21:55:08 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 21:55:08 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 22:52:05 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 22:52:05 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 22:52:08 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 22:52:08 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[28-May-2024 22:52:09 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[28-May-2024 22:52:09 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 22:38:22 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 22:38:22 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 22:40:07 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 22:40:07 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 22:40:23 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 22:40:23 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 23:12:34 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 23:12:34 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 23:12:36 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 23:12:36 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 23:14:55 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 23:14:55 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 23:19:50 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 23:19:50 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81
+[25-Jun-2024 23:19:53 America/Fortaleza] PHP Warning:  Undefined array key "calendario" in /home2/linuc318/flechamagica.com.br/live/twd.php on line 47
+[25-Jun-2024 23:19:53 America/Fortaleza] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/linuc318/flechamagica.com.br/live/twd.php:47) in /home2/linuc318/flechamagica.com.br/live/twd.php on line 81

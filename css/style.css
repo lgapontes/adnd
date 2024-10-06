@@ -1,0 +1,485 @@
+@font-face {
+  font-family: "Oregon-LDO-ExtraBlack";
+  src: url('../fonts/Oregon LDO ExtraBlack.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Oregon-LDO";
+  src: url('../fonts/Oregon LDO.ttf') format('truetype');
+}
+
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+}
+
+html {
+  padding-bottom: 1000px;
+}
+
+div.loading {
+  display: none;
+
+  background-color: #fdeec5;
+  opacity: .6;
+  filter: alpha(opacity=60);
+  z-index: 3;
+
+  background-image: url(../img/loading.gif);
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position: center;
+
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+/* HEADER */
+
+header {
+  background-color: #111;
+  background-image: url('../img/header.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-width: 400px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+  height: 60px;
+}
+
+header img {
+  margin-top: 10px;
+  height: 40px;
+}
+
+/* HEADER */
+
+/* MAIN */
+
+main::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+div::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main.texto {
+  display: block;
+  width: 800px;
+  max-width: 95%;
+  min-width: 380px;
+  box-sizing: border-box;
+
+  background-image: linear-gradient(#dad798, #dacb8f);
+  margin: 80px auto 10px auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 15px;
+
+  box-shadow:
+    inset #4b3921 0 0 0 4px,
+    inset #dad798 0 0 0 6px;
+}
+
+main.texto > span,
+main.texto > div.atributos > span {
+  display: block;
+  float: left;
+
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 29px;
+}
+
+main.texto > div.atributos {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+
+main.texto > div.bloco-texto {
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  padding: 5px;
+  background-color: rgba(191, 54, 12, 0.1);
+  margin-bottom: 10px;
+}
+
+main.texto > br {
+  clear: both;
+}
+
+main.texto > a {
+  color: #bf360c;
+}
+
+main.texto > div.bloco {
+  display: block;
+  float: left;
+  margin-top: 10px;
+  min-height: 26px;
+}
+
+main.texto > div.bloco-campos {
+  width: 100%;
+}
+
+main.texto > div.invisivel {
+  display: none;
+}
+
+main.texto > div.bloco-botoes {
+  width: 100%;
+  margin-top: 20px;
+}
+
+main.texto > div.bloco-checkbox {
+  width: 100%;
+  background-color: rgba(59, 39, 11, .3);
+}
+
+main.texto > div.bloco-atributos {
+  margin-top: 0;
+
+  box-sizing: border-box;
+  width: 33.33%; /* as @passatgt mentioned in the comment, for the older browsers fallback */
+  width: calc(100% / 3);
+  padding-left: 1%;
+}
+
+main.texto > div.primeiro {
+  padding-left: 0;
+}
+
+main.texto > div.quarto {
+  padding-left: 0;
+}
+
+main.texto > div.segunda-linha {
+  margin-top: 5px;
+}
+
+/* MAIN */
+
+/* CAMPOS */
+
+main.texto > div.bloco-campos > label {
+  display: block;
+  float: left;
+  width: 20%;
+  box-sizing: border-box;
+  padding-left: 4px;
+  line-height: 26px;
+  font-weight: bold;
+  background-color: rgba(59, 39, 11, .3);
+}
+
+main.texto > div.bloco-checkbox > label {
+  background-color: rgba(0, 0, 0, 0);
+  width: 90%;
+}
+
+main.texto > div.bloco-atributos > label {
+  display: block;
+  float: left;
+  width: 70%;
+  box-sizing: border-box;
+  padding-left: 4px;
+  line-height: 26px;
+  font-weight: bold;
+  background-color: rgba(59, 39, 11, .3);
+}
+
+main.texto > div.bloco-atributos > label.menor {
+  font-size: 0.9em;
+}
+
+main.texto > div.bloco-campos > input[type=checkbox] {
+  display: block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin: 6px 2px 0 5px;
+}
+
+main.texto > div.bloco-campos > input[type=text],
+main.texto > div.bloco-campos > input[type=number] {
+  display: block;
+  float: left;
+  width: 80%;
+  line-height: 26px;
+  text-indent: 3px;
+
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+}
+
+main.texto > div.bloco-campos > select {
+  display: block;
+  float: left;
+  width: 80%;
+  height: 26px;
+  text-indent: 3px;
+}
+
+main.texto > div.bloco-campos > select > option {
+  font-size: 1em;
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+}
+
+main.texto > div.bloco-campos > input[type=number] {
+  text-indent: 0;
+  text-align: center;
+}
+
+main.texto > div.bloco-campos > input[type=number].pequeno {
+  width: 20%;
+}
+
+main.texto > div.bloco-atributos > input[type=number] {
+  display: block;
+  float: left;
+  width: 30%;
+  line-height: 26px;
+  text-align: center;
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+}
+
+/* CAMPOS */
+
+/* BOTOES GERAIS */
+
+button {
+  display: block;
+  padding: 4px 8px;
+  background-color: #bf360c;
+  font-weight: bold;
+  box-sizing: border-box;
+  height: 28px;
+}
+
+button:hover {
+  background-color: #af2600;
+}
+
+button::after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+button > span {
+  display: block;
+  float: left;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+button > img {
+  position: relative;
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  margin-right: 6px;
+}
+
+/* BOTOES GERAIS */
+
+/* BOTOES */
+
+header > button {
+  display: block;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+
+header > button > img {
+  margin: 0 0 0 1px;
+}
+
+main.texto > div.bloco-botoes > button {
+  display: block;
+  float: right;
+  margin-left: 5px;
+  border-radius: 2px;
+}
+
+main.texto > div.atributos > button {
+  float: left;
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+main.texto > button.mostrar {
+  display: block;
+  float: left;
+
+  margin-right: 5px;
+  border-radius: 2px;
+}
+
+/* BOTOES */
+
+/* MENUS */
+
+main.menu {
+  margin-top: 10px;
+  text-align: center;
+  z-index: 1;
+}
+
+main.menu > a.menu {
+  display: inline-block;
+  height: 170px;
+  width: 170px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0px 0px 30px rgb(0 0 0 / 10%);
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 170px;
+  text-decoration: none;
+
+  margin: 10px;
+}
+
+main.menu > a.menu-personagens {
+  background-image: url(../img/menu_personagens.jpg);
+}
+
+main.menu > a.menu-npcs {
+  background-image: url(../img/menu_npcs.jpg);
+}
+
+main.menu > a.menu-itens {
+  background-image: url(../img/menu_itens.jpg);
+}
+
+main.menu > a.menu-calendario {
+  background-image: url(../img/menu_calendario.jpg);
+}
+
+main.menu > a.menu > span {
+  display: inline-block;
+  font-family: "Oregon-LDO-ExtraBlack";
+  color: #fff;
+  -webkit-text-stroke: 1px #423c2b;
+  font-size: 1.8em;
+  text-shadow: 0 0 10px rgba(0, 0, 0);
+  line-height: 30px;
+  margin-top: 50px;
+}
+
+/* MENUS */
+
+/* Configurações por IDs */
+
+#header-botao-voltar {
+  display: none;
+}
+
+#texto-botao-voltar {
+  float: left;
+  margin-left: 0;
+}
+
+#pagina-personagens {
+  display: none;
+}
+
+#texto-botao-mostrar1 {
+  display: block;
+}
+
+#texto-botao-esconder1 {
+  display: none;
+}
+
+#texto-bloco1 {
+  display: none;
+}
+
+#texto-botao-mostrar2 {
+  display: block;
+}
+
+#texto-botao-esconder2 {
+  display: none;
+}
+
+#texto-bloco2 {
+  display: none;
+}
+
+/* Configurações por IDs */
+
+@media (min-width: 800px) {
+  header img {
+    margin-top: 3px;
+    height: 50px;
+  }
+
+  header > button > img {
+    height: 20px;
+    margin: 0 0 0 1px;
+  }
+
+  main.texto > div.bloco-campos {
+    width: 49%;
+  }
+
+  main.texto > div.bloco-atributos {
+    box-sizing: border-box;
+    width: 16.66%; /* as @passatgt mentioned in the comment, for the older browsers fallback */
+    width: calc(100% / 6);
+    padding-left: 1%;
+  }
+
+  main.texto > div.primeiro {
+    padding-left: 0;
+  }
+
+  main.texto > div.quarto {
+    padding-left: 1%;
+  }
+
+  main.texto > div.segunda-linha {
+    margin-top: 0;
+  }
+
+  main.texto > div.direita {
+    float: right;
+  }
+
+  main.texto > div.invisivel {
+    display: block;
+  }
+}

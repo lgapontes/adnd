@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <title>AD&D 2ed - NPCs</title>
+		<link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/ficha.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <header>
+      <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed">
+    </header>
+
+    <main>
+      <h2>Gerador de NPCs de AD&D 2ed</h2>
+      <br>
+      <span>Sobre este gerador</span>
+      <br>
+      Este gerador foi criado a partir das regras do <b>Livro do Jogador</b>, <b>Livro do Mestre</b> e <b>Livro dos Monstros</b> do Advanced Dungeons & Dragons 2ed. A ideia aqui é gerar apenas personagens humanos e não-humanos. Para outros personagens (como Orcs, por exemplo), veja o <b>Livro dos Monstros</b>.
+
+      <br><br>
+
+      <campos>
+        <input type="checkbox" id="definir-profissao">
+        <span>Definir Profissão</span>
+
+        <input type="checkbox" id="exibicao-simples">
+        <span>Exibição Simples</span>
+      </campos>
+
+      <br>
+      <campos>
+        <span>Dados de Vida (1d8)</span>
+        <select id="dados-vida">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+
+        <span>Raça</span>
+        <select id="racas">
+          <option value="Todas" selected>Todas</option>
+          <option value="Humano">Humano</option>
+          <option value="Anão">Anão</option>
+          <option value="Elfo">Elfo</option>
+          <option value="Gnomo">Gnomo</option>
+          <option value="Meio-Elfo">Meio-Elfo</option>
+          <option value="Halfling">Halfling</option>
+          <option value="Drow">Drow</option>
+          <option value="Goblin">Goblin</option>
+        </select>
+
+        <span>Classe</span>
+        <select id="classes">
+          <option value="Todas" selected>Todas</option>
+          <option value="Guerreiro">Guerreiro</option>
+          <option value="Paladino">Paladino</option>
+          <option value="Ranger">Ranger</option>
+          <option value="Mago">Mago</option>
+          <option value="Clérigo">Clérigo</option>
+          <option value="Druida">Druida</option>
+          <option value="Ladrão">Ladrão</option>
+          <option value="Bardo">Bardo</option>
+        </select>
+      </campos>
+
+      <br>
+      <campos>
+        <span>Profissões</span>
+        <select id="profissao">
+        </select>
+      </campos>
+
+      <br>
+      <br>
+      <campos class="botoes">
+        <button id="bt-rolar" class="vermelho"><img src="img/bt-ded.png" ><span>Rolar NPC</span></button>
+        <button id="bt-copiar" class="vermelho"><img src="img/bt-ded.png" ><span>Copiar para Clipboard</span></button>
+      </campos>
+    </main>
+
+    <main id="npc">
+      <textarea rows="15" cols="128" readonly="readonly"></textarea>
+    </main>
+
+    <script src="js/dados.js"></script>
+    <script src="js/rolador.js"></script>
+  </body>
+</html>
