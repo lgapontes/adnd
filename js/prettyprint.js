@@ -383,7 +383,7 @@ var prettyPrint = (function(){
 				return '/' + obj.source + '/';
 			}
 			if (type === 'string') {
-				return '"' + obj.replace(/"/g,'\\"') + '"';
+				return obj.replace(/"/g,'\\"');
 			}
 			return obj.toString();
 		},
@@ -434,7 +434,7 @@ var prettyPrint = (function(){
 
 		var typeDealer = {
 			string : function(item){
-				return util.txt('"' + util.shorten(item.replace(/"/g,'\\"')) + '"');
+				return util.txt(util.shorten(item.replace(/"/g,'\\"')));
 			},
 			number : function(item) {
 				return util.txt(item);
@@ -537,7 +537,7 @@ var prettyPrint = (function(){
 				}
 
 				if (isEmpty) {
-					table.addRow(['<small>[empty]</small>']);
+					table.addRow(['<small>Nenhum(a)</small>']);
 				} else {
 					table.thead.appendChild(
 						util.hRow(['key','value'], 'colHeader')
@@ -593,7 +593,7 @@ var prettyPrint = (function(){
 
 				if (!jquery){
 					if (isEmpty) {
-						table.addRow(['<small>[empty]</small>']);
+						table.addRow(['<small>Nenhum(a)</small>']);
 					} else {
 						table.thead.appendChild( util.hRow(['index','value'], 'colHeader') );
 					}

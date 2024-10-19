@@ -35,6 +35,102 @@
       <br>
     </main>
 
+    <main class="texto" id="pagina-itens">
+      <h2>Gerador de itens AD&D 2ed</h2>
+      <br>
+      Este é um gerador aleatório de itens, vestimentas, armas e moedas para Advanced Dungeons and Dragons 2ª edição.
+      <br>
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-nivel-itens">Nível</label>
+        <input type="number" class="pequeno" max="10" min="1" value="1" name="texto-formulario-nivel-itens" id="texto-formulario-nivel-itens">
+      </div>
+      <br>
+      <div class="bloco bloco-botoes">
+        <button type="button" id="texto-botao-voltar-itens">
+					<img src="img/arrow-left-solid.svg">
+					<span>Voltar</span>
+				</button>
+
+        <button type="button" id="texto-botao-rolar-itens">
+					<img src="img/rolar.png">
+					<span>Rolar</span>
+				</button>
+      </div>
+    </main>
+
+    <main class="texto" id="pagina-npcs">
+      <h2>Gerador de NPCs AD&D 2ed</h2>
+      <br>
+      Este gerador foi criado a partir das regras do <b>Livro do Jogador</b>, <b>Livro do Mestre</b> e <b>Livro dos Monstros</b> do Advanced Dungeons & Dragons 2ed. A ideia aqui é gerar apenas personagens humanos e não-humanos. Para outros personagens (como Orcs, por exemplo), veja o <b>Livro dos Monstros</b>.
+      <br>
+
+      <div class="bloco bloco-campos bloco-checkbox">
+        <input type="checkbox" name="texto-formulario-npc-definir-profissao" id="texto-formulario-npc-definir-profissao" checked>
+        <label for="texto-formulario-npc-definir-profissao">Definir Profissão</label>
+      </div>
+      <div class="bloco bloco-campos bloco-checkbox direita">
+        <input type="checkbox" name="texto-formulario-npc-exibicao-simples" id="texto-formulario-npc-exibicao-simples">
+        <label for="texto-formulario-npc-exibicao-simples">Exibição Simples</label>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-npc-classe">Classe</label>
+        <select name="texto-formulario-npc-classe" id="texto-formulario-npc-classe">
+          <option value="Todas" selected>Todas</option>
+          <option value="Guerreiro">Guerreiro</option>
+          <option value="Paladino">Paladino</option>
+          <option value="Ranger">Ranger</option>
+          <option value="Mago">Mago</option>
+          <option value="Clérigo">Clérigo</option>
+          <option value="Druida">Druida</option>
+          <option value="Ladrão">Ladrão</option>
+          <option value="Bardo">Bardo</option>
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-npc-raca">Raça</label>
+        <select name="texto-formulario-npc-raca" id="texto-formulario-npc-raca">
+          <option value="Todas" selected>Todas</option>
+          <option value="Humano">Humano</option>
+          <option value="Anão">Anão</option>
+          <option value="Elfo">Elfo</option>
+          <option value="Gnomo">Gnomo</option>
+          <option value="Meio-Elfo">Meio-Elfo</option>
+          <option value="Halfling">Halfling</option>
+          <option value="Drow">Drow</option>
+          <option value="Goblin">Goblin</option>
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-npc-profissao">Profissão</label>
+        <select name="texto-formulario-npc-profissao" id="texto-formulario-npc-profissao">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-npc-dados-vida">Hit Dices</label>
+        <input type="number" class="pequeno" max="10" min="1" value="1" name="texto-formulario-npc-dados-vida" id="texto-formulario-npc-dados-vida">
+        <span class="dica">Dados de Vida (1d8)</span>
+      </div>
+
+      <br>
+      <div class="bloco bloco-botoes">
+        <button type="button" id="texto-botao-voltar-npcs">
+					<img src="img/arrow-left-solid.svg">
+					<span>Voltar</span>
+				</button>
+
+        <button type="button" id="texto-botao-rolar-npcs">
+					<img src="img/rolar.png">
+					<span>Rolar</span>
+				</button>
+        <button type="button" id="texto-botao-copiar-npcs">
+					<img src="img/copy-regular.svg">
+					<span>Copiar NPCs</span>
+				</button>
+      </div>
+    </main>
+
     <main class="texto" id="pagina-personagens">
       <h2>Gerador de personagens AD&D 2ed</h2>
       <br>
@@ -80,6 +176,7 @@
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-nivel">Nível</label>
         <input type="number" class="pequeno" max="3" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel">
+        <span class="dica">Nível máximo: 3</span>
       </div>
 
       <div class="bloco bloco-campos bloco-checkbox">
@@ -95,7 +192,14 @@
         <input type="checkbox" name="texto-formulario-vida" id="texto-formulario-vida">
         <label for="texto-formulario-vida">Máximo PV no Nível 1</label>
       </div>
+      <!--
       <div class="bloco bloco-campos direita invisivel">
+      </div>
+      -->
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-idade">Idade</label>
+        <input type="number" class="pequeno" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
+        <span class="dica" id="texto-formulario-idade-dica"></span>
       </div>
 
       <div class="bloco bloco-campos">
@@ -118,6 +222,69 @@
         <label for="texto-formulario-linhagem">Linhagem</label>
         <select name="texto-formulario-linhagem" id="texto-formulario-linhagem">
         </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-arma">Arma*</label>
+        <select name="texto-formulario-arma" id="texto-formulario-arma">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-escudo">Escudo*</label>
+        <select name="texto-formulario-escudo" id="texto-formulario-escudo">
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-armadura" class="menor">Armadura*</label>
+        <select name="texto-formulario-armadura" id="texto-formulario-armadura">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-pericia">Perícia*</label>
+        <select name="texto-formulario-pericia" id="texto-formulario-pericia">
+        </select>
+      </div>
+
+      <div class="bloco-texto bloco-texto-apoio">
+        <span class="asterisco">*</span> A escolha da <b>Arma</b>, da <b>Armadura</b>, do <b>Escudo</b> e da <b>Perícia</b> depende de vários fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-escola">Escola</label>
+        <select name="texto-formulario-escola" id="texto-formulario-escola">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-escola-magia" class="magia">Magia Arcana*</label>
+        <select name="texto-formulario-escola-magia" id="texto-formulario-escola-magia" class="magia">
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-esfera">Esfera</label>
+        <select name="texto-formulario-esfera" id="texto-formulario-esfera">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-esfera-magia" class="magia">Magia Divina*</label>
+        <select name="texto-formulario-esfera-magia" id="texto-formulario-esfera-magia" class="magia">
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-ciencia">Ciência*</label>
+        <select name="texto-formulario-ciencia" id="texto-formulario-ciencia">
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-devocao">Devoção*</label>
+        <select name="texto-formulario-devocao" id="texto-formulario-devocao">
+        </select>
+      </div>
+
+      <div class="bloco-texto bloco-texto-apoio">
+        <span class="asterisco">*</span> A escolha da <b>Magia Arcana</b>, da <b>Magia Divina</b>, da <b>Ciência</b> e da <b>Devoção</b> depende da classe escolhida e outros fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
       </div>
 
       <br>
@@ -216,12 +383,20 @@
 
     <div id="ficha"></div>
 
+    <div id="ficha-itens-loot"></div>
+    <div id="ficha-itens-armeiro"></div>
+    <div id="ficha-itens-taverna"></div>
+    <div id="ficha-itens-alfaiataria"></div>
+
+    <textarea readonly="readonly" id="ficha-npcs"></textarea>
+
     <script type="text/javascript" src="js/script.js"></script>
 
     <script type="text/javascript" src="js/prettyprint.js"></script>
     <script type="text/javascript" src="js/dados.js"></script>
     <script type="text/javascript" src="js/gerador.js"></script>
-
+    <script type="text/javascript" src="js/script-itens.js"></script>
+    <script type="text/javascript" src="js/rolador-npcs.js"></script>
     <script type="text/javascript" src="js/render.js"></script>
   </body>
 </html>

@@ -1,9 +1,13 @@
 /* debug */
-const DEBUG = false;
+const DEBUG = true;
 function debug(texto) {
   if (DEBUG) {
     console.log(texto);
   }
+}
+
+function error(texto) {
+  console.error(texto);
 }
 
 var forcar_classe = 'Todas';

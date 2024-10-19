@@ -135,6 +135,21 @@ const NOMES_RACAS = {
       'Deserto', 'Sol', 'Mar', 'Rio', 'Vento', 'Coral', 'Anoitecer', 'Fogo',
       'Canino', 'Orvalho'
     ]
+  },
+  "Goblin": {
+    "Masculino": [
+      'Zrudrog', 'Tus', 'Stug', 'Tib', 'Pork', 'Bitterflab', 'Moldbrain', 'Toadwart', 'Toadwart', 'Mite',
+      'Kragrab', 'Norrat', 'Vudgas', 'Rogdurk', 'Callugg', 'Larva', 'Wriggler', 'Frailbrain', 'Snothead',
+      'Vudgis', 'Halk', 'Terg', 'Stullagg', 'Zurrurk', 'Bitesize', 'Pigmug', 'Palefoot', 'Shrilleyes'
+    ],
+    "Feminino": [
+      'Jilzis', 'Vil', 'Nidalduk', 'Qulgrizel', 'Puldrit', 'Paleknuckle', 'Owlball', 'Redeye', 'Moldbrain', 'Leechhead',
+      'Nelgas', 'Bucket', 'Bentbrain', 'Muckbones', 'Wartteeth', 'Bonehead', 'Uglymug', 'Zartuzat', 'Ridin', 'Buk',
+      'Negan', 'Frailcheeks', 'Leech', 'No-Ears', 'Bonegob', 'Warteye', 'Adra', 'Aldru'
+    ],
+    "Sobrenome": [
+      'Coldnose', 'Numbcheek', 'Bottomfeeder', 'Lumpgob', 'Maggot', 'Bottomfeeder', 'Malformed', 'Grimmaw'
+    ]
   }
 };
 
@@ -172,34 +187,109 @@ const MAGIAS_DIVINAS = {
   "Todas": [ "Bênção", "Círculo de Fé", "Detectar Maldade", "Purificar Alimentos" ]
 };
 
-const MAGIAS_ARCANAS = {
-  //Abjuração
-  "Abjurante": [ "Alarme", "Proteção ao Mal" ],
+const LISTA_ESCOLAS_ARCANAS = [
+  "Abjurante",
+  "Conjurador",
+  "Adivinho",
+  "Feiticeiro",
+  "Ilusionista",
+  "Invocador",
+  "Necromante",
+  "Transmutador",
+  "Arcanista",
+  "Elementalista Ar",
+  "Elementalista Terra",
+  "Elementalista Água",
+  "Elementalista Fogo",
+];
 
-  // Conjuração/Convocação
-  "Conjurador": [ "Área Escorregadia", "Armadura Arcana", "Conjurar Familiar", "Montaria Arcana", "Servo Invisível" ],
+const LISTA_ESCOLAS_ARCANAS_SEM_ELEMENTALISTA = [
+  "Abjurante",
+  "Conjurador",
+  "Adivinho",
+  "Feiticeiro",
+  "Ilusionista",
+  "Invocador",
+  "Necromante",
+  "Transmutador",
+  "Arcanista",
+];
 
-  // Profecia
-  "Adivinho": [ "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias" ],
-
-  // Encantamento/Feitiço
-  "Feiticeiro": [ "Amizade", "Enfeitiçar Pessoas", "Hipnotismo", "Provocação", "Sono", "Truque" ],
-
-  // Ilusão
-  "Ilusionista": [ "A Aura Esotérica de Nystul", "Força Fantasmagórica", "Som Ilusório", "Susto", "Transformação Momentânea", "Ventriloquismo" ],
-
-  // Invocação/Evocação
-  "Invocador": [ "Alarme", "Dardos Místicos", "O Disco Flutuante de Tenser", "Escudo Arcano", "Muralhas de Névoas" ],
-
-  // Necromancia
-  "Necromante": [ "Toque Macabro" ],
-
-  // Alteração
-  "Transmutador": [ "Apagar", "Cerrar Portas", "Compreensão da Linguagem", "Consertar", "Expandir", "Globos de Luz", "Leque Cromático", "Luz", "Manipular Chamas", "Mãos Flamejantes", "Mensagem", "Patas de Aranha", "Queda Suave", "Reflexão do Olhar", "Runa Arcana", "Salto", "Toque Chocante" ],
-
-  // Arcanista
-  "Arcanista": [ "Toque Macabro", "Toque Macabro", "Toque Macabro", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias", "Alarme", "Proteção ao Mal", "Área Escorregadia", "Armadura Arcana", "Conjurar Familiar", "Montaria Arcana", "Servo Invisível" ]
+const LISTA_ESCOLAS_ARCANAS_MAGO_PARA_ESCOLA = {
+  "Abjurante": "Abjuração",
+  "Conjurador": "Conjuração/Convocação",
+  "Adivinho": "Adivinhação",
+  "Feiticeiro": "Encantamento/Feitiço",
+  "Ilusionista": "Ilusão",
+  "Invocador": "Invocação/Evocação",
+  "Necromante": "Necromântica",
+  "Transmutador": "Alteração",
+  "Arcanista": "Arcanista",
+  "Elementalista Ar": "Ar",
+  "Elementalista Terra": "Terra",
+  "Elementalista Água": "Água",
+  "Elementalista Fogo": "Fogo",
 };
+
+const LISTA_ESCOLAS_ARCANAS_ESCOLA_PARA_MAGO = {
+  "Abjuração": "Abjurante",
+  "Conjuração/Convocação": "Conjurador",
+  "Adivinhação": "Adivinho",
+  "Encantamento/Feitiço": "Feiticeiro",
+  "Ilusão": "Ilusionista",
+  "Invocação/Evocação": "Invocador",
+  "Necromântica": "Necromante",
+  "Alteração": "Transmutador",
+  "Arcanista": "Arcanista",
+  "Ar": "Elementalista Ar",
+  "Terra": "Elementalista Terra",
+  "Água": "Elementalista Água",
+  "Fogo": "Elementalista Fogo",
+};
+
+const MAGIAS_ARCANAS = [
+  // NIVEL 1
+  {
+    //Abjuração
+    "Abjurante": [ "Alarme", "Proteção ao Mal" ],
+
+    // Conjuração/Convocação
+    "Conjurador": [ "Área Escorregadia", "Armadura Arcana", "Conjurar Familiar", "Montaria Arcana", "Servo Invisível" ],
+
+    // Profecia
+    "Adivinho": [ "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias" ],
+
+    // Encantamento/Feitiço
+    "Feiticeiro": [ "Amizade", "Enfeitiçar Pessoas", "Hipnotismo", "Provocação", "Sono", "Truque" ],
+
+    // Ilusão
+    "Ilusionista": [ "A Aura Esotérica de Nystul", "Força Fantasmagórica", "Som Ilusório", "Susto", "Transformação Momentânea", "Ventriloquismo" ],
+
+    // Invocação/Evocação
+    "Invocador": [ "Alarme", "Dardos Místicos", "O Disco Flutuante de Tenser", "Escudo Arcano", "Muralhas de Névoas" ],
+
+    // Necromancia
+    "Necromante": [ "Toque Macabro" ],
+
+    // Alteração
+    "Transmutador": [ "Apagar", "Cerrar Portas", "Compreensão da Linguagem", "Consertar", "Expandir", "Globos de Luz", "Leque Cromático", "Luz", "Manipular Chamas", "Mãos Flamejantes", "Mensagem", "Patas de Aranha", "Queda Suave", "Reflexão do Olhar", "Runa Arcana", "Salto", "Toque Chocante" ],
+
+    // Arcanista
+    "Arcanista": [ "Toque Macabro", "Toque Macabro", "Toque Macabro", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias", "Alarme", "Proteção ao Mal", "Área Escorregadia", "Armadura Arcana", "Conjurar Familiar", "Montaria Arcana", "Servo Invisível" ],
+
+    // Elementalista
+    "Elementalista Ar": ["Queda Suave", "Respiração Duradoura", "Muralhas de Névoas", "Queda Suave", "Respiração Duradoura", "Muralhas de Névoas", "Queda Suave", "Respiração Duradoura", "Muralhas de Névoas", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias"],
+
+    // Elementalista
+    "Elementalista Terra": ["Punho de pedra","Punho de pedra","Punho de pedra","Punho de pedra","Punho de pedra", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias"],
+
+    // Elementalista
+    "Elementalista Água": ["Metamorfosear Líquido","Metamorfosear Líquido","Metamorfosear Líquido","Metamorfosear Líquido", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias"],
+
+    // Elementalista
+    "Elementalista Fogo": ["Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo","Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo","Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias"],
+  }
+];
 
 const DISCIPLINAS_PSIONICAS = {
   'Clariscientes': {
@@ -230,31 +320,43 @@ const DISCIPLINAS_PSIONICAS = {
 
 const ESCOLAS_ARCANAS_OPOSTAS = {
   //Abjuração
-  "Abjurante": [ "Alteração", "Ilusão" ],
+  "Abjurante": [ "Alteração", "Ilusão", "Terra", "Ar", "Fogo", "Água" ],
 
   // Conjuração/Convocação
-  "Conjurador": [ "Profecia", "Invocação/Evocação" ],
+  "Conjurador": [ "Adivinhação", "Invocação/Evocação", "Terra", "Ar", "Fogo", "Água" ],
 
   // Profecia
-  "Adivinho": [ "Conjuração/Convocação" ],
+  "Adivinho": [ "Conjuração/Convocação", "Terra", "Ar", "Fogo", "Água" ],
 
   // Encantamento/Feitiço
-  "Feiticeiro": [ "Invocação/Evocação", "Necromancia" ],
+  "Feiticeiro": [ "Invocação/Evocação", "Necromântica", "Terra", "Ar", "Fogo", "Água" ],
 
   // Ilusão
-  "Ilusionista": [ "Necromancia", "Invocação/Evocação", "Abjuração" ],
+  "Ilusionista": [ "Necromântica", "Invocação/Evocação", "Abjuração", "Terra", "Ar", "Fogo", "Água" ],
 
   // Invocação/Evocação
-  "Invocador": [ "Encantamento/Feitiço", "Conjuração/Convocação" ],
+  "Invocador": [ "Encantamento/Feitiço", "Conjuração/Convocação", "Terra", "Ar", "Fogo", "Água" ],
 
   // Necromancia
-  "Necromante": [ "Ilusão", "Encantamento/Feitiço" ],
+  "Necromante": [ "Ilusão", "Encantamento/Feitiço", "Terra", "Ar", "Fogo", "Água" ],
 
   // Alteração
-  "Transmutador": [ "Abjuração", "Necromancia" ],
+  "Transmutador": [ "Abjuração", "Necromântica", "Terra", "Ar", "Fogo", "Água" ],
 
   // Arcanista
-  "Arcanista": [ "Alteração", "Invocação/Evocação", "Encantamento/Feitiço", "Ilusão" ]
+  "Arcanista": [ "Alteração", "Invocação/Evocação", "Encantamento/Feitiço", "Ilusão", "Terra", "Ar", "Fogo", "Água" ],
+
+  // Elementalista
+  "Elementalista Ar": [ "Terra", "Abjuração", "Conjuração/Convocação", "Adivinhação", "Encantamento/Feitiço", "Ilusão", "Invocação/Evocação", "Necromântica", "Alteração", "Arcanista" ],
+
+  // Elementalista
+  "Elementalista Terra": [ "Ar", "Abjuração", "Conjuração/Convocação", "Adivinhação", "Encantamento/Feitiço", "Ilusão", "Invocação/Evocação", "Necromântica", "Alteração", "Arcanista" ],
+
+  // Elementalista
+  "Elementalista Água": [ "Fogo", "Abjuração", "Conjuração/Convocação", "Adivinhação", "Encantamento/Feitiço", "Ilusão", "Invocação/Evocação", "Necromântica", "Alteração", "Arcanista" ],
+
+  // Elementalista
+  "Elementalista Fogo": [ "Água", "Abjuração", "Conjuração/Convocação", "Adivinhação", "Encantamento/Feitiço", "Ilusão", "Invocação/Evocação", "Necromântica", "Alteração", "Arcanista" ],
 };
 
 const MAGIAS_ELEMENTAIS = {
@@ -1024,6 +1126,76 @@ const RACAS = {
       'Usar Pergaminhos': 0,
       'Identificar Item Mágico': 0
     }
+  },
+};
+
+const RACA_DROW = {
+  "Força": { minimo: 3, maximo: 18 },
+  "Destreza": { minimo: 6, maximo: 18 },
+  "Constituição": { minimo: 7, maximo: 18 },
+  "Inteligência": { minimo: 8, maximo: 18 },
+  "Sabedoria": { minimo: 3, maximo: 18 },
+  "Carisma": { minimo: 8, maximo: 18 },
+  ajustes: { "Destreza": 1, "Constituição": -1 },
+  detalhes: [
+    'Elfos têm 90% de proteção contra magias relacionadas ao sono e magias de Encantar.',
+    'Quando utilizam um arco de qualquer tipo (mas não bestas) ou quando empregam espadas (curtas ou longas) os elfos ganham um bônus de +1 em suas jogadas de ataque.',
+    'Um elfo pode obter bônus de Surpresa contra seus oponentes, mas somente se não estiver usando armadura de metal. Mesmo assim, o elfo precisa estar sozinho, ou num grupo formado só de elfos ou halflings (que também não podem usar armaduras de metal), ou, no mínimo, a 30 metros de seus companheiros para ganhar o bônus. Se o elfo cumprir essas condições, os oponentes sofrerão uma penalidade de -4 em testes de Surpresa. Se uma porta ou um obstáculo precisar ser transposto, a penalidade reduz-se para -2.',
+    'A infravisão permite aos elfos enxergar a 20 metros no escuro.',
+    'Se estiver a 3 mestros, elfos podem localizar (1 em 1d6) portas ocultas (escondidas por uma tela, cortina ou algo parecido).',
+    'Se procurar intencionalmente por uma porta secreta (construidas para não serem notadas), o elfo terá uma chance de 1-2 em 1d6 de encontrá-la.',
+    'Se procurar intencionalmente por uma porta oculta (escondidas por uma tela, cortina ou algo parecido), o elfo terá uma chance de 1-3 em 1d6 de encontrá-la.'
+  ],
+  altura: { "Masculino": { minimo: 1.4, maximo: 1.64 }, "Feminino": { minimo: 1.27, maximo: 1.51 }},
+  idade: { minimo: 100, maximo: 750 },
+  peso: { "Masculino": { minimo: 45, maximo: 61 }, "Feminino": { minimo: 35, maximo: 51 }},
+  linguas_importantes: [ "comum", 'élfico' ],
+  linguas: [ 'dos gnomos', 'dos halflings', 'dos goblins', 'dos robgoblins', 'dos orcs', 'dos gnolls' ],
+  armas_importantes: [ 'Arco Longo Composto', 'Arco Curto Composto', 'Arco Longo', 'Arco Curto', 'Espada Longa', 'Espada Curta' ],
+  talentos: {
+    'Furtar Bolsos': 10,
+    'Abrir Fechaduras': 0,
+    'Achar/Desarmar Armadilhas': 2,
+    'Mover-se em Silêncio': 10,
+    'Esconder-se nas Sombras': 12,
+    'Ouvir Ruídos': 10,
+    'Escalar Muros': 40,
+    'Decifrar Linguagens': 0,
+    'Ataque pelas Costas': '',
+    'Gíria dos ladrões': '',
+    'Usar Pergaminhos': 0,
+    'Identificar Item Mágico': 0
+  }
+};
+
+const RACA_GOBLIN = {
+  "Força": { minimo: 3, maximo: 18 },
+  "Destreza": { minimo: 3, maximo: 18 },
+  "Constituição": { minimo: 3, maximo: 18 },
+  "Inteligência": { minimo: 3, maximo: 18 },
+  "Sabedoria": { minimo: 3, maximo: 18 },
+  "Carisma": { minimo: 3, maximo: 18 },
+  ajustes: {},
+  detalhes: [],
+  altura: { "Masculino": { minimo: 0.91, maximo: 1.06 }, "Feminino": { minimo: 0.90, maximo: 1.01 }},
+  idade: { minimo: 8, maximo: 60 },
+  peso: { "Masculino": { minimo: 21, maximo: 24 }, "Feminino": { minimo: 21, maximo: 24 }},
+  linguas_importantes: [ "comum", "dos goblins" ],
+  linguas: [ "dos anões", "dos halflings", "dos goblins", "dos kobolds" ],
+  armas_importantes: [],
+  talentos: {
+    'Furtar Bolsos': 5,
+    'Abrir Fechaduras': 10,
+    'Achar/Desarmar Armadilhas': 12,
+    'Mover-se em Silêncio': 10,
+    'Esconder-se nas Sombras': 7,
+    'Ouvir Ruídos': 15,
+    'Escalar Muros': 25,
+    'Decifrar Linguagens': 0,
+    'Ataque pelas Costas': '',
+    'Gíria dos ladrões': '',
+    'Usar Pergaminhos': 0,
+    'Identificar Item Mágico': 0
   }
 };
 
@@ -1157,6 +1329,56 @@ const CLANS = {
   }
 };
 
+const CLASSE_ELEMENTALISTA = {
+  "Próximo Nível": 2500,
+  "Grupo": "Arcano",
+  "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
+  "Pré-Requisitos": [ "lnteligéncia" ],
+  "Raças Permitidas": [ "Tabaxi", "Humano" ],
+  tendencias: TENDENCIAS,
+  dado_de_vida: 4,
+  detalhes: [
+    'Um Elementalista com Inteligência 16 ou mais ganha um bônus de 10% em sua experiência em pontos.',
+    'Elementalistas não podem usar nenhum tipo de armadura.',
+    'Todos os elementalistas podem usar livremente a maioria dos itens magicos disponíveis para os outros arcanos. No entanto, eles não podem utilizar os itens que duplicam os efeitos de magias de campos opostos ao seu.',
+    'Uma vez que tenha alcançado o 9º nível, um arcano pode escrever pergaminhos e preparar poções. Ele só poderá criar itens de maior poder depois de ter aprendido as magias apropriadas para isso (ou de ter trabalhado com alguém que as conheça).',
+    'Todos os arcanos recebem um d4 de vida por nível do personagem, do 1º até o 10º. Depois do 10º, arcanos ganham 1 ponto de vida por nível.',
+    'O elementalista é uma estirpe rara de arcano especialista que verga as forças naturais do universo de acordo com sua vontade.',
+    'As Escolas Elementais: Terra, ar, fogo e água são as quatro escolas elementais. Da mesma forma que as oito escolas descritas na seção dos arcanos especialistas, cada escola elemental possui uma escola oposta que é proibida para alguns especialistas. Não interessa em qual dessas escolas que um arcano desse tipo se especializa, ele será conhecido como um elementalista.',
+    'A escola do Ar se opõe à escola da Terra (e vice-versa), e tem as escolas do Fogo e Água como próximas. A escola do Fogo se opões à escola da Água (e vice-versa), e tem as escolas do Ar e da Terra como próximas.',
+    'Os elementalistas recebem um bônus de +25% ao tentar aprender feitiços de seu elemento e um bônus de +15% ao aprender outros feitiços elementais. Eles sofrem uma penalidade de -25% ao tentar aprender feitiços que não se relacionam com os elementos.',
+    'Um elementalista pode memorizar um feitiço extra por nível, desde que pelo menos um dos feitiços memorizados seja de seu elemento de especialidade. Como os elementalistas têm uma compreensão aprimorada das magias dentro de seu elemento, eles recebem um bônus de +2 ao fazer testes de resistência contra essas magias. Outras criaturas sofrem -2 de penalidade ao fazer testes de resistência contra um elemental que lança feitiços de sua especialidade.',
+    'Uma vez por dia um elementalista pode escolher lançar um feitiço memorizado de seu elemento de especialidade como se ele tivesse ld4 níveis mais altos. Ele deve declarar sua decisão de fazer isso imediatamente antes de lançar o feitiço. Isso afeta o alcance, a duração, a área de efeito e o dano; não permite que o mago lance um feitiço de um nível que ele normalmente não poderia usar.',
+    'Quando um elementalista tenta criar uma nova magia relacionada ao seu elemento de especialidade, o Mestre deve contar a nova magia como um nível a menos (para determinar a dificuldade).',
+    'Ao atingir o 15º nível, um elementalista não precisa se concentrar ao controlar os elementais de seu elemento especial convocado pelo elemental de conjuração de magia de 5º nível. A chance normal de 5% de o elemental se voltar contra seu invocador permanece em vigor.',
+    'No 20º nível, não há chance de um elemental invocado se voltar contra um elementalista se a criatura for do elemento especialidade de magos.',
+    'Regra homebrew: os Elementalistas possuem 10% de chance de identificar itens mágicos por nível, sendo o máximo 80%. A exceção são de itens opostos a sua escola.'
+  ],
+  xp_extra: (personagem)=>{
+    if (personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"] >= 16) {
+      return '10%';
+    }
+    return '0%';
+  },
+  armas: ["Cajado", "Adaga", "Punhal", "Dardo", "Faca", "Funda"],
+  armaduras: [],
+  escudos: [],
+  talentos: {
+    'Furtar Bolsos': 0,
+    'Abrir Fechaduras': 0,
+    'Achar/Desarmar Armadilhas': 0,
+    'Mover-se em Silêncio': 0,
+    'Esconder-se nas Sombras': 0,
+    'Ouvir Ruídos': 0,
+    'Escalar Muros': 0,
+    'Decifrar Linguagens': 0,
+    'Ataque pelas Costas': 'Não possui',
+    'Gíria dos ladrões': 'Não possui',
+    'Usar Pergaminhos': 0,
+    'Identificar Item Mágico': 10
+  },
+};
+
 const CLASSES = {
   "Guerreiro": {
     "Próximo Nível": 2000,
@@ -1197,7 +1419,7 @@ const CLASSES = {
     }
   },
   "Paladino": {
-    "Próximo Nível": 2000,
+    "Próximo Nível": 2250,
     "Grupo": "Homem de Armas",
     "Habilidades Exigidas": { "Força": 12, "Destreza": 0, "Constituição": 9, "Inteligência": 0, "Sabedoria": 13, "Carisma": 17 },
     "Pré-Requisitos": [ "Força", "Carisma" ],
@@ -1216,7 +1438,7 @@ const CLASSES = {
       'Um paladino usando uma espada sagrada projeta um círculo de poder de 20 metros de diâmetro quando a espada é desembainhada e erguida. Esse poder neutraliza magias hostis de círculos menores ou iguais ao nível de experiência do paladino.',
       'Um paladino pode usar o poder de sua fé contra mortos-vivos e demônios a partir do 3º nível. Ele afeta esses monstros da mesma forma que um clérigo dois níveis abaixo.',
       'Poder da Fé: criaturas especiais incluem mortos-vivos únicos, mortos-vivos dotados de vontade própria do plano Material Negativo, certos poderes Superiores ou Inferiores e mortos-vivos que habitam outros Planos de Exislência.',
-      'Poder da Fé: Na relação de itens, há um número, um traço, ou uma letra. Se houver um número, jogue 1d20. Se o valor for maior ou igual, a criatura será afugentada. Se a letra "A" (de "afugentado") aparecer, isso significa um sucesso automático sem a necessidade de uma jogada. Se a letra "D" (de "destruído") aparacer, o clérigo não terá simplesmente afugentado o morto-vivo, mas sim o destru1do. Um traço "-" indica quando um clérigo ou paladino do nível em questão não é capaz, ainda, de reunir a fé necessana para afugentar esse lipo de morto-vivo. Uma tentativa, com sucesso, de afugentar mortos-vivos afeta 2d6 criaturas. Se o grupo de mortos-vivos for misto, as criaturas com menos dados de vida serão afetadas primeiro.',
+      'Poder da Fé: Na relação de itens, há um número, um traço, ou uma letra. Se houver um número, jogue 1d20. Se o valor for maior ou igual, a criatura será afugentada. Se a letra "A" (de "afugentado") aparecer, isso significa um sucesso automático sem a necessidade de uma jogada. Se a letra "D" (de "destruído") aparacer, o clérigo não terá simplesmente afugentado o morto-vivo, mas sim o destru1do. Um traço - indica quando um clérigo ou paladino do nível em questão não é capaz, ainda, de reunir a fé necessana para afugentar esse lipo de morto-vivo. Uma tentativa, com sucesso, de afugentar mortos-vivos afeta 2d6 criaturas. Se o grupo de mortos-vivos for misto, as criaturas com menos dados de vida serão afetadas primeiro.',
       'Um paladino pode chamar seu cavalo de batalha a partir do 4º nível.',
       'Um paladino pode lançar magias divinas uma vez que tenha atingido o 9º nível. Ele pode utilizar somente magias das esferas de combate, adivinhação, cura e proteção.',
       'Diferente dos sacerdotes, o paladino não recebe magias extras por um valor alto de Sabedoria.',
@@ -1739,7 +1961,7 @@ const CLASSES = {
       'Clérigos comuns, relutantes em derramar sangue ou semear violência, só podem usar armas sem corte, de impacto.',
       'O poder da fé permite que o personagem afugente ou destrua mortos-vivos. Um clérigo maligno pode fazer com que os mortos-vivos obedeçam a seus comandos.',
       'Poder da Fé: criaturas especiais incluem mortos-vivos únicos, mortos-vivos dotados de vontade própria do plano Material Negativo, certos poderes Superiores ou Inferiores e mortos-vivos que habitam outros Planos de Exislência.',
-      'Poder da Fé: Na relação de itens, há um número, um traço, ou uma letra. Se houver um número, jogue 1d20. Se o valor for maior ou igual, a criatura será afugentada. Se a letra "A" (de "afugentado") aparecer, isso significa um sucesso automático sem a necessidade de uma jogada. Se a letra "D" (de "destruído") aparacer, o clérigo não terá simplesmente afugentado o morto-vivo, mas sim o destru1do. Um traço "-" indica quando um clérigo ou paladino do nível em questão não é capaz, ainda, de reunir a fé necessana para afugentar esse lipo de morto-vivo. Uma tentativa, com sucesso, de afugentar mortos-vivos afeta 2d6 criaturas. Se o grupo de mortos-vivos for misto, as criaturas com menos dados de vida serão afetadas primeiro.',
+      'Poder da Fé: Na relação de itens, há um número, um traço, ou uma letra. Se houver um número, jogue 1d20. Se o valor for maior ou igual, a criatura será afugentada. Se a letra A (de afugentado) aparecer, isso significa um sucesso automático sem a necessidade de uma jogada. Se a letra D (de destruído) aparacer, o clérigo não terá simplesmente afugentado o morto-vivo, mas sim o destru1do. Um traço - indica quando um clérigo ou paladino do nível em questão não é capaz, ainda, de reunir a fé necessana para afugentar esse lipo de morto-vivo. Uma tentativa, com sucesso, de afugentar mortos-vivos afeta 2d6 criaturas. Se o grupo de mortos-vivos for misto, as criaturas com menos dados de vida serão afetadas primeiro.',
       'Ao alcançar o 8° nível, o clérigo automaticamente atrai um grupo de seguidores fanaticamente leais, contanto que o personagem tenha estabelecido um local de adoração de bom tamanho.',
       'No 9º nível, o clérigo pode receber autorização oficial para construir uma fortaleza religiosa, seja um mosteiro fortificado ou um convento isolado.',
       'Regra homebrew: os sacerdotes possuem 5% de chance de identificar itens mágicos por nível.'
@@ -2002,55 +2224,16 @@ const CLASSES = {
   },
 
   /* Pronto */
-  "Elementalista": {
-    "Próximo Nível": 2500,
-    "Grupo": "Arcano",
-    "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
-    "Pré-Requisitos": [ "lnteligéncia" ],
-    "Raças Permitidas": [ "Tabaxi", "Humano" ],
-    tendencias: TENDENCIAS,
-    dado_de_vida: 4,
-    detalhes: [
-      'Um Elementalista com Inteligência 16 ou mais ganha um bônus de 10% em sua experiência em pontos.',
-      'Elementalistas não podem usar nenhum tipo de armadura.',
-      'Todos os elementalistas podem usar livremente a maioria dos itens magicos disponíveis para os outros arcanos. No entanto, eles não podem utilizar os itens que duplicam os efeitos de magias de campos opostos ao seu.',
-      'Uma vez que tenha alcançado o 9º nível, um arcano pode escrever pergaminhos e preparar poções. Ele só poderá criar itens de maior poder depois de ter aprendido as magias apropriadas para isso (ou de ter trabalhado com alguém que as conheça).',
-      'Todos os arcanos recebem um d4 de vida por nível do personagem, do 1º até o 10º. Depois do 10º, arcanos ganham 1 ponto de vida por nível.',
-      'O elementalista é uma estirpe rara de arcano especialista que verga as forças naturais do universo de acordo com sua vontade.',
-      'As Escolas Elementais: Terra, ar, fogo e água são as quatro escolas elementais. Da mesma forma que as oito escolas descritas na seção dos arcanos especialistas, cada escola elemental possui uma escola oposta que é proibida para alguns especialistas. Não interessa em qual dessas escolas que um arcano desse tipo se especializa, ele será conhecido como um elementalista.',
-      'A escola do Ar se opõe à escola da Terra (e vice-versa), e tem as escolas do Fogo e Água como próximas. A escola do Fogo se opões à escola da Água (e vice-versa), e tem as escolas do Ar e da Terra como próximas.',
-      'Os elementalistas recebem um bônus de +25% ao tentar aprender feitiços de seu elemento e um bônus de +15% ao aprender outros feitiços elementais. Eles sofrem uma penalidade de -25% ao tentar aprender feitiços que não se relacionam com os elementos.',
-      'Um elementalista pode memorizar um feitiço extra por nível, desde que pelo menos um dos feitiços memorizados seja de seu elemento de especialidade. Como os elementalistas têm uma compreensão aprimorada das magias dentro de seu elemento, eles recebem um bônus de +2 ao fazer testes de resistência contra essas magias. Outras criaturas sofrem -2 de penalidade ao fazer testes de resistência contra um elemental que lança feitiços de sua especialidade.',
-      'Uma vez por dia um elementalista pode escolher lançar um feitiço memorizado de seu elemento de especialidade como se ele tivesse ld4 níveis mais altos. Ele deve declarar sua decisão de fazer isso imediatamente antes de lançar o feitiço. Isso afeta o alcance, a duração, a área de efeito e o dano; não permite que o mago lance um feitiço de um nível que ele normalmente não poderia usar.',
-      'Quando um elementalista tenta criar uma nova magia relacionada ao seu elemento de especialidade, o Mestre deve contar a nova magia como um nível a menos (para determinar a dificuldade).',
-      'Ao atingir o 15º nível, um elementalista não precisa se concentrar ao controlar os elementais de seu elemento especial convocado pelo elemental de conjuração de magia de 5º nível. A chance normal de 5% de o elemental se voltar contra seu invocador permanece em vigor.',
-      'No 20º nível, não há chance de um elemental invocado se voltar contra um elementalista se a criatura for do elemento especialidade de magos.',
-      'Regra homebrew: os Elementalistas possuem 10% de chance de identificar itens mágicos por nível, sendo o máximo 80%. A exceção são de itens opostos a sua escola.'
-    ],
-    xp_extra: (personagem)=>{
-      if (personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"] >= 16) {
-        return '10%';
-      }
-      return '0%';
-    },
-    armas: ["Cajado", "Adaga", "Punhal", "Dardo", "Faca", "Funda"],
-    armaduras: [],
-    escudos: [],
-    talentos: {
-      'Furtar Bolsos': 0,
-      'Abrir Fechaduras': 0,
-      'Achar/Desarmar Armadilhas': 0,
-      'Mover-se em Silêncio': 0,
-      'Esconder-se nas Sombras': 0,
-      'Ouvir Ruídos': 0,
-      'Escalar Muros': 0,
-      'Decifrar Linguagens': 0,
-      'Ataque pelas Costas': 'Não possui',
-      'Gíria dos ladrões': 'Não possui',
-      'Usar Pergaminhos': 0,
-      'Identificar Item Mágico': 10
-    },
-  },
+  "Elementalista Ar": CLASSE_ELEMENTALISTA,
+
+  /* Pronto */
+  "Elementalista Terra": CLASSE_ELEMENTALISTA,
+
+  /* Pronto */
+  "Elementalista Água": CLASSE_ELEMENTALISTA,
+
+  /* Pronto */
+  "Elementalista Fogo": CLASSE_ELEMENTALISTA,
 
   /* Pronto */
   "Arcanista": {
@@ -2325,7 +2508,10 @@ const COMBO_CLASSES = [
   { value: 'Ladrão', texto: 'Ladrão (Livro do Jogador)' },
   { value: 'Bardo', texto: 'Bardo (Livro do Jogador)' },
   { value: 'Vingador', texto: 'Vingador (Ravenloft: Domínios do Medo)' },
-  { value: 'Elementalista', texto: 'Elementalista (Ravenloft: Domínios do Medo)' },
+  { value: 'Elementalista Ar', texto: 'Elementalista Ar (Ravenloft: Domínios do Medo)' },
+  { value: 'Elementalista Terra', texto: 'Elementalista Terra (Ravenloft: Domínios do Medo)' },
+  { value: 'Elementalista Água', texto: 'Elementalista Água (Ravenloft: Domínios do Medo)' },
+  { value: 'Elementalista Fogo', texto: 'Elementalista Fogo (Ravenloft: Domínios do Medo)' },
   { value: 'Arcanista', texto: 'Arcanista (Ravenloft: Domínios do Medo)' },
   { value: 'Anacoreta', texto: 'Anacoreta (Ravenloft: Domínios do Medo)' },
   { value: 'Cigano', texto: 'Cigano (Ravenloft: Domínios do Medo)' },
@@ -2351,9 +2537,975 @@ const COMBO_CLASSES_INDEX = {
   'Ladrão': 15,
   'Bardo': 16,
   'Vingador': 17,
-  'Elementalista': 18,
-  'Arcanista': 19,
-  'Anacoreta': 20,
-  'Cigano': 21,
-  'Psionicista': 22
+  'Elementalista Ar': 18,
+  'Elementalista Terra': 19,
+  'Elementalista Água': 20,
+  'Elementalista Fogo': 21,
+  'Arcanista': 22,
+  'Anacoreta': 23,
+  'Cigano': 24,
+  'Psionicista': 25
+};
+
+const DIVINDADES = {
+  "Humano": ['Azuth','Bane','Chauntea','Cyric','Gond','Helm','Ilmater','Kelemvor','Kossuth','Lathander','Lolth','Malar','Mask','Mielikki','Mystra','Oghma','Selûne','Shar','Shaundakul','Silvanus','Sune','Talos','Tempus','Torm','Tymora','Tyr','Umberlee','Uthgar','Waukeen','Akadi','Auril','Beshaba','Deneir','Eldath','Finder','Garagos','Gargauth','Grumbar','Gwaeron Windstrom','Hoar','Istishia','Jergal','Lliira','Loviatar','Lurue','Milil','Nobanion','Red Knight','Savras','Sharess','Shiallia','Siamorphe','Talona','Tiamat','Ubtao','Ulutiu','Valkur','Velsharoon'],
+  "Anão": ['Abbathor','Berronar','Truesilver','Clangeddin Silverbeard','Deep Duerra','Dugmaren Brightmantle','Dumathoin','Gorm Gulthyn','Haela Brightaxe','Laduguer','Marthammor Duin','Moradin','Sharindlar','Thard Harr','Vergadain'],
+  "Elfo": ['Aerdrie Faenya','Angharradh','Corellon Larethian','Deep Sashelas','Erevan Ilesere','Fenmarel Mestarine','Hanali Celanil','Labelas Enoreth','Rillifane Rallathil','Sehanine Moonbow','Shevarash','Solonor Thelandira'],
+  "Gnomo": ['Baervan Wildwanderer','Baravar Cloakshadow','Callarduran Smoothhands','Flandal Steelskin','Gaerdal Ironhand','Garl Glittergold','Segojan Earthcaller','Urdlen'],
+  "Meio-Elfo": ['Azuth','Bane','Chauntea','Cyric','Gond','Helm','Ilmater','Kelemvor','Kossuth','Lathander','Lolth','Malar','Mask','Mielikki','Mystra','Oghma','Selûne','Shar','Shaundakul','Silvanus','Sune','Talos','Tempus','Torm','Tymora','Tyr','Umberlee','Uthgar','Waukeen','Akadi','Auril','Beshaba','Deneir','Eldath','Finder','Garagos','Gargauth','Grumbar','Gwaeron Windstrom','Hoar','Istishia','Jergal','Lliira','Loviatar','Lurue','Milil','Nobanion','Red Knight','Savras','Sharess','Shiallia','Siamorphe','Talona','Tiamat','Ubtao','Ulutiu','Valkur','Velsharoon','Aerdrie Faenya','Angharradh','Corellon Larethian','Deep Sashelas','Erevan Ilesere','Fenmarel Mestarine','Hanali Celanil','Labelas Enoreth','Rillifane Rallathil','Sehanine Moonbow','Shevarash','Solonor Thelandira'],
+  "Halfling": ['Arvoreen','Brandobaris','Cyrrollalee','Sheela Peryroyl','Urogalan','Yondalla'],
+  "Drow": ['Eilistraee','Ghaunadaur','Kiaransalee','Lolth','Selvetarm','Vhaeraun'],
+  "Goblin": ['Maglubiyet','Khurgorbaeyag'],
+};
+
+const PROFISSOES = [
+  'Dragão Púrpura (Suzail)',
+  'Capitão Dragão Púrpura (Suzail)',
+  'Mago da Guerra (Suzail)',
+  'Burocrata da Magia Real (Suzail)',
+  'Fornalheiro do Trono de Ferro (Suzail)',
+  'Comerciante do Trono de Ferro (Suzail)',
+  'Vigilante do Trono de Ferro (Suzail)',
+  'Taverneiro',
+  'Açougueiro',
+  'Agricultor: fazendeiro livre, com alguma riqueza',
+  'Alfageme: ferreiro que faz lâminas de espada',
+  'Alfaiate',
+  'Amolador: afiador de facas',
+  'Arauto: cortesão que faz etiqueta e heráldica',
+  'Armarinheiro: negociante de pequenas quantidades, linha e agulhas',
+  'Armeiro',
+  'Arquiteto',
+  'Artesão de cobre: trabalhador em cobre',
+  'Assassino: matador por encomenda',
+  'Astrólogo: lê estrelas e destinos',
+  'Bainho: fabricante de bainhas e estojos de facas',
+  'Barbeiro: cirurgião, sangrador dentista e cabeleireiro',
+  'Batedor de ouro: fabricante de lâminas de ouro',
+  'Bordador: costureiro que borda e decora tecidos',
+  'Boticário: químico, droguista ou farmacêutico',
+  'Caçador de peles Carpinteiro',
+  'Carregador de água',
+  'Carregador: transportador de bens',
+  'Carreteiro: carroceiro, transportador de bens',
+  'Carroceiro: alguém que transporta bens por carroça ou carreto',
+  'Carvoeiro: queima carvão vegetal na fundição',
+  'Causídico: advogado, que pleiteia o caso de terceiros diante da corte',
+  'Cavalariço: homem que cuida de cavalos',
+  'Cavouqueiro: aquele que cava e corta pedra',
+  'Cervejeiro: fabricante de cervejas, sejam escuras, fortes ou fracas',
+  'Chapeleiro: aquele que faz chapéus',
+  'Cinteiro: fabricante de cintos e cinturões',
+  'Cinzelador: joalheiro especializado em gravar figuras no metal',
+  'Construtor: operário que constrói paredes e edifícios',
+  'Costureiro: aquele cuja ocupação é a costura',
+  'Cozinheiro',
+  'Cunhador: fabricante de moedas',
+  'Curtidor fabricante de couro',
+  'Cuteleiro: fabricante de facas e prataria',
+  'Desenhista: pintor',
+  'Dourador: artífice da douração de metais',
+  'Dragomano: intérprete oficial ou guia',
+  'Encadernador: fabricante de livros',
+  'Entalhador: escultor de madeira',
+  'Escrevente: escrivão que geralmente lida com contabilidade',
+  'Escriba: secretária ou alguém que possa escrever',
+  'Esfolador: açougueiro que prepara o couro para curtir',
+  'Esmaltador: joalheiro especializado em trabalho esmaltado',
+  'Espião',
+  'Esporeiro: fabricante de esporas',
+  'Estirador: fabricante de arame',
+  'Estucador: especialista em gesso e reboco',
+  'Fabricante de alaúde',
+  'Fabricante de arcos',
+  'Fabricante de bolsas',
+  'Fabricante de cal',
+  'Fabricante de carros: construtor de carroças/ carretas',
+  'Fabricante de harpa',
+  'Fabricante de órgão',
+  'Fabricante de peltre: aquele que trabalha com ligas de estanho',
+  'Fabricante de sapatos',
+  'Fabricante de velino',
+  'Fabricante e reparador de rodas',
+  'Fanqueiro: negociante de tecidos',
+  'Ferrador: fabricante de ferraduras',
+  'Ferragista: negociante, não fabricante de artigos de ferro',
+  'Ferreiro',
+  'Flecheiro: fabricante de flechas',
+  'Fornalheiro: o homem que faz funcionar uma fornalha de forjaria',
+  'Funileiro: artífice viajante, que repara potes de estanho e itens similares',
+  'Garimpeiro: aquele que cava em busca de carvão ou outros minerais',
+  'Granjeiro: negociante de galinhas ou outras aves',
+  'Guarda-florestal: oficial responsável pelos bosques do senhor',
+  'Herbalista: praticante de curas com ervas',
+  'Hospedeiro: estalajadeiro',
+  'Intérprete: tradutor',
+  'Jardineiro',
+  'Ladrilhador',
+  'Lapidador: joalheiro especialista em pedras preciosas',
+  'Latoeiro: ferreiro que trabalha com latão, às vezes trabalhador viajante',
+  'Lavadeira',
+  'Lavrador: trabalhador dos campos',
+  'Luveiro: fabricante de luvas',
+  'Marceneiro: fabricante de mobílias ou cabines',
+  'Marmoreiro: cortador e escultor de mármore',
+  'Mascate: vendedor ambulante, que normalmente frequenta pequenas vilas',
+  'Mendigo',
+  'Menestrel',
+  'Mensageiro',
+  'Mercador: negociante de tecidos',
+  'Merceeiro: atacadista, particularmente de itens úteis no dia a dia',
+  'Minerador',
+  'Minerador de estanho',
+  'Moleiro: aquele que opera uma mó de grãos',
+  'Montador de flechas: fabricante de pontas de flecha',
+  'Navegador: aquele especializado nas artes de direção e navegação',
+  'Negociante de meias: fabricante de meias e ligas',
+  'Operário de estaleiro: construtor de navios e barcos',
+  'Ourives: joalheiro que trabalha com ouro',
+  'Padeiro',
+  'Pajem de archote: portador de lanterna ou tocha',
+  'Paredeiro: pedreiro que junta pedras e tijolos para paredes',
+  'Pastor',
+  'Pavimentador: pedreiro especializado em pavimentar ruas',
+  'Pedreiro: trabalhador em construções de pedra, tijolo e gesso',
+  'Peixeiro: vendedor de peixes',
+  'Peleteiro: alfaiate de trajes de pele',
+  'Pescador',
+  'Pintor',
+  'Pisoeiro: fabricante de feltro',
+  'Porqueiro: guardador de porcos',
+  'Portador: aquele que transporta mensagens ou pequenos bens',
+  'Poteiro: fabricante de potes de metal ou, alternativamente, de argila',
+  'Pregueiro: ferreiro especializado em pregos',
+  'Preparador de molhos: cozinheiro especializado em molhos',
+  'Relojoeiro',
+  'Sábio: erudito',
+  'Saboeiro',
+  'Sanguessuga: médico não pertencente ao clero',
+  'Sapateiro: reparador de sapatos velhos',
+  'Seleiro: fabricante de selas',
+  'Serralheiro',
+  'Sineiro: fundidor que faz sinos',
+  'Soprador de vidro: fabricante de itens feitos de vidro',
+  'Tabelião: copista',
+  'Tanoeiro: fabricante de tonéis e barris',
+  'Tecelão: aquele que fabrica tecidos',
+  'Tintureiro: alguém que tinge tecidos',
+  'Torneiro: trabalhador no torno mecânico',
+  'Tosquiador: homem que apara a lã solta dos tecidos, para garantir bom acabamento',
+  'Trabalhador braçal (sem especialização)',
+  'Trombeteino: fabricante de trombetas',
+  'Veleiro: fabricante de velas (de iluminação)',
+  'Velejador',
+  'Vidraceiro: aquele que corta e modela vidro',
+  'Vinhateiro: fabricante de vinhos'
+];
+
+const RESISTENCIA = [
+  { // 0
+    "Paralisação, Veneno ou Morte por Magia": 16,
+    "Bastão, Cajado ou Varinha": 18,
+    "Petrificação ou Transformação": 17,
+    "Sopro-de-Dragão": 20,
+    "Magia": 19
+  },
+  { // 1
+    "Paralisação, Veneno ou Morte por Magia": 14,
+    "Bastão, Cajado ou Varinha": 16,
+    "Petrificação ou Transformação": 15,
+    "Sopro-de-Dragão": 17,
+    "Magia": 17
+  },
+  { // 2
+    "Paralisação, Veneno ou Morte por Magia": 14,
+    "Bastão, Cajado ou Varinha": 16,
+    "Petrificação ou Transformação": 15,
+    "Sopro-de-Dragão": 17,
+    "Magia": 17
+  },
+  { // 3
+    "Paralisação, Veneno ou Morte por Magia": 13,
+    "Bastão, Cajado ou Varinha": 15,
+    "Petrificação ou Transformação": 14,
+    "Sopro-de-Dragão": 16,
+    "Magia": 16
+  },
+  { // 4
+    "Paralisação, Veneno ou Morte por Magia": 13,
+    "Bastão, Cajado ou Varinha": 15,
+    "Petrificação ou Transformação": 14,
+    "Sopro-de-Dragão": 16,
+    "Magia": 16
+  },
+  { // 5
+    "Paralisação, Veneno ou Morte por Magia": 11,
+    "Bastão, Cajado ou Varinha": 13,
+    "Petrificação ou Transformação": 12,
+    "Sopro-de-Dragão": 13,
+    "Magia": 14
+  },
+  { // 6
+    "Paralisação, Veneno ou Morte por Magia": 11,
+    "Bastão, Cajado ou Varinha": 13,
+    "Petrificação ou Transformação": 12,
+    "Sopro-de-Dragão": 13,
+    "Magia": 14
+  },
+  { // 7
+    "Paralisação, Veneno ou Morte por Magia": 10,
+    "Bastão, Cajado ou Varinha": 12,
+    "Petrificação ou Transformação": 11,
+    "Sopro-de-Dragão": 12,
+    "Magia": 13
+  },
+  { // 8
+    "Paralisação, Veneno ou Morte por Magia": 10,
+    "Bastão, Cajado ou Varinha": 12,
+    "Petrificação ou Transformação": 11,
+    "Sopro-de-Dragão": 12,
+    "Magia": 13
+  },
+  { // 9
+    "Paralisação, Veneno ou Morte por Magia": 8,
+    "Bastão, Cajado ou Varinha": 10,
+    "Petrificação ou Transformação": 9,
+    "Sopro-de-Dragão": 9,
+    "Magia": 11
+  },
+  { // 10
+    "Paralisação, Veneno ou Morte por Magia": 8,
+    "Bastão, Cajado ou Varinha": 10,
+    "Petrificação ou Transformação": 9,
+    "Sopro-de-Dragão": 9,
+    "Magia": 11
+  }
+];
+
+const THAC0 = {
+  "Guerreiro":   [ 20, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11 ],
+  "Paladino":    [ 20, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11 ],
+  "Ranger":      [ 20, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11 ],
+  "Mago":        [ 20, 20, 20, 20, 19, 19, 19, 18, 18, 18, 17 ],
+  "Ilusionista": [ 20, 20, 20, 20, 19, 19, 19, 18, 18, 18, 17 ],
+  "Clérigo":     [ 20, 20, 20, 20, 18, 18, 18, 16 ,16 ,16, 14 ],
+  "Druida":      [ 20, 20, 20, 20, 18, 18, 18, 16 ,16 ,16, 14 ],
+  "Ladrão":      [ 20, 20, 20, 19, 19, 18, 18, 17, 17, 16, 16 ],
+  "Bardo":       [ 20, 20, 20, 19, 19, 18, 18, 17, 17, 16, 16 ]
+};
+
+const MORAL = [
+  /*
+  2-4 Inconfiável
+  5-7 Incerto
+  8-10 Mediano
+  11-12 Resoluto
+  13-14 Elite
+  15-16 Campeão
+  17-18 Fanático
+  19-20 Destemido
+  */
+  'Mediano (10)',
+  'Resoluto (11)',
+  'Resoluto (12)',
+  'Elite (13)',
+  'Elite (14)',
+  'Campeão (15)',
+  'Campeão (16)',
+  'Fanático (17)',
+  'Fanático (18)',
+  'Destemido (19)',
+  'Destemido (20)'
+];
+
+const MORAL_GOBLIN = [
+  'Incerto (5)',
+  'Incerto (6)',
+  'Incerto (6)',
+  'Incerto (7)',
+  'Incerto (7)',
+  'Mediano (8)',
+  'Mediano (8)',
+  'Mediano (9)',
+  'Mediano (9)',
+  'Mediano (10)',
+  'Mediano (10)'
+];
+
+const CIRCULOS_POR_CLASSE_E_NIVEL = {
+  "Guerreiro": {
+    obter_lista: (callback) => { callback({}); },
+    magias: [
+      /* 0, nivel 1  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+    ]
+  },
+  "Paladino": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_DIVINAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 1, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+    ]
+  },
+  "Ranger": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_DIVINAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 1, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 2, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+    ]
+  },
+  "Mago": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_ARCANAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: true , '1º Círculo': 1, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 2, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 3, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 1 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 2 },
+    ]
+  },
+  "Ilusionista": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_ILUSIONISTA,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 3, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 3, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 5, '2º Círculo': 2, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 5, '2º Círculo': 2, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 5, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 5, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 5, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 1 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 5, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 2 },
+    ]
+  },
+  "Clérigo": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_DIVINAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 3, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 3, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 5, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 1 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 5, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 3, '5º Círculo': 2 },
+    ]
+  },
+  "Druida": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_DRUIDICAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 3, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 3, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 5, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 1 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 5, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 3, '5º Círculo': 2 },
+    ]
+  },
+  "Ladrão": {
+    obter_lista: (callback) => { callback({}); },
+    magias: [
+      /* 0, nivel 1  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+    ]
+  },
+  "Bardo": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_ARCANAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: false, '1º Círculo': 0, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 1, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 2, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 3, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 3, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 3, '2º Círculo': 2, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 3, '2º Círculo': 3, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 3, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 3, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0 },
+    ]
+  }
+};
+
+function clonar_magias(lista,callback) {
+  let clone = JSON.parse(JSON.stringify(lista));
+  let retorno = {};
+  let circulos = Object.keys(clone);
+
+  circulos.forEach((circulo, index_circulo) => {
+
+    retorno[circulo] = {
+      importantes: [],
+      outras: []
+    };
+    let magias = Object.keys(clone[circulo]);
+    magias.forEach((magia, index_magia) => {
+      if (clone[circulo][magia]) {
+        retorno[circulo].importantes.push(magia);
+      }
+      retorno[circulo].outras.push(magia);
+
+      if (index_magia == (magias.length - 1)) {
+        if (index_circulo == (circulos.length - 1)) {
+          callback(retorno);
+        }
+      }
+    });
+  });
+}
+
+const LISTA_MAGIAS_ILUSIONISTA = {
+  '1º Círculo': {
+    'A Aura Esotérica de Nystul': false,
+    'Força Fantasmagórica': true,
+    'Som Ilusório': true,
+    'Susto': false,
+    'Transformação Momentânea': false,
+    'Truque': true,
+    'Ventriloquismo': false
+  },
+  '2º Círculo': {
+    'A Armadilha de Leomund': false,
+    'Borrar a Visão': false,
+    'Cegueira': true,
+    'Confundir Detecção': false,
+    'Criação Fantasmagórica': true,
+    'Invisibilidade': true,
+    'Ouro dos Tolos': false,
+    'Padrão Hipnótico': false,
+    'Reflexos': false,
+    'Surdez': false,
+    'Vento Sussurrante': false
+  },
+  '3º Círculo': {
+    'Escrita Ilusória': false,
+    'Força Espectral': true,
+    'Forma Ectoplásmica': false,
+    'Invisibilidade, 3m': true,
+    'Montaria Fantasmagórica': false
+  },
+  '4º Círculo': {
+    'Abandono': false,
+    'Assassino Fantasmagórico': true,
+    'Criar Itens Efêmeros': false,
+    'Invisibilidade Melhorada': true,
+    'Medo': false,
+    'Monstros de Sombra': true,
+    'Padrão Prismático': false,
+    'Parede Ilusória': false,
+    'Terreno Ilusório': false
+  },
+  '5º Círculo': {
+    'Criar Itens Temporários': false,
+    'Ilusão Independente': true,
+    'Magia de Sombras': true,
+    'Modificar Aparência': false,
+    'Monstros Sombrios': true,
+    'Portal Ilusório': false,
+    'Sonho': false,
+    'Telecinésia': false,
+    'Teleportação': true
+  }
+};
+
+const LISTA_MAGIAS_ARCANAS = {
+  '1º Círculo': {
+    'Alarme': false,
+    'Amizade': false,
+    'Apagar': false,
+    'Área Escorregadia': true,
+    'Armadura Arcana': true,
+    'A Aura Esotérica de Nystul': false,
+    'Cerrar Portas': false,
+    'Compreensão da Linguagem': false,
+    'Conjurar Familiar': false,
+    'Consertar': false,
+    'Dardos Místicos': true,
+    'Detectar Magia': false,
+    'Detectar Mortos-Vivos': false,
+    'O Disco Flutuante de Tenser': false,
+    'Enfeitiçar Pessoas': false,
+    'Escudo Arcano': true,
+    'Expandir': false,
+    'Força Fantasmagórica': false,
+    'Globos de luz': false,
+    'Hipnotismo': false,
+    'Identificação': false,
+    'Leque Cromático': false,
+    'Ler Magias': false,
+    'Luz': false,
+    'Manipular Chamas': false,
+    'Mãos Flamejantes': true,
+    'Mensagem': false,
+    'Montaria Arcana': false,
+    'Muralhas de Névoas': true,
+    'Patas de Aranha': false,
+    'Proteção ao Mal': false,
+    'Provocação': false,
+    'Queda Suave': false,
+    'Reflexão do Olhar': false,
+    'Runa Arcana': false,
+    'Salto': false,
+    'Servo Invisível': false,
+    'Som Ilusório': false,
+    'Sono': true,
+    'Susto': false,
+    'Toque Chocante': true,
+    'Toque Macabro': true,
+    'Transformação Momentânea': false,
+    'Truque': false,
+    'Ventriloquismo': false
+  },
+  '2º Círculo': {
+    'Alterar-se': false,
+    'A Armadilha de Leomund': false,
+    'Arrombar': false,
+    'Aterrorizar': false,
+    'Boca Encantada': false,
+    'Bolsos Arcanos': false,
+    'Borrar a Visão': false,
+    'Cegueira': true,
+    'Confundir Detecção': false,
+    'Convocar Enxames': true,
+    'Criação Fantasmagórica': false,
+    'Despedaçar': false,
+    'Detectar Invisibilidade': false,
+    'Detectar Maldade': false,
+    'Escuridão, 4,5 m': true,
+    'Esfera Flamejante': true,
+    'Esquecimento': false,
+    'Fechadura Arcana': false,
+    'A Flecha Ácida de Melf': true,
+    'Força': false,
+    'Invisibilidade': false,
+    'Irritação': false,
+    'Levitação': false,
+    'Localizar Objetos': false,
+    'Luz Contínua': false,
+    'Mão Espectral': false,
+    'Névoa': false,
+    'Névoa Fétida': true,
+    'Nó': false,
+    'Ouro dos Tolos': false,
+    'Padrão Hipnótico': false,
+    'Percepção Extrasensorial': false,
+    'Pirotecnia': false,
+    'Poeira Ofuscante': false,
+    'Proteção a Truques': false,
+    'Raio de Enfraquecimento': true,
+    'Reflexos': false,
+    'Revelar Tendência': false,
+    'O Riso Histérico de Tasha': false,
+    'Surdez': false,
+    'Teia': true,
+    'Truque de Corda': false,
+    'Vento Sussurrante': false
+  },
+  '3º Círculo': {
+    'Bola de Fogo': true,
+    'Claraudiência': false,
+    'Clarividência': false,
+    'Convocar Criaturas I': false,
+    'Dissipar Magia': true,
+    'Esconder Itens': false,
+    'Escrita Ilusória': false,
+    'Flecha de Chamas': false,
+    'Força Espectral': false,
+    'Forma Ectoplásmica': false,
+    'Idiomas': false,
+    'Imobilizar Pessoas': false,
+    'Infravisão': false,
+    'Invisibilidade, 3m': false,
+    'Item': false,
+    'Lentidão': false,
+    'Logro': false,
+    'Lufada de Vento': false,
+    'Montaria Fantasmagórica': false,
+    'Morte Aparente': false,
+    'Muralha de Vento': false,
+    'Os Meteoros Instantâneos de Melf': false,
+    'Página Secreta': false,
+    'O Pequeno Refúgio de Leomund': false,
+    'Piscar': false,
+    'Proteção a Projéteis': false,
+    'Proteção ao Mal, 3m': false,
+    'Relâmpago': true,
+    'Respirar na Agua': false,
+    'Runas Explosivas': false,
+    'O Selo da Serpente Sépia': false,
+    'Sugestão': false,
+    'Toque Vampírico': false,
+    'Velocidade': false,
+    'Vôo': false
+  },
+  '4º Círculo': {
+    'Abandono': false,
+    'Ampliar Plantas': false,
+    'Arma Encantada': false,
+    'Armadilha de Fogo': false,
+    'Assassino Fantasmagórico': false,
+    'Confusão': false,
+    'Convocar Criaturas II': false,
+    'Criar Itens Efêmeros': false,
+    'Detectar Observação': false,
+    'Dreno Temporário': false,
+    'Emoção': false,
+    'Enfeitiçar Monstros': false,
+    'Escarvar': false,
+    'Escudo de Fogo': false,
+    'A Esfera Resiliente de Otiluke': false,
+    'Espelho Encantado': false,
+    'Extensão I': false,
+    'Fiasco': false,
+    'Fogo da Contemplação': false,
+    'Grito': false,
+    'Invisibilidade Melhorada': false,
+    'Medo': false,
+    'Metamorfose': false,
+    'Metamorfose Vegetal': false,
+    'Metamorfosear-se': false,
+    'Monstros de Sombra': true,
+    'Muralha de Fogo': true,
+    'Muralha de Gero': true,
+    'Névoa Sólida': false,
+    'Olho Arcano': false,
+    'Padrão Prismático': false,
+    'Parede Ilusória': false,
+    'Pele Rochosa': false,
+    'Pequeno Globo de Invunerabilidade': false,
+    'Porta Dimensional': true,
+    'Praga': false,
+    'O Realce Mnemônico de Rary': false,
+    'O Refúgio Seguro de Leomund': false,
+    'Remover Maldições': false,
+    'Tempestade Glacial': true,
+    'Os Tentáculos Negros de Evard': true,
+    'Terreno Ilusório': false
+  },
+  '5º Círculo': {
+    'Ampliar Animais': false,
+    'Animar os Mortos': true,
+    'Ar Líquido': false,
+    'A Arca Secreta de Leomund': false,
+    'O Cão Fiel de Mordenkainen': false,
+    'Caos': false,
+    'Compor': false,
+    'Cone Glacial': false,
+    'Conjurar Elemental': true,
+    'Contato Extraplanar': false,
+    'Convocar Criaturas III': false,
+    'Convocar Sombras': true,
+    'Criar Itens Temporários': false,
+    'Criar Passagens': false,
+    'Distorção de Distância': false,
+    'Dominação': false,
+    'Enfraquecer o Intelecto': false,
+    'Enganar Visão': false,
+    'Enviar Mensagem': false,
+    'Expulsão': false,
+    'Extensão II': false,
+    'Ilusão Independente': true,
+    'Imobilizar Monstros': false,
+    'O Lamentável Debate de Leomund': false,
+    'Magia de Sombras': false,
+    'A Mão Interposta de Bigby': false,
+    'Modificar Aparência': false,
+    'Moldar Rochas': false,
+    'Monstros Sombrios': false,
+    'Muralha de Energia': true,
+    'Muralha de Ferro': false,
+    'Muralha de Pedra': false,
+    'Névoa Mortal': true,
+    'Pedra em Lama': true,
+    'Portal Ilusório': false,
+    'Recipiente Arcano': false,
+    'Repulsão': false,
+    'Sonho': false,
+    'Telecinésia': false,
+    'Teleportação': true
+  }
+};
+
+const LISTA_MAGIAS_DIVINAS = {
+  '1º Círculo': {
+    'Arma Abençoada': false,
+    'Benção': false,
+    'Cativar Animais': false,
+    'Círculo de Fé': false,
+    'Comando': false,
+    'Constrição': false,
+    'Criar Água': false,
+    'Curar Ferimentos Leves': true,
+    'Detectar Armadilhas': false,
+    'Detectar Magia': false,
+    'Detectar Maldade': false,
+    'Detectar Venenos': false,
+    'Fogo das Fadas': false,
+    'Invisibilidade contra Animais': false,
+    'Invisibilidade contra Mortos-Vivos': false,
+    'Localizar Animais ou Plantas': false,
+    'Luz': false,
+    'Passos sem Pegadas': false,
+    'Pedra Encantada': false,
+    'Proteção ao Calor/Frio': false,
+    'Proteção ao Mal': false,
+    'Purificar Alimentos': false,
+    'Remover Medo': false,
+    'Santurário': true
+  },
+  '2º Círculo': {
+    'Ajuda': false,
+    'Armadilha de Fogo': false,
+    'Augúrio': false,
+    'Bom Fruto': false,
+    'Cântico': false,
+    'Cativar': false,
+    'Criar Chamas': true,
+    'Demônio da Poeira': true,
+    'Detectar Feitiço': false,
+    'Distanciamento': false,
+    'Encantar Pessoas ou Mamíferos': false,
+    'Encontrar Armadilhas': false,
+    'Esquentar Metal': true,
+    'Falar com Animais': false,
+    'Imobilizar Pessoas': true,
+    'Lâmina Flamejante': false,
+    'Martelo Espiritual': true,
+    'Mensageiro': false,
+    'Obscurecimento': false,
+    'Pele de Arvore': false,
+    'Resistir ao Calor/Frio': false,
+    'Retardar Venenos': false,
+    'Revelar Tendência': false,
+    'Silêncio, 4,5m': true,
+    'Torcer Madeira': false,
+    'Tropeço': false,
+    'Wyvern Vigia': false
+  },
+  '3º Círculo': {
+    'Ampliar Plantas': false,
+    'Andar Sobre as Águas': false,
+    'Andar Sobre as Chamas': false,
+    'Animar os Mortos': true,
+    'Armadilha': false,
+    'Árvore': false,
+    'Brilho das Estrelas': false,
+    'Convocar Insetos': true,
+    'Convocar Relâmpagos': true,
+    'Crescer Espinhos': false,
+    'Criar Alimentos': false,
+    'Curar Cegueira ou Surdez': true,
+    'Curar Doenças': false,
+    'Dissipar Magia': true,
+    'Falar com Mortos': false,
+    'Imobilizar Animais': false,
+    'Localizar Objetos': false,
+    'Luz Contínua': false,
+    'Mesclar-se às Rochas': false,
+    'Moldar Rochas': false,
+    'Morte Aparente': false,
+    'Oração': false,
+    'Pirotecnia': false,
+    'Proteção a Fogo': false,
+    'Proteção ao Plano Negativo': false,
+    'Remover Maldições': false,
+    'Remover Paralisia': false,
+    'Respirar na Água': false,
+    'Roupa Encantada': false,
+    'Símbolo de Proteção': false
+  },
+  '4º Círculo': {
+    'Abjurar': false,
+    'Adivinhação': false,
+    'Bastões em Serpentes': false,
+    'Controlar Temperatura, 3m': true,
+    'Convocar Animais I': false,
+    'Convocar Criaturas da Floresta': true,
+    'Criar Fogo': true,
+    'Curar Ferimentos Graves': true,
+    'Detectar Mentiras': false,
+    'Esconderijo Vegetal': false,
+    'Falar com Plantas': false,
+    'Floresta Ilusória': false,
+    'Idiomas': false,
+    'Imobilizar Plantas': false,
+    'Imunidade a Magia': false,
+    'Inseto Gigante': true,
+    'Manto de Bravura': false,
+    'Movimentação Livre': false,
+    'Neutralizar Venenos': false,
+    'Poça Reflexiva': false,
+    'Proteção a Eletricidade': false,
+    'Proteção ao Mal, 3m': false,
+    'Repelir Insetos': false,
+    'Tornar Raso': false,
+    'Transferência de Poder Divino': false
+  },
+  '5º Círculo': {
+    'Ampliar Animais': true,
+    'Andar no Ar': false,
+    'Arco-Íris': false,
+    'Coluna de Chamas': true,
+    'Comunhão': false,
+    'Comunhão com a Natureza': false,
+    'Concha de Proteção a Vegetais': false,
+    'Controlar os Ventos': false,
+    'Convocar Animais II': false,
+    'Curar Ferimentos Críticos': true,
+    'Dissipar o Mal': false,
+    'Fonte Mágica': false,
+    'Missão': false,
+    'Mudança de Plano': false,
+    'Muralha de Fogo': true,
+    'Pedra em Lama': true,
+    'Pedras Afiadas': false,
+    'Penitência': false,
+    'Portal Vegetal': false,
+    'Praga de Insetos': true,
+    'Raio de Luar': false,
+    'Reviver Mortos': true,
+    'Visão da Verdade': false
+  }
+};
+
+// Todas, Animal, Elemental, Cura, Vegetal, Clima, Advinhacao (menor)
+
+const LISTA_MAGIAS_DRUIDICAS = {
+  '1º Círculo': {
+    'Benção': false,
+    'Cativar Animais': false,
+    'Círculo de Fé': false,
+    'Constrição': false,
+    'Criar Água': false,
+    'Curar Ferimentos Leves': true,
+    'Detectar Armadilhas': false,
+    'Detectar Magia': false,
+    'Detectar Maldade': false,
+    'Detectar Venenos': false,
+    'Fogo das Fadas': false,
+    'Invisibilidade contra Animais': false,
+    'Localizar Animais ou Plantas': false,
+    'Passos sem Pegadas': false,
+    'Purificar Alimentos': false
+  },
+
+// Todas, Animal, Elemental, Cura, Vegetal, Clima, Advinhacao (menor)
+
+  '2º Círculo': {
+    'Armadilha de Fogo': false,
+    'Augúrio': false,
+    'Bom Fruto': false,
+    'Criar Chamas': true,
+    'Demônio da Poeira': true,
+    'Detectar Feitiço': false,
+    'Encantar Pessoas ou Mamíferos': false,
+    'Encontrar Armadilhas': false,
+    'Esquentar Metal': true,
+    'Falar com Animais': false,
+    'Lâmina Flamejante': false,
+    'Mensageiro': false,
+    'Obscurecimento': false,
+    'Pele de Arvore': false,
+    'Retardar Venenos': false,
+    'Revelar Tendência': false,
+    'Torcer Madeira': false,
+    'Tropeço': false
+  },
+
+// Todas, Animal, Elemental, Cura, Vegetal, Clima, Advinhacao (menor)
+
+  '3º Círculo': {
+    'Ampliar Plantas': false,
+    'Andar Sobre as Águas': false,
+    'Andar Sobre as Chamas': false,
+    'Armadilha': false,
+    'Árvore': false,
+    'Convocar Insetos': true,
+    'Convocar Relâmpagos': true,
+    'Crescer Espinhos': false,
+    'Criar Alimentos': false,
+    'Falar com Mortos': false,
+    'Imobilizar Animais': false,
+    'Localizar Objetos': false,
+    'Mesclar-se às Rochas': false,
+    'Moldar Rochas': false,
+    'Pirotecnia': true,
+    'Proteção a Fogo': false,
+    'Respirar na Água': false
+  },
+
+// Todas, Animal, Elemental, Cura, Vegetal, Clima, Advinhacao (menor)
+
+  '4º Círculo': {
+    'Bastões em Serpentes': false,
+    'Controlar Temperatura, 3m': true,
+    'Convocar Animais I': false,
+    'Criar Fogo': true,
+    'Curar Ferimentos Graves': true,
+    'Esconderijo Vegetal': false,
+    'Falar com Plantas': false,
+    'Floresta Ilusória': false,
+    'Imobilizar Plantas': false,
+    'Inseto Gigante': true,
+    'Neutralizar Venenos': false,
+    'Tornar Raso': false
+  },
+
+// Todas, Animal, Elemental, Cura, Vegetal, Clima, Advinhacao (menor)
+
+  '5º Círculo': {
+    'Ampliar Animais': true,
+    'Andar no Ar': false,
+    'Controlar os Ventos': true,
+    'Convocar Animais II': false,
+    'Curar Ferimentos Críticos': true,
+    'Muralha de Fogo': true,
+    'Pedra em Lama': true,
+    'Pedras Afiadas': false,
+    'Penitência': false,
+    'Portal Vegetal': false
+  }
 };

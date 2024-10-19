@@ -18,6 +18,12 @@ document.querySelector("div.classes > form").addEventListener("submit", evento =
 });
 */
 
+function isInt(value) {
+  return !isNaN(value) &&
+         parseInt(Number(value)) == value &&
+         !isNaN(parseInt(value, 10));
+}
+
 function formatar_pericia_comum(pericia) {
   /*
     { nome: "", "Nº Pontos Necessários": 0, "Habilidade Relevante": 'Força Destreza Constituição Inteligência Sabedoria Carisma', "Modificador do Teste": 0 },
@@ -37,11 +43,13 @@ function formatar_pericia_comum(pericia) {
 function rolar1d6(callback) {
   let resultado = Math.floor(Math.random() * 6) + 1;
   callback(resultado);
+  return;
 }
 
 function rolar1d100(callback) {
   let resultado = Math.floor(Math.random() * 100) + 1;
   callback(resultado);
+  return;
 }
 
 function rolar3d6(callback) {
@@ -50,6 +58,7 @@ function rolar3d6(callback) {
       rolar1d6(dado3 => {
         let resultado = dado1 + dado2 + dado3;
         callback(resultado);
+        return;
       })
     })
   })
@@ -62,11 +71,13 @@ function rolarAtributo(callback) {
     let r3 = Math.floor(Math.random() * 4) + 1;
     let r4 = Math.floor(Math.random() * 4) + 1;
     callback(r1 + r2 + r3 + r4 + 4);
+    return;
   } else {
     let r1 = Math.floor(Math.random() * 6) + 1;
     let r2 = Math.floor(Math.random() * 6) + 1;
     let r3 = Math.floor(Math.random() * 6) + 1;
     callback(r1 + r2 + r3);
+    return;
   }
 }
 
@@ -178,7 +189,7 @@ function poderes_psionicos(personagem,callback) {
         devocoes = devocoes - 1;
 
         if (array_devocoes.length == 0) {
-          console.log('Erro ao definir as devoções do psionicista!');
+          error('Erro ao definir as devoções do psionicista!');
           devocoes = 0;
         } else if (array_devocoes.length == 1) {
           personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes[0]);
@@ -192,10 +203,12 @@ function poderes_psionicos(personagem,callback) {
 
       if ( (ciencias == 0) && (devocoes == 0) ) {
         callback();
+        return;
       }
     }
   } else {
     callback();
+    return;
   }
 }
 
@@ -1902,6 +1915,7 @@ function sortear_atributos(callback) {
   };
 
   callback(obter_dados_json_personagem(habilidades_sorteadas["Força"], habilidades_sorteadas["Destreza"], habilidades_sorteadas["Constituição"], habilidades_sorteadas["Inteligência"], habilidades_sorteadas["Sabedoria"], habilidades_sorteadas["Carisma"]));
+  return;
 
   /*
   rolar3d6(forca => {
@@ -2006,6 +2020,7 @@ function sortear_atributos_tela(callback) {
                       "Sabedoria": habilidades_sorteadas["Sabedoria"],
                       "Carisma": habilidades_sorteadas["Carisma"],
                     });
+                    return;
                   }
                 });
               } else {
@@ -2017,6 +2032,7 @@ function sortear_atributos_tela(callback) {
                   "Sabedoria": habilidades_sorteadas["Sabedoria"],
                   "Carisma": habilidades_sorteadas["Carisma"],
                 });
+                return;
               }
 
             });
@@ -2053,6 +2069,7 @@ function validar_habilidades(personagem, callback) {
 
     if (index_racas == (keys_racas.length - 1)) {
       callback(racas);
+      return;
     }
   });
 
@@ -2076,8 +2093,9 @@ function sortear_raca(personagem, callback) {
   validar_habilidades(personagem, racas => {
 
     let raca = '';
+    let raca_nao_forcada = (forcar_raca == 'Todas');
 
-    if (forcar_raca == 'Todas') {
+    if (raca_nao_forcada) {
       if (forcar_classe == 'Todas') {
         let index = Math.floor(Math.random() * racas.length);
         raca = racas[index];
@@ -2096,7 +2114,7 @@ function sortear_raca(personagem, callback) {
       let texto_formulario_linhagem = document.getElementById('texto-formulario-linhagem');
       let linhagem_selecionada = texto_formulario_linhagem.options[texto_formulario_linhagem.selectedIndex].value;
 
-      if (linhagem_selecionada == 'Todas') {
+      if ((linhagem_selecionada == 'Todas') || raca_nao_forcada) {
         let clans = Object.keys(CLANS);
         clans.shift(); // remove o primeiro
         let nome_clan = clans[Math.floor(Math.random() * clans.length)];
@@ -2125,6 +2143,7 @@ function sortear_raca(personagem, callback) {
     let ajustes = Object.keys(RACAS[raca].ajustes);
     if (ajustes.length == 0) {
       callback();
+      return;
     } else {
       ajustes.forEach((habilidade, i) => {
 
@@ -2134,11 +2153,33 @@ function sortear_raca(personagem, callback) {
 
         if (i == (ajustes.length - 1)) {
           callback();
+          return;
         }
       });
     }
 
   });
+}
+
+function definir_valor_basico_classe(personagem,classe_selecionada) {
+  if (personagem["Habilidades"]["Força"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Força"]) {
+    personagem["Habilidades"]["Força"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Força"];
+  }
+  if (personagem["Habilidades"]["Destreza"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Destreza"]) {
+    personagem["Habilidades"]["Destreza"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Destreza"];
+  }
+  if (personagem["Habilidades"]["Constituição"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Constituição"]) {
+    personagem["Habilidades"]["Constituição"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Constituição"];
+  }
+  if (personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Inteligência"]) {
+    personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Inteligência"];
+  }
+  if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Sabedoria"]) {
+    personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Sabedoria"];
+  }
+  if (personagem["Habilidades"]["Carisma"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Carisma"]) {
+    personagem["Habilidades"]["Carisma"]["Valor da Habilidade"] = CLASSES[classe_selecionada]["Habilidades Exigidas"]["Carisma"];
+  }
 }
 
 function validar_classes_por_habilidades(classes, personagem, callback) {
@@ -2164,7 +2205,26 @@ function validar_classes_por_habilidades(classes, personagem, callback) {
     });
 
     if (index_classes == (keys_classes.length - 1)) {
+
+      if (classes_permitidas.length == 0) {
+
+        let texto_formulario_classe = document.getElementById('texto-formulario-classe');
+        let texto_formulario_classe_valor = texto_formulario_classe.options[texto_formulario_classe.selectedIndex].value;
+        let classe_selecionada = '';
+
+        if (texto_formulario_classe_valor != 'Todas') {
+          classe_selecionada = texto_formulario_classe_valor;
+        }
+        if (classe_selecionada == '') {
+          classe_selecionada = 'Guerreiro';
+        }
+
+        definir_valor_basico_classe(personagem,classe_selecionada);
+        classes_permitidas.push(classe_selecionada);
+      }
+
       callback(classes_permitidas);
+      return;
     }
   });
 }
@@ -2182,6 +2242,7 @@ function validar_classes_por_raca(personagem, callback) {
   if ( (ajustar_nome_raca(personagem) == 'Meio-Vistani') && classes_100_por_cento) {
     let classes_clans = Object.keys(CLANS[personagem["Linhagem"]].classes);
     callback(classes_clans);
+    return;
   } else {
 
     keys_classes.forEach((classe,index_classes) => {
@@ -2202,6 +2263,7 @@ function validar_classes_por_raca(personagem, callback) {
 
       if (index_classes == (keys_classes.length - 1)) {
         callback(classes_permitidas);
+        return;
       }
     });
 
@@ -2221,6 +2283,7 @@ function sortear_classes_especificas_do_clan(classes, personagem, callback) {
       if (!ja_sorteada) {
         ja_sorteada = true;
         callback(classe_clan);
+        return;
       }
     } else {
       const index_remover = classes_copiadas.indexOf(classe_clan);
@@ -2234,9 +2297,11 @@ function sortear_classes_especificas_do_clan(classes, personagem, callback) {
         if (CLANS[personagem["Linhagem"]].classes_100_por_cento) {
           let index = Math.floor(Math.random() * classes_clans.length);
           callback(classes_clans[index]);
+          return;
         } else {
           let index = Math.floor(Math.random() * classes_copiadas.length);
           callback(classes_copiadas[index]);
+          return;
         }
       }
     }
@@ -2248,19 +2313,23 @@ function sortear_classes_do_clan(classes, personagem, callback) {
     if (CLANS[personagem["Linhagem"]].classes_100_por_cento) {
       sortear_classes_especificas_do_clan(classes, personagem, classe=>{
         callback(classe);
+        return;
       });
     } else {
       sortear_classes_especificas_do_clan(classes, personagem, classe=>{
         callback(classe);
+        return;
       });
     }
   } else {
     let index = Math.floor(Math.random() * classes.length);
     callback(classes[index]);
+    return;
   }
 }
 
 function sortear_classe(personagem, callback) {
+  debug('Executando validar_classes_por_raca()');
   validar_classes_por_raca(personagem, classes => {
     validar_classes_por_habilidades(classes, personagem, classes_permitidas => {
 
@@ -2268,8 +2337,9 @@ function sortear_classe(personagem, callback) {
 
       if (classes_permitidas.length == 0) {
         callback({ valores_invalidos: true });
+        return;
       } else {
-        let classes_fortes = ["Paladino", "Vingador", "Ranger", "Elementalista", "Arcanista", "Psionicista", "Abjurante", "Conjurador", "Adivinho", "Feiticeiro", "Ilusionista", "Invocador", "Necromante", "Transmutador", "Druida", "Anacoreta", "Bardo", "Cigano"];
+        let classes_fortes = ["Paladino", "Vingador", "Ranger", "Elementalista Fogo", "Elementalista Terra", "Elementalista Ar", "Elementalista Água", "Arcanista", "Psionicista", "Abjurante", "Conjurador", "Adivinho", "Feiticeiro", "Ilusionista", "Invocador", "Necromante", "Transmutador", "Druida", "Anacoreta", "Bardo", "Cigano"];
         let classes_selecionadas = [];
 
         classes_fortes.forEach((classe_forte, index_classes_fortes) => {
@@ -2406,6 +2476,9 @@ function sortear_classe(personagem, callback) {
 }
 
 function render(callback) {
+  if (!DEBUG)
+    console.clear();
+
   forcar_havenloft = document.getElementById('texto-formulario-ravenloft').checked;
   forcar_darksun = document.getElementById('texto-formulario-darksun').checked;
   forcar_classe = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
@@ -2436,20 +2509,25 @@ function render(callback) {
     document.getElementById('ficha').appendChild(node);
     output.style.display = 'block';
     callback();
+    return;
   });
 }
 
 function sortear_personagem(callback) {
+  debug('Chamando sortear_atributos()');
   sortear_atributos(personagem => {
+    debug('Chamando sortear_raca()');
     sortear_raca(personagem, () => {
+      debug('Chamando sortear_classe()');
       sortear_classe(personagem, resultado => {
 
         if (resultado.valores_invalidos) {
           sortear_personagem(personagem => {
-            console.log("Foi necessário outro lance de dados pois não foi possível escolher uma classe.");
+            error("Foi necessário outro lance de dados pois não foi possível escolher uma classe.");
             sortear_tendencia(personagem, () => {
               sortear_dados_basicos(personagem, () => {
                 callback(personagem);
+                return;
               });
             });
           });
@@ -2457,6 +2535,7 @@ function sortear_personagem(callback) {
           sortear_tendencia(personagem, () => {
             sortear_dados_basicos(personagem, () => {
               callback(personagem);
+              return;
             });
           });
         }
@@ -2508,6 +2587,7 @@ function sortear_tendencia(personagem, callback) {
   }
 
   callback();
+  return;
 }
 
 function acrescentar_novas_linguas(personagem, raca, numero_de_linguas, callback) {
@@ -2548,10 +2628,12 @@ function acrescentar_novas_linguas(personagem, raca, numero_de_linguas, callback
 
       if (index_externo == (linguas.length - 1)) {
         callback(numero_de_linguas);
+        return;
       }
     });
   } else {
     callback(numero_de_linguas);
+    return;
   }
 }
 
@@ -2600,6 +2682,7 @@ function sortear_pontos_talentos(classe, personagem, callback) {
     }
     if (pontos_extras == 0) {
       callback();
+      return;
     }
   }
 }
@@ -2618,6 +2701,7 @@ function definir_talentos(classe, personagem, callback) {
     if (index_talento == (keys_talentos.length - 1)) {
       sortear_pontos_talentos(classe, personagem, () => {
         callback();
+        return;
       });
     }
   });
@@ -2749,8 +2833,8 @@ function reduzir_moedas(moedas, preco) {
     let preco_po = preco.quantidade * 5;
     final = moedas - preco_po;
   } else {
-    debug("Erro ao calcular moedas:");
-    debug(preco);
+    error("Erro ao calcular moedas:");
+    error(preco);
   }
   return { moedas: final, valido: (final >= 0) };
 }
@@ -2758,9 +2842,32 @@ function reduzir_moedas(moedas, preco) {
 function sortear_itens_escudos(moeda_limite, peso_limite, classe, personagem, callback) {
   let ca_escudo = false;
   if (CLASSES[classe].escudos.length > 0) {
-    let index_item = Math.floor(Math.random() * (CLASSES[classe].escudos.length + 1));
+
+    let texto_formulario_escudo = document.getElementById('texto-formulario-escudo');
+    let texto_formulario_escudo_valor = texto_formulario_escudo.options[texto_formulario_escudo.selectedIndex].value;
+
+    let index_item = CLASSES[classe].escudos.length;
+
+    if ( (texto_formulario_escudo_valor != 'Todos') && (texto_formulario_escudo_valor != 'Nenhum') ) {
+      debug(`Escudo selecionado: ${texto_formulario_escudo_valor}`);
+      let nomes_escudos = CLASSES[classe].escudos.map(e => e.nome);
+
+      if (nomes_escudos.includes(texto_formulario_escudo_valor)) {
+        debug(`Escudo selecionado e incluído: ${texto_formulario_escudo_valor}`);
+        index_item = nomes_escudos.indexOf(texto_formulario_escudo_valor);
+      } else {
+        debug(`Escudo selecionado mas não permitido`);
+        index_item = Math.floor(Math.random() * (CLASSES[classe].escudos.length + 1));
+      }
+    } else {
+      debug(`Nenhum escudo selecionado`);
+      index_item = Math.floor(Math.random() * (CLASSES[classe].escudos.length + 1));
+    }
+
     if (index_item == CLASSES[classe].escudos.length) {
+      debug(`Nenhum escudo incluído`);
       callback(moeda_limite, peso_limite, ca_escudo);
+      return;
     } else {
       let escudo = CLASSES[classe].escudos[index_item];
       /*{
@@ -2785,12 +2892,16 @@ function sortear_itens_escudos(moeda_limite, peso_limite, classe, personagem, ca
           personagem["Detalhes"].push.apply(personagem["Detalhes"], escudo.detalhes);
         }
         callback(resultado_moedas.moedas, resultado_peso, ca_escudo);
+        return;
       } else {
         callback(moeda_limite, peso_limite, ca_escudo);
+        return;
       }
     }
   } else {
+    debug(`Nenhum escudo incluído`);
     callback(moeda_limite, peso_limite, ca_escudo);
+    return;
   }
 }
 
@@ -2799,6 +2910,16 @@ function sortear_itens_armaduras(moeda_limite, peso_limite, classe, personagem, 
   let armadura_mais_leve = { peso: 1000, validar: true };
   if (grupo == "Homem de Armas") {
     armadura_mais_leve.validar = false;
+  }
+
+  let texto_formulario_armadura = document.getElementById('texto-formulario-armadura');
+  let texto_formulario_armadura_valor = texto_formulario_armadura.options[texto_formulario_armadura.selectedIndex].value;
+  let armadura_selecionada = '';
+  if ( (texto_formulario_armadura_valor != 'Todas') && (texto_formulario_armadura_valor != 'Nenhuma') ) {
+    armadura_selecionada = texto_formulario_armadura_valor;
+    debug(`Armadura selecionada: ${armadura_selecionada}`);
+  } else {
+    debug(`Nenhuma armadura selecionada`);
   }
 
   if (CLASSES[classe].armaduras.length > 0) {
@@ -2826,20 +2947,36 @@ function sortear_itens_armaduras(moeda_limite, peso_limite, classe, personagem, 
         if (sorteio_armadura.length > 0) {
 
           let index_sorteio = Math.floor(Math.random() * sorteio_armadura.length);
+          let nomes_armaduras = sorteio_armadura.map(e => e.nome);
+
+          if (armadura_selecionada != '') {
+            if (nomes_armaduras.includes(armadura_selecionada)) {
+              index_sorteio = nomes_armaduras.indexOf(armadura_selecionada);
+              debug(`Armadura selecionada e incluída: ${armadura_selecionada}`);
+            } else {
+              debug(`Armadura selecionada mas não foi incluída: ${armadura_selecionada}`);
+            }
+          }
+
           let armadura_sorteada = sorteio_armadura[index_sorteio];
           let moeda_descontada_final = reduzir_moedas(moeda_limite, armadura_sorteada.preco);
           let peso_descontado_final = peso_limite - armadura_sorteada.peso;
           personagem["Itens"].push(armadura_sorteada.nome + ', ' + armadura_sorteada.peso + 'kg, ' + armadura_sorteada.preco.quantidade + ' ' + armadura_sorteada.preco.moeda);
           callback(moeda_descontada_final.moedas, peso_descontado_final, armadura_sorteada.ca);
+          return;
 
         } else {
+          debug(`Nenhuma armadura incluída`);
           callback(moeda_limite, peso_limite, 10);
+          return;
         }
       }
     });
 
   } else {
+    debug(`Nenhuma armadura incluída`);
     callback(moeda_limite, peso_limite, 10);
+    return;
   }
 }
 
@@ -2856,13 +2993,15 @@ function restringir_armas(personagem, array_completo, array_restrito, callback) 
 
         if (index_restrito == (array_restrito.length - 1)) {
           if (index_completo == (array_completo.length - 1)) {
-            return callback(array_final);
+            callback(array_final);
+            return;
           }
         }
       });
     });
   } else {
-    return callback(array_completo);
+    callback(array_completo);
+    return;
   }
 }
 
@@ -2944,18 +3083,44 @@ function sortear_itens_armas(moeda_limite, peso_limite, classe, raca, personagem
           }
         }
 
+        let texto_formulario_arma = document.getElementById('texto-formulario-arma');
+        let texto_formulario_arma_valor = texto_formulario_arma.options[texto_formulario_arma.selectedIndex].value;
+        let arma_escolhida_combo = '';
+        if ( (texto_formulario_arma_valor != 'Todas') && sorteio_armas_3.includes(texto_formulario_arma_valor) ) {
+          arma_escolhida_combo = texto_formulario_arma_valor;
+        }
+
         /* Sortear arma */
         let quantidade_armas = Math.floor(Math.random() * 4) + 2;
-        debug("Quantidade de armas sorteadas: " + quantidade_armas);
+        //debug("Quantidade de armas sorteadas: " + quantidade_armas);
+
         for (let qtde = 0; qtde < quantidade_armas; qtde++) {
 
-          let index_sorteio = Math.floor(Math.random() * sorteio_armas_3.length);
-          let nome_arma = sorteio_armas_3[index_sorteio];
-          let arma = ARMAS[nome_arma];
+          let index_sorteio = -1;
+          let nome_arma = '';
+          let arma = { preco: { quantidade: 10000, moeda: 'po' }, peso: 0, tamanho: '', tipo: '', velocidade: 0, dano_p: '', dano_mg: '', dano: 0, detalhes: [] };
           let arma_preco = { quantidade: 10000, moeda: 'po' };
 
+          if ( (qtde == 0) && (arma_escolhida_combo != '') ) {
+            index_sorteio = sorteio_armas_3.indexOf(arma_escolhida_combo);
+            nome_arma = sorteio_armas_3[index_sorteio];
+            arma = ARMAS[nome_arma];
+
+            debug(`A arma escolhida ${arma_escolhida_combo} foi incluída na lista.`);
+
+            arma_escolhida_combo = '';
+          } else {
+            if ( (qtde == 0) && (arma_escolhida_combo != '') ) {
+              debug(`A arma escolhida ${arma_escolhida_combo} NÃO foi incluída na lista por restrições da ficha: ${sorteio_armas_3}`);
+            }
+
+            index_sorteio = Math.floor(Math.random() * sorteio_armas_3.length);
+            nome_arma = sorteio_armas_3[index_sorteio];
+            arma = ARMAS[nome_arma];
+          }
+
           if ((arma == 'undefined') || (arma == undefined) || (arma == null) || (arma == '')) {
-            console.log('A arma ' + nome_arma + ' não foi encontrada na lista de armas.');
+            error('A arma ' + nome_arma + ' não foi encontrada na lista de armas.');
           } else {
             arma_preco = arma.preco;
           }
@@ -3102,7 +3267,9 @@ function sortear_itens_armas(moeda_limite, peso_limite, classe, raca, personagem
           }
 
           if (qtde == (quantidade_armas - 1)) {
+            debug(`Armas roladas: ${armas_mais_fortes.map(e => e.arma)}`);
             callback(moeda_descontada_final, peso_descontado_final, armas_mais_fortes, itens_extras);
+            return;
           }
         }
 
@@ -3118,7 +3285,7 @@ function sortear_itens_comuns(moeda_limite, peso_limite, personagem, callback) {
 
   /* Sortear item */
   let quantidade_itens = Math.floor(Math.random() * 6) + 2;
-  debug("Quantidade de itens sorteados: " + quantidade_itens);
+  //debug("Quantidade de itens sorteados: " + quantidade_itens);
   for (let qtde = 0; qtde < quantidade_itens; qtde++) {
 
     let index_sorteio = Math.floor(Math.random() * ITENS.length);
@@ -3134,6 +3301,7 @@ function sortear_itens_comuns(moeda_limite, peso_limite, personagem, callback) {
 
     if (qtde == (quantidade_itens - 1)) {
       callback(moeda_descontada_final, peso_descontado_final);
+      return;
     }
 
   }
@@ -3145,7 +3313,7 @@ function sortear_itens_alimentos(moeda_limite, personagem, callback) {
 
   /* Sortear item */
   let quantidade_itens = Math.floor(Math.random() * 4) + 2;
-  debug("Quantidade de itens sorteados: " + quantidade_itens);
+  //debug("Quantidade de itens sorteados: " + quantidade_itens);
   for (let qtde = 0; qtde < quantidade_itens; qtde++) {
 
     let index_sorteio = Math.floor(Math.random() * ALIMENTOS.length);
@@ -3160,6 +3328,7 @@ function sortear_itens_alimentos(moeda_limite, personagem, callback) {
 
     if (qtde == (quantidade_itens - 1)) {
       callback(moeda_descontada_final);
+      return;
     }
 
   }
@@ -3197,11 +3366,13 @@ function sortear_itens(classe, raca, personagem, callback) {
     ) * 10;
   }
 
+  /*
   debug("");
   debug("-------------------------------------------------------------------------");
   debug("Calcular itens para " + raca + " e " + classe);
   debug("Moedas sorteadas: " + personagem["Dados Básicos"]["Moedas"] + " po");
   debug("Peso sorteado: " + personagem["Habilidades"]["Força"]["Carga Permitida"]);
+  */
 
   /* Vestimentas */
   let lista_vestimentas = VESTIMENTAS[personagem["Dados Básicos"]["Gênero"]];
@@ -3214,8 +3385,8 @@ function sortear_itens(classe, raca, personagem, callback) {
   if (peso_limite < 0) { peso_limite = 0; }
   personagem["Itens"].push("Mochila, 2 po, 1kg");
 
-  debug("Moedas pós mochila: " + moeda_limite + " po");
-  debug("Peso pós mochila: " + peso_limite);
+  //debug("Moedas pós mochila: " + moeda_limite + " po");
+  //debug("Peso pós mochila: " + peso_limite);
 
   /* Itens Específicos */
   let instrumento_bardo_nome = '';
@@ -3238,19 +3409,19 @@ function sortear_itens(classe, raca, personagem, callback) {
   }
 
   sortear_itens_escudos(moeda_limite, peso_limite, classe, personagem, (resultado_moedas_1, resultado_peso_1, ca_escudo) => {
-    debug("Moedas pós escudo: " + resultado_moedas_1 + " po");
-    debug("Peso pós escudo: " + resultado_peso_1);
+    //debug("Moedas pós escudo: " + resultado_moedas_1 + " po");
+    //debug("Peso pós escudo: " + resultado_peso_1);
     sortear_itens_armaduras(resultado_moedas_1, resultado_peso_1, classe, personagem, (resultado_moedas_2, resultado_peso_2, ca_armadura) => {
-      debug("Moedas pós armadura: " + resultado_moedas_2 + " po");
-      debug("Peso pós armadura: " + resultado_peso_2);
+      //debug("Moedas pós armadura: " + resultado_moedas_2 + " po");
+      //debug("Peso pós armadura: " + resultado_peso_2);
       sortear_itens_armas(resultado_moedas_2, resultado_peso_2, classe, raca, personagem, (resultado_moedas_3, resultado_peso_3, armas_mais_fortes, itens_extras) => {
-        debug("Moedas pós armas: " + resultado_moedas_3 + " po");
-        debug("Peso pós armas: " + resultado_peso_3);
+        //debug("Moedas pós armas: " + resultado_moedas_3 + " po");
+        //debug("Peso pós armas: " + resultado_peso_3);
         sortear_itens_comuns(resultado_moedas_3, resultado_peso_3, personagem, (resultado_moedas_4, resultado_peso_4) => {
-          debug("Moedas pós itens: " + resultado_moedas_4 + " po");
-          debug("Peso pós itens: " + resultado_peso_4);
+          //debug("Moedas pós itens: " + resultado_moedas_4 + " po");
+          //debug("Peso pós itens: " + resultado_peso_4);
           sortear_itens_alimentos(resultado_moedas_4, personagem, (resultado_moedas_5) => {
-            debug("Moedas pós alimentos: " + resultado_moedas_5 + " po");
+            //debug("Moedas pós alimentos: " + resultado_moedas_5 + " po");
 
             let ajuste_ca = personagem["Habilidades"]["Destreza"]["Ajuste Defensivo"];
             let ca_final = ca_armadura + ajuste_ca;
@@ -3263,6 +3434,7 @@ function sortear_itens(classe, raca, personagem, callback) {
             personagem["Dados Básicos"]["Peso dos Equipamentos"] = (personagem["Habilidades"]["Força"]["Carga Permitida"] - resultado_peso_4).toFixed(2);
 
             callback(armas_mais_fortes);
+            return;
 
           });
         });
@@ -3278,13 +3450,16 @@ function adicionar_pericias_vistani(raca,personagem,callback) {
         personagem["Perícias"].push(formatar_pericia_comum(pericia));
         if (index == (CLANS[personagem["Linhagem"]].pericias.length - 1)) {
           callback();
+          return;
         }
       });
     } else {
       callback();
+      return;
     }
   } else {
     callback();
+    return;
   }
 }
 
@@ -3315,18 +3490,43 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
     let contador_pericias = 0;
     let pericias_sorteadas = [];
 
+    let texto_formulario_pericia = document.getElementById('texto-formulario-pericia');
+    let texto_formulario_pericia_valor = texto_formulario_pericia.options[texto_formulario_pericia.selectedIndex].value;
+    let texto_formulario_pericia_grupo = texto_formulario_pericia.options[texto_formulario_pericia.selectedIndex].getAttribute("grupo");
+    let texto_formulario_pericia_texto = texto_formulario_pericia.options[texto_formulario_pericia.selectedIndex].innerHTML;
+    let texto_formulario_pericia_index = PERICIAS[texto_formulario_pericia_grupo].findIndex(p => p.nome == texto_formulario_pericia_valor);
+
+    if (texto_formulario_pericia_valor != 'Todas') {
+      debug('Perícia selecionada: ' + texto_formulario_pericia_texto);
+    }
+
     while (qtde_pericias > 0) {
 
       let pericia_sorteada = undefined;
 
-      if (contador_pericias < qtde_pericias_gerais) {
-        /* Perícias Gerais */
-        let index_pericia_geral = Math.floor(Math.random() * PERICIAS["Geral"].length);
-        pericia_sorteada = PERICIAS["Geral"][index_pericia_geral];
+      if (texto_formulario_pericia_valor != 'Todas') {
+        /* Pegar perícia selecionada */
+
+        pericia_sorteada = JSON.parse(JSON.stringify(PERICIAS[texto_formulario_pericia_grupo][texto_formulario_pericia_index]));
+
+        if ( (texto_formulario_pericia_grupo != 'Geral') && (CLASSES[classe]["Grupo"] != texto_formulario_pericia_grupo) ) {
+          pericia_sorteada.pontos = pericia_sorteada.pontos + 1;
+        }
+
+        texto_formulario_pericia_valor = 'Todas';
+        /* Pegar perícia selecionada */
       } else {
-        /* Perícias do Grupo */
-        let index_pericia_grupo = Math.floor(Math.random() * PERICIAS[CLASSES[classe]["Grupo"]].length);
-        pericia_sorteada = PERICIAS[CLASSES[classe]["Grupo"]][index_pericia_grupo];
+        /* Sortear perícia */
+        if (contador_pericias < qtde_pericias_gerais) {
+          /* Perícias Gerais */
+          let index_pericia_geral = Math.floor(Math.random() * PERICIAS["Geral"].length);
+          pericia_sorteada = PERICIAS["Geral"][index_pericia_geral];
+        } else {
+          /* Perícias do Grupo */
+          let index_pericia_grupo = Math.floor(Math.random() * PERICIAS[CLASSES[classe]["Grupo"]].length);
+          pericia_sorteada = PERICIAS[CLASSES[classe]["Grupo"]][index_pericia_grupo];
+        }
+        /* Sortear perícia */
       }
 
       /*
@@ -3342,16 +3542,17 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
       if ( qtde_pericias == 0 ) {
 
         personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + " (0 pontos restantes)";
-        debug('Perícias escolhidas');
+        //debug('Perícias escolhidas');
 
         /* Perícias com Armas */
         let qtde_pericias_armas = personagem["Pontos de Perícia"]["Perícias Armas Inicial"];
         let procurar_pericias_armas = true;
 
         if (armas_mais_fortes.length == 0) {
-            debug('Nenhuma perícia de arma foi selecionada');
+            //debug('Nenhuma perícia de arma foi selecionada');
             personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = qtde_pericias_armas + " (" + qtde_pericias_armas + " pontos restantes)";
             callback();
+            return;
         } else {
 
           let index_arma_mais_forte = 0;
@@ -3410,11 +3611,12 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
             index_arma_mais_forte = index_arma_mais_forte + 1;
 
             if ( (qtde_pericias_armas == 0) || (index_arma_mais_forte >= armas_mais_fortes.length) ) {
-              debug('Armas escolhidas');
+              //debug('Armas escolhidas');
               procurar_pericias_armas = false;
               personagem["Detalhes"].push('Personagens com perícias ou especializações em armas possuem um bônus que reduz pela metade (arredondando para cima) a penalidade para as armas similares. Exemplo: um perito em espeda curta tem reduz sua penalidade pela metade ao usar uma espada longa.');
               personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = personagem["Pontos de Perícia"]["Perícias Armas Inicial"] + " (" + qtde_pericias_armas + " pontos restantes)";
               callback();
+              return;
             }
           }
 
@@ -3433,7 +3635,14 @@ function sortear_magias(classe, personagem, callback) {
   let grupo = ajustar_nome_grupo(classe);
   if (grupo == "Sacerdote") {
 
-    let qtde_magias = personagem["Dados Básicos"]["Magias Divinas por Círculo"];
+    // MAGIAS DIVINAS
+    let qtde_magias = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'];
+
+    /*
+      AQUI
+      Retirar combo de Esfera
+      Talvez colocar combo de divindade
+    */
 
     let qtde = 0;
     let esferas = [];
@@ -3480,59 +3689,96 @@ function sortear_magias(classe, personagem, callback) {
       if (qtde == qtde_magias) {
         personagem["Dados Básicos"]["Esferas"] = esferas;
         callback();
+        return;
       }
     }
+    // MAGIAS DIVINAS
 
   } else if (CLASSES[classe]["Grupo"] == "Arcano") {
 
-    let qtde_magias = personagem["Dados Básicos"]["Magias Arcanas por Círculo"];
-    if (classe != "Mago") {
-      if (classe == "Elementalista") {
-        if (MAGIAS_ELEMENTAIS[personagem["Dados Básicos"]["Escolas de Magia"][0]].magias.length < qtde_magias) {
-          qtde_magias = MAGIAS_ELEMENTAIS[personagem["Dados Básicos"]["Escolas de Magia"][0]].magias.length;
-        }
-      } else if (MAGIAS_ARCANAS[classe].length < qtde_magias) {
-        qtde_magias = MAGIAS_ARCANAS[classe].length;
-      }
+    // MAGIAS ARCANAS
+    let texto_formulario_escola_magia = document.getElementById('texto-formulario-escola-magia');
+    let texto_formulario_escola_magia_value = texto_formulario_escola_magia.value;
+    let forcar_magia = '';
+    if (texto_formulario_escola_magia_value != 'Todas') {
+      forcar_magia = texto_formulario_escola_magia_value;
     }
 
+    let qtde_magias = personagem["Dados Básicos"]["Magias Arcanas por Círculo"];
+
     let qtde = 0;
-    while (qtde < qtde_magias) {
+
+    if (classe != "Conjurador") {
+      personagem["Magias"].push("Ler Magias");
+      qtde++;
+
+      personagem["Magias"].push("Detectar Magia");
+      qtde++;
+    }
+
+    while (qtde < qtde_magias) { // FOR Sortear magias
 
       if (classe != "Mago") {
-        if (classe == "Elementalista") {
-          let index_magia = Math.floor(Math.random() * MAGIAS_ELEMENTAIS[personagem["Dados Básicos"]["Escolas de Magia"][0]].magias.length);
-          let magia = MAGIAS_ELEMENTAIS[personagem["Dados Básicos"]["Escolas de Magia"][0]].magias[index_magia];
-          if (!personagem["Magias"].includes(magia)) {
-            personagem["Magias"].push(magia);
-            qtde++;
-          }
-        } else {
-          let index_magia = Math.floor(Math.random() * MAGIAS_ARCANAS[classe].length);
-          let magia = MAGIAS_ARCANAS[classe][index_magia];
-          if (!personagem["Magias"].includes(magia)) {
-            personagem["Magias"].push(magia);
-            qtde++;
+        // Especialista ou Elementalista
+
+        let lista_sorteio_magia = MAGIAS_ARCANAS[0][classe];
+        if (Math.floor(Math.random() * 2) > 0) {
+          let lista_sorteio_keys_escolas = Object.keys(MAGIAS_ARCANAS[0]);
+          let lista_sorteio_escola = lista_sorteio_keys_escolas[Math.floor(Math.random() * lista_sorteio_keys_escolas.length)];
+          let lista_sorteio_classes_opostas = ESCOLAS_ARCANAS_OPOSTAS[classe].map(escola => LISTA_ESCOLAS_ARCANAS_ESCOLA_PARA_MAGO[escola]);
+
+          if (!lista_sorteio_classes_opostas.includes(lista_sorteio_escola)) {
+            lista_sorteio_magia = MAGIAS_ARCANAS[0][lista_sorteio_escola];
           }
         }
-      } else {
-        let keys_magias = Object.keys(MAGIAS_ARCANAS);
-        let index_escola = keys_magias[Math.floor(Math.random() * keys_magias.length)];
-        let index_magia = Math.floor(Math.random() * MAGIAS_ARCANAS[index_escola].length);
-        let magia = MAGIAS_ARCANAS[index_escola][index_magia];
+
+        let index_magia = Math.floor(Math.random() * lista_sorteio_magia.length);
+        let magia = lista_sorteio_magia[index_magia];
+
+        if (forcar_magia != '') {
+          magia = forcar_magia;
+          forcar_magia = '';
+        }
+
         if (!personagem["Magias"].includes(magia)) {
           personagem["Magias"].push(magia);
           qtde++;
         }
+
+        // Especialista ou Elementalista
+      } else {
+        // Mago
+        let keys_magias = Object.keys(MAGIAS_ARCANAS[0]);
+        let index_escola = keys_magias[Math.floor(Math.random() * keys_magias.length)];
+        let index_magia = Math.floor(Math.random() * MAGIAS_ARCANAS[0][index_escola].length);
+        let magia = MAGIAS_ARCANAS[0][index_escola][index_magia];
+
+        if (forcar_magia != '') {
+          magia = forcar_magia;
+          forcar_magia = '';
+        }
+
+        if (!personagem["Magias"].includes(magia)) {
+          personagem["Magias"].push(magia);
+          qtde++;
+        }
+        // Mago
       }
 
       if (qtde == qtde_magias) {
+        debug(`Magias sorteadas: ${personagem["Magias"]}`);
+
         callback();
+        return;
       }
-    }
+
+    } // FOR Sortear magias
+
+    // MAGIAS ARCANAS
 
   } else {
     callback();
+    return;
   }
 }
 
@@ -3591,8 +3837,29 @@ function sortear_dados_basicos(personagem, callback) {
   let altura = (Math.random() * ajuste_altura) + RACAS[raca].altura[genero].minimo;
   personagem["Dados Básicos"]["Altura"] = altura.toFixed(2);
 
-  let ajuste_idade = RACAS[raca].idade.maximo - RACAS[raca].idade.minimo;
-  let idade = Math.floor(Math.random() * ajuste_idade) + RACAS[raca].idade.minimo;
+  /* Idade */
+  let texto_formulario_idade = document.getElementById('texto-formulario-idade');
+  let idade = texto_formulario_idade.value;
+
+  if ( isInt(idade) ) {
+    debug('Idade definida pelo usuário');
+    idade = parseInt(idade);
+      console.log();
+
+    if (idade < RACAS[raca].idade.minimo) {
+      idade = RACAS[raca].idade.minimo;
+    }
+    if (idade > RACAS[raca].idade.maximo) {
+      idade = RACAS[raca].idade.maximo;
+    }
+  } else {
+    debug('Idade rolada');
+    let ajuste_idade = RACAS[raca].idade.maximo - RACAS[raca].idade.minimo;
+    idade = Math.floor(Math.random() * ajuste_idade) + RACAS[raca].idade.minimo;
+  }
+
+  debug(`Idade: ${idade}`);
+
   personagem["Dados Básicos"]["Idade"] = idade;
 
   let ajuste_peso = RACAS[raca].peso[genero].maximo - RACAS[raca].peso[genero].minimo;
@@ -3717,7 +3984,11 @@ function sortear_dados_basicos(personagem, callback) {
   personagem["Habilidades"]["Constituição"]["Resistência contra Veneno"] = atributos_constituicao("Resistência contra Veneno", constituicao, classe);
   personagem["Habilidades"]["Constituição"]["Regeneração"] = atributos_constituicao("Regeneração", constituicao, classe);
 
-  let vida = Math.floor(Math.random() * CLASSES[classe].dado_de_vida) + 1;
+  let vida = CLASSES[classe].dado_de_vida;
+  if (!document.getElementById('texto-formulario-vida').checked) {
+    vida = Math.floor(Math.random() * CLASSES[classe].dado_de_vida) + 1;
+  }
+
   if (constituicao == 20) {
     if (vida == 1) {
       vida = 2;
@@ -3751,6 +4022,18 @@ function sortear_dados_basicos(personagem, callback) {
 
   acrescentar_novas_linguas(personagem, raca, numero_de_linguas, (numero_de_linguas) => {
 
+    let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
+    personagem["Habilidades"]["Sabedoria"]["Ajuste de Defesa Contra Magia"] = atributos_sabedoria("Ajuste de Defesa Contra Magia", sabedoria);
+    personagem["Habilidades"]["Sabedoria"]["Magias Extras"] = atributos_sabedoria("Magias Extras", sabedoria);
+    personagem["Habilidades"]["Sabedoria"]["Chance da Magia Falhar"] = atributos_sabedoria("Chance da Magia Falhar", sabedoria);
+    personagem["Habilidades"]["Sabedoria"]["Imunidade à Magia"] = atributos_sabedoria("Imunidade à Magia", sabedoria);
+
+    let carisma = personagem["Habilidades"]["Carisma"]["Valor da Habilidade"];
+    personagem["Habilidades"]["Carisma"]["Nº Máximo de aliados"] = atributos_carisma("Nº Máximo de aliados", carisma);
+    personagem["Habilidades"]["Carisma"]["Fator de Lealdade"] = atributos_carisma("Fator de Lealdade", carisma);
+    personagem["Habilidades"]["Carisma"]["Ajuste de reação"] = atributos_carisma("Ajuste de reação", carisma);
+
+
     if (CLASSES[classe]["Grupo"] == "Homem de Armas") {
       personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 4;
       personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 3;
@@ -3780,20 +4063,20 @@ function sortear_dados_basicos(personagem, callback) {
       personagem["Resistência"]["Magia"] = 12;
 
       if (classe == "Mago") {
-        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 1;
+        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 6;
         personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
         personagem["Dados Básicos"]["Escolas Opostas"] = [];
         personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
-      } else if (classe == "Elementalista") {
+      } else if ( (classe == "Elementalista Ar") || (classe == "Elementalista Terra") || (classe == "Elementalista Água") || (classe == "Elementalista Fogo") ) {
         let escolas_elementais = Object.keys(MAGIAS_ELEMENTAIS);
         let index_escolas_elementais = Math.floor(Math.random() * escolas_elementais.length);
         let escola_elemental = escolas_elementais[index_escolas_elementais];
         personagem["Dados Básicos"]["Escolas de Magia"] = [ escola_elemental ];
         personagem["Dados Básicos"]["Escolas Opostas"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Opostas"];
         personagem["Dados Básicos"]["Escolas Adjacentes"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Adjacentes"];
-        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 2;
+        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 7;
       } else if (classe == "Arcanista") {
-        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 2;
+        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 7;
         personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
         personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
         personagem["Dados Básicos"]["Escolas Adjacentes"] = ['Conjuração/Convocação', 'Abjuração'];
@@ -3831,7 +4114,7 @@ function sortear_dados_basicos(personagem, callback) {
         };
 
       } else {
-        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 2;
+        personagem["Dados Básicos"]["Magias Arcanas por Círculo"] = 7;
         personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
         personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
         personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
@@ -3851,12 +4134,99 @@ function sortear_dados_basicos(personagem, callback) {
       personagem["Resistência"]["Sopro-de-Dragão"] = 16;
       personagem["Resistência"]["Magia"] = 15;
 
-      if (personagem["Habilidades"]["Sabedoria"]["Magias Extras"] == 13) {
-        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = 2;
-      } else if (personagem["Habilidades"]["Sabedoria"]["Magias Extras"] == 14) {
-        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = 3;
+      // AQUI
+      if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 13) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 2,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 14) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 3,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 15) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 3,
+          '2º Círculo': 1,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 16) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 3,
+          '2º Círculo': 2,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 17) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 3,
+          '2º Círculo': 2,
+          '3º Círculo': 1,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 18) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 3,
+          '2º Círculo': 2,
+          '3º Círculo': 1,
+          '4º Círculo': 1,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 19) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 2,
+          '3º Círculo': 1,
+          '4º Círculo': 2,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 20) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 1,
+          '4º Círculo': 3,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 21) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 2,
+          '4º Círculo': 3,
+          '5º Círculo': 1,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 22) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 2,
+          '4º Círculo': 4,
+          '5º Círculo': 2,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 23) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 2,
+          '4º Círculo': 4,
+          '5º Círculo': 4,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 24) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 2,
+          '4º Círculo': 4,
+          '5º Círculo': 4,
+          '6º Círculo': 2,
+        };
+      } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 25) {
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 4,
+          '2º Círculo': 3,
+          '3º Círculo': 2,
+          '4º Círculo': 4,
+          '5º Círculo': 4,
+          '6º Círculo': 3,
+          '7º Círculo': 1,
+        };
       } else {
-        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = 1;
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+          '1º Círculo': 1,
+        };
       }
 
       if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
@@ -3932,16 +4302,7 @@ function sortear_dados_basicos(personagem, callback) {
       personagem["Resistência"]["Magia"] = 15;
     }
 
-    let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
-    personagem["Habilidades"]["Sabedoria"]["Ajuste de Defesa Contra Magia"] = atributos_sabedoria("Ajuste de Defesa Contra Magia", sabedoria);
-    personagem["Habilidades"]["Sabedoria"]["Magias Extras"] = atributos_sabedoria("Magias Extras", sabedoria);
-    personagem["Habilidades"]["Sabedoria"]["Chance da Magia Falhar"] = atributos_sabedoria("Chance da Magia Falhar", sabedoria);
-    personagem["Habilidades"]["Sabedoria"]["Imunidade à Magia"] = atributos_sabedoria("Imunidade à Magia", sabedoria);
-
-    let carisma = personagem["Habilidades"]["Carisma"]["Valor da Habilidade"];
-    personagem["Habilidades"]["Carisma"]["Nº Máximo de aliados"] = atributos_carisma("Nº Máximo de aliados", carisma);
-    personagem["Habilidades"]["Carisma"]["Fator de Lealdade"] = atributos_carisma("Fator de Lealdade", carisma);
-    personagem["Habilidades"]["Carisma"]["Ajuste de reação"] = atributos_carisma("Ajuste de reação", carisma);
+    // A definição de sabedoria e carisma estava aqui, mas precisou ir para cima do código
 
     /* Poder psiônico */
     calcular_PSP(personagem);
@@ -3959,10 +4320,12 @@ function sortear_dados_basicos(personagem, callback) {
         sortear_itens(classe, raca, personagem, (armas_mais_fortes) => {
 
           sortear_pericias(armas_mais_fortes, classe, raca, personagem, () => {
+            debug(`Perícias sorteadas:${personagem['Perícias'].map(p => ` ${p.split(',')[0]}`)}`);
 
             sortear_magias(classe, personagem, () => {
 
               callback();
+              return;
 
             });
 
@@ -3998,9 +4361,11 @@ function obter_dados_personagem(callback) {
       "Raça": raca
     };
     callback(personagem);
+    return;
   } else {
     sortear_personagem(personagem => {
       callback(personagem);
+      return;
     });
   }
 }

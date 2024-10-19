@@ -121,6 +121,17 @@ main.texto > div.bloco-texto {
   margin-bottom: 10px;
 }
 
+main.texto > div.bloco-texto-apoio {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+main.texto > div.bloco-texto-apoio > span.asterisco {
+  padding: 0 3px;
+  background-color: rgba(59, 39, 11, .3);
+  font-weight: bold;
+}
+
 main.texto > br {
   clear: both;
 }
@@ -179,6 +190,17 @@ main.texto > div.segunda-linha {
 
 /* CAMPOS */
 
+main.texto > div.bloco-campos > span.dica {
+  display: block;
+  float: left;
+  width: 55%;
+  box-sizing: border-box;
+  padding-left: 4px;
+  line-height: 26px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
 main.texto > div.bloco-campos > label {
   display: block;
   float: left;
@@ -188,6 +210,10 @@ main.texto > div.bloco-campos > label {
   line-height: 26px;
   font-weight: bold;
   background-color: rgba(59, 39, 11, .3);
+}
+
+main.texto > div.bloco-campos > label.magia {
+  width: 30%;
 }
 
 main.texto > div.bloco-checkbox > label {
@@ -207,6 +233,10 @@ main.texto > div.bloco-atributos > label {
 }
 
 main.texto > div.bloco-atributos > label.menor {
+  font-size: 0.9em;
+}
+
+main.texto > div.bloco-campos label.menor {
   font-size: 0.9em;
 }
 
@@ -238,6 +268,10 @@ main.texto > div.bloco-campos > select {
   text-indent: 3px;
 }
 
+main.texto > div.bloco-campos > select.magia {
+  width: 70%;
+}
+
 main.texto > div.bloco-campos > select > option {
   font-size: 1em;
   font-family: "Oregon-LDO", sans-serif;
@@ -262,6 +296,14 @@ main.texto > div.bloco-atributos > input[type=number] {
   font-family: "Oregon-LDO", sans-serif;
   color: #423c2b;
 }
+
+/*
+#ficha-npcs > textarea {
+  padding: 4px;
+  resize: none;
+  width: 99%;
+}
+*/
 
 /* CAMPOS */
 
@@ -344,6 +386,36 @@ main.texto > button.mostrar {
   border-radius: 2px;
 }
 
+#ficha-itens-loot > button,
+#ficha-itens-armeiro > button,
+#ficha-itens-taverna > button,
+#ficha-itens-alfaiataria > button {
+  float: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 2px;
+}
+
+#ficha-itens-loot > button > img,
+#ficha-itens-armeiro > button > img,
+#ficha-itens-taverna > button > img,
+#ficha-itens-alfaiataria > button > img,
+#texto-botao-copiar-npcs > button > img {
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+}
+
+#ficha-itens-loot > div.texto-itens,
+#ficha-itens-armeiro > div.texto-itens,
+#ficha-itens-taverna > div.texto-itens,
+#ficha-itens-alfaiataria > div.texto-itens {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
 /* BOTOES */
 
 /* MENUS */
@@ -411,7 +483,25 @@ main.menu > a.menu > span {
   margin-left: 0;
 }
 
+#texto-botao-voltar-itens {
+  float: left;
+  margin-left: 0;
+}
+
+#texto-botao-voltar-npcs {
+  float: left;
+  margin-left: 0;
+}
+
 #pagina-personagens {
+  display: none;
+}
+
+#pagina-itens {
+  display: none;
+}
+
+#pagina-npcs {
   display: none;
 }
 

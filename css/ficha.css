@@ -23,18 +23,32 @@
         font-size: 1em !important;
         */
       }
+
       div#ficha > div > table {
         width: 800px !important;
+        max-width: 95% !important;
+        min-width: 380px !important;
+
         box-sizing: border-box !important;
         display: block !important;
         margin: 0 auto !important;
-      }
-      div#ficha > div > table > tbody > tr > td > table {
-        box-sizing: border-box !important;
-        display: block !important;
-        margin: 0 auto !important;
+
+        word-wrap: break-word !important;
       }
 
+      div#ficha > div > table > tbody > tr > td > table {
+        width: auto !important;
+        max-width: auto !important;
+        min-width: auto !important;
+
+        box-sizing: border-box !important;
+        display: block !important;
+        margin: 0 auto !important;
+
+        word-wrap: break-word !important;
+      }
+
+      /*
       div#ficha > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
         background-color: rgba(0,0,0,0.1) !important;
       }
@@ -90,6 +104,7 @@
       div#ficha > div > table > tbody > tr:nth-child(20) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
         background-color: rgba(0,0,0,0.1) !important;
       }
+      */
 
       div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table  {
         /* width: 280px !important; */
@@ -112,7 +127,7 @@
         width: 100%;
       }
       div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
+        /* background-color: rgba(0,0,0,0.1) !important; */
       }
 
       div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr:nth-child(5) > td:last-child {
@@ -237,7 +252,7 @@
       }
 
       tbody tr:nth-child(13) td tbody tr td:last-child {
-        background-color: rgba(0,0,0,0.1) !important;
+        /* background-color: rgba(0,0,0,0.1) !important; */
         border: 0 !important;
         white-space: normal !important;
         width: 100%;
@@ -287,9 +302,63 @@
         /* max-width: 290px !important; */
       }
       #ficha {
-        display: block;
+        display: none;
         margin: 0 auto !important;
         margin-bottom: 30px !important;
+      }
+
+      #ficha-itens-loot,
+      #ficha-itens-armeiro,
+      #ficha-itens-taverna,
+      #ficha-itens-alfaiataria {
+        position: relative;
+        display: none;
+        margin: 0 auto;
+        margin-bottom: 10px;
+
+        width: 800px;
+        max-width: 95%;
+        min-width: 380px;
+
+        box-sizing: border-box;
+
+        background-image: url(../img/background.jpg);
+
+        border: 2px solid #000;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+
+        padding: 7px;
+      }
+
+      #ficha-npcs {
+        position: relative;
+        display: none;
+        margin: 0 auto;
+        margin-bottom: 10px;
+
+        width: 800px;
+        max-width: 95%;
+        min-width: 380px;
+        height: 500px;
+
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        font-size: 1.1em;
+
+        box-sizing: border-box;
+
+        background-image: url(../img/background.jpg);
+
+        border: 2px solid #000;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+
+        padding: 7px;
+        resize: none;
+      }
+
+      #ficha-itens-loot {
+        margin-top: 0;
       }
 
       /*
@@ -318,4 +387,60 @@
 
       div.classes a {
         color: #fff;
+      }
+
+      /* Ajuste fino */
+
+
+      div#ficha > div > table > tbody > tr > td > table {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      div#ficha > div > table > tbody > tr > td > table > tbody {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      div#ficha > div > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
+        background-color: rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(1) {
+        width: auto !important;
+        max-width: 100px !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) {
+        width: auto !important;
+        max-width: none !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(2) > table > tbody > tr > td {
+        width: auto !important;
+        max-width: none !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+
+      @media (min-width: 800px) {
+        div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(1) {
+          width: auto !important;
+          max-width: none !important;
+          word-wrap: break-word !important;
+          white-space: normal !important;
+        }
+
+        #ficha-npcs {
+          height: 340px;
+        }
       }
