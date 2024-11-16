@@ -153,12 +153,366 @@ const NOMES_RACAS = {
   }
 };
 
+const DIVINDADES = {
+  "Humano": {
+    "Justo (bom e leal)": [
+      'Amaterasu (Kara-Tur)',
+      'Bala (Zakhara)',
+    ],
+    "Ordeiro (neutro e leal)": [
+      'Amaunator (Netheril)',
+      'Anubis (Plano Astral)',
+      'Azuth (Faerûn)',
+      'Bala (Zakhara)',
+    ],
+    "Vil (maligno e leal)": [
+      'Azul (Maztica)',
+      'Bala (Zakhara)',
+      'Bane (Faerûn)',
+    ],
+    "Bondoso (bom e neutro)": [
+      'Bala (Zakhara)',
+    ],
+    "Neutro": [
+      'Bala (Zakhara)',
+    ],
+    "Egoista (neutro e maligno)": [
+      'Apep (Abismo)',
+      'Auril (Faerûn)',
+      'Bala (Zakhara)',
+    ],
+    "Honrado (caótico e bom)": [
+      'Bala (Zakhara)',
+    ],
+    "Inconstante (neutro e caótico)": [
+      'Bala (Zakhara)',
+    ],
+    "Cruel (caótico e maligno)": [
+      'Bala (Zakhara)',
+      'Beshaba (Faerûn)', // ULTIMO FOI ESSE - https://forgottenrealms.fandom.com/wiki/Category:Human_deities
+    ],
+  },
+  "Anão": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Elfo": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Gnomo": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Meio-Elfo": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Halfling": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Meio-Vistani": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Tabaxi": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+  "Goblin": {
+    "Justo (bom e leal)": [
+
+    ],
+    "Ordeiro (neutro e leal)": [
+
+    ],
+    "Vil (maligno e leal)": [
+
+    ],
+    "Bondoso (bom e neutro)": [
+
+    ],
+    "Neutro": [
+
+    ],
+    "Egoista (neutro e maligno)": [
+
+    ],
+    "Honrado (caótico e bom)": [
+
+    ],
+    "Inconstante (neutro e caótico)": [
+
+    ],
+    "Cruel (caótico e maligno)": [
+
+    ],
+  },
+};
+
 const TENDENCIAS = [
   /* 0 */ "Justo (bom e leal)",
-  /* 1 */ "Ordeiro (neutro e leal)",
+  /*
+  "Justo (bom e leal)": [
+
+  ],
+  "Ordeiro (neutro e leal)": [
+
+  ]
+  "Justo (bom e leal)": [
+
+  ],
+  "Ordeiro (neutro e leal)": [
+
+  ],
+  "Vil (maligno e leal)": [
+
+  ],
+  "Bondoso (bom e neutro)": [
+
+  ],
+  "Neutro": [
+
+  ],
+  "Egoista (neutro e maligno)": [
+
+  ],
+  "Honrado (caótico e bom)": [
+
+  ],
+  "Inconstante (neutro e caótico)": [
+
+  ],
+  "Cruel (caótico e maligno)": [
+
+  ],
+  "Vil (maligno e leal)": [
+
+  ],
+  "Bondoso (bom e neutro)": [
+
+  ],
+  "Neutro": [
+
+  ],
+  "Egoista (neutro e maligno)": [
+
+  ],
+  "Honrado (caótico e bom)": [
+
+  ],
+  "Inconstante (neutro e caótico)": [
+
+  ],
+  "Cruel (caótico e maligno)": [
+
+  ], */ "Ordeiro (neutro e leal)",
   /* 2 */ "Vil (maligno e leal)",
   /* 3 */ "Bondoso (bom e neutro)",
-  /* 4 */ "Neutro",
+  /
+  "Justo (bom e leal)": [
+
+  ],
+  "Ordeiro (neutro e leal)": [
+
+  ],
+  "Vil (maligno e leal)": [
+
+  ],
+  "Bondoso (bom e neutro)": [
+
+  ],
+  "Neutro": [
+
+  ],
+  "Egoista (neutro e maligno)": [
+
+  ],
+  "Honrado (caótico e bom)": [
+
+  ],
+  "Inconstante (neutro e caótico)": [
+
+  ],
+  "Cruel (caótico e maligno)": [
+
+  ], 4 */ "Neutro",
   /* 5 */ "Egoista (neutro e maligno)",
   /* 6 */ "Honrado (caótico e bom)",
   /* 7 */ "Inconstante (neutro e caótico)",
@@ -173,7 +527,34 @@ const MAGIAS_DIVINAS = {
   "Caos": [ "Missiva Equivocada" ],
   "Combate": [ "Pedra Encantada", "Arma Abençoada" ],
   "Convocação": [ "Apelo à Fé" ],
-  "Criação": [],
+  "
+  "Justo (bom e leal)": [
+
+  ],
+  "Ordeiro (neutro e leal)": [
+
+  ],
+  "Vil (maligno e leal)": [
+
+  ],
+  "Bondoso (bom e neutro)": [
+
+  ],
+  "Neutro": [
+
+  ],
+  "Egoista (neutro e maligno)": [
+
+  ],
+  "Honrado (caótico e bom)": [
+
+  ],
+  "Inconstante (neutro e caótico)": [
+
+  ],
+  "Cruel (caótico e maligno)": [
+
+  ],riação": [],
   "Cura": [ "Curar Ferimentos Leves" ],
   "Elemental": [ "Criar Água" ],
   "Feitiço": [ "Comando", "Remover Medo" ],

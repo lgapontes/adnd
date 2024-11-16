@@ -5,6 +5,11 @@
     <title>Advanced Dungeon & Dragons 2ed</title>
 		<link rel="icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="css/ficha.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -33,6 +38,20 @@
       <br>
       Estes roladores foram desenvolvidos pelo Flecha Mágica! Acesse nosso canal do YouTube neste link <a href="https://www.youtube.com/@flechamagica">youtube.com/@flechamagica</a> para conhecer nossas campanhas de RPG. O desenvolvimento desses roladores e outros materiais relacionados ao RPG foram viabilizados pelo projeto Pega Essa Flecha no Catarse. Acesse este link <a href="https://catarse.me/flechamagica">catarse.me/flechamagica</a> para conhecer o projeto.
       <br>
+    </main>
+
+    <main class="texto" id="pagina-calendario">
+      <h2>Calendário de AD&D 2ed</h2>
+      <br>
+      Este é um calendário de <b>Advanced Dungeons and Dragons 2ª edição</b>. O ano inicial vigora no período de Metaplot publicado pela TSR no AD&D 2ed. Caso você avance o calendário é possível utilizá-lo em qualquer edição do D&D. Há dois formatos de calendário disponíveis: o calendário <b>Cômputo dos Vales</b> de Faerûn (cenário de Forgotten Realms) e o calendário de <b>Baróvia</b> (cenário Domínios do Medo, Ravenloft). Estes calendários estão conectados: ao alterar entre eles a data será equivalente nos Realmspaces diferentes. Cada alteração realizada no calendário será salvo no seu navegador.
+      <br>
+
+      <div class="bloco bloco-botoes">
+        <button type="button" id="texto-botao-voltar-calendario">
+					<img src="img/arrow-left-solid.svg">
+					<span>Voltar</span>
+				</button>
+      </div>
     </main>
 
     <main class="texto" id="pagina-itens">
@@ -262,13 +281,13 @@
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-esfera">Esfera</label>
-        <select name="texto-formulario-esfera" id="texto-formulario-esfera">
+        <label for="texto-formulario-divindade">Divindade</label>
+        <select name="texto-formulario-divindade" id="texto-formulario-divindade">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-esfera-magia" class="magia">Magia Divina*</label>
-        <select name="texto-formulario-esfera-magia" id="texto-formulario-esfera-magia" class="magia">
+        <label for="texto-formulario-magia-divina" class="magia">Magia Divina*</label>
+        <select name="texto-formulario-magia-divina" id="texto-formulario-magia-divina" class="magia">
         </select>
       </div>
 

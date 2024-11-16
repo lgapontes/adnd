@@ -32,6 +32,8 @@ function openMain(event) {
   document.getElementById('pagina-npcs').style.display = 'none';
   document.getElementById('ficha-npcs').style.display = 'none';
 
+  document.getElementById('pagina-calendario').style.display = 'none';
+
   document.getElementById('ficha').style.display = 'none';
   closeLoading();
 }
@@ -61,6 +63,15 @@ function openNPCs(event) {
       closeLoading();
     });
   });
+}
+
+function openCalendario(event) {
+  closeMain(event);
+  openLoading();
+
+  document.getElementById('pagina-calendario').style.display = 'block';
+
+  closeLoading();
 }
 
 function openItens(event) {
@@ -101,6 +112,10 @@ document.getElementById('menu-npcs').addEventListener('click',(event)=>{
   openNPCs(event);
 });
 
+document.getElementById('menu-calendario').addEventListener('click',(event)=>{
+  openCalendario(event);
+});
+
 document.getElementById('menu-itens').addEventListener('click',(event)=>{
   openItens(event);
 });
@@ -118,6 +133,10 @@ document.getElementById('texto-botao-voltar').addEventListener('click',(event)=>
 });
 
 document.getElementById('texto-botao-voltar-itens').addEventListener('click',(event)=>{
+  openMain(event);
+});
+
+document.getElementById('texto-botao-voltar-calendario').addEventListener('click',(event)=>{
   openMain(event);
 });
 

@@ -20,7 +20,24 @@
         overflow: hidden;
       }
 
-      div {
+      #ficha-calendario {
+        position: relative;
+        display: none;
+        margin: 0 auto;
+        margin-bottom: 10px;
+
+        width: 800px;
+        max-width: 95%;
+        min-width: 380px;
+
+        box-sizing: border-box;
+        border: 0;
+        padding: 7px;
+
+        background-color: red;
+      }
+
+      #ficha-calendario > div {
         position: fixed;
         width: 540px;
         height: 400px;
@@ -30,7 +47,7 @@
         text-shadow: 1px 1px 1px black;
       }
 
-      div.gif {
+      #ficha-calendario > div.gif {
         position: fixed;
         width: 540px;
         height: 400px;
@@ -40,20 +57,20 @@
         z-index: 5;
       }
 
-      div.background {
+      #ficha-calendario > div.background {
         background-image: url(img/b1b.png);
         background-repeat: no-repeat;
         background-size: 540px;
       }
 
-      div.background-2 {
+      #ficha-calendario > div.background-2 {
         background-image: url(img/b2b.png);
         background-repeat: no-repeat;
         background-size: 540px;
         z-index: 2;
       }
 
-      div.texto {
+      #ficha-calendario > div.texto {
         top: 45px;
         width: 540px;
         height: 60px;
@@ -189,6 +206,7 @@
         background-image: url(img/tempo24c.png);
       }
 
+      /*
       div#dados-bbb {
         font-family: serif;
         font-weight: normal;
@@ -232,18 +250,21 @@
           padding: 0;
           border: 0;
       }
+      */
 
     </style>
   </head>
   <body>
 
-    <div class="gif"></div>
+    <div id="ficha-calendario">
+      <div class="gif"></div>
 
-    <div class="background">
-      <div id="data-descritiva" class="texto">10h, 15 Marpenoth, 1379 CV</div>
-      <div class="background-2"></div>
-      <div id="imagem-tempo-1" class="tempo tempo01c"></div>
-      <div id="imagem-tempo-2" class="tempo tempo01c"></div>
+      <div class="background">
+        <div id="data-descritiva" class="texto">10h, 15 Marpenoth, 1379 CV</div>
+        <div class="background-2"></div>
+        <div id="imagem-tempo-1" class="tempo tempo01c"></div>
+        <div id="imagem-tempo-2" class="tempo tempo01c"></div>
+      </div>
     </div>
 
     <form id="formulario-tempo">
