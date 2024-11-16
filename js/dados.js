@@ -153,43 +153,99 @@ const NOMES_RACAS = {
   }
 };
 
-const DIVINDADES = {
+const DIVINDADES_PERSONAGENS = {
   "Humano": {
     "Justo (bom e leal)": [
       'Amaterasu (Kara-Tur)',
       'Bala (Zakhara)',
+      'Hsing Yong (Kara-Tur)',
+      'Ilmater (Faerûn)',
+      'Isakkhu (Faerûn)',
+      'Jarmik (Zakhara)',
+      'Kor (Zakhara)',
+      'Kwan Ying (Kara-Tur)',
     ],
     "Ordeiro (neutro e leal)": [
       'Amaunator (Netheril)',
       'Anubis (Plano Astral)',
       'Azuth (Faerûn)',
       'Bala (Zakhara)',
+      'Helm (Faerûn)',
+      'Hoar (Faerûn)',
+      'Jergal (Faerûn)',
+      'Kelemvor (Faerûn)',
+      'Mystra (Faerûn)',
     ],
     "Vil (maligno e leal)": [
       'Azul (Maztica)',
       'Bala (Zakhara)',
       'Bane (Faerûn)',
+      'Gargauth (Faerûn)',
+      'Hakiyah (Zakhara)',
+      'Lei Kung (Kara-Tur)',
+      'Loviatar (Faerûn)',
     ],
     "Bondoso (bom e neutro)": [
       'Bala (Zakhara)',
+      'The Celestial Emperor (Kara-Tur)',
+      'Chauntea (Faerûn)',
+      'Deneir (Faerûn)',
+      'Jisan (Zakhara)',
+      'Lathander (Faerûn)',
+      'Mielikki (Faerûn)',
+      'Milil (Faerûn)',
+      'Mystra/Midnight (Faerûn)',
     ],
     "Neutro": [
       'Bala (Zakhara)',
+      'Chan Cheng (Kara-Tur)',
+      'Chih Shih (Kara-Tur)',
+      'Gond (Faerûn)',
+      'Grumbar (Faerûn)',
+      'Hajama (Zakhara)',
+      'Istishia (Plano Elemental da Água)',
+      'Jauhar (Zakhara)',
+      'Kukul (Maztica)',
+      'Mahavidi (Hordelands)',
+      'Maztica (Maztica)',
     ],
     "Egoista (neutro e maligno)": [
       'Apep (Abismo)',
       'Auril (Faerûn)',
       'Bala (Zakhara)',
+      'Chirasu (Kara-Tur)',
+      'Furo (Hordelands)',
+      'Mask (Faerûn)',
+      'Myrkul (Faerûn)',
     ],
     "Honrado (caótico e bom)": [
       'Bala (Zakhara)',
+      'Bright Nydra (Faerûn)',
+      'Haku (Zakhara)',
+      'Jujimo (Hordelands)',
+      'Kiltzi (Maztica)',
+      'Lliira (Faerûn)',
+      'The Lost One (Zakhara)',
     ],
     "Inconstante (neutro e caótico)": [
       'Bala (Zakhara)',
+      'Eha (Maztica)',
+      'Garagos (Netherese)',
+      'Karsus (Netherese)',
+      'Khass (Faerûn)',
+      'Leira (Faerûn)',
+      'Mystryl/Mystra (Faerûn)', // ESSE FOI O ULTIMO
     ],
     "Cruel (caótico e maligno)": [
       'Bala (Zakhara)',
-      'Beshaba (Faerûn)', // ULTIMO FOI ESSE - https://forgottenrealms.fandom.com/wiki/Category:Human_deities
+      'Beshaba (Faerûn)',
+      'Cyric (Faerûn)',
+      'Eshowdow (Chult)',
+      'Kali (Kara-Tur)',
+      'Kiputytto (Faerûn)',
+      'Talos (Faerûn)',
+      'Malar (Faerûn)',
+      'Moander (Netherese)',
     ],
   },
   "Anão": {
@@ -428,95 +484,14 @@ const DIVINDADES = {
 
 const TENDENCIAS = [
   /* 0 */ "Justo (bom e leal)",
-  /*
-  "Justo (bom e leal)": [
-
-  ],
-  "Ordeiro (neutro e leal)": [
-
-  ]
-  "Justo (bom e leal)": [
-
-  ],
-  "Ordeiro (neutro e leal)": [
-
-  ],
-  "Vil (maligno e leal)": [
-
-  ],
-  "Bondoso (bom e neutro)": [
-
-  ],
-  "Neutro": [
-
-  ],
-  "Egoista (neutro e maligno)": [
-
-  ],
-  "Honrado (caótico e bom)": [
-
-  ],
-  "Inconstante (neutro e caótico)": [
-
-  ],
-  "Cruel (caótico e maligno)": [
-
-  ],
-  "Vil (maligno e leal)": [
-
-  ],
-  "Bondoso (bom e neutro)": [
-
-  ],
-  "Neutro": [
-
-  ],
-  "Egoista (neutro e maligno)": [
-
-  ],
-  "Honrado (caótico e bom)": [
-
-  ],
-  "Inconstante (neutro e caótico)": [
-
-  ],
-  "Cruel (caótico e maligno)": [
-
-  ], */ "Ordeiro (neutro e leal)",
+  /* 1 */ "Ordeiro (neutro e leal)",
   /* 2 */ "Vil (maligno e leal)",
   /* 3 */ "Bondoso (bom e neutro)",
-  /
-  "Justo (bom e leal)": [
-
-  ],
-  "Ordeiro (neutro e leal)": [
-
-  ],
-  "Vil (maligno e leal)": [
-
-  ],
-  "Bondoso (bom e neutro)": [
-
-  ],
-  "Neutro": [
-
-  ],
-  "Egoista (neutro e maligno)": [
-
-  ],
-  "Honrado (caótico e bom)": [
-
-  ],
-  "Inconstante (neutro e caótico)": [
-
-  ],
-  "Cruel (caótico e maligno)": [
-
-  ], 4 */ "Neutro",
+  /* 4 */ "Neutro",
   /* 5 */ "Egoista (neutro e maligno)",
   /* 6 */ "Honrado (caótico e bom)",
   /* 7 */ "Inconstante (neutro e caótico)",
-  /* 8 */ "Cruel (caótico e maligno)"
+  /* 8 */ "Cruel (caótico e maligno)",
 ];
 
 const MAGIAS_DIVINAS = {
@@ -527,34 +502,7 @@ const MAGIAS_DIVINAS = {
   "Caos": [ "Missiva Equivocada" ],
   "Combate": [ "Pedra Encantada", "Arma Abençoada" ],
   "Convocação": [ "Apelo à Fé" ],
-  "
-  "Justo (bom e leal)": [
-
-  ],
-  "Ordeiro (neutro e leal)": [
-
-  ],
-  "Vil (maligno e leal)": [
-
-  ],
-  "Bondoso (bom e neutro)": [
-
-  ],
-  "Neutro": [
-
-  ],
-  "Egoista (neutro e maligno)": [
-
-  ],
-  "Honrado (caótico e bom)": [
-
-  ],
-  "Inconstante (neutro e caótico)": [
-
-  ],
-  "Cruel (caótico e maligno)": [
-
-  ],riação": [],
+  "Criação": [],
   "Cura": [ "Curar Ferimentos Leves" ],
   "Elemental": [ "Criar Água" ],
   "Feitiço": [ "Comando", "Remover Medo" ],
