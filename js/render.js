@@ -97,8 +97,10 @@ function openPersonagens(event) {
         carregarComboTendencias(()=>{
           carregarComboLinhagem(()=>{
             carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
-              render(() => {
-                closeLoading();
+              carregarComboDivindades(()=>{
+                render(() => {
+                  closeLoading();
+                });
               });
             });
           });
@@ -112,9 +114,11 @@ document.getElementById('menu-npcs').addEventListener('click',(event)=>{
   openNPCs(event);
 });
 
+/*
 document.getElementById('menu-calendario').addEventListener('click',(event)=>{
   openCalendario(event);
 });
+*/
 
 document.getElementById('menu-itens').addEventListener('click',(event)=>{
   openItens(event);
@@ -508,7 +512,9 @@ function carregarCombosClasses(selecionada,callback) {
 
 document.getElementById('texto-formulario-tendencia').addEventListener('input',(event)=>{
   event.preventDefault();
-  carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{});
+  carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
+    carregarComboDivindades(()=>{});
+  });
 });
 
 function carregarComboTendencias(callback) {
@@ -529,6 +535,29 @@ function carregarComboTendencias(callback) {
     criarOption(combo,tendencia,tendencia);
 
     if (index_tendencia == (tendencias.length - 1)) {
+      callback();
+    }
+  });
+}
+
+function carregarComboDivindades(callback) {
+  let raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
+  let tendencia = document.getElementById('texto-formulario-tendencia').options[document.getElementById('texto-formulario-tendencia').selectedIndex].value;
+  let classe = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
+  let combo = document.getElementById('texto-formulario-divindade');
+  combo.innerHTML = '';
+  criarOption(combo,'Todas','Todas');
+
+  organizar_divindades_permitidas_tela(raca,tendencia,classe,(lista_divindades)=>{
+    if (lista_divindades.length > 0) {
+      lista_divindades.forEach((divindade, index_divindade) => {
+        criarOption(combo,divindade,divindade);
+
+        if (index_divindade == (lista_divindades.length - 1)) {
+          callback();
+        }
+      });
+    } else {
       callback();
     }
   });
@@ -916,7 +945,9 @@ document.getElementById('texto-formulario-raca').addEventListener('input',event=
       carregarComboLinhagem(()=>{
         definirIdadeMinimaMaxima(()=>{
           carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
-            definirAtributosMinimos();
+            carregarComboDivindades(()=>{
+              definirAtributosMinimos();
+            });
           });
         });
       });
@@ -924,7 +955,9 @@ document.getElementById('texto-formulario-raca').addEventListener('input',event=
   } else {
     definirIdadeMinimaMaxima(()=>{
       carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
-        definirAtributosMinimos();
+        carregarComboDivindades(()=>{
+          definirAtributosMinimos();
+        });
       });
     });
   }
@@ -949,20 +982,27 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
     carregarCombosRacas(()=>{
       carregarComboTendencias(()=>{
         carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
-          definirAtributosMinimos();
+          carregarComboDivindades(()=>{
+            definirAtributosMinimos();
+          });
         });
       });
     });
   } else {
     carregarComboTendencias(()=>{
       carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
-        definirAtributosMinimos();
+        carregarComboDivindades(()=>{
+          definirAtributosMinimos();
+        });
       });
     });
   }
 });
 
-/*
+document.getElementById('texto-botao-pdf').addEventListener('click',()=>{
+  window.print();
+});
+
 function iniciar() {
   let url = new URLSearchParams(window.location.search);
   let pagina = url.get('p');
@@ -973,7 +1013,9 @@ function iniciar() {
   if (pagina == 'itens') {
     openItens();
   }
+  if (pagina == 'npcs') {
+    openNPCs();
+  }
 }
 
 iniciar();
-*/

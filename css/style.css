@@ -96,6 +96,16 @@ main.texto {
     inset #dad798 0 0 0 6px;
 }
 
+main.texto > div.em-construcao {
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  padding: 5px;
+  background-color: rgba(191, 54, 12, 0.5);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 main.texto > span,
 main.texto > div.atributos > span {
   display: block;
@@ -575,5 +585,84 @@ main.menu > a.menu > span {
 
   main.texto > div.invisivel {
     display: block;
+  }
+}
+
+@media print {
+  header {
+    display: none !important;
+  }
+  main {
+    display: none !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(9) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(10) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(11) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(12) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(13) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(14) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(15) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(16) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(17) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(18) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(19) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(20) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
   }
 }

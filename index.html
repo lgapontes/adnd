@@ -33,6 +33,7 @@
 
     <main class="texto" id="pagina-inicial">
       <h2>Roladores de AD&D 2ed</h2>
+      <div class="em-construcao">Em construção!</div>
       <br>
       <span>Conheça o Flecha Mágica</span>
       <br>
@@ -42,6 +43,7 @@
 
     <main class="texto" id="pagina-calendario">
       <h2>Calendário de AD&D 2ed</h2>
+      <div class="em-construcao">Em construção!</div>
       <br>
       Este é um calendário de <b>Advanced Dungeons and Dragons 2ª edição</b>. O ano inicial vigora no período de Metaplot publicado pela TSR no AD&D 2ed. Caso você avance o calendário é possível utilizá-lo em qualquer edição do D&D. Há dois formatos de calendário disponíveis: o calendário <b>Cômputo dos Vales</b> de Faerûn (cenário de Forgotten Realms) e o calendário de <b>Baróvia</b> (cenário Domínios do Medo, Ravenloft). Estes calendários estão conectados: ao alterar entre eles a data será equivalente nos Realmspaces diferentes. Cada alteração realizada no calendário será salvo no seu navegador.
       <br>
@@ -152,6 +154,7 @@
 
     <main class="texto" id="pagina-personagens">
       <h2>Gerador de personagens AD&D 2ed</h2>
+      <div class="em-construcao">Em construção!</div>
       <br>
 
       <button type="button" class="mostrar" id="texto-botao-mostrar1">
@@ -194,8 +197,8 @@
       </div>
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-nivel">Nível</label>
-        <input type="number" class="pequeno" max="3" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel">
-        <span class="dica">Nível máximo: 3</span>
+        <input type="number" class="pequeno" max="1" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel" readonly disabled>
+        <span class="dica"><!--Nível máximo: 3--></span>
       </div>
 
       <div class="bloco bloco-campos bloco-checkbox">
@@ -287,18 +290,21 @@
       </div>
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-magia-divina" class="magia">Magia Divina*</label>
-        <select name="texto-formulario-magia-divina" id="texto-formulario-magia-divina" class="magia">
+        <select name="texto-formulario-magia-divina" id="texto-formulario-magia-divina" class="magia" readonly disabled>
+          <option value="Todas" selected>Em construção</option>
         </select>
       </div>
 
       <div class="bloco bloco-campos">
         <label for="texto-formulario-ciencia">Ciência*</label>
-        <select name="texto-formulario-ciencia" id="texto-formulario-ciencia">
+        <select name="texto-formulario-ciencia" id="texto-formulario-ciencia" readonly disabled>
+          <option value="Todas" selected>Em construção</option>
         </select>
       </div>
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-devocao">Devoção*</label>
-        <select name="texto-formulario-devocao" id="texto-formulario-devocao">
+        <select name="texto-formulario-devocao" id="texto-formulario-devocao" readonly disabled>
+          <option value="Todas" selected>Em construção</option>
         </select>
       </div>
 
@@ -378,6 +384,10 @@
 					<img src="img/rolar.png">
 					<span>Rolar</span>
 				</button>
+        <button type="button" id="texto-botao-pdf">
+					<img src="img/file-pdf-solid.svg">
+					<span>Imprimir</span>
+				</button>
         <button type="button" id="texto-botao-limpar">
 					<img src="img/eraser-solid.svg">
 					<span>Limpar</span>
@@ -395,9 +405,11 @@
       <a id="menu-itens" class="menu menu-itens" href="#">
         <span>Rolador de Itens</span>
       </a>
+      <!--
       <a id="menu-calendario" class="menu menu-calendario" href="#">
         <span>Calendário de D&D</span>
       </a>
+      -->
     </main>
 
     <div id="ficha"></div>

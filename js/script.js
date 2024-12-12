@@ -1,5 +1,5 @@
 /* debug */
-const DEBUG = true;
+const DEBUG = false;
 function debug(texto) {
   if (DEBUG) {
     console.log(texto);
