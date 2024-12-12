@@ -2525,17 +2525,28 @@ function sortear_personagem(callback) {
           sortear_personagem(personagem => {
             error("Foi necessário outro lance de dados pois não foi possível escolher uma classe.");
             sortear_tendencia(personagem, () => {
-              sortear_dados_basicos(personagem, () => {
-                callback(personagem);
-                return;
+              organizar_divindades_permitidas(false,personagem, (lista_divindades)=>{
+                sortear_dados_basicos(personagem, () => {
+                  callback(personagem);
+                  return;
+                });
               });
             });
           });
         } else {
           sortear_tendencia(personagem, () => {
-            sortear_dados_basicos(personagem, () => {
-              callback(personagem);
-              return;
+            organizar_divindades_permitidas(false,personagem, (lista_divindades)=>{
+
+              // AQUI
+              console.log(personagem['Raça']);
+              console.log(personagem['Tendência']);
+              console.log(personagem['Classe']);
+              console.log(lista_divindades);
+
+              sortear_dados_basicos(personagem, () => {
+                callback(personagem);
+                return;
+              });
             });
           });
         }
@@ -2588,6 +2599,109 @@ function sortear_tendencia(personagem, callback) {
 
   callback();
   return;
+}
+
+function organizar_divindades_pertence_tendencias_proximas(tendencia_personagem,tendencia_testada,callback) {
+  let lista = TENDENCIAS_UM_PASSO[tendencia_personagem];
+  let pertence = false;
+
+  lista.forEach((entry, index) => {
+
+    if (entry == tendencia_testada) {
+      pertence = true;
+    }
+
+    if (index == (lista.length - 1)) {
+      callback(pertence);
+    }
+  });
+}
+
+function organizar_divindades_tendencias(classe,tendencia,callback) {
+  if (classe == "Paladino") {
+    callback(["Justo (bom e leal)"]);
+  } else {
+    callback(TENDENCIAS_UM_PASSO[tendencia]);
+  }
+}
+
+function organizar_divindades_havenloft(classe,tendencia,callback) {
+  let lista_opcoes = [];
+
+  if (classe == "Paladino") {
+    lista_opcoes = lista_opcoes.concat(DIVINDADES_PERSONAGENS["Meio-Vistani"]["Justo (bom e leal)"]);
+    callback(lista_opcoes);
+  } else {
+
+    let keys_tendencias = Object.keys(DIVINDADES_PERSONAGENS["Meio-Vistani"]);
+
+    keys_tendencias.forEach((entry_tendencias, index_tendencias) => {
+      organizar_divindades_pertence_tendencias_proximas(tendencia,entry_tendencias,(pertence)=>{
+        if (pertence) {
+          lista_opcoes = lista_opcoes.concat(DIVINDADES_PERSONAGENS["Meio-Vistani"][entry_tendencias]);
+        }
+
+        if (index_tendencias == (keys_tendencias.length - 1)) {
+          callback(lista_opcoes);
+        }
+      });
+    });
+
+  }
+}
+
+function organizar_divindades_permitidas(ja_foi,personagem, callback) {
+
+  let lista_opcoes = [];
+
+  if (forcar_darksun) {
+    lista_opcoes.push(SEM_DIVINDADES_PERSONAGENS);
+    callback(lista_opcoes);
+  } else {
+
+    if (forcar_havenloft) {
+      organizar_divindades_havenloft(personagem['Classe'],personagem['Tendência'],(lista_opcoes)=>{
+        callback(lista_opcoes);
+      });
+    } else {
+      let raca = ajustar_nome_raca(personagem);
+
+      organizar_divindades_tendencias(personagem['Classe'],personagem['Tendência'],(lista_tendencias)=>{
+        lista_tendencias.forEach((tendencia, index_tendencia) => {
+          lista_opcoes = lista_opcoes.concat(DIVINDADES_PERSONAGENS[raca][tendencia]);
+
+          if (index_tendencia == (lista_tendencias.length - 1)) {
+
+            if ( (personagem['Raça'] == "Humano") && (!ja_foi) ) {
+              organizar_divindades_permitidas(false,{
+                'Raça': "Meio-Vistani",
+                'Tendência': personagem['Tendência'],
+                'Classe': personagem['Classe'],
+              }, (lista_vistani)=>{
+                lista_opcoes = lista_opcoes.concat(lista_vistani);
+                callback(lista_opcoes);
+              });
+            } else {
+
+              if (lista_opcoes.length == 0) {
+                organizar_divindades_permitidas(true,{
+                  'Raça': "Humano",
+                  'Tendência': personagem['Tendência'],
+                  'Classe': personagem['Classe'],
+                }, callback);
+              } else {
+                callback(lista_opcoes);
+              }
+
+            }
+
+          }
+        });
+
+      });
+    }
+
+  }
 }
 
 function acrescentar_novas_linguas(personagem, raca, numero_de_linguas, callback) {

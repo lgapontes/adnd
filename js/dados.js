@@ -153,6 +153,8 @@ const NOMES_RACAS = {
   }
 };
 
+const SEM_DIVINDADES_PERSONAGENS = 'Nenhuma divindade';
+
 const DIVINDADES_PERSONAGENS = {
   "Humano": {
     "Justo (bom e leal)": [
@@ -164,6 +166,10 @@ const DIVINDADES_PERSONAGENS = {
       'Jarmik (Zakhara)',
       'Kor (Zakhara)',
       'Kwan Ying (Kara-Tur)',
+      'Nung Chiang (Kara-Tur)',
+      'Qotal (Maztica)',
+      'Torm (Faerûn)',
+      'Tyr (Faerûn)',
     ],
     "Ordeiro (neutro e leal)": [
       'Amaunator (Netheril)',
@@ -175,15 +181,22 @@ const DIVINDADES_PERSONAGENS = {
       'Jergal (Faerûn)',
       'Kelemvor (Faerûn)',
       'Mystra (Faerûn)',
+      "N'asr (Anauroch)",
+      'Plutoq (Maztica)',
+      'Red Knight (Faerûn)',
+      'Savras (Faerûn)',
+      'Siamorphe (Faerûn)',
+      'Ulutiu (Plano Astral)',
+      'Vataqatal (Zakhara)',
     ],
     "Vil (maligno e leal)": [
-      'Azul (Maztica)',
       'Bala (Zakhara)',
       'Bane (Faerûn)',
       'Gargauth (Faerûn)',
       'Hakiyah (Zakhara)',
       'Lei Kung (Kara-Tur)',
       'Loviatar (Faerûn)',
+      'Thasmudyan (Zakhara)',
     ],
     "Bondoso (bom e neutro)": [
       'Bala (Zakhara)',
@@ -195,6 +208,11 @@ const DIVINDADES_PERSONAGENS = {
       'Mielikki (Faerûn)',
       'Milil (Faerûn)',
       'Mystra/Midnight (Faerûn)',
+      'Shajar (Zakhara)',
+      'Shiallia (Faerûn)',
+      'Tefnut (Faerûn)',
+      'Watil (Maztica)',
+      'Gwaeron Windstrom (Faerûn)',
     ],
     "Neutro": [
       'Bala (Zakhara)',
@@ -208,6 +226,14 @@ const DIVINDADES_PERSONAGENS = {
       'Kukul (Maztica)',
       'Mahavidi (Hordelands)',
       'Maztica (Maztica)',
+      'Najm (Zakhara)',
+      'Oghma (Faerûn)',
+      'Padhrasattva of Pilgrims (Hordelands)',
+      'Silvanus (Faerûn)',
+      'Ubtao (Faerûn)',
+      'Untamo (Faerûn)',
+      'Matsailema (Maztica)',
+      'Waukeen (Faerûn)',
     ],
     "Egoista (neutro e maligno)": [
       'Apep (Abismo)',
@@ -217,6 +243,8 @@ const DIVINDADES_PERSONAGENS = {
       'Furo (Hordelands)',
       'Mask (Faerûn)',
       'Myrkul (Faerûn)',
+      'Shar (Faerûn)',
+      'Velsharoon (Faerûn)',
     ],
     "Honrado (caótico e bom)": [
       'Bala (Zakhara)',
@@ -226,6 +254,15 @@ const DIVINDADES_PERSONAGENS = {
       'Kiltzi (Maztica)',
       'Lliira (Faerûn)',
       'The Lost One (Zakhara)',
+      'Nephthys (Faerûn)',
+      'Piminasi (Hordelands)',
+      'Priapus (Kara-Tur)',
+      'Selan (Zakhara)',
+      'Selûne (Faerûn)',
+      'Sharess (Faerûn)',
+      'Sune (Faerûn)',
+      'Tymora (Faerûn)',
+      'Valkur (Faerûn)',
     ],
     "Inconstante (neutro e caótico)": [
       'Bala (Zakhara)',
@@ -234,7 +271,13 @@ const DIVINDADES_PERSONAGENS = {
       'Karsus (Netherese)',
       'Khass (Faerûn)',
       'Leira (Faerûn)',
-      'Mystryl/Mystra (Faerûn)', // ESSE FOI O ULTIMO
+      'Mystryl/Mystra (Faerûn)',
+      'Poseidon (Olympus)',
+      'Shaundakul (Faerûn)',
+      'Tempus (Faerûn)',
+      'Uthgar (Ysgard)',
+      'Finder Wyvernspur (Olympus)',
+      'Zann (Zakhara)',
     ],
     "Cruel (caótico e maligno)": [
       'Bala (Zakhara)',
@@ -246,238 +289,218 @@ const DIVINDADES_PERSONAGENS = {
       'Talos (Faerûn)',
       'Malar (Faerûn)',
       'Moander (Netherese)',
+      'Ragarra (Zakhara)',
+      'Talona (Faerûn)',
+      'Talos (Faerûn)',
+      'Umberlee (Faerûn)',
     ],
   },
   "Anão": {
     "Justo (bom e leal)": [
-
+      'Gorm Gulthyn (Faerûn)',
+      'Moradin (Faerûn)',
+      'Clangeddin Silverbeard (Faerûn)',
+      'Berronar Truesilver (Faerûn)',
     ],
-    "Ordeiro (neutro e leal)": [
-
-    ],
+    "Ordeiro (neutro e leal)": [],
     "Vil (maligno e leal)": [
-
+      'Deep Duerra (Faerûn)',
+      'Laduguer (Faerûn)',
     ],
     "Bondoso (bom e neutro)": [
-
+      'Marthammor Duin (Faerûn)',
     ],
     "Neutro": [
-
+      'Dumathoin (Faerûn)',
+      'Vergadain (Faerûn)',
     ],
     "Egoista (neutro e maligno)": [
-
+      'Abbathor (Faerûn)',
     ],
     "Honrado (caótico e bom)": [
-
+      'Haela Brightaxe (Faerûn)',
+      'Dugmaren Brightmantle (Faerûn)',
+      'Thard Harr (Faerûn)',
+      'Sharindlar (Faerûn)',
     ],
-    "Inconstante (neutro e caótico)": [
-
-    ],
+    "Inconstante (neutro e caótico)": [],
     "Cruel (caótico e maligno)": [
-
+      'Diirinka (Faerûn)',
     ],
   },
+  // https://forgottenrealms.fandom.com/wiki/Seldarine
   "Elfo": {
-    "Justo (bom e leal)": [
-
-    ],
+    "Justo (bom e leal)": [],
     "Ordeiro (neutro e leal)": [
-
+      'Vandria Gilmadrith (Faerûn)',
+      'Darahl Firecloak (Faerûn)',
     ],
-    "Vil (maligno e leal)": [
-
-    ],
+    "Vil (maligno e leal)": [],
     "Bondoso (bom e neutro)": [
-
+      'Naralis Analor (Faerûn)',
+      'Rellavar Danuvien (Faerûn)',
+      'Tethrin Veraldé (Faerûn)',
     ],
     "Neutro": [
-
+      'Meia-elfa Khalreshaar (Faerûn)',
+      'Alathrien Druanna (Faerûn)',
     ],
-    "Egoista (neutro e maligno)": [
-
-    ],
+    "Egoista (neutro e maligno)": [],
     "Honrado (caótico e bom)": [
-
+      'Corellon Larethian (Faerûn)',
+      'Angharradh (Faerûn)',
+      'Aerdrie Faenya (Faerûn)',
+      'Deep Sashelas (Faerûn)',
+      'Hanali Celanil (Faerûn)',
+      'Labelas Enoreth (Faerûn)',
+      'Rillifane Rallathil (Faerûn)',
+      'Sehanine Moonbow (Faerûn)',
+      'Solonor Thelandira (Faerûn)',
+      'Araleth Letheranil (Faerûn)',
+      'Hlal (Avachel) (Panteão Dracônico)',
+      'Melira Taralen (Faerûn)',
+      'Sarula Iliene (Faerûn)',
+      'Lashrael (Faerûn)',
+      'Felarathael (Faerûn)',
+      'Mythrien Sarath (Faerûn)',
     ],
     "Inconstante (neutro e caótico)": [
-
+      'Erevan Ilesere (Faerûn)',
+      'Tarsellis Meunniduin (Faerûn)',
+      'Aasterinian (Avachel) (Panteão Dracônico)',
+      'Fenmarel Mestarine (Faerûn)',
+      'Shevarash (Faerûn)',
     ],
-    "Cruel (caótico e maligno)": [
-
-    ],
+    "Cruel (caótico e maligno)": [],
   },
+  // https://forgottenrealms.fandom.com/wiki/Category:Gnome_domain_deities
   "Gnomo": {
     "Justo (bom e leal)": [
-
+      'Garl Glittergold (Faerûn)',
+      'Gaerdal Ironhand (Faerûn)',
     ],
-    "Ordeiro (neutro e leal)": [
-
-    ],
-    "Vil (maligno e leal)": [
-
-    ],
+    "Ordeiro (neutro e leal)": [],
+    "Vil (maligno e leal)": [],
     "Bondoso (bom e neutro)": [
-
+      'Baravar Cloakshadow (Faerûn)',
+      'Segojan Earthcaller (Faerûn)',
+      'Flandal Steelskin (Faerûn)',
+      'Baervan Wildwanderer (Faerûn)',
     ],
     "Neutro": [
-
+      'Callarduran Smoothhands (Faerûn)',
     ],
-    "Egoista (neutro e maligno)": [
-
-    ],
-    "Honrado (caótico e bom)": [
-
-    ],
-    "Inconstante (neutro e caótico)": [
-
-    ],
+    "Egoista (neutro e maligno)": [],
+    "Honrado (caótico e bom)": [],
+    "Inconstante (neutro e caótico)": [],
     "Cruel (caótico e maligno)": [
-
+      'Urdlen (Faerûn)',
     ],
   },
   "Meio-Elfo": {
-    "Justo (bom e leal)": [
-
-    ],
-    "Ordeiro (neutro e leal)": [
-
-    ],
-    "Vil (maligno e leal)": [
-
-    ],
-    "Bondoso (bom e neutro)": [
-
-    ],
-    "Neutro": [
-
-    ],
-    "Egoista (neutro e maligno)": [
-
-    ],
-    "Honrado (caótico e bom)": [
-
-    ],
-    "Inconstante (neutro e caótico)": [
-
-    ],
-    "Cruel (caótico e maligno)": [
-
-    ],
+    "Justo (bom e leal)": [],
+    "Ordeiro (neutro e leal)": [],
+    "Vil (maligno e leal)": [],
+    "Bondoso (bom e neutro)": [],
+    "Neutro": [],
+    "Egoista (neutro e maligno)": [],
+    "Honrado (caótico e bom)": [],
+    "Inconstante (neutro e caótico)": [],
+    "Cruel (caótico e maligno)": [],
   },
   "Halfling": {
     "Justo (bom e leal)": [
-
+      'Arvoreen (Faerûn)',
+      'Cyrrollalee (Faerûn)',
     ],
     "Ordeiro (neutro e leal)": [
-
+      'Urogalan (Faerûn)',
     ],
-    "Vil (maligno e leal)": [
-
-    ],
-    "Bondoso (bom e neutro)": [
-
-    ],
+    "Vil (maligno e leal)": [],
+    "Bondoso (bom e neutro)": [],
     "Neutro": [
-
+      'Brandobaris (Faerûn)',
+      'Sheela Peryroyl (Faerûn)',
+      'Yondalla (Faerûn)',
     ],
-    "Egoista (neutro e maligno)": [
-
-    ],
-    "Honrado (caótico e bom)": [
-
-    ],
+    "Egoista (neutro e maligno)": [],
+    "Honrado (caótico e bom)": [],
     "Inconstante (neutro e caótico)": [
-
+      'Dallah Thaun (Faerûn)',
     ],
-    "Cruel (caótico e maligno)": [
-
-    ],
+    "Cruel (caótico e maligno)": [],
   },
   "Meio-Vistani": {
     "Justo (bom e leal)": [
-
+      'Igreja de Lawgiver (Ravenloft)',
+      'Brigantian (Ravenloft, Panteão Celta)',
+      'Manannan mac Lir (Ravenloft, Panteão Celta)',
+      'Belenus (Ravenloft, Panteão Celta)',
     ],
     "Ordeiro (neutro e leal)": [
-
+      'Igreja de Ezra (Ravenloft)',
     ],
     "Vil (maligno e leal)": [
-
+      'Mytteri (Ravenloft)',
     ],
     "Bondoso (bom e neutro)": [
-
+      'Igreja de Hala (Ravenloft)',
+      'Belenus (Ravenloft)',
     ],
-    "Neutro": [
-
-    ],
+    "Neutro": [],
     "Egoista (neutro e maligno)": [
-
+      'A Ordem Eterna (Ravenloft)',
+      'Arawn (Ravenloft, Panteão Celta)',
+      'Morrigan (Ravenloft, Panteão Celta)',
+      'Math Mathonwy (Ravenloft, Panteão Celta)',
     ],
     "Honrado (caótico e bom)": [
-
+      'Igreja de Morninglord (Ravenloft)',
     ],
-    "Inconstante (neutro e caótico)": [
-
-    ],
+    "Inconstante (neutro e caótico)": [],
     "Cruel (caótico e maligno)": [
-
+      'Lugh (Ravenloft, Panteão Celta)',
+      'Daghda (Ravenloft, Panteão Celta)',
+      'Diancecht (Ravenloft, Panteão Celta)',
     ],
   },
   "Tabaxi": {
-    "Justo (bom e leal)": [
-
-    ],
-    "Ordeiro (neutro e leal)": [
-
-    ],
+    "Justo (bom e leal)": [],
+    "Ordeiro (neutro e leal)": [],
     "Vil (maligno e leal)": [
-
+      'Azul (Maztica)',
     ],
-    "Bondoso (bom e neutro)": [
-
-    ],
+    "Bondoso (bom e neutro)": [],
     "Neutro": [
-
+      ' Cat Lord (Faerûn)',
     ],
-    "Egoista (neutro e maligno)": [
-
-    ],
-    "Honrado (caótico e bom)": [
-
-    ],
+    "Egoista (neutro e maligno)": [],
+    "Honrado (caótico e bom)": [],
     "Inconstante (neutro e caótico)": [
-
+      'Nula (Maztica)',
     ],
     "Cruel (caótico e maligno)": [
-
+      'Tezca (Maztica)',
+      'Zaltec (Maztica)',
     ],
   },
   "Goblin": {
-    "Justo (bom e leal)": [
-
-    ],
-    "Ordeiro (neutro e leal)": [
-
-    ],
+    "Justo (bom e leal)": [],
+    "Ordeiro (neutro e leal)": [],
     "Vil (maligno e leal)": [
-
+      'Nomog-Geaya (Faerûn)',
+      'Khurgorbaeyag (Faerûn)',
+      'Bargrivyek (Faerûn)',
     ],
-    "Bondoso (bom e neutro)": [
-
-    ],
-    "Neutro": [
-
-    ],
-    "Egoista (neutro e maligno)": [
-
-    ],
-    "Honrado (caótico e bom)": [
-
-    ],
-    "Inconstante (neutro e caótico)": [
-
-    ],
+    "Bondoso (bom e neutro)": [],
+    "Neutro": [],
+    "Egoista (neutro e maligno)": [],
+    "Honrado (caótico e bom)": [],
+    "Inconstante (neutro e caótico)": [],
     "Cruel (caótico e maligno)": [
-
+      'Maglubiyet (Faerûn)',
+      'Hruggek (Faerûn)',
+      'Grankhul (Faerûn)',
     ],
   },
 };
@@ -493,6 +516,18 @@ const TENDENCIAS = [
   /* 7 */ "Inconstante (neutro e caótico)",
   /* 8 */ "Cruel (caótico e maligno)",
 ];
+
+const TENDENCIAS_UM_PASSO = {
+  /* 0 */ "Justo (bom e leal)": ["Justo (bom e leal)", "Ordeiro (neutro e leal)", "Bondoso (bom e neutro)"],
+  /* 1 */ "Ordeiro (neutro e leal)": ["Ordeiro (neutro e leal)","Vil (maligno e leal)","Neutro","Justo (bom e leal)"],
+  /* 2 */ "Vil (maligno e leal)": ["Vil (maligno e leal)","Ordeiro (neutro e leal)","Egoista (neutro e maligno)"],
+  /* 3 */ "Bondoso (bom e neutro)": ["Bondoso (bom e neutro)","Justo (bom e leal)","Neutro","Honrado (caótico e bom)"],
+  /* 4 */ "Neutro": ["Neutro","Ordeiro (neutro e leal)","Bondoso (bom e neutro)","Egoista (neutro e maligno)","Inconstante (neutro e caótico)"],
+  /* 5 */ "Egoista (neutro e maligno)": ["Egoista (neutro e maligno)","Neutro","Cruel (caótico e maligno)","Vil (maligno e leal)"],
+  /* 6 */ "Honrado (caótico e bom)": ["Honrado (caótico e bom)","Inconstante (neutro e caótico)","Bondoso (bom e neutro)"],
+  /* 7 */ "Inconstante (neutro e caótico)": ["Inconstante (neutro e caótico)","Neutro","Honrado (caótico e bom)","Cruel (caótico e maligno)",],
+  /* 8 */ "Cruel (caótico e maligno)": ["Cruel (caótico e maligno)","Inconstante (neutro e caótico)","Egoista (neutro e maligno)"],
+};
 
 const MAGIAS_DIVINAS = {
   "Adivinhação": [ "Detectar Magia", "Detectar Venenos", "Detectar Armadilhas", "Localizar Animais ou Plantas" ],
