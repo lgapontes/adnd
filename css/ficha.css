@@ -194,6 +194,13 @@
         box-sizing: border-box !important;
         padding: 2px !important;
       }
+
+      div#ficha > div > table > tbody > tr > td:nth-child(odd) {        
+        max-width: 100px;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
       div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > table > tbody > tr > td {
         font-size: 0.9em !important;
       }
