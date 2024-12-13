@@ -3196,6 +3196,155 @@ const MORAL_GOBLIN = [
   'Mediano (10)'
 ];
 
+/*
+  https://adnd2e.fandom.com/wiki/Comprehend_Languages_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Confusion_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Fire_Trap_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Leomund%27s_Secret_Chest_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Change_Self_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Alter_Self_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Arcane_Belt_(Magic_Belt)
+  https://adnd2e.fandom.com/wiki/Arcane_Runes_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Sepia_Snake_Sigil_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Wizard_Mark_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Illusionary_Script_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Symbol_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Glyph_of_Warding_(Priest_Spell)
+  https://adnd2e.fandom.com/wiki/Explosive_Runes_(Wizard_Spell)
+  https://adnd2e.fandom.com/wiki/Erase_(Wizard_Spell)
+*/
+
+const PROTECAO_GRIMORIOS = {
+  'Nenhuma proteção': {
+    'Nível': 0,
+    'Escola': 'Nenhuma',
+    'Duração': 'Nenhuma',
+    'Área de Efeito': 'Nenhuma',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Não há magia protegendo este grimório.`,
+  },
+  'Recipiente Arcano': {
+    'Nível': 9,
+    'Escola': 'Necromancia',
+    'Duração': 'Especial',
+    'Área de Efeito': '1 criatura',
+    'Resistência': 'Especial',
+    'Efeito': `Há uma força vital de uma conjurador dentro deste grimório. Ele está o utilizando como um Recipiente Arcano e agora vai tentar possuir uma criatura que esteja a até 3 níveis por nível de distância. A tentativa consome uma rodada inteira e pode ser bloqueada pela magia Proteção ao Mal ou similar. A tentativa de possuir falha se a vítima for bem-sucedida em um teste de Resistência contra Magias (com modificador, vide no final deste texto). Se a vítima falhar a força vital do mago se apodera do corpo da vítima, que tem sua força vital confinada no grimório. Mais detalhes leia na página 216 do Livro do Jogador.\nO teste de Resistência à Magia é modificado subtraindo-se os valores combinados de Inteligência e Sabedoria da vítima dos valores combinados do mago (inteligência e dados de vida em criaturas não-humanas). Um modificador negativo indica que o mago tetm um total de Sabedoria mais Inteligência menor do que a vítima, o que dá a ela um bônus no teste. Este modificador é somado ou subtraído ao resultado dos dados: -9 ou menos: +4; -8 a -6: +3; --5 a -3: +2; -2 a 0: +1; +1 a +4: 0; +5 a +8: -1; +9 a +12: -2; +13 ou maior: -3.`,
+  },
+  'Repulsão': {
+    'Nível': 12,
+    'Escola': 'Abjuração/Alteração',
+    'Duração': 'Permanente, até ser dissipada',
+    'Área de Efeito': 'No máximo um cubo de 3 metros',
+    'Resistência': 'Especial (não há)',
+    'Efeito': `Através dessa magia, o mago produz uma repulsão natural entre o objeto afetado e todos os outros seres vivos, exceto ele mesmo. Qualquer criatura tentando tocar o objeto afetado é repelida (não consegue se aproximar mais que meio metro), ou repele o item.`,
+  },
+  'Atração (reverso de Repulsão)': {
+    'Nível': 12,
+    'Escola': 'Abjuração/Alteração',
+    'Duração': 'Permanente, até ser dissipada',
+    'Área de Efeito': 'No máximo um cubo de 3 metros',
+    'Resistência': 'Especial (não há)',
+    'Efeito': `Através dessa magia, o mago produz uma atração natural entre o objeto afetado e todos os outros seres vivos, exceto ele mesmo. Qualquer criatura tentando tocar o objeto afetado é atraído. O indivíduo vai se aproximar do objeto (e pegá-lo) ou o objeto desliza na direção dele. Um teste de dobrar barras deve ser feito com sucesso para remover o objeto encantado.`,
+  },
+  'Página Secreta': {
+    'Nível': 5,
+    'Escola': 'Alteração',
+    'Duração': 'Até que seja dissipado',
+    'Área de Efeito': '1 página de qualquer tamanho, até 2 pés quadrados',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Quando conjurada, uma magia de página secreta altera o conteúdo real de uma página para que pareça algo completamente diferente. O texto de uma magia pode ser alterado para mostrar uma página contábil ou até mesmo outra forma de magia. Magias de Confundir Idiomas e Runas Explosivas podem ser conjuradas na página secreta, mas uma magia de Compreender Idiomas não pode revelar o conteúdo da Página Secreta. O conjurador é capaz de revelar o conteúdo original falando uma palavra de comando, examinando a página real e, em seguida, retornando-a à sua forma de Página Secreta. O conjurador também pode remover a magia pela repetição dupla da palavra de comando. A página irradia magia e outuro mago pode tentar desfazer com Dissipar Magia (se falhar a página é destruída). Visão da Verdade não revela o conteúdo, a menos que seja conjurada em combinação com uma magia de Compreender Idiomas . Uma magia de apagar pode destruir a página.`,
+  },
+  'Confundir Idiomas (reverso de Compreender Idiomas)': {
+    'Nível': 1,
+    'Escola': 'Alteração',
+    'Duração': '5 rodadas/nível',
+    'Área de Efeito': '1 criatura falante ou objeto escrito',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Cancela uma magia Compreender Idiomas ou torna uma escrita ou a fala de uma criatura incompreensível, pela mesma duração de 5 rodadas por nível.`,
+  },
+  'Armadilha de Fogo': {
+    'Nível': 7,
+    'Escola': 'Invocação/Evocação',
+    'Duração': 'Permanente',
+    'Área de Efeito': 'Objeto tocado',
+    'Resistência': 'Metade',
+    'Efeito': `Qualquer item que possa ser fechado (grimório) pode ser protegido por uma magia de Armadilha de Fogo. A magia é centralizada em um ponto selecionado pelo conjurador. O item assim preso não pode ter uma segunda magia de fechamento ou proteção colocada sobre ele (se isso for tentado, a chance é de 25% de que a primeira magia falhe, 25% de que a segunda magia falhe ou 50% de que ambas as magias falhem). Uma magia Arrombar não afeta uma Armadilha de Fogo de forma alguma — assim que a parte toca no item, a armadilha dispara. Ladrões e outros têm apenas metade de sua chance normal de detectar uma Armadilha de Fogo (ao notar as marcações características necessárias para conjurar a magia). Eles têm apenas metade de sua chance normal de remover a armadilha (a falha detona a armadilha imediatamente). Uma Dissipação malsucedida não detona a magia. O conjurador pode usar o objeto preso sem descarregá-lo, assim como qualquer indivíduo a quem a magia foi especificamente sintonizada quando conjurada (o método exato geralmente envolve uma palavra-chave). Quando a armadilha é descarregada, há uma explosão de 5 pés de raio do centro da magia; todas as criaturas dentro desta área devem rolar testes de Resistência contra a Magia. O dano é de 1d4 pontos mais 1 ponto por nível do conjurador, ou metade disso (arredondado para cima) para criaturas que conseguem passar no teste. Debaixo d'água, esta proteção inflige metade do dano e cria uma grande nuvem de vapor. O item preso não é prejudicado por esta explosão. Para colocar esta magia, o conjurador deve traçar o contorno do fechamento com um pouco de enxofre ou salitre e tocar o centro do efeito. A sintonização com outro indivíduo requer um fio de cabelo ou objeto similar daquela pessoa.`,
+  },
+  'Runas Arcanas': {
+    'Nível': 7,
+    'Escola': 'Alteração',
+    'Duração': 'Especial',
+    'Área de Efeito': 'Pergaminho ou livro',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Quando esse poder é usado, um Arcano — ou um mago treinado no uso de suas runas — pode escrever uma mensagem ou texto mais longo, escondendo-o invisivelmente dentro de um pergaminho, livro ou tomo. O usuário pode escrever um aviso dentro de um texto grande normal ou mágico, enviar uma carta com informações secretas escondidas entre as linhas ou até mesmo escrever um livro inteiro dentro de outro volume. Esta magia é similar à magia de mago de 1º nível, Wizard Mark, mas as Runas não aparecem quando Detectar Magia é usada. Elas podem ser vistas com Visão da Verdade ou por qualquer um conjurando a magia Read Arcane Runes.`,
+  },
+  'Marca do Mago': {
+    'Nível': 1,
+    'Escola': 'Alteração',
+    'Duração': 'Permanente',
+    'Área de Efeito': 'Até 1 pé quadrado',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Quando esta magia é conjurada, o mago é capaz de escrever, visível ou invisivelmente, sua runa ou marca pessoal, bem como até seis caracteres adicionais de tamanho menor. Esta magia permite que o conjurador grave a runa em pedra, metal ou qualquer substância mais macia sem causar danos ao material sobre o qual a marca é colocada. Se uma marca invisível for feita, uma magia de Detecção de Magia fará com que ela brilhe e fique visível (embora não necessariamente compreensível). Detectar Invisibilidade, Visão da Verdade, uma Gema da Visão ou um Manto dos Olhos também vão expor a marca de mago. Ler Magias revelará as palavras do criador, se houver. A marca não pode ser dissipada, mas pode ser removida pelo conjurador ou por uma magia de Apagar . Se conjurada em um ser vivo, o desgaste normal gradualmente faz com que a marca desapareça.`,
+  },
+  'O Selo da Serpente de Sépia': {
+    'Nível': 5,
+    'Escola': 'Conjuração/Invocação',
+    'Duração': 'Especial',
+    'Área de Efeito': '1 Selo',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Quando esta magia é conjurada, um pequeno símbolo escrito aparece no texto de qualquer trabalho escrito. Quando lida, a chamada Cobra Sépia surge e ataca a criatura viva mais próxima (mas não ataca o mago que conjurou a magia). Seu ataque é feito como se fosse um monstro com Dados de Vida iguais ao nível do mago que conjurou a magia. Se ela atacar com sucesso, a vítima é engolfada em um campo de força âmbar brilhante, congelada e imobilizada até ser liberada, seja ao comando do conjurador, por Dissipar Magia bem-sucedida, ou até que um tempo igual a 1d4 dias+1 dia por nível do conjurador tenha decorrido. Até então, nada pode atingir a vítima, mover a força brilhante ao seu redor ou afetá-la de outra forma. A vítima não envelhece, não fica com fome, não dorme ou recupera magias enquanto estiver neste estado. Ela não está ciente de seus arredores. Se a Cobra Sépia errar o alvo, ela se dissipa em um clarão de luz marrom, com um barulho alto e uma nuvem de fumaça de cor parda com 3 metros de diâmetro e duração de uma rodada. A magia não pode ser detectada por observação normal, e Detectar Magia revela apenas que o texto inteiro é mágico. Dissipar Magia pode removê-la; uma magia Apagar destrói a página inteira de texto. Ela pode ser lançada em combinação com outras magias que escondem ou distorcem texto.`,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+  '': {
+    'Nível': 0,
+    'Escola': '',
+    'Duração': '',
+    'Área de Efeito': '',
+    'Resistência': '',
+    'Efeito': ``,
+  },
+};
+
 const CIRCULOS_POR_CLASSE_E_NIVEL = {
   "Guerreiro": {
     obter_lista: (callback) => { callback({}); },

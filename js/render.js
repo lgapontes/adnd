@@ -105,8 +105,7 @@ function openGrimorio(event) {
 document.querySelector('#texto-botao-copiar-grimorio').addEventListener('click',event=>{
   event.preventDefault();
   let elemento = document.querySelector('#ficha-grimorio');
-  console.log(elemento.value);
-  copy_text_grimorio(elemento);
+  copy_textarea(elemento.value);
 });
 
 function openItens(event) {

@@ -608,8 +608,8 @@ function p_itens_formatar_item_itens(loot, item) {
   return "<b>" + item.nome + "</b>" + peso + moedas;
 }
 
-function copy_text_itens(item) {
-  const str = item.innerText;  
+function copy_textarea(str) {
+  //const str = item.innerText;  
   const el = document.createElement("textarea");
   el.value = str;
   el.setAttribute("readonly", "");
@@ -646,7 +646,7 @@ function render_texto_itens(tag,t,texto) {
   document.querySelector(`#${tag} > button`).addEventListener('click',event=>{
     event.preventDefault();
     let elemento = document.querySelector(`#${tag} > div.texto-itens`);
-    copy_text_itens(elemento);
+    copy_textarea(elemento.innerText);
   });
 }
 

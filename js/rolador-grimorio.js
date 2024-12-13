@@ -79,18 +79,6 @@ function sortear_magias_grimorio(nivel,classe,callback) {
   }
 }
 
-function copy_text_grimorio(item) {
-  const str = item.value;
-  const el = document.createElement("textarea");
-  el.value = str;
-  el.setAttribute("readonly", "");
-  el.style.position = "absolute";
-  el.style.left = '-9999px';
-  document.body.appendChild(el);
-  el.select(); document.execCommand("copy");
-  document.body.removeChild(el);
-};
-
 function render_grimorio(nivel,callback) {
   sortear_nome_grimorio((nome,genero)=>{
 
