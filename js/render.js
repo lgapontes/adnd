@@ -34,6 +34,9 @@ function openMain(event) {
 
   document.getElementById('pagina-calendario').style.display = 'none';
 
+  document.getElementById('pagina-grimorio').style.display = 'none';
+  document.getElementById('ficha-grimorio').style.display = 'none';
+
   document.getElementById('ficha').style.display = 'none';
   closeLoading();
 }
@@ -73,6 +76,38 @@ function openCalendario(event) {
 
   closeLoading();
 }
+
+function obterNivelGrimorio() {
+  let texto_formulario_grimorio_nivel = document.getElementById('texto-formulario-grimorio-nivel');
+
+  let nivel = 1;
+
+  if ( isInt(texto_formulario_grimorio_nivel.value) ) {
+    nivel = parseInt(texto_formulario_grimorio_nivel.value);
+  }
+
+  return nivel;
+}
+
+function openGrimorio(event) {
+  closeMain(event);
+  openLoading();
+
+  document.getElementById('pagina-grimorio').style.display = 'block';
+  document.getElementById('ficha-grimorio').style.display = 'block';
+
+  let nivel = obterNivelGrimorio();
+  render_grimorio(nivel,()=>{
+    closeLoading();
+  });
+}
+
+document.querySelector('#texto-botao-copiar-grimorio').addEventListener('click',event=>{
+  event.preventDefault();
+  let elemento = document.querySelector('#ficha-grimorio');
+  console.log(elemento.value);
+  copy_text_grimorio(elemento);
+});
 
 function openItens(event) {
   closeMain(event);
@@ -114,11 +149,9 @@ document.getElementById('menu-npcs').addEventListener('click',(event)=>{
   openNPCs(event);
 });
 
-/*
-document.getElementById('menu-calendario').addEventListener('click',(event)=>{
-  openCalendario(event);
+document.getElementById('menu-grimorio').addEventListener('click',(event)=>{
+  openGrimorio(event);
 });
-*/
 
 document.getElementById('menu-itens').addEventListener('click',(event)=>{
   openItens(event);
@@ -141,6 +174,10 @@ document.getElementById('texto-botao-voltar-itens').addEventListener('click',(ev
 });
 
 document.getElementById('texto-botao-voltar-calendario').addEventListener('click',(event)=>{
+  openMain(event);
+});
+
+document.getElementById('texto-botao-voltar-grimorio').addEventListener('click',(event)=>{
   openMain(event);
 });
 
@@ -329,6 +366,15 @@ document.getElementById('texto-botao-rolar-npcs').addEventListener('click',(even
   openLoading();
   let nivel = obterHitDiceNPC();
   render_npc(nivel,()=>{
+    closeLoading();
+  });
+});
+
+document.getElementById('texto-botao-rolar-grimorio').addEventListener('click',(event)=>{
+  event.preventDefault();
+  openLoading();
+  let nivel = obterNivelGrimorio();
+  render_grimorio(nivel,()=>{
     closeLoading();
   });
 });
@@ -1015,6 +1061,9 @@ function iniciar() {
   }
   if (pagina == 'npcs') {
     openNPCs();
+  }
+  if (pagina == 'grimorio') {
+    openGrimorio();
   }
 }
 

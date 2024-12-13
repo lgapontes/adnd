@@ -465,8 +465,8 @@ main.menu > a.menu-itens {
   background-image: url(../img/menu_itens.jpg);
 }
 
-main.menu > a.menu-calendario {
-  background-image: url(../img/menu_calendario.jpg);
+main.menu > a.menu-grimorio {
+  background-image: url(../img/menu_grimorio.jpg);
 }
 
 main.menu > a.menu > span {
@@ -503,11 +503,20 @@ main.menu > a.menu > span {
   margin-left: 0;
 }
 
+#texto-botao-voltar-grimorio {
+  float: left;
+  margin-left: 0;
+}
+
 #pagina-personagens {
   display: none;
 }
 
 #pagina-calendario {
+  display: none;
+}
+
+#pagina-grimorio {
   display: none;
 }
 

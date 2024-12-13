@@ -15,7 +15,7 @@
 
     <meta property="og:title" content="Advanced Dungeon & Dragons 2ed" />
     <meta property="og:image" content="img/adnd.jpg" />
-    <meta property="og:description" content="Rolador de personagens, NPCs, itens e calendário de AD&D 2ed."/>
+    <meta property="og:description" content="Rolador de personagens, NPCs, itens e Grimórios de AD&D 2ed."/>
     <meta property="og:url" content="https://flechamagica.com.br/aded/"/>
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" />
@@ -52,6 +52,36 @@
         <button type="button" id="texto-botao-voltar-calendario">
 					<img src="img/arrow-left-solid.svg">
 					<span>Voltar</span>
+				</button>
+      </div>
+    </main>
+
+    <main class="texto" id="pagina-grimorio">
+      <h2>Grimórios de AD&D 2ed</h2>
+      <br>
+      Este é um rolador de Grimórios de magias arcanas de <b>Advanced Dungeons and Dragons 2ª edição</b>. Ele auxilia na condução de aventuras com personagens magos, onde o narrador poderá rolar rapidamente quais magias estão no grimório e qual tipo de proteção ele possui contra a leitura de terceiros.
+      <br>
+
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-grimorio-nivel">Nível</label>
+        <input type="number" class="pequeno" max="10" min="1" value="1" name="texto-formulario-grimorio-nivel" id="texto-formulario-grimorio-nivel">
+        <span class="dica">Nível do conjurador</span>
+      </div>
+
+      <br>
+      <div class="bloco bloco-botoes">
+        <button type="button" id="texto-botao-voltar-grimorio">
+					<img src="img/arrow-left-solid.svg">
+					<span>Voltar</span>
+				</button>
+
+        <button type="button" id="texto-botao-rolar-grimorio">
+					<img src="img/rolar.png">
+					<span>Rolar</span>
+				</button>
+        <button type="button" id="texto-botao-copiar-grimorio">
+					<img src="img/copy-regular.svg">
+					<span>Copiar Grimório</span>
 				</button>
       </div>
     </main>
@@ -405,11 +435,9 @@
       <a id="menu-itens" class="menu menu-itens" href="#">
         <span>Rolador de Itens</span>
       </a>
-      <!--
-      <a id="menu-calendario" class="menu menu-calendario" href="#">
-        <span>Calendário de D&D</span>
+      <a id="menu-grimorio" class="menu menu-grimorio" href="#">
+        <span>Grimórios Arcanos</span>
       </a>
-      -->
     </main>
 
     <div id="ficha"></div>
@@ -421,6 +449,8 @@
 
     <textarea readonly="readonly" id="ficha-npcs"></textarea>
 
+    <textarea readonly="readonly" id="ficha-grimorio"></textarea>
+
     <script type="text/javascript" src="js/script.js"></script>
 
     <script type="text/javascript" src="js/prettyprint.js"></script>
@@ -428,6 +458,7 @@
     <script type="text/javascript" src="js/gerador.js"></script>
     <script type="text/javascript" src="js/script-itens.js"></script>
     <script type="text/javascript" src="js/rolador-npcs.js"></script>
+    <script type="text/javascript" src="js/rolador-grimorio.js"></script>
     <script type="text/javascript" src="js/render.js"></script>
   </body>
 </html>

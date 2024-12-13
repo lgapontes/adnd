@@ -195,7 +195,7 @@
         padding: 2px !important;
       }
 
-      div#ficha > div > table > tbody > tr > td:nth-child(odd) {        
+      div#ficha > div > table > tbody > tr > td:nth-child(odd) {
         max-width: 100px;
         word-wrap: break-word !important;
         white-space: normal !important;
@@ -337,7 +337,7 @@
         padding: 7px;
       }
 
-      #ficha-npcs {
+      #ficha-npcs, #ficha-grimorio {
         position: relative;
         display: none;
         margin: 0 auto;
@@ -447,7 +447,7 @@
           white-space: normal !important;
         }
 
-        #ficha-npcs {
+        #ficha-npcs, #ficha-grimorio {
           height: 340px;
         }
       }

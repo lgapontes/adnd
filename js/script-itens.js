@@ -609,7 +609,7 @@ function p_itens_formatar_item_itens(loot, item) {
 }
 
 function copy_text_itens(item) {
-  const str = item.innerText;
+  const str = item.innerText;  
   const el = document.createElement("textarea");
   el.value = str;
   el.setAttribute("readonly", "");
