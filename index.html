@@ -62,10 +62,45 @@
       Este é um rolador de Grimórios de magias arcanas de <b>Advanced Dungeons and Dragons 2ª edição</b>. Ele auxilia na condução de aventuras com personagens magos, onde o narrador poderá rolar rapidamente quais magias estão no grimório e qual tipo de proteção ele possui contra a leitura de terceiros.
       <br>
 
+      <!--
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-grimorio-nivel">Nível</label>
         <input type="number" class="pequeno" max="10" min="1" value="1" name="texto-formulario-grimorio-nivel" id="texto-formulario-grimorio-nivel">
         <span class="dica">Nível do conjurador</span>
+      </div>
+      -->
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-grimorio-nivel">Nível</label>
+        <select name="texto-formulario-grimorio-nivel" id="texto-formulario-grimorio-nivel">
+          <option value="Todos">Todos</option>
+          <option value="1">Conjurador nível 1, 1⁰ Círculo</option>
+          <option value="2">Conjurador nível 2, 1⁰ Círculo</option>
+          <option value="3">Conjurador nível 3, 2⁰ Círculo</option>
+          <option value="4">Conjurador nível 4, 2⁰ Círculo</option>
+          <option value="5">Conjurador nível 5, 3⁰ Círculo</option>
+          <option value="6">Conjurador nível 6, 3⁰ Círculo</option>
+          <option value="7">Conjurador nível 7, 4⁰ Círculo</option>
+          <option value="8">Conjurador nível 8, 4⁰ Círculo</option>
+          <option value="9">Conjurador nível 9, 5⁰ Círculo</option>
+          <option value="10">Conjurador nível 10, 5⁰ Círculo</option>
+          <option value="11">Conjurador nível 11, 5⁰ Círculo</option>
+          <option value="12">Conjurador nível 12, 6⁰ Círculo</option>
+          <option value="13">Conjurador nível 13, 6⁰ Círculo</option>
+          <option value="14">Conjurador nível 14, 7⁰ Círculo</option>
+          <option value="15">Conjurador nível 15, 7⁰ Círculo</option>
+          <option value="16">Conjurador nível 16, 8⁰ Círculo</option>
+          <option value="17">Conjurador nível 17, 8⁰ Círculo</option>
+          <option value="18">Conjurador nível 18, 9⁰ Círculo</option>
+          <option value="19">Conjurador nível 19, 9⁰ Círculo</option>
+          <option value="20">Conjurador nível 20, 9⁰ Círculo</option>
+        </select>
+      </div>
+
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-grimorio-protecao">Proteção</label>
+        <select name="texto-formulario-grimorio-protecao" id="texto-formulario-grimorio-protecao">          
+        </select>
       </div>
 
       <br>

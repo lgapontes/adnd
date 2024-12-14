@@ -364,6 +364,10 @@
         resize: none;
       }
 
+      #ficha-grimorio {
+        height: 800px;        
+      }
+
       #ficha-itens-loot {
         margin-top: 0;
       }

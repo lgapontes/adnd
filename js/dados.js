@@ -3197,21 +3197,21 @@ const MORAL_GOBLIN = [
 ];
 
 /*
-  https://adnd2e.fandom.com/wiki/Comprehend_Languages_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Confusion_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Fire_Trap_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Leomund%27s_Secret_Chest_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Change_Self_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Alter_Self_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Arcane_Belt_(Magic_Belt)
-  https://adnd2e.fandom.com/wiki/Arcane_Runes_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Sepia_Snake_Sigil_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Wizard_Mark_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Illusionary_Script_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Symbol_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Glyph_of_Warding_(Priest_Spell)
-  https://adnd2e.fandom.com/wiki/Explosive_Runes_(Wizard_Spell)
-  https://adnd2e.fandom.com/wiki/Erase_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Comprehend_Languages_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Confusion_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Fire_Trap_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Leomund%27s_Secret_Chest_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Change_Self_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Alter_Self_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Arcane_Belt_(Magic_Belt)
+  OK https://adnd2e.fandom.com/wiki/Arcane_Runes_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Sepia_Snake_Sigil_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Wizard_Mark_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Illusionary_Script_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Symbol_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Glyph_of_Warding_(Priest_Spell)
+  OK https://adnd2e.fandom.com/wiki/Explosive_Runes_(Wizard_Spell)
+  OK https://adnd2e.fandom.com/wiki/Erase_(Wizard_Spell)
 */
 
 const PROTECAO_GRIMORIOS = {
@@ -3295,53 +3295,45 @@ const PROTECAO_GRIMORIOS = {
     'Resistência': 'Nenhuma',
     'Efeito': `Quando esta magia é conjurada, um pequeno símbolo escrito aparece no texto de qualquer trabalho escrito. Quando lida, a chamada Cobra Sépia surge e ataca a criatura viva mais próxima (mas não ataca o mago que conjurou a magia). Seu ataque é feito como se fosse um monstro com Dados de Vida iguais ao nível do mago que conjurou a magia. Se ela atacar com sucesso, a vítima é engolfada em um campo de força âmbar brilhante, congelada e imobilizada até ser liberada, seja ao comando do conjurador, por Dissipar Magia bem-sucedida, ou até que um tempo igual a 1d4 dias+1 dia por nível do conjurador tenha decorrido. Até então, nada pode atingir a vítima, mover a força brilhante ao seu redor ou afetá-la de outra forma. A vítima não envelhece, não fica com fome, não dorme ou recupera magias enquanto estiver neste estado. Ela não está ciente de seus arredores. Se a Cobra Sépia errar o alvo, ela se dissipa em um clarão de luz marrom, com um barulho alto e uma nuvem de fumaça de cor parda com 3 metros de diâmetro e duração de uma rodada. A magia não pode ser detectada por observação normal, e Detectar Magia revela apenas que o texto inteiro é mágico. Dissipar Magia pode removê-la; uma magia Apagar destrói a página inteira de texto. Ela pode ser lançada em combinação com outras magias que escondem ou distorcem texto.`,
   },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
+  'Escrita Ilusória': {
+    'Nível': 5,
+    'Escola': 'Ilusão',
+    'Duração': '1 dia/nível',
+    'Área de Efeito': 'Leitor da escrita',
+    'Resistência': 'Especial',
+    'Efeito': `Esta magia permite que o mago escreva instruções ou outras informações em pergaminho, papel, etc. A escrita ilusória parece ser alguma forma de escrita estrangeira ou mágica. Somente a pessoa (ou pessoas) que o mago deseja que leia a escrita pode fazê-lo. Um ilusionista a reconhece como escrita ilusória. Criaturas não autorizadas que olharem para a escrita devem fazer testes de Resistência contra Magia. Um teste bem-sucedido significa que a criatura pode desviar o olhar com apenas uma leve sensação de desorientação. Falha significa que a criatura está sujeita a uma sugestão implantada na escrita pelo conjurador no momento em que a magiafoi conjurada. A sugestão não pode exigir mais de três turnos para ser executada. A sugestão pode ser fechar o livro e ir embora, ou esquecer a existência do livro, por exemplo. Uma magia Dissipar Magia bem-sucedida removerá a escrita ilusória, mas uma tentativa malsucedida apaga toda a escrita. As escritas ocultas podem ser lidas por uma combinação da magia Visão Verdadeira e de Ler Magia ou Compreender Idiomas, conforme aplicável.`,
   },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
+  'Símbolo': {
+    'Nível': 16,
+    'Escola': 'Conjuração/Invocação',
+    'Duração': 'Especial',
+    'Área de Efeito': 'Especial',
+    'Resistência': 'Especial',
+    'Efeito': `Uma magia de Símbolo cria runas mágicas que afetam criaturas que passam por cima, tocam ou leem as runas, ou passam por um portal no qual o símbolo está inscrito. Ao conjurar a magia, o mago escreve o símbolo em qualquer superfície que desejar. Da mesma forma, o conjurador é capaz de colocar o símbolo de sua escolha, usando qualquer um dos casos a seguir. O tipo de símbolo não pode ser reconhecido sem ser lido e, assim, ativar seus efeitos.\n
+Morte: Uma ou mais criaturas, cujo total de pontos de vida não exceda 80, são mortas.\n
+Discórdia: Todas as criaturas são afetadas e imediatamente começam a discutir e discutir alto; há 50% de probabilidade de criaturas de diferentes alinhamentos atacarem umas às outras. A discussão dura 5d4 rodadas, a luta, 2d4 rodadas.\n
+Medo: Este símbolo cria uma magia de medo extraforte , fazendo com que todas as criaturas tenham que resistir a uma magia com penalidades de -4 no teste de dado, ou entrem em pânico e fujam como se estivessem sendo atacadas por uma magia de medo.\n
+Desesperança: Todas as criaturas são afetadas e devem voltar em desânimo, a menos que façam uma Defesa contra Magia. As criaturas afetadas se submetem às exigências de qualquer oponente — por exemplo, render-se, sair, etc. A desesperança dura 3d4 turnos; durante esse período, é 25% provável que as criaturas afetadas não tomem nenhuma ação durante qualquer rodada, e 25% provável que aquelas que estão tomando uma ação voltem ou se retirem da batalha, conforme aplicável.\n
+Insanidade: Uma ou mais criaturas cujos pontos de vida totais não excedem 120 tornam-se insanas e permanecem assim, agindo como se uma magia de Confusão tivesse sido conjurada sobre elas, até que uma magia de Cura, Restauração ou Desejo seja usada para remover a loucura.\n
+Dor: Todas as criaturas são afligidas por dores lancinantes que atravessam seus corpos, causando uma penalidade de -2 na Destreza e uma penalidade de -4 nas jogadas de ataque por 2d10 turnos.\n
+Sono: Todas as criaturas com menos de 8+1 Dados de Vida caem imediatamente em sono catatônico e não podem ser despertadas por 1d12+4 turnos.\n
+Atordoamento: Uma ou mais criaturas cujos pontos de vida totais não excedam 160 ficam atordoadas e cambaleando por 3d4 rodadas, derrubando tudo o que estiverem segurando.`,
   },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
+  'Símbolo de Proteção (Divina)': {
+    'Nível': 5,
+    'Escola': 'Abjuração, Evocação',
+    'Duração': 'Até ser dissipado',
+    'Área de Efeito': 'Especial',
+    'Resistência': 'Especial',
+    'Efeito': `Um Símbolo de Proteção é uma inscrição poderosa desenhada magicamente para impedir que criaturas não autorizadas ou hostis passem, entrem ou abram. Pode ser usado para guardar uma pequena ponte, para proteger uma entrada ou como uma armadilha em um baú ou caixa. O sacerdote deve definir as condições da proteção; normalmente, qualquer criatura que viole a área protegida sem falar o nome do símbolo está sujeita à magia que ele armazena. Um teste de resistência bem-sucedido contra magia permite que a criatura escape dos efeitos do símbolo. Os símbolos podem ser definidos de acordo com características físicas, como tipo de criatura, tamanho e peso. Os símbolos também podem ser definidos com relação ao bem ou ao mal, ou para não afetar aqueles da religião do conjurador. Eles não podem ser definidos de acordo com classe, Dados de Vida ou nível. Vários símbolos não podem ser lançados na mesma área; embora se um armário tivesse três gavetas, cada uma poderia ser protegida separadamente. O conjurador pode afetar uma área igual a um quadrado cujos lados sejam os mesmos que seu nível, em pés. O Símbolo pode ser colocado para se restringir a qualquer formato até as limitações da metragem quadrada total do conjurador. Assim, um conjurador de 6º nível pode colocar um símbolo em um quadrado de 6 pés x 6 pés, um retângulo de 4 pés x 9 pés, uma faixa de 2 pés x 18 pés ou uma faixa de 1 pé por 36 pés. Quando a magia é concluída, o símbolo se torna invisível. Símbolos típicos causam choque por 1d4 pontos de dano elétrico por nível do conjurador, explodem por uma quantidade similar de dano de fogo, paralisam, cegam, ensurdecem e assim por diante. O Mestre pode permitir que qualquer efeito de magia prejudicial de sacerdote seja usado como um símbolo, desde que o conjurador tenha nível suficiente para conjurar a magia. Testes de resistência bem-sucedidos reduzem os efeitos pela metade ou os negam, de acordo com o símbolo empregado. Símbolos não podem ser afetados ou ignorados por meios como sondagem física ou mágica, embora possam ser dissipados por magia e frustrados por ladrões de alto nível usando sua perícia de encontrar e remover armadilhas. O Mestre pode decidir que os símbolos exatos disponíveis para um sacerdote dependem de sua religião, e ele pode disponibilizar novos símbolos de acordo com as regras de pesquisa mágica.`,
   },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
-  },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
-  },
-  '': {
-    'Nível': 0,
-    'Escola': '',
-    'Duração': '',
-    'Área de Efeito': '',
-    'Resistência': '',
-    'Efeito': ``,
+  'Runas Explosivas': {
+    'Nível': 5,
+    'Escola': 'Alteração',
+    'Duração': 'Especial',
+    'Área de Efeito': 'Raio de 10 pés',
+    'Resistência': 'Nenhuma',
+    'Efeito': `Ao traçar essas runas místicas em um livro, mapa, pergaminho ou objeto semelhante que contenha informações escritas, o mago impede que pessoas não autorizadas leiam seu material. As runas explosivas são difíceis de detectar - 5% de chance por nível de experiência de uso de magia do leitor; ladrões têm apenas 5% de chance. Mas a detecção de armadilhas por magia ou dispositivo mágico sempre encontra essas runas. Quando lidas, as runas explosivas detonam, causando 6d4+6 pontos de dano ao leitor, que não recebe nenhum teste de resistência. Uma quantia igual, ou metade disso se testes de resistência forem feitos, é sofrida por cada criatura dentro do raio da explosão. O mago que lançou a magia, assim como qualquer um que ele instruir, pode ler a escrita protegida sem ativar as runas. Da mesma forma, o mago pode remover as runas sempre que desejar. Outros podem removê-las apenas com uma magia Dissipar Magia ou Apagar bem-sucedida. Runas explosivas, caso contrário, duram até que a magia seja ativada. O item no qual as runas são colocadas é destruído quando a explosão ocorre, a menos que normalmente não esteja sujeito à destruição por fogo mágico (veja os Testes de Resistência de Itens no Guia do Mestre).`,
   },
 };
 
@@ -3482,6 +3474,88 @@ const CIRCULOS_POR_CLASSE_E_NIVEL = {
     ]
   }
 };
+
+const CIRCULOS_MAGO_GRIMORIO = {
+  "Mago": {
+    obter_lista: (callback) => { clonar_magias(LISTA_MAGIAS_ARCANAS,callback); },
+    magias: [
+      /* 0, nivel 1  */ { possui: true , '1º Círculo': 1, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 1, nivel 2  */ { possui: true , '1º Círculo': 2, '2º Círculo': 0, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 2, nivel 3  */ { possui: true , '1º Círculo': 2, '2º Círculo': 1, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 3, nivel 4  */ { possui: true , '1º Círculo': 3, '2º Círculo': 2, '3º Círculo': 0, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 4, nivel 5  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 1, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 5, nivel 6  */ { possui: true , '1º Círculo': 4, '2º Círculo': 2, '3º Círculo': 2, '4º Círculo': 0, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 6, nivel 7  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 1, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 7, nivel 8  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 0, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 8, nivel 9  */ { possui: true , '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 1, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 9, nivel 10 */ { possui: true , '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 2, '5º Círculo': 2, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 10, nivel 11 */ { possui: true , '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 4, '4º Círculo': 3, '5º Círculo': 3, '6º Círculo': 0, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 11, nivel 12 */ { possui: true , '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 4, '4º Círculo': 4, '5º Círculo': 4, '6º Círculo': 1, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 12, nivel 13 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 4, '5º Círculo': 4, '6º Círculo': 2, '7º Círculo': 0, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 13, nivel 14 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 4, '5º Círculo': 4, '6º Círculo': 2, '7º Círculo': 1, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 14, nivel 15 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 2, '7º Círculo': 1, '8º Círculo': 0, '9º Círculo': 0 },
+      /* 15, nivel 16 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 3, '7º Círculo': 2, '8º Círculo': 1, '9º Círculo': 0 },
+      /* 16, nivel 17 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 3, '7º Círculo': 3, '8º Círculo': 2, '9º Círculo': 0 },
+      /* 17, nivel 18 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 3, '7º Círculo': 3, '8º Círculo': 2, '9º Círculo': 1 },
+      /* 18, nivel 19 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 3, '7º Círculo': 3, '8º Círculo': 3, '9º Círculo': 1 },
+      /* 19, nivel 20 */ { possui: true , '1º Círculo': 5, '2º Círculo': 5, '3º Círculo': 5, '4º Círculo': 5, '5º Círculo': 5, '6º Círculo': 4, '7º Círculo': 3, '8º Círculo': 3, '9º Círculo': 2 },
+    ]
+  }
+};
+
+const BONUS_QUANTIDADE_GRIMORIO_ORIGINAL = { '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 3, '5º Círculo': 2, '6º Círculo': 2, '7º Círculo': 1, '8º Círculo': 1, '9º Círculo': 0 };
+
+function bonusQUantidadeGrimorio(nivel,circulo) {
+  let BONUS_QUANTIDADE_GRIMORIO = JSON.parse(JSON.stringify(BONUS_QUANTIDADE_GRIMORIO_ORIGINAL));
+
+  if (nivel < 3) {
+      BONUS_QUANTIDADE_GRIMORIO['2º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['3º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['4º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['5º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['6º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+  } else if (nivel < 5) {
+      BONUS_QUANTIDADE_GRIMORIO['3º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['4º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['5º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['6º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+  } else if (nivel < 7) {
+      BONUS_QUANTIDADE_GRIMORIO['4º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['5º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['6º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+  } else if (nivel < 9) {
+      BONUS_QUANTIDADE_GRIMORIO['5º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['6º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+  } else if (nivel < 12) {
+      BONUS_QUANTIDADE_GRIMORIO['6º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+      BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+  } else if (nivel < 14) {
+     BONUS_QUANTIDADE_GRIMORIO['7º Círculo'] = 0;
+     BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+     BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+ } else if (nivel < 16) {
+    BONUS_QUANTIDADE_GRIMORIO['8º Círculo'] = 0;
+    BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+} else if (nivel < 18) {
+   BONUS_QUANTIDADE_GRIMORIO['9º Círculo'] = 0;
+}
+
+  return BONUS_QUANTIDADE_GRIMORIO[circulo];
+}
 
 function clonar_magias(lista,callback) {
   let clone = JSON.parse(JSON.stringify(lista));
@@ -3779,7 +3853,122 @@ const LISTA_MAGIAS_ARCANAS = {
     'Sonho': false,
     'Telecinésia': false,
     'Teleportação': true
-  }
+  },
+  '6º Círculo': {
+    'Água em Pó': false,
+    'Aprisionamento': true,
+    'Caçador Invisível': true,
+    'Comando Visual': true,
+    'Concha Antimagia': true,
+    'Conjurar Animais': true,
+    'Contingência': false,
+    'Controlar o Clima': false,
+    'Convocar Criaturas IV': true,
+    'Corrente de Relâmpagos': true,
+    'Desintegração': true,
+    'Despistar': false,
+    'A Elucubração de Mordenkainen': false,
+    'Encantar Item': false,
+    'A Esfera Gélida de Otiluke': false,
+    'Extensão III': false,
+    'Globo de Invulnerabilidade': true,
+    'Ilusão Permanente': false,
+    'Ilusão Programada': false,
+    'Lendas e Histórias': false,
+    'Magia da Morte': true,
+    'Magia Sombria': false,
+    'A Mão Vigorosa de Bigby': false,
+    'Miragem Arcana': false,
+    'Mover Terra': false,
+    'Neblina Mortal': false,
+    'Partir Água': false,
+    'Pedra em Carne': false,
+    'Projetar Imagem': false,
+    'Proteger Fortalezas': false,
+    'Reencarnação': false,
+    'Repulsão': false,
+    'Sombras': false,
+    'Sugestionar Multidões': true,
+    'Tarefa': false,
+    'Tornar Raso': false,
+    'A Transformação de Tenser': false,
+    'Véu': false,
+    'Visão da Verdade': false,
+    'Vitrificação': false,
+  },
+  '7º Círculo': {
+    'Andar nas Sombras': true,
+    'Banimento': true,
+    'Bola de Fogo Controlável': true,
+    'Controlar Mortos-Vivos': true,
+    'A Convocação Instantânea de Drawmij': false,
+    'Convocar Criaturas V': true,
+    'Cubo de Força': false,
+    'Dedo da Morte': true,
+    'Desejo Restrito': false,
+    'Desvanecimento': false,
+    'Enfeitiçar Plantas': false,
+    'A Espada de Mordenkainen': false,
+    'Estátua': false,
+    'Forma Plana': false,
+    'Inverter a Gravidade': true,
+    'Invisibilidade em Massa': false,
+    'A Mansão Magnífica de Mordenkainen': false,
+    'A Mão Poderosa de Bigby': false,
+    'Palavra de Poder': false,
+    'Atordoar': false,
+    'Passagem Invisível': false,
+    'Rajada Prismática': false,
+    'Refugiar Itens': false,
+    'Reverter Magia': true,
+    'Simulacrum': false,
+    'Teleportação Exata': false,
+    'Visão': false,
+  },
+  '8º Círculo': {
+    'Aço Vítreo': false,
+    'Afundar': false,
+    'Animação Ilusória': true,
+    'Antipatia / Simpatia': false,
+    'Aprisionar a Arma': true,
+    'Clone': false,
+    'Convocar Criaturas VI': true,
+    'A Dança Irresistível de Otto': false,
+    'Enfeitiçar Multidões': true,
+    'A Esfera Telecinética de Otiluke': false,
+    'A Imunidade à Magia de Serten': false,
+    'Labirinto': false,
+    'Limpar a Mente': false,
+    'Metamorfosear Objetos': false,
+    'Muralha Prismática': false,
+    'Nuvem Incendiária': true,
+    'Obstrução': false,
+    'Ordem': false,
+    'Palavra de Poder, Cegar': false,
+    'Permanência': false,
+    'O Punho Cerrado de Bigby': false,
+    'Símbolo': false,
+  },
+  '9º Círculo': {
+    'Alterar Forma': false,
+    'Aprisionamento': true,
+    'Auxílio Imediato': false,
+    'Chuva de Meteoros': true,
+    'Convocar Criaturas VII': true,
+    'Cristalização': false,
+    'Desejo': false,
+    'A Disjunção de Mordenkainen': false,
+    'Drenar Energia': true,
+    'Encarnação do Medo': false,
+    'Esfera Prismática': false,
+    'Êxtase Temporal': false,
+    'Magia Astral': false,
+    'A Mão Esmagadora de Bigby': false,
+    'Palavra de Poder, Matar': true,
+    'Parar o Tempo': true,
+    'Portal': false,
+    'Sexto Sentido': false,
+  },
 };
 
 const LISTA_MAGIAS_DIVINAS = {

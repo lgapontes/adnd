@@ -78,13 +78,20 @@ function openCalendario(event) {
 }
 
 function obterNivelGrimorio() {
-  let texto_formulario_grimorio_nivel = document.getElementById('texto-formulario-grimorio-nivel');
+  //let texto_formulario_grimorio_nivel = document.getElementById('texto-formulario-grimorio-nivel');
+  let select = document.getElementById('texto-formulario-grimorio-nivel');
+  let nivel = select.options[select.selectedIndex].value;
+  if (nivel == 'Todos') {
+    nivel = Math.floor(Math.random() * 20) + 1;
+  } else {
+    nivel = parseInt(nivel);
+  }
 
-  let nivel = 1;
-
+  /*
   if ( isInt(texto_formulario_grimorio_nivel.value) ) {
     nivel = parseInt(texto_formulario_grimorio_nivel.value);
   }
+  */
 
   return nivel;
 }
@@ -97,8 +104,10 @@ function openGrimorio(event) {
   document.getElementById('ficha-grimorio').style.display = 'block';
 
   let nivel = obterNivelGrimorio();
-  render_grimorio(nivel,()=>{
-    closeLoading();
+  preencher_protecoes(()=>{    
+    render_grimorio(nivel,()=>{
+      closeLoading();
+    });
   });
 }
 
