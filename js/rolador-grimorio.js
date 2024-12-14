@@ -120,8 +120,6 @@ function sortear_protecao_grimorio(callback) {
     protecao = lista[Math.floor(Math.random() * lista.length)];
   }
 
-  console.log('protecao: ' + protecao);
-
   callback(protecao);
 }
 

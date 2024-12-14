@@ -365,7 +365,7 @@
       }
 
       #ficha-grimorio {
-        height: 800px;        
+        height: 800px;
       }
 
       #ficha-itens-loot {
@@ -451,7 +451,11 @@
           white-space: normal !important;
         }
 
-        #ficha-npcs, #ficha-grimorio {
+        #ficha-npcs {
           height: 340px;
+        }
+
+        #ficha-grimorio {
+          height: 540px;
         }
       }
