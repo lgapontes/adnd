@@ -31,7 +31,7 @@ function sortear_magias_grimorio(nivel,classe,callback) {
   let magias = {
     conjurador: false,
     lista: {
-      '1º Círculo': [],
+      '1º Círculo': ['Ler Magias','Detectar Magia'],
       '2º Círculo': [],
       '3º Círculo': [],
       '4º Círculo': [],
@@ -43,7 +43,7 @@ function sortear_magias_grimorio(nivel,classe,callback) {
     }
   };
 
-  if (CIRCULOS_MAGO_GRIMORIO[classe].magias[nivel_magia].possui) { // ERRO AQUI
+  if (CIRCULOS_MAGO_GRIMORIO[classe].magias[nivel_magia].possui) {
     magias.conjurador = true;
     let circulos = Object.keys(magias.lista);
 
@@ -56,13 +56,19 @@ function sortear_magias_grimorio(nivel,classe,callback) {
           for (let contador=quantidade; contador>0; contador--) {
 
             if (contador == quantidade) {
-              magias.lista[circulo].push(
-                lista_magias[circulo].importantes[Math.floor(Math.random() * lista_magias[circulo].importantes.length)]
-              );
+              let magia_sorteada = lista_magias[circulo].importantes[Math.floor(Math.random() * lista_magias[circulo].importantes.length)];
+              if (magias.lista[circulo].indexOf(magia_sorteada) == -1) {
+                magias.lista[circulo].push(magia_sorteada);
+              } else {
+                contador++;
+              }
             } else {
-              magias.lista[circulo].push(
-                lista_magias[circulo].outras[Math.floor(Math.random() * lista_magias[circulo].outras.length)]
-              );
+              let magia_sorteada = lista_magias[circulo].outras[Math.floor(Math.random() * lista_magias[circulo].outras.length)];
+              if (magias.lista[circulo].indexOf(magia_sorteada) == -1) {
+                magias.lista[circulo].push(magia_sorteada);
+              } else {
+                contador++;
+              }
             }
 
             if (contador == 1) {

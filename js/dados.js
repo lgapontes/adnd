@@ -3503,7 +3503,7 @@ const CIRCULOS_MAGO_GRIMORIO = {
   }
 };
 
-const BONUS_QUANTIDADE_GRIMORIO_ORIGINAL = { '1º Círculo': 4, '2º Círculo': 4, '3º Círculo': 3, '4º Círculo': 3, '5º Círculo': 2, '6º Círculo': 2, '7º Círculo': 1, '8º Círculo': 1, '9º Círculo': 0 };
+const BONUS_QUANTIDADE_GRIMORIO_ORIGINAL = { '1º Círculo': 4, '2º Círculo': 3, '3º Círculo': 2, '4º Círculo': 2, '5º Círculo': 2, '6º Círculo': 1, '7º Círculo': 1, '8º Círculo': 1, '9º Círculo': 0 };
 
 function bonusQUantidadeGrimorio(nivel,circulo) {
   let BONUS_QUANTIDADE_GRIMORIO = JSON.parse(JSON.stringify(BONUS_QUANTIDADE_GRIMORIO_ORIGINAL));
