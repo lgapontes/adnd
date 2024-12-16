@@ -126,9 +126,12 @@
         border: 0 !important;
         width: 100%;
       }
+
+      /*
       div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        /* background-color: rgba(0,0,0,0.1) !important; */
+        background-color: rgba(0,0,0,0.1) !important;
       }
+      */
 
       div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr:nth-child(5) > td:last-child {
         width: 100px !important;
@@ -298,8 +301,12 @@
         white-space: normal !important;
         width: 100%;
       }
-
       tbody tr:nth-child(20) td tbody tr td:last-child {
+        border: 0 !important;
+        white-space: normal !important;
+        width: 100%;
+      }
+      tbody tr:nth-child(21) td tbody tr td:last-child {
         border: 0 !important;
         white-space: normal !important;
         width: 100%;
@@ -442,6 +449,23 @@
         white-space: normal !important;
       }
 
+      /* Grimório */
+      div#ficha > div > table > tbody > tr:nth-child(14) > td > table > tbody > tr {
+        background-color: rgba(0,0,0,0) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr:nth-child(14) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
+        background-color: rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+      /* Grimório */
 
       @media (min-width: 800px) {
         div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(1) {

@@ -529,27 +529,53 @@ const TENDENCIAS_UM_PASSO = {
   /* 8 */ "Cruel (caótico e maligno)": ["Cruel (caótico e maligno)","Inconstante (neutro e caótico)","Egoista (neutro e maligno)"],
 };
 
-const MAGIAS_DIVINAS = {
-  "Adivinhação": [ "Detectar Magia", "Detectar Venenos", "Detectar Armadilhas", "Localizar Animais ou Plantas" ],
-  "Animal": [ "Cativar Animais", "Invisibilidade contra Animais", "Localizar Animais ou Plantas" ],
-  "Astral": [ "Falar com Viajante Astral" ],
-  "Clima": [ "Fogo das Fadas" ],
-  "Caos": [ "Missiva Equivocada" ],
-  "Combate": [ "Pedra Encantada", "Arma Abençoada" ],
-  "Convocação": [ "Apelo à Fé" ],
-  "Criação": [],
-  "Cura": [ "Curar Ferimentos Leves" ],
-  "Elemental": [ "Criar Água" ],
-  "Feitiço": [ "Comando", "Remover Medo" ],
-  "Lei": [ "Comando", "Teste de Maat" ],
-  "Defesa": [ "Barreira Anti-Vermes", "Baú Pesado" ],
-  "Guarda": [ "Guardião Sagrado", "Sentinela de Elmo" ],
-  "Necromântica": [ "Invisibilidade contra Mortos-Vivos" ],
-  "Proteção": [ "Proteção ao Calor/Frio", "Proteção ao Mal", "Santuário" ],
-  "Solar": [ "Luz" ],
-  "Vegetal": [ "Constrição", "Localizar Animais ou Plantas", "Passos sem Pegadas", "Arma Abençoada" ],
-  "Todas": [ "Bênção", "Círculo de Fé", "Detectar Maldade", "Purificar Alimentos" ]
-};
+const MAGIAS_DIVINAS = [
+  /* 1 Circulo */
+  {
+    "Adivinhação": [ "Detectar Magia", "Detectar Venenos", "Detectar Armadilhas", "Localizar Animais ou Plantas" ],
+    "Animal": [ "Cativar Animais", "Invisibilidade contra Animais", "Localizar Animais ou Plantas" ],
+    "Astral": [ "Falar com Viajante Astral" ],
+    "Clima": [ "Fogo das Fadas" ],
+    "Caos": [ "Missiva Equivocada" ],
+    "Combate": [ "Pedra Encantada", "Arma Abençoada" ],
+    "Convocação": [ "Apelo à Fé" ],
+    "Criação": [],
+    "Cura": [ "Curar Ferimentos Leves" ],
+    "Elemental": [ "Criar Água" ],
+    "Feitiço": [ "Comando", "Remover Medo" ],
+    "Lei": [ "Comando", "Teste de Maat" ],
+    "Defesa": [ "Barreira Anti-Vermes", "Baú Pesado" ],
+    "Guarda": [ "Guardião Sagrado", "Sentinela de Elmo" ],
+    "Necromântica": [ "Invisibilidade contra Mortos-Vivos" ],
+    "Proteção": [ "Proteção ao Calor/Frio", "Proteção ao Mal", "Santuário" ],
+    "Solar": [ "Luz" ],
+    "Vegetal": [ "Constrição", "Localizar Animais ou Plantas", "Passos sem Pegadas", "Arma Abençoada" ],
+    "Todas": [ "Bênção", "Círculo de Fé", "Detectar Maldade", "Purificar Alimentos" ],
+  },
+
+  /* 2 Circulo */
+  {
+    "Adivinhação": [ 'Augúrio', 'Detectar Feitiço', 'Encontrar Armadilhas', 'Pele de Árvore', 'Revelar Tendência' ],
+    "Animal": [ 'Encantar Pessoas ou Mamíferos', 'Falar com Animais', 'Mensageiro' ],
+    "Astral": [  ],
+    "Clima": [ 'Obscurecimento' ],
+    "Caos": [  ],
+    "Combate": [ 'Cântico', 'Martelo Espiritual' ],
+    "Convocação": [  ],
+    "Criação": [  ],
+    "Cura": [ 'Retardar Venenos' ],
+    "Elemental": [ 'Armadilha de Fogo', 'Criar Chamas', 'Demônio da Poeira', 'Esquentar Metal', 'Lâmina Flamejante' ],
+    "Feitiço": [ 'Cativar', 'Imobilizar Pessoas' ],
+    "Lei": [  ],
+    "Defesa": [  ],
+    "Guarda": [ 'Silêncio, 4,5m', 'Wyvern Vigia' ],
+    "Necromântica": [ 'Ajuda' ],
+    "Proteção": [ 'Distanciamento', 'Resistir ao Calor/Frio' ],
+    "Solar": [  ],
+    "Vegetal": [ 'Bom Fruto', 'Torcer Madeira', 'Tropeço' ],
+    "Todas": [  ],
+  },
+];
 
 const LISTA_ESCOLAS_ARCANAS = [
   "Abjurante",
