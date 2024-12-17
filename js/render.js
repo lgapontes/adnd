@@ -104,7 +104,7 @@ function openGrimorio(event) {
   document.getElementById('ficha-grimorio').style.display = 'block';
 
   let nivel = obterNivelGrimorio();
-  preencher_protecoes(()=>{    
+  preencher_protecoes(()=>{
     render_grimorio(nivel,()=>{
       closeLoading();
     });
@@ -440,18 +440,6 @@ function obterEscolaSelecionada() {
   return retorno;
 }
 
-function obterNivelSelecionado() {
-  let texto_formulario_nivel = document.getElementById('texto-formulario-nivel');
-  let nivel = 1;
-  if (isInt(texto_formulario_nivel.value)) {
-    nivel = parseInt(texto_formulario_nivel.value);
-
-    if (nivel < 1) nivel = 1;
-    if (nivel > 3) nivel = 3;
-  }
-  return nivel;
-}
-
 function obterClasseSelecionada() {
   let selecionada = 'Todas';
   if (document.getElementById('texto-formulario-classe').options.length > 0) {
@@ -728,10 +716,19 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
   let combo = document.getElementById('texto-formulario-escola-magia');
   combo.innerHTML = '';
 
-  let niveis = [...Array(obterNivelSelecionado()).keys()];
+  let escola_selecionada = obterEscolaSelecionada();
+  // {selecionada: 'Arcanista', escola_especialista: true}
+  // escola_selecionada.selecionada
+  // escola_selecionada.escola_especialista
+
+  let lista_conferencia = [];
+
+  // Obtem os index de 0 a no máximo 1
+  let nivel_selecionado = obterNivelSelecionado();
+  if (nivel_selecionado > 2) nivel_selecionado = 2;
+  let niveis = [...Array(nivel_selecionado).keys()];
 
   niveis.forEach((nivel, index_nivel) => {
-    // let keys_escolas = Object.keys(MAGIAS_ARCANAS[nivel]); NAO PRECISA POIS PEGA NIVEL ABAIXO
 
     keys_escolas.forEach((escola, index_escola) => {
 
@@ -741,8 +738,21 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
           criarOption(combo,'Todas','Todas');
         }
 
-        let texto = `${magia} (${nivel + 1}º Círculo, ${LISTA_ESCOLAS_ARCANAS_MAGO_PARA_ESCOLA[escola]})`;
-        criarOption(combo,magia,texto);
+        let nome_escola_convertido = LISTA_ESCOLAS_ARCANAS_MAGO_PARA_ESCOLA[escola];
+        let texto = `${magia} (${nivel + 1}º Círculo, ${nome_escola_convertido})`;
+
+        if (lista_conferencia.indexOf(magia) == -1) {
+
+          if (escola_selecionada.escola_especialista) {
+            if (ESCOLAS_ARCANAS_OPOSTAS[escola].indexOf(nome_escola_convertido) == -1) {
+              lista_conferencia.push(magia);
+              criarOption(combo,magia,texto);
+            }
+          } else {
+            lista_conferencia.push(magia);
+            criarOption(combo,magia,texto);
+          }
+        }
 
         if (index_magia == (MAGIAS_ARCANAS[nivel][escola].length - 1)) {
           if (index_escola == (keys_escolas.length - 1)) {

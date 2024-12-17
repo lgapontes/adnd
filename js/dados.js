@@ -637,8 +637,9 @@ const LISTA_ESCOLAS_ARCANAS_ESCOLA_PARA_MAGO = {
   "Fogo": "Elementalista Fogo",
 };
 
+// AQUI
 const MAGIAS_ARCANAS = [
-  // NIVEL 1
+  // 1 CIRCULO
   {
     //Abjuração
     "Abjurante": [ "Alarme", "Proteção ao Mal" ],
@@ -678,6 +679,52 @@ const MAGIAS_ARCANAS = [
 
     // Elementalista
     "Elementalista Fogo": ["Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo","Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo","Manipular Chamas", "Mãos Flamejantes", "Globos de Luz", "Explosão de Fogo", "Detectar Magia", "Detectar Mortos-Vivos", "Identificação", "Ler Magias"],
+  },
+
+  // 2 CIRCULO
+  {
+    //Abjuração
+    "Abjurante": ["Proteção a Truques"],
+
+    // Conjuração/Convocação
+    "Conjurador": ["Convocar Enxames","A Flecha Acida de Melf","Poeira Ofuscante"],
+
+    // Profecia
+    "Adivinho": ["Detectar Invisibilidade","Detectar Maldade","Localizar Objetos","Percepção Extra-sensorial","Revelar Tendência"],
+
+    // Encantamento/Feitiço
+    "Feiticeiro": ["Aterrorizar","Esquecimento","Nó","Raio de Enfraquecimento","O Riso Histérico de Tasha"],
+
+    // Ilusão
+    "Ilusionista": ["A Armadilha de Leomund","Borrar a Visão","Cegueira","Confundir Detecção","Criação Fantasmagórica","Invisibilidade","Ouro dos Tolos","Padrão Hipnótico","Reflexos","Surdez","Vento Sussurrante"],
+
+    // Invocação/Evocação
+    "Invocador": ["Esfera Flamejante","Névoa Fétida","Teia"],
+
+    // Necromancia
+    "Necromante": ["Mão Espectral"],
+
+    // Alteração
+    "Transmutador": ["Alterar-se","Arrombar","Boca Encantada","Bolsos Arcanos","Despedaçar","Escuridão, 4,5m","Fechadura Arcana","Força","Irritação","Levitação","Luz Contínua","Névoa","Pirotecnia","Truque de Corda"],
+
+    // Arcanista
+    "Arcanista": ["Mão Espectral","Mão Espectral","Mão Espectral","Mão Espectral","Mão Espectral","Proteção a Truques","Convocar Enxames","A Flecha Acida de Melf","Poeira Ofuscante","Detectar Invisibilidade","Detectar Maldade","Localizar Objetos","Percepção Extra-sensorial","Revelar Tendência",],
+
+    // Elementalista
+    // https://people.wku.edu/charles.plemons/ad&d/listings/air.html
+    "Elementalista Ar": ['Sopro de Perplexidade','Brisa Refrescante de Darsson','O Sopro de Vida de Drawmij','Máscara Perfumada de Drawmij','Olho da Tempestade','Jambiya Voadora','Nuvem de Nevoeiro','Névoa Fétida','Névoa','Prever o Clima','Montar o Vento','Forma de Fumaça','Forma Fumegante','Gancho do Céu','Parede Contra Ruído','Vento Sussurrante','Respiração do Vento'],
+
+    // Elementalista
+    // https://people.wku.edu/charles.plemons/ad&d/listings/earth.html
+    "Elementalista Terra": ['Cortina de Poeira','Ampliar Criatura Do Deserto','Ouro dos Tolos','O Aperto de Terra de Maximiliano','Adaga de Cristal de Nystul','Sombra de Areia','Sono de Pedra','Três Pedras'],
+
+    // Elementalista
+    // https://people.wku.edu/charles.plemons/ad&d/listings/water.html
+    "Elementalista Água": ['Água Animada','Aviso de Profundidade','Filtro','Nuvem de Nevoeiro','Sede Insaciável','Névoa','Raio Tubarão','Enxame de bolas de neve de Snilloc','Rolamento Verdadeiro'],
+
+    // Elementalista
+    // https://people.wku.edu/charles.plemons/ad&d/listings/fire.html
+    "Elementalista Fogo": ['Incendiador de Agannazar','Banir o Deslumbramento','Círculo de Chama','Combustão','Cubo de Fogo de Darsson','Negar Fogo','Shuriken de Fogo','Cajado de Fogo','Adaga Flamejante','Esfera Flamejante','Pirotecnia','Deslumbramento do Sol'],
   }
 ];
 

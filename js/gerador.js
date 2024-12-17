@@ -1755,6 +1755,18 @@ function atributos_carisma(atributo, carisma) {
   }
 }
 
+function obterNivelSelecionado() {
+  let texto_formulario_nivel = document.getElementById('texto-formulario-nivel');
+  let nivel = 1;
+  if (isInt(texto_formulario_nivel.value)) {
+    nivel = parseInt(texto_formulario_nivel.value);
+
+    if (nivel < 1) nivel = 1;
+    if (nivel > 3) nivel = 3;
+  }
+  return nivel;
+}
+
 function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
   return {
     "Nome": '',
@@ -1779,7 +1791,7 @@ function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia
       "Pontos de Força Psiônica (PSPs)": 0,
       "PSPs por Nível Adicional": 0,
       "Próximo Nível": 0,
-      "Nível": 1,
+      "Nível": obterNivelSelecionado(),
       "XP Extra": '0%',
       "Escolas de Magia": [],
       "Escolas Opostas": [],
@@ -2481,7 +2493,7 @@ function sortear_classe(personagem, callback) {
 }
 
 function render(callback) {
-  if (!DEBUG)
+  if (DEBUG)
     console.clear();
 
   forcar_havenloft = document.getElementById('texto-formulario-ravenloft').checked;
@@ -3812,66 +3824,87 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
 // MAGIAS_ARCANAS
 function sortear_magias(classe, personagem, callback) {
   let grupo = ajustar_nome_grupo(classe);
-  let index_nivel = personagem["Dados Básicos"]['Nível'] - 1;
+  let index_nivel = 0;
+  if (personagem["Dados Básicos"]['Nível'] > 1) {
+    index_nivel = 1;
+  }
 
   if (grupo == "Sacerdote") {
-
-    // MAGIAS DIVINAS
-    let qtde_magias = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'];
-
     /*
       AQUI
     */
 
-    let qtde = 0;
-    let esferas = [];
+    // >>>>>>>>>>>>>>> MAGIAS DIVINAS
+    let list_circulo_magia = ["1º Círculo","2º Círculo"];
+    list_circulo_magia.forEach((entry_circulo_magia, index_circulo_magia) => {
+      let qtde_magias = personagem["Dados Básicos"]["Magias Divinas por Círculo"][entry_circulo_magia];
 
-    while (qtde < qtde_magias) {
-
-      if (classe == "Anacoreta") {
-        if (personagem["Tendência"] == TENDENCIAS[1]) {
-          // Ordeiro
-          esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Clima" ];
-        } else if (personagem["Tendência"] == TENDENCIAS[0]) {
-          // Justo
-          esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Solar"];
-        } else {
-          // Neutro
-          esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Caos"];
-        }
-
-        let index_esfera = Math.floor(Math.random() * esferas.length);
-        let esfera = esferas[index_esfera];
-        if (MAGIAS_DIVINAS[index_nivel][esfera].length > 0) {
-          let index_magia = Math.floor(Math.random() * MAGIAS_DIVINAS[index_nivel][esfera].length);
-          let magia = MAGIAS_DIVINAS[index_nivel][esfera][index_magia];
-          if (!personagem["Magias Divinas"].includes(magia)) {
-            personagem["Magias Divinas"].push(magia);
-            qtde++
-          }
-        }
-
-      } else {
-        esferas = CLASSES[classe].esferas;
-        let index_esfera = Math.floor(Math.random() * CLASSES[classe].esferas.length);
-        let esfera = CLASSES[classe].esferas[index_esfera];
-        if (MAGIAS_DIVINAS[index_nivel][esfera].length > 0) {
-          let index_magia = Math.floor(Math.random() * MAGIAS_DIVINAS[index_nivel][esfera].length);
-          let magia = MAGIAS_DIVINAS[index_nivel][esfera][index_magia];
-          if (!personagem["Magias Divinas"].includes(magia)) {
-            personagem["Magias Divinas"].push(magia);
-            qtde++
-          }
-        }
-      }
-
-      if (qtde == qtde_magias) {
-        personagem["Dados Básicos"]["Esferas"] = esferas;
+      if ( (entry_circulo_magia == "2º Círculo") && (qtde_magias == 0) ) {
         callback();
         return;
+      } else {
+
+        // LOOP Circulos
+        let qtde = 0;
+        let esferas = [];
+
+        while (qtde < qtde_magias) {
+
+          if (classe == "Anacoreta") {
+            if (personagem["Tendência"] == TENDENCIAS[1]) {
+              // Ordeiro
+              esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Clima" ];
+            } else if (personagem["Tendência"] == TENDENCIAS[0]) {
+              // Justo
+              esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Solar"];
+            } else {
+              // Neutro
+              esferas = ["Todas", "Feitiço", "Adivinhação", "Guarda", "Cura", "Proteção", "Defesa", "Lei", "Caos"];
+            }
+
+            let index_esfera = Math.floor(Math.random() * esferas.length);
+            let esfera = esferas[index_esfera];
+
+            if (MAGIAS_DIVINAS[index_nivel][esfera].length > 0) {
+              let index_magia = Math.floor(Math.random() * MAGIAS_DIVINAS[index_nivel][esfera].length);
+              let magia = MAGIAS_DIVINAS[index_nivel][esfera][index_magia];
+              if (!personagem["Magias Divinas"].includes(magia)) {
+                personagem["Magias Divinas"].push(magia);
+                qtde++
+              }
+            }
+
+          } else {
+            esferas = CLASSES[classe].esferas;
+            let index_esfera = Math.floor(Math.random() * CLASSES[classe].esferas.length);
+            let esfera = CLASSES[classe].esferas[index_esfera];
+            if (MAGIAS_DIVINAS[index_nivel][esfera].length > 0) {
+              let index_magia = Math.floor(Math.random() * MAGIAS_DIVINAS[index_nivel][esfera].length);
+              let magia = MAGIAS_DIVINAS[index_nivel][esfera][index_magia];
+              if (!personagem["Magias Divinas"].includes(magia)) {
+                personagem["Magias Divinas"].push(magia);
+                qtde++
+              }
+            }
+          }
+
+          if (qtde == qtde_magias) {
+            if (entry_circulo_magia == "1º Círculo") {
+              personagem["Dados Básicos"]["Esferas"] = esferas;
+            }
+
+            if (index_circulo_magia == (list_circulo_magia.length - 1)) {
+              callback();
+              return;
+            }
+          }
+        }
+        // LOOP Circulos
+
       }
-    }
-    // MAGIAS DIVINAS
+
+    });
+    // >>>>>>>>>>>>>>> MAGIAS DIVINAS
 
   } else if (CLASSES[classe]["Grupo"] == "Arcano") {
 
@@ -4263,16 +4296,19 @@ function sortear_dados_basicos(personagem, callback) {
           "1º Círculo": 6,
           "2º Círculo": 0,
         };
-
         personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
           '1º Círculo': 0,
           '2º Círculo': 0,
         };
+
         let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
         if (nivel_para_magias == 3) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 3;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 1;
         } else if (nivel_para_magias == 2) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 7;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
         } else {
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 1;
@@ -4293,16 +4329,19 @@ function sortear_dados_basicos(personagem, callback) {
           "1º Círculo": 7,
           "2º Círculo": 0,
         };
-
         personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
           '1º Círculo': 0,
           '2º Círculo': 0,
         };
+
         let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
         if (nivel_para_magias == 3) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
         } else if (nivel_para_magias == 2) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
         } else {
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
@@ -4313,16 +4352,19 @@ function sortear_dados_basicos(personagem, callback) {
           "1º Círculo": 7,
           "2º Círculo": 0,
         };
-
         personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
           '1º Círculo': 0,
           '2º Círculo': 0,
         };
+
         let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
         if (nivel_para_magias == 3) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
         } else if (nivel_para_magias == 2) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
         } else {
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
@@ -4369,16 +4411,19 @@ function sortear_dados_basicos(personagem, callback) {
           "1º Círculo": 7,
           "2º Círculo": 0,
         };
-
         personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
           '1º Círculo': 0,
           '2º Círculo': 0,
         };
+
         let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
         if (nivel_para_magias == 3) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
         } else if (nivel_para_magias == 2) {
+          personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
         } else {
           personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
@@ -4535,7 +4580,7 @@ function sortear_dados_basicos(personagem, callback) {
         };
       } else {
         personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-          '1º Círculo': 1,
+          '1º Círculo': 0,
           '2º Círculo': 0,
           '3º Círculo': 0,
           '4º Círculo': 0,
@@ -4543,6 +4588,25 @@ function sortear_dados_basicos(personagem, callback) {
           '6º Círculo': 0,
           '7º Círculo': 0,
         };
+      }
+
+      personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+        '1º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'],
+        '2º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'],
+      };
+
+      let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
+      if (nivel_para_magias == 3) {
+        personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
+        personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] + 1;
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'] + 1;
+      } else if (nivel_para_magias == 2) {
+        personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
+      } else {
+        personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 1;
+        personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 1;
       }
 
       if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
