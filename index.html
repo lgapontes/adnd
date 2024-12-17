@@ -24,6 +24,10 @@
   <body>
     <div class="loading" id="loading"></div>
 
+    <button type="button" class="fab" id="tela-botao-fab">
+      <img src="img/rolar.png">
+    </button>
+
     <header>
       <button type="button" id="header-botao-voltar">
         <img src="img/arrow-left-solid.svg">
@@ -284,9 +288,11 @@
       </div>
       -->
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-idade">Idade</label>
-        <input type="number" class="pequeno" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
-        <span class="dica" id="texto-formulario-idade-dica"></span>
+        <label for="texto-formulario-vida-fixa">PV Inicial</label>
+        <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
+
+        <label class="coluna-interna" for="texto-formulario-idade">Idade</label>
+        <input type="number" class="medio" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
       </div>
 
       <div class="bloco bloco-campos">
@@ -338,43 +344,49 @@
       </div>
 
       <div class="bloco bloco-campos">
+        <label for="texto-formulario-darksun-tipo-mago">DarkSun¹</label>
+        <select name="texto-formulario-darksun-tipo-mago" id="texto-formulario-darksun-tipo-mago" readonly disabled>
+          <option value="Todos" selected>Todos</option>
+          <option value="Defiler">Defiler (Profanador)</option>
+          <option value="Preserver">Preserver (Preservador)</option>
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-divindade">Divindade</label>
+        <select name="texto-formulario-divindade" id="texto-formulario-divindade">
+        </select>
+      </div>
+
+      <div class="bloco-texto bloco-texto-apoio">
+        <span class="asterisco">¹</span> A opção <b>DarkSun</b> estará disponível apenas se a opção <b>Campanha Dark Sun</b> estiver marcada. Ela permite escolher entre <b>Defiler (Profanador)</b> ou <b>Preserver (Preservador)</b> para os conjuradores arcanos. Esta opção será utilizada apenas caso um mago ou mago especialista seja rolado.
+      </div>
+
+      <div class="bloco bloco-campos">
         <label for="texto-formulario-escola">Escola</label>
         <select name="texto-formulario-escola" id="texto-formulario-escola">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-escola-magia" class="magia">Magia Arcana*</label>
+        <label for="texto-formulario-escola-magia" class="magia">Magia Arcana²</label>
         <select name="texto-formulario-escola-magia" id="texto-formulario-escola-magia" class="magia">
         </select>
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-divindade">Divindade</label>
-        <select name="texto-formulario-divindade" id="texto-formulario-divindade">
-        </select>
-      </div>
-      <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-magia-divina" class="magia">Magia Divina*</label>
-        <select name="texto-formulario-magia-divina" id="texto-formulario-magia-divina" class="magia" readonly disabled>
-          <option value="Todas" selected>Em construção</option>
-        </select>
-      </div>
-
-      <div class="bloco bloco-campos">
-        <label for="texto-formulario-ciencia">Ciência*</label>
+        <label for="texto-formulario-ciencia">Ciência²</label>
         <select name="texto-formulario-ciencia" id="texto-formulario-ciencia" readonly disabled>
           <option value="Todas" selected>Em construção</option>
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-devocao">Devoção*</label>
+        <label for="texto-formulario-devocao">Devoção²</label>
         <select name="texto-formulario-devocao" id="texto-formulario-devocao" readonly disabled>
           <option value="Todas" selected>Em construção</option>
         </select>
       </div>
 
       <div class="bloco-texto bloco-texto-apoio">
-        <span class="asterisco">*</span> A escolha da <b>Magia Arcana</b>, da <b>Magia Divina</b>, da <b>Ciência</b> e da <b>Devoção</b> depende da classe escolhida e outros fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
+        <span class="asterisco">²</span> A escolha da <b>Magia Arcana</b>, da <b>Ciência</b> e da <b>Devoção</b> depende da classe escolhida e outros fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
       </div>
 
       <br>

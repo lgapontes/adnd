@@ -222,6 +222,10 @@ main.texto > div.bloco-campos > label {
   background-color: rgba(59, 39, 11, .3);
 }
 
+main.texto > div.bloco-campos > label.coluna-interna {
+  margin-left: 4%;
+}
+
 main.texto > div.bloco-campos > label.magia {
   width: 30%;
 }
@@ -297,6 +301,10 @@ main.texto > div.bloco-campos > input[type=number].pequeno {
   width: 20%;
 }
 
+main.texto > div.bloco-campos > input[type=number].medio {
+  width: 28%;
+}
+
 main.texto > div.bloco-atributos > input[type=number] {
   display: block;
   float: left;
@@ -328,6 +336,21 @@ button {
   height: 28px;
 }
 
+button.fab {
+  display: none;
+  position: fixed;
+  right: 40px;
+  bottom: 30px;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  z-index: 2;
+}
+
 button:hover {
   background-color: #af2600;
 }
@@ -354,6 +377,15 @@ button > img {
   height: 20px;
   margin: 0;
   margin-right: 6px;
+}
+
+button.fab > img {
+  position: relative;
+  display: block;
+  float: none;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
 }
 
 /* BOTOES GERAIS */

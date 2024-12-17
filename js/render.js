@@ -18,6 +18,8 @@ function closeMain(event) {
 function openMain(event) {
   if (event) event.preventDefault();
   openLoading();
+  document.getElementById('tela-botao-fab').style.display = 'none';
+
   document.getElementById('pagina-inicial').style.display = 'block';
   document.getElementById('pagina-menus').style.display = 'block';
   document.getElementById('header-botao-voltar').style.display = 'none';
@@ -59,6 +61,7 @@ function openNPCs(event) {
 
   document.getElementById('pagina-npcs').style.display = 'block';
   document.getElementById('ficha-npcs').style.display = 'block';
+  document.getElementById('tela-botao-fab').style.display = 'block';
 
   preencher_profissoes(()=>{
     let nivel = obterHitDiceNPC();
@@ -102,6 +105,7 @@ function openGrimorio(event) {
 
   document.getElementById('pagina-grimorio').style.display = 'block';
   document.getElementById('ficha-grimorio').style.display = 'block';
+  document.getElementById('tela-botao-fab').style.display = 'block';
 
   let nivel = obterNivelGrimorio();
   preencher_protecoes(()=>{
@@ -122,6 +126,8 @@ function openItens(event) {
   openLoading();
 
   document.getElementById('pagina-itens').style.display = 'block';
+  document.getElementById('tela-botao-fab').style.display = 'block';
+
   renderItens(()=>{
     closeLoading();
   });
@@ -133,6 +139,7 @@ function openPersonagens(event) {
 
   document.getElementById('pagina-personagens').style.display = 'block';
   document.getElementById('ficha').style.display = 'none';
+  document.getElementById('tela-botao-fab').style.display = 'block';
 
   carregarCombosRacas(()=>{
     carregarCombosClasses(null,()=>{
@@ -314,8 +321,13 @@ document.getElementById('texto-formulario-darksun').addEventListener('input',(ev
   document.getElementById('texto-formulario-ravenloft').checked = false;
   if (document.getElementById('texto-formulario-darksun').checked) {
     document.getElementById('texto-formulario-nivel').value = 3;
+    document.getElementById('texto-formulario-darksun-tipo-mago').disabled = false;
+    document.getElementById('texto-formulario-darksun-tipo-mago').readonly = false;
   } else {
     document.getElementById('texto-formulario-nivel').value = 1;
+    document.getElementById('texto-formulario-darksun-tipo-mago').selectedIndex = 0;
+    document.getElementById('texto-formulario-darksun-tipo-mago').disabled = true;
+    document.getElementById('texto-formulario-darksun-tipo-mago').readonly = true;
   }
   definirAtributosMinimos();
 });
@@ -1065,6 +1077,34 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
 
 document.getElementById('texto-botao-pdf').addEventListener('click',()=>{
   window.print();
+});
+
+document.getElementById('tela-botao-fab').addEventListener('click',(event)=>{
+  event.preventDefault();
+
+  if (document.getElementById('pagina-personagens').style.display == 'block') {
+    openLoading();
+    render(() => {
+      closeLoading();
+    });
+  }
+  if (document.getElementById('pagina-itens').style.display == 'block') {
+    renderItens(()=>{});
+  }
+  if (document.getElementById('pagina-npcs').style.display == 'block') {
+    openLoading();
+    let nivel = obterHitDiceNPC();
+    render_npc(nivel,()=>{
+      closeLoading();
+    });
+  }
+  if (document.getElementById('pagina-grimorio').style.display == 'block') {
+    openLoading();
+    let nivel = obterNivelGrimorio();
+    render_grimorio(nivel,()=>{
+      closeLoading();
+    });
+  }
 });
 
 function iniciar() {

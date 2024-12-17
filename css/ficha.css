@@ -449,6 +449,24 @@
         white-space: normal !important;
       }
 
+      /* Magias Divinas */
+      div#ficha > div > table > tbody > tr:nth-child(13) > td > table > tbody > tr {
+        background-color: rgba(0,0,0,0) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr:nth-child(13) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
+        background-color: rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+      /* Magias Divinas */
+
       /* Grimório */
       div#ficha > div > table > tbody > tr:nth-child(14) > td > table > tbody > tr {
         background-color: rgba(0,0,0,0) !important;
