@@ -4795,3 +4795,15 @@ document.getElementById('bt-salvar-personagem').addEventListener('click',()=>{
   window.print();
 });
 */
+
+// AQUI TODO
+/*
+Problema do atributo Força
+falta Resistência
+falta XP
+Falta perícias
+falta skill ladino e ranger
+falta afastar mortos vivos de clérigo e anacoreta
+
+falta dar uma olhada classe a classe para ver algo no nivel 2 ou 3
+*/
