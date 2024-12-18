@@ -1288,7 +1288,7 @@ const RACAS = {
       'Mover-se em Silêncio': 5,
       'Esconder-se nas Sombras': 2,
       'Ouvir Ruídos': 5,
-      'Escalar Muros': 40,
+      'Escalar Muros': 0,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1330,7 +1330,7 @@ const RACAS = {
       'Mover-se em Silêncio': 5,
       'Esconder-se nas Sombras': 2,
       'Ouvir Ruídos': 5,
-      'Escalar Muros': 30,
+      'Escalar Muros': -10,
       'Decifrar Linguagens': -5,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1368,7 +1368,7 @@ const RACAS = {
       'Mover-se em Silêncio': 10,
       'Esconder-se nas Sombras': 12,
       'Ouvir Ruídos': 10,
-      'Escalar Muros': 40,
+      'Escalar Muros': 0,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1408,7 +1408,7 @@ const RACAS = {
       'Mover-se em Silêncio': 10,
       'Esconder-se nas Sombras': 7,
       'Ouvir Ruídos': 15,
-      'Escalar Muros': 25,
+      'Escalar Muros': -15,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1443,7 +1443,7 @@ const RACAS = {
       'Mover-se em Silêncio': 5,
       'Esconder-se nas Sombras': 7,
       'Ouvir Ruídos': 5,
-      'Escalar Muros': 40,
+      'Escalar Muros': 0,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1518,7 +1518,7 @@ const RACAS = {
       'Mover-se em Silêncio': 5,
       'Esconder-se nas Sombras': 2,
       'Ouvir Ruídos': 5,
-      'Escalar Muros': 40,
+      'Escalar Muros': 0,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1556,7 +1556,7 @@ const RACAS = {
       'Mover-se em Silêncio': 20,
       'Esconder-se nas Sombras': 2,
       'Ouvir Ruídos': 5,
-      'Escalar Muros': 50,
+      'Escalar Muros': 0,
       'Decifrar Linguagens': 0,
       'Ataque pelas Costas': '',
       'Gíria dos ladrões': '',
@@ -1596,7 +1596,7 @@ const RACA_DROW = {
     'Mover-se em Silêncio': 10,
     'Esconder-se nas Sombras': 12,
     'Ouvir Ruídos': 10,
-    'Escalar Muros': 40,
+    'Escalar Muros': 0,
     'Decifrar Linguagens': 0,
     'Ataque pelas Costas': '',
     'Gíria dos ladrões': '',
@@ -1627,7 +1627,7 @@ const RACA_GOBLIN = {
     'Mover-se em Silêncio': 10,
     'Esconder-se nas Sombras': 7,
     'Ouvir Ruídos': 15,
-    'Escalar Muros': 25,
+    'Escalar Muros': -15,
     'Decifrar Linguagens': 0,
     'Ataque pelas Costas': '',
     'Gíria dos ladrões': '',
@@ -1767,7 +1767,7 @@ const CLANS = {
 };
 
 const CLASSE_ELEMENTALISTA = {
-  "Próximo Nível": 2500,
+  "Próximo Nível": [2500,5000,10000],
   "Grupo": "Arcano",
   "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
   "Pré-Requisitos": [ "lnteligéncia" ],
@@ -1818,7 +1818,7 @@ const CLASSE_ELEMENTALISTA = {
 
 const CLASSES = {
   "Guerreiro": {
-    "Próximo Nível": 2000,
+    "Próximo Nível": [2000,4000,8000],
     "Grupo": "Homem de Armas",
     "Habilidades Exigidas": { "Força": 9, "Destreza": 0, "Constituição": 0, "Inteligência": 0, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Força" ],
@@ -1856,7 +1856,7 @@ const CLASSES = {
     }
   },
   "Paladino": {
-    "Próximo Nível": 2250,
+    "Próximo Nível": [2250,4500,9000],
     "Grupo": "Homem de Armas",
     "Habilidades Exigidas": { "Força": 12, "Destreza": 0, "Constituição": 9, "Inteligência": 0, "Sabedoria": 13, "Carisma": 17 },
     "Pré-Requisitos": [ "Força", "Carisma" ],
@@ -1911,7 +1911,7 @@ const CLASSES = {
     }
   },
   "Ranger": {
-    "Próximo Nível": 2250,
+    "Próximo Nível": [2250,4500,9000],
     "Grupo": "Homem de Armas",
     "Habilidades Exigidas": { "Força": 13, "Destreza": 13, "Constituição": 14, "Inteligência": 0, "Sabedoria": 14, "Carisma": 0 },
     "Pré-Requisitos": [ "Força", "Destreza", "Sabedoria" ],
@@ -1965,7 +1965,7 @@ const CLASSES = {
     }
   },
   "Mago": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2005,7 +2005,7 @@ const CLASSES = {
     }
   },
   "Abjurante": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 15, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2052,7 +2052,7 @@ const CLASSES = {
     escola: ['Abjuração']
   },
   "Conjurador": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 15, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2099,7 +2099,7 @@ const CLASSES = {
     escola: ['Conjuração/Convocação']
   },
   "Adivinho": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 16, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2146,7 +2146,7 @@ const CLASSES = {
     escola: ['Profecia']
   },
   "Feiticeiro": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 16 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2193,7 +2193,7 @@ const CLASSES = {
     escola: ['Encantamento/Feitiço']
   },
   "Ilusionista": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 16, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2240,7 +2240,7 @@ const CLASSES = {
     escola: ['Ilusão/Visão']
   },
   "Invocador": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 16, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2287,7 +2287,7 @@ const CLASSES = {
     escola: ['Invocação/Evocação']
   },
   "Necromante": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 9, "Sabedoria": 16, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2334,7 +2334,7 @@ const CLASSES = {
     escola: ['Necromancia']
   },
   "Transmutador": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 15, "Constituição": 0, "Inteligência": 9, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2381,7 +2381,7 @@ const CLASSES = {
     escola: ['Alteração']
   },
   "Clérigo": {
-    "Próximo Nível": 1500,
+    "Próximo Nível": [1500,3000,6000],
     "Grupo": "Sacerdote",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 0, "Sabedoria": 9, "Carisma": 0 },
     "Pré-Requisitos": [ "Sabedoria" ],
@@ -2430,7 +2430,7 @@ const CLASSES = {
     esferas: ["Adivinhação", "Astral", "Combate", "Convocação", "Criação", "Cura", "Elemental", "Feitiço", "Guarda", "Necromântica", "Proteção", "Solar", "Todas"]
   },
   "Druida": {
-    "Próximo Nível": 2000,
+    "Próximo Nível": [2000,4000,7500],
     "Grupo": "Sacerdote",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 0, "Sabedoria": 12, "Carisma": 15 },
     "Pré-Requisitos": [ "Sabedoria", "Carisma" ],
@@ -2498,7 +2498,7 @@ const CLASSES = {
     esferas: ["Adivinhação", "Animal", "Clima", "Cura", "Elemental", "Vegetal", "Todas"]
   },
   "Ladrão": {
-    "Próximo Nível": 1250,
+    "Próximo Nível": [1250,2500,5000],
     "Grupo": "Ladino",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 9, "Constituição": 0, "Inteligência": 0, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Destreza" ],
@@ -2562,7 +2562,7 @@ const CLASSES = {
     }
   },
   "Bardo": {
-    "Próximo Nível": 1250,
+    "Próximo Nível": [1250,2500,5000],
     "Grupo": "Ladino",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 12, "Constituição": 0, "Inteligência": 13, "Sabedoria": 0, "Carisma": 15 },
     "Pré-Requisitos": [ "Destreza", "Carisma" ],
@@ -2619,7 +2619,7 @@ const CLASSES = {
 
   // Pronto
   "Vingador": {
-    "Próximo Nível": 2250,
+    "Próximo Nível": [2250,4500,9000],
     "Grupo": "Homem de Armas",
     "Habilidades Exigidas": { "Força": 15, "Destreza": 14, "Constituição": 15, "Inteligência": 0, "Sabedoria": 0, "Carisma": 0 },
     "Pré-Requisitos": [ "Força", "Constituição" ],
@@ -2674,7 +2674,7 @@ const CLASSES = {
 
   /* Pronto */
   "Arcanista": {
-    "Próximo Nível": 2500,
+    "Próximo Nível": [2500,5000,10000],
     "Grupo": "Arcano",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 15, "Sabedoria": 15, "Carisma": 0 },
     "Pré-Requisitos": [ "Inteligência" ],
@@ -2721,7 +2721,7 @@ const CLASSES = {
 
   /* Pronto */
   "Anacoreta": {
-    "Próximo Nível": 2000,
+    "Próximo Nível": [2000,4000,7500],
     "Grupo": "Sacerdote",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 0, "Inteligência": 0, "Sabedoria": 12, "Carisma": 15 },
     "Pré-Requisitos": [ "Sabedoria", "Carisma" ],
@@ -2782,7 +2782,7 @@ const CLASSES = {
 
   /* Pronto */
   "Cigano": {
-    "Próximo Nível": 1250,
+    "Próximo Nível": [1250,2500,5000],
     "Grupo": "Ladino",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 13, "Inteligência": 13, "Sabedoria": 13, "Carisma": 15 },
     "Pré-Requisitos": [ "Destreza" ],
@@ -2826,7 +2826,7 @@ const CLASSES = {
 
   /* Pronto */
   "Psionicista": {
-    "Próximo Nível": 2200,
+    "Próximo Nível": [2200,4400,8800],
     "Grupo": "Psionicista",
     "Habilidades Exigidas": { "Força": 0, "Destreza": 0, "Constituição": 11, "Inteligência": 12, "Sabedoria": 15, "Carisma": 0 },
     "Pré-Requisitos": [ "Constituição", "Sabedoria" ],
