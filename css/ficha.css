@@ -311,6 +311,11 @@
         white-space: normal !important;
         width: 100%;
       }
+      tbody tr:nth-child(22) td tbody tr td:last-child {
+        border: 0 !important;
+        white-space: normal !important;
+        width: 100%;
+      }
 
       td {
         /* max-width: 290px !important; */
@@ -484,6 +489,24 @@
         white-space: normal !important;
       }
       /* Grimório */
+
+      /* Magia Cigana */
+      div#ficha > div > table > tbody > tr:nth-child(15) > td > table > tbody > tr {
+        background-color: rgba(0,0,0,0) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr:nth-child(15) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
+        background-color: rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+      /* Magia Cigana */
 
       @media (min-width: 800px) {
         div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(1) {

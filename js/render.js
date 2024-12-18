@@ -206,7 +206,6 @@ document.getElementById('texto-botao-limpar').addEventListener('click',(event)=>
 
 document.getElementById('texto-formulario-ravenloft').addEventListener('input',(event)=>{
   document.getElementById('texto-formulario-darksun').checked = false;
-  document.getElementById('texto-formulario-nivel').value = 1;
   definirAtributosMinimos();
 });
 
@@ -324,7 +323,6 @@ document.getElementById('texto-formulario-darksun').addEventListener('input',(ev
     document.getElementById('texto-formulario-darksun-tipo-mago').disabled = false;
     document.getElementById('texto-formulario-darksun-tipo-mago').readonly = false;
   } else {
-    document.getElementById('texto-formulario-nivel').value = 1;
     document.getElementById('texto-formulario-darksun-tipo-mago').selectedIndex = 0;
     document.getElementById('texto-formulario-darksun-tipo-mago').disabled = true;
     document.getElementById('texto-formulario-darksun-tipo-mago').readonly = true;
@@ -710,8 +708,11 @@ function carregarComboEscolas(carregar,callback) {
     keys = LISTA_ESCOLAS_ARCANAS;
     carregarComboEscolasOptions(keys,callback);
   } else {
-    if (classe_selecionada == 'Mago') {
+    if ( (classe_selecionada == 'Mago') || (classe_selecionada == 'Bardo') ) {
       keys = LISTA_ESCOLAS_ARCANAS_SEM_ELEMENTALISTA;
+      carregarComboEscolasOptions(keys,callback);
+    } else if (classe_selecionada == 'Cigano') {
+      keys = ["Adivinho"];
       carregarComboEscolasOptions(keys,callback);
     } else {
       if (CLASSES[classe_selecionada]["Grupo"] == 'Arcano') {
@@ -729,15 +730,14 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
   combo.innerHTML = '';
 
   let escola_selecionada = obterEscolaSelecionada();
-  // {selecionada: 'Arcanista', escola_especialista: true}
-  // escola_selecionada.selecionada
-  // escola_selecionada.escola_especialista
+  let classe_selecionada = obterClasseSelecionada();
 
   let lista_conferencia = [];
 
   // Obtem os index de 0 a no máximo 1
   let nivel_selecionado = obterNivelSelecionado();
   if (nivel_selecionado > 2) nivel_selecionado = 2;
+  if ( (classe_selecionada == 'Bardo') || (classe_selecionada == 'Cigano') ) nivel_selecionado = 1;
   let niveis = [...Array(nivel_selecionado).keys()];
 
   niveis.forEach((nivel, index_nivel) => {
@@ -756,9 +756,16 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
         if (lista_conferencia.indexOf(magia) == -1) {
 
           if (escola_selecionada.escola_especialista) {
-            if (ESCOLAS_ARCANAS_OPOSTAS[escola].indexOf(nome_escola_convertido) == -1) {
-              lista_conferencia.push(magia);
-              criarOption(combo,magia,texto);
+            if (classe_selecionada == 'Cigano') {
+              if (MAGIAS_ARCANAS[0]["Adivinho"].indexOf(magia) > -1) {
+                lista_conferencia.push(magia);
+                criarOption(combo,magia,texto);
+              }
+            } else {
+              if (ESCOLAS_ARCANAS_OPOSTAS[escola].indexOf(nome_escola_convertido) == -1) {
+                lista_conferencia.push(magia);
+                criarOption(combo,magia,texto);
+              }
             }
           } else {
             lista_conferencia.push(magia);

@@ -1884,6 +1884,9 @@ function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia
       "1º Círculo": [],
       "2º Círculo": [],
     },
+    "Magias Ciganas": {
+      "1º Círculo": [],
+    },
     "Perícias": [],
     "Especialização": [],
     "Poderes Psiônicos": {
@@ -3949,7 +3952,7 @@ function sortear_magias(classe, personagem, callback) {
     });
     // >>>>>>>>>>>>>>> MAGIAS DIVINAS
 
-  } else if (CLASSES[classe]["Grupo"] == "Arcano") {
+  } else if ( (CLASSES[classe]["Grupo"] == "Arcano") || ((CLASSES[classe]["Grupo"] == "Ladino") && (classe == "Bardo")) ) {
 
     // >>>>>>>>>>>>>>> MAGIAS ARCANAS
 
@@ -3964,7 +3967,7 @@ function sortear_magias(classe, personagem, callback) {
     list_circulo_magia.forEach((entry_circulo_magia, index_circulo_magia) => {
       let qtde_magias = personagem["Dados Básicos"]["Magias Arcanas no Grimório"][entry_circulo_magia];
 
-      if ( (entry_circulo_magia == "2º Círculo") && (qtde_magias == 0) ) {
+      if ( (qtde_magias == undefined) || (qtde_magias == null) || (qtde_magias == '') || (qtde_magias == '0') || (qtde_magias == 0) ) {
         debug(`Magias sorteadas: ${personagem["Grimório"][entry_circulo_magia]}`);
 
         callback();
@@ -3974,7 +3977,7 @@ function sortear_magias(classe, personagem, callback) {
         // FOREACH Circulos
         let qtde = 0;
 
-        if ( (entry_circulo_magia == "1º Círculo") && (classe != "Conjurador") ) {
+        if ( (entry_circulo_magia == "1º Círculo") && (classe != "Conjurador") && (classe != "Bardo") ) {
           personagem["Grimório"][entry_circulo_magia].push("Ler Magias");
           qtde++;
 
@@ -3984,17 +3987,17 @@ function sortear_magias(classe, personagem, callback) {
 
         while (qtde < qtde_magias) { // FOR Sortear magias
 
-          if (classe != "Mago") {
+          if ( (classe != "Mago") && (classe != "Bardo") ) {
             // Especialista ou Elementalista
 
-            let lista_sorteio_magia = MAGIAS_ARCANAS[0][classe];
+            let lista_sorteio_magia = MAGIAS_ARCANAS[index_circulo_magia][classe];
             if (Math.floor(Math.random() * 2) > 0) {
-              let lista_sorteio_keys_escolas = Object.keys(MAGIAS_ARCANAS[0]);
+              let lista_sorteio_keys_escolas = Object.keys(MAGIAS_ARCANAS[index_circulo_magia]);
               let lista_sorteio_escola = lista_sorteio_keys_escolas[Math.floor(Math.random() * lista_sorteio_keys_escolas.length)];
               let lista_sorteio_classes_opostas = ESCOLAS_ARCANAS_OPOSTAS[classe].map(escola => LISTA_ESCOLAS_ARCANAS_ESCOLA_PARA_MAGO[escola]);
 
               if (!lista_sorteio_classes_opostas.includes(lista_sorteio_escola)) {
-                lista_sorteio_magia = MAGIAS_ARCANAS[0][lista_sorteio_escola];
+                lista_sorteio_magia = MAGIAS_ARCANAS[index_circulo_magia][lista_sorteio_escola];
               }
             }
 
@@ -4013,11 +4016,11 @@ function sortear_magias(classe, personagem, callback) {
 
             // Especialista ou Elementalista
           } else {
-            // Mago
-            let keys_magias = Object.keys(MAGIAS_ARCANAS[0]);
+            // Mago ou Bardo
+            let keys_magias = Object.keys(MAGIAS_ARCANAS[index_circulo_magia]);
             let index_escola = keys_magias[Math.floor(Math.random() * keys_magias.length)];
-            let index_magia = Math.floor(Math.random() * MAGIAS_ARCANAS[0][index_escola].length);
-            let magia = MAGIAS_ARCANAS[0][index_escola][index_magia];
+            let index_magia = Math.floor(Math.random() * MAGIAS_ARCANAS[index_circulo_magia][index_escola].length);
+            let magia = MAGIAS_ARCANAS[index_circulo_magia][index_escola][index_magia];
 
             if (forcar_magia != '') {
               magia = forcar_magia;
@@ -4048,6 +4051,10 @@ function sortear_magias(classe, personagem, callback) {
 
     // >>>>>>>>>>>>>>> MAGIAS ARCANAS
 
+  } else if (classe == "Cigano") {
+    personagem["Magias Ciganas"]["1º Círculo"] = JSON.parse(JSON.stringify(MAGIAS_ARCANAS[0]["Adivinho"]));
+    callback();
+    return;
   } else {
     callback();
     return;
@@ -4196,7 +4203,6 @@ function sortear_dados_basicos(personagem, callback) {
   if ( isInt(idade) ) {
     debug('Idade definida pelo usuário');
     idade = parseInt(idade);
-      console.log();
 
     if (idade < RACAS[raca].idade.minimo) {
       idade = RACAS[raca].idade.minimo;
@@ -4897,6 +4903,40 @@ function sortear_dados_basicos(personagem, callback) {
           personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
         }
 
+        if (classe == "Cigano") {
+          personagem["Dados Básicos"]["Magias ciganas conhecidas"] = {
+            "1º Círculo": 4,
+          };
+          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+            '1º Círculo': 1,
+          };
+
+          personagem["Dados Básicos"]["Escolas de Magia"] = ['Profecia','Augúrio'];
+        }
+
+        if (classe == "Bardo") {
+          if (nivel_para_magias == 2) {
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 4,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 1,
+            };
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
+          }
+          if (nivel_para_magias == 3) {
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 5,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 2,
+            };
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
+          }
+        }
+
       } else if (CLASSES[classe]["Grupo"] == "Psionicista") {
         personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
         personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 5;
@@ -4990,19 +5030,13 @@ function obter_dados_personagem(callback) {
   }
 }
 
-/*
-document.getElementById('bt-rolar-personagem').addEventListener('click',()=>{
-  render();
-});
-
-document.getElementById('bt-salvar-personagem').addEventListener('click',()=>{
-  window.print();
-});
-*/
-
 // AQUI TODO
 /*
-Problema do atributo Força
+BUG Problema do atributo Força
+BUG armaduras para arcanos
+
+Combos psionicos
+poderes psionicos
 
 falta dar uma olhada classe a classe para ver algo no nivel 2 ou 3
 */
