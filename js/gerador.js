@@ -82,7 +82,10 @@ function rolarAtributo(callback) {
 }
 
 function calcular_PSP(personagem) {
+
   if (personagem["Classe"] == "Psionicista") {
+    let nivel_personagem = personagem["Dados Básicos"]['Nível'];
+
     let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
     let inteligencia = personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"];
     let constituicao = personagem["Habilidades"]["Constituição"]["Valor da Habilidade"];
@@ -130,6 +133,17 @@ function calcular_PSP(personagem) {
     } else if (inteligencia >= 20) {
       personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] = personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] + 5;
     }
+
+    if (nivel_personagem > 1) {
+      personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] =
+        personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] +
+        personagem["Dados Básicos"]["PSPs por Nível Adicional"];
+    }
+    if (nivel_personagem > 2) {
+      personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] =
+        personagem["Dados Básicos"]["Pontos de Força Psiônica (PSPs)"] +
+        personagem["Dados Básicos"]["PSPs por Nível Adicional"];
+    }
   }
 }
 
@@ -153,6 +167,12 @@ function poderes_psionicos(personagem,callback) {
       ciencias = 2;
       devocoes = 7;
       defesas = 2;
+    }
+
+    /* Retirar 'Metapsiônicos' caso seja nível 1 (pois há poucos poderes disponíveis) */
+    if (nivel_personagem == 1) {
+      let index_metapsionicos = disciplinas_keys.indexOf('Metapsiônicos');
+      disciplinas_keys.splice(index_metapsionicos, 1);
     }
 
     /* Disciplinas */
@@ -194,8 +214,6 @@ function poderes_psionicos(personagem,callback) {
       array_ciencias_dois = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[1]]["Ciências"]));
       array_devocoes_dois = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[1]]["Devoções"]));
     }
-
-    // AQUI
 
     let index_disciplina_nao_removida = -1;
 
@@ -270,7 +288,7 @@ function poderes_psionicos(personagem,callback) {
         devocoes = devocoes - 1;
 
         if (array_devocoes_da_vez.length == 0) {
-          if (array_disciplinas.length > 1) {            
+          if (array_disciplinas.length > 1) {
             warning('Foi removida uma disciplina da lista por não conter mais devoções!');
             array_disciplinas.splice(qual_disciplina_index, 1);
             index_disciplina_nao_removida = 0;

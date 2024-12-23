@@ -302,6 +302,7 @@ function definirAtributosMinimos() {
   definirAtributoMinimo(darksun,document.getElementById('texto-formulario-minimo-inteligencia'),"Inteligência");
   definirAtributoMinimo(darksun,document.getElementById('texto-formulario-minimo-sabedoria'),"Sabedoria");
   definirAtributoMinimo(darksun,document.getElementById('texto-formulario-minimo-carisma'),"Carisma");
+  definirAtributosTela(()=>{});
 }
 
 function definirAtributosTela(callback) {
