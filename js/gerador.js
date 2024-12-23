@@ -135,51 +135,132 @@ function calcular_PSP(personagem) {
 
 function poderes_psionicos(personagem,callback) {
   if (personagem["Classe"] == "Psionicista") {
-    let disciplinas = [
-      'Clariscientes',
-      'Psicocinéticos',
-      'Psicometabólicos',
-      'Psicoportivos',
-      'Telepáticos'
-    ];
-    personagem["Dados Básicos"]["Disciplinas Psiônicas"] = disciplinas[Math.floor(Math.random() * disciplinas.length)];
+    let nivel_personagem = personagem["Dados Básicos"]['Nível'];
+    let disciplinas_keys = Object.keys(DISCIPLINAS_PSIONICAS);
 
+    let disciplinas = 1
     let ciencias = 1;
     let devocoes = 3;
+    let defesas = 1;
 
-    let array_ciencias = DISCIPLINAS_PSIONICAS[personagem["Dados Básicos"]["Disciplinas Psiônicas"]]["Ciências"].slice();
-    let array_devocoes = DISCIPLINAS_PSIONICAS[personagem["Dados Básicos"]["Disciplinas Psiônicas"]]["Devoções"].slice();
-
-    personagem["Dados Básicos"]["Modos de Ataque"] = 'Nenhum';
-    if (personagem["Dados Básicos"]["Disciplinas Psiônicas"] == 'Telepáticos') {
-
-      // Só possui uma ciência disponível
-      personagem["Poderes Psiônicos"]["Ciências"].push('Mindlink');
-      ciencias = ciencias - 1;
-
-      if (Math.floor(Math.random() * 2) == 0) {
-        let modos_ataque = ['Impulso Mental', 'Chicote do Ego', 'Insinuação do Id', 'Esmagamento Psíquico'];
-        personagem["Dados Básicos"]["Modos de Ataque"] = modos_ataque[Math.floor(Math.random() * modos_ataque.length)];
-        devocoes = devocoes - 1;
-      }
+    if (nivel_personagem == 2) {
+      disciplinas = 2;
+      ciencias = 1;
+      devocoes = 5;
+      defesas = 1;
+    } else if (nivel_personagem == 3) {
+      disciplinas = 2;
+      ciencias = 2;
+      devocoes = 7;
+      defesas = 2;
     }
 
-    let defesas = ['Mente em Branco','Escudo de Pensamento','Barreira Mental','Torre de Vontade de Ferro','Fortaleza do Intelecto'];
-    personagem["Dados Básicos"]["Modos de Defesa"] = defesas[Math.floor(Math.random() * defesas.length)];
+    /* Disciplinas */
+    personagem["Dados Básicos"]["Disciplinas Psiônicas"] = [];
+    let primeira_disciplina = disciplinas_keys[Math.floor(Math.random() * disciplinas_keys.length)];
+    personagem["Dados Básicos"]["Disciplinas Psiônicas"].push(primeira_disciplina);
+    disciplinas = disciplinas - 1;
+    if (disciplinas > 0) {
+      let index_primeira_disciplina = disciplinas_keys.indexOf(primeira_disciplina);
+      disciplinas_keys.splice(index_primeira_disciplina, 1);
+      let segunda_disciplina = disciplinas_keys[Math.floor(Math.random() * disciplinas_keys.length)];
+      personagem["Dados Básicos"]["Disciplinas Psiônicas"].push(segunda_disciplina);
+    }
+    let array_disciplinas = JSON.parse(JSON.stringify(personagem["Dados Básicos"]["Disciplinas Psiônicas"]));
+
+    /* Modos de Defesa */
+    let array_defesas = JSON.parse(JSON.stringify(DEFESAS_PSIONICAS));
+    let primeira_defesa = array_defesas[Math.floor(Math.random() * array_defesas.length)];
+    personagem["Poderes Psiônicos"]["Modos de Defesa"] = [];
+    personagem["Poderes Psiônicos"]["Modos de Defesa"].push(primeira_defesa);
+    defesas = defesas - 1;
+    if (defesas > 0) {
+      let index_primeira_defesa = array_defesas.indexOf(primeira_defesa);
+      array_defesas.splice(index_primeira_defesa, 1);
+      let segunda_defesa = array_defesas[Math.floor(Math.random() * array_defesas.length)];
+      personagem["Poderes Psiônicos"]["Modos de Defesa"].push(segunda_defesa);
+    }
+
+    /* Modos de Ataque */
+    personagem["Poderes Psiônicos"]["Modos de Ataque"] = [];
+    let array_ataques = JSON.parse(JSON.stringify(ATAQUES_PSIONICAS));
+
+    /* Arrays dos ciencias e devocoes */
+    let array_ciencias_um = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[0]]["Ciências"]));
+    let array_devocoes_um = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[0]]["Devoções"]));
+    let array_ciencias_dois = [];
+    let array_devocoes_dois = [];
+    if (nivel_personagem > 1) {
+      array_ciencias_dois = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[1]]["Ciências"]));
+      array_devocoes_dois = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[1]]["Devoções"]));
+    }
+
+    // AQUI
+
+    let index_disciplina_nao_removida = -1;
 
     while ( (ciencias + devocoes) > 0 ) {
+
+      let array_ciencias_da_vez = array_ciencias_um;
+      let array_devocoes_da_vez = array_devocoes_um;
+
+      // Qual disciplina?
+      let qual_disciplina_index = 0;
+      let qual_disciplina = array_disciplinas[qual_disciplina_index];
+
+      if (array_disciplinas.length > 1) {
+        if (Math.floor(Math.random() * 3) == 0) {
+          qual_disciplina_index = 1;
+          qual_disciplina = array_disciplinas[qual_disciplina_index];
+          array_ciencias_da_vez = array_ciencias_dois;
+          array_devocoes_da_vez = array_devocoes_dois;
+        }
+      }
+
+      if (index_disciplina_nao_removida > -1) {
+        qual_disciplina_index = index_disciplina_nao_removida;
+        qual_disciplina = array_disciplinas[index_disciplina_nao_removida];
+
+        if ( personagem["Dados Básicos"]["Disciplinas Psiônicas"].indexOf(qual_disciplina) == 1 ) {
+          array_ciencias_da_vez = array_ciencias_dois;
+          array_devocoes_da_vez = array_devocoes_dois;
+        }
+      }
+
+      // Colocar ataque?
+      if (Math.floor(Math.random() * 2) == 0) {
+        if (qual_disciplina == 'Telepáticos') {
+
+          let index_array_ataque = Math.floor(Math.random() * array_ataques.length);
+          let modo_ataque = array_ataques[index_array_ataque];
+
+          if (modo_ataque.ciencia) {
+            if (ciencias > 0) {
+              personagem["Poderes Psiônicos"]["Modos de Ataque"].push(modo_ataque.poder);
+              array_ataques.splice(index_array_ataque, 1);
+              ciencias = ciencias - 1;
+            }
+          } else {
+            if (devocoes > 0) {
+              personagem["Poderes Psiônicos"]["Modos de Ataque"].push(modo_ataque.poder);
+              array_ataques.splice(index_array_ataque, 1);
+              devocoes = devocoes - 1;
+            }
+          }
+        }
+      }
 
       if (ciencias > 0) {
         ciencias = ciencias - 1;
 
-        if (array_ciencias.length > 0) {
-          if (array_ciencias.length == 1) {
-            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias[0]);
-            array_ciencias.splice(0, 1);
+        if (array_ciencias_da_vez.length > 0) {
+          if (array_ciencias_da_vez.length == 1) {
+            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias_da_vez[0]);
+            array_ciencias_da_vez.splice(0, 1);
           } else {
-            let index_array_ciencias = Math.floor(Math.random() * array_ciencias.length);
-            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias[index_array_ciencias]);
-            array_ciencias.splice(index_array_ciencias, 1);
+            let index_array_ciencias = Math.floor(Math.random() * array_ciencias_da_vez.length);
+            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias_da_vez[index_array_ciencias]);
+            array_ciencias_da_vez.splice(index_array_ciencias, 1);
           }
         } else {
           ciencias = 0;
@@ -188,16 +269,22 @@ function poderes_psionicos(personagem,callback) {
       } else if (devocoes > 0) {
         devocoes = devocoes - 1;
 
-        if (array_devocoes.length == 0) {
-          error('Erro ao definir as devoções do psionicista!');
-          devocoes = 0;
-        } else if (array_devocoes.length == 1) {
-          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes[0]);
-          array_devocoes.splice(0, 1);
+        if (array_devocoes_da_vez.length == 0) {
+          if (array_disciplinas.length > 1) {            
+            warning('Foi removida uma disciplina da lista por não conter mais devoções!');
+            array_disciplinas.splice(qual_disciplina_index, 1);
+            index_disciplina_nao_removida = 0;
+          } else {
+            error('Erro ao definir as devoções do psionicista!');
+            devocoes = 0;
+          }
+        } else if (array_devocoes_da_vez.length == 1) {
+          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes_da_vez[0]);
+          array_devocoes_da_vez.splice(0, 1);
         } else {
-          let index_array_devocoes = Math.floor(Math.random() * array_devocoes.length);
-          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes[index_array_devocoes]);
-          array_devocoes.splice(index_array_devocoes, 1);
+          let index_array_devocoes = Math.floor(Math.random() * array_devocoes_da_vez.length);
+          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes_da_vez[index_array_devocoes]);
+          array_devocoes_da_vez.splice(index_array_devocoes, 1);
         }
       }
 
@@ -1771,12 +1858,12 @@ function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia
   return {
     "Nome": '',
     "Raça": '',
-    "Linhagem": 'Não é um personagem Vistani',
     "Classe": '',
     "Tendência": '',
     "Dados Básicos": {
       "Gênero": '',
       "Grupo": '',
+      "Linhagem": 'Não é um personagem Vistani',
       "Idade": 0,
       "Altura": 0,
       "Peso": 0,
@@ -1891,7 +1978,9 @@ function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia
     "Especialização": [],
     "Poderes Psiônicos": {
       "Ciências": [],
-      "Devoções": []
+      "Devoções": [],
+      "Modos de Defesa": [],
+      "Modos de Ataque": [],
     },
     "Itens": [],
     "Detalhes": [],
@@ -2143,10 +2232,10 @@ function sortear_raca(personagem, callback) {
         clans.shift(); // remove o primeiro
         let nome_clan = clans[Math.floor(Math.random() * clans.length)];
 
-        personagem["Linhagem"] = nome_clan;
+        personagem["Dados Básicos"]["Linhagem"] = nome_clan;
         personagem["Raça"] = 'Meio-Vistani (' + nome_clan + ')';
       } else {
-        personagem["Linhagem"] = linhagem_selecionada;
+        personagem["Dados Básicos"]["Linhagem"] = linhagem_selecionada;
         personagem["Raça"] = 'Meio-Vistani (' + linhagem_selecionada + ')';
       }
     }
@@ -2259,12 +2348,12 @@ function validar_classes_por_raca(personagem, callback) {
 
   let classes_100_por_cento = false;
 
-  if (CLANS[personagem["Linhagem"]].vistani) {
-    classes_100_por_cento = CLANS[personagem["Linhagem"]].classes_100_por_cento;
+  if (CLANS[personagem["Dados Básicos"]["Linhagem"]].vistani) {
+    classes_100_por_cento = CLANS[personagem["Dados Básicos"]["Linhagem"]].classes_100_por_cento;
   }
 
   if ( (ajustar_nome_raca(personagem) == 'Meio-Vistani') && classes_100_por_cento) {
-    let classes_clans = Object.keys(CLANS[personagem["Linhagem"]].classes);
+    let classes_clans = Object.keys(CLANS[personagem["Dados Básicos"]["Linhagem"]].classes);
     callback(classes_clans);
     return;
   } else {
@@ -2296,12 +2385,12 @@ function validar_classes_por_raca(personagem, callback) {
 
 function sortear_classes_especificas_do_clan(classes, personagem, callback) {
   let valor100 = Math.floor(Math.random() * 100);
-  let classes_clans = Object.keys(CLANS[personagem["Linhagem"]].classes);
+  let classes_clans = Object.keys(CLANS[personagem["Dados Básicos"]["Linhagem"]].classes);
   let ja_sorteada = false;
   let classes_copiadas = classes.slice();
 
   classes_clans.forEach((classe_clan, index_classe_clan) => {
-    let valor_comparar = 100 - CLANS[personagem["Linhagem"]].classes[classe_clan];
+    let valor_comparar = 100 - CLANS[personagem["Dados Básicos"]["Linhagem"]].classes[classe_clan];
 
     if (valor100 <= valor_comparar) {
       if (!ja_sorteada) {
@@ -2318,7 +2407,7 @@ function sortear_classes_especificas_do_clan(classes, personagem, callback) {
 
     if (index_classe_clan == (classes_clans.length - 1)) {
       if (!ja_sorteada) {
-        if (CLANS[personagem["Linhagem"]].classes_100_por_cento) {
+        if (CLANS[personagem["Dados Básicos"]["Linhagem"]].classes_100_por_cento) {
           let index = Math.floor(Math.random() * classes_clans.length);
           callback(classes_clans[index]);
           return;
@@ -2333,8 +2422,8 @@ function sortear_classes_especificas_do_clan(classes, personagem, callback) {
 }
 
 function sortear_classes_do_clan(classes, personagem, callback) {
-  if (CLANS[personagem["Linhagem"]].vistani) {
-    if (CLANS[personagem["Linhagem"]].classes_100_por_cento) {
+  if (CLANS[personagem["Dados Básicos"]["Linhagem"]].vistani) {
+    if (CLANS[personagem["Dados Básicos"]["Linhagem"]].classes_100_por_cento) {
       sortear_classes_especificas_do_clan(classes, personagem, classe=>{
         callback(classe);
         return;
@@ -3708,10 +3797,10 @@ function sortear_itens(classe, raca, personagem, callback) {
 
 function adicionar_pericias_vistani(raca,personagem,callback) {
   if (raca == "Meio-Vistani") {
-    if (CLANS[personagem["Linhagem"]].pericias.length > 0) {
-      CLANS[personagem["Linhagem"]].pericias.forEach((pericia, index) => {
+    if (CLANS[personagem["Dados Básicos"]["Linhagem"]].pericias.length > 0) {
+      CLANS[personagem["Dados Básicos"]["Linhagem"]].pericias.forEach((pericia, index) => {
         personagem["Perícias"].push(formatar_pericia_comum(pericia));
-        if (index == (CLANS[personagem["Linhagem"]].pericias.length - 1)) {
+        if (index == (CLANS[personagem["Dados Básicos"]["Linhagem"]].pericias.length - 1)) {
           callback();
           return;
         }
@@ -3746,7 +3835,7 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
     let grupo = ajustar_nome_grupo(classe);
 
     if (raca == "Meio-Vistani") {
-      qtde_pericias = qtde_pericias - CLANS[personagem["Linhagem"]].reduzir_pontos_pericias;
+      qtde_pericias = qtde_pericias - CLANS[personagem["Dados Básicos"]["Linhagem"]].reduzir_pontos_pericias;
     }
 
     let qtde_pericias_gerais = Math.floor(Math.random() * 2);
@@ -4236,7 +4325,7 @@ function sortear_dados_basicos(personagem, callback) {
   personagem["Dados Básicos"]["XP Extra"] = CLASSES[classe].xp_extra(personagem);
 
   if (raca == "Meio-Vistani") {
-    personagem["Detalhes"].push.apply(personagem["Detalhes"], CLANS[personagem["Linhagem"]].detalhes);
+    personagem["Detalhes"].push.apply(personagem["Detalhes"], CLANS[personagem["Dados Básicos"]["Linhagem"]].detalhes);
   }
 
   let base_movimentacao = 0;

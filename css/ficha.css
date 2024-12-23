@@ -48,96 +48,31 @@
         word-wrap: break-word !important;
       }
 
-      /*
-      div#ficha > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(9) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(10) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(11) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(12) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(13) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(14) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(15) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(16) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(17) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(18) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(19) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(20) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-      */
-
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table  {
-        /* width: 280px !important; */
-      }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody {
-        /* width: 280px !important; */
-      }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody  {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody  {
         padding: 0 !important;
       }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) {
         padding: 0 !important;
       }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > table > tbody {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > table > tbody {
         /* width: 210px !important; */
         padding: 0 !important;
       }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) {
         border: 0 !important;
         width: 100%;
       }
 
-      /*
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-      */
-
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr:nth-child(5) > td:last-child {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr:nth-child(5) > td:last-child {
         width: 100px !important;
         white-space: normal !important;
       }
-      div#ficha > div > table > tbody > tr:nth-child(8) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr > td:last-child {
+      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:last-child > table > tbody > tr > td:last-child {
+        background-color: inherit !important;
+      }
+
+      div#ficha > div > table > tbody > tr:nth-child(12) > td:nth-child(2) > table > tbody > tr > td:last-child {
+        white-space: normal !important;
         background-color: inherit !important;
       }
 
@@ -146,32 +81,10 @@
         background-color: inherit !important;
       }
 
-      /*
-      div#ficha > div > table > tbody > tr:nth-child(14) > td:nth-child(2) > table > tbody > tr {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-      */
-
       div#ficha > div > table > tbody > tr:nth-child(14) > td:nth-child(2) > table > tbody > tr > td:last-child {
         white-space: normal !important;
         background-color: inherit !important;
       }
-
-      div#ficha > div > table > tbody > tr:nth-child(15) > td:nth-child(2) > table > tbody > tr > td:last-child {
-        white-space: normal !important;
-        background-color: inherit !important;
-      }
-
-      /*
-      div#ficha > div > table > tbody > tr:nth-child(16) > td:nth-child(2) > table > tbody > tr {
-        background-color: rgba(0,0,0,0.1) !important;
-      }
-      div#ficha > div > table > tbody > tr:nth-child(16) > td:nth-child(2) > table > tbody > tr > td:last-child {
-        width: 100% !important;
-        white-space: normal !important;
-        background-color: inherit !important;
-      }
-      */
 
       div#ficha > div > table {
         background-image: url(../img/background.jpg);
@@ -204,7 +117,7 @@
         white-space: normal !important;
       }
 
-      div#ficha > div > table > tbody > tr:nth-child(7) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > table > tbody > tr > td {
+      div#ficha > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > table > tbody > tr > td:nth-child(2) > table > tbody > tr > td {
         font-size: 0.9em !important;
       }
       tbody tr td {
@@ -227,13 +140,19 @@
         width: 100%;
       }
 
+      tbody tr:nth-child(5) td tbody tr td:last-child {
+        border: 0 !important;
+        width: 100%;
+      }
+
       tbody tr:nth-child(6) td tbody tr td:last-child {
         border: 0 !important;
         width: 100%;
       }
 
-      tbody tr:nth-child(7) td tbody tr td:last-child {
+      tbody tr:nth-child(8) td tbody tr td:last-child {
         border: 0 !important;
+        white-space: normal !important;
         width: 100%;
       }
 
@@ -256,13 +175,13 @@
       }
 
       tbody tr:nth-child(12) td tbody tr td:last-child {
+        /* background-color: rgba(0,0,0,0.1) !important; */
         border: 0 !important;
         white-space: normal !important;
         width: 100%;
       }
 
       tbody tr:nth-child(13) td tbody tr td:last-child {
-        /* background-color: rgba(0,0,0,0.1) !important; */
         border: 0 !important;
         white-space: normal !important;
         width: 100%;
@@ -271,7 +190,7 @@
       tbody tr:nth-child(14) td tbody tr td:last-child {
         border: 0 !important;
         white-space: normal !important;
-        width: 100%;
+        width: 100% !important;
       }
 
       tbody tr:nth-child(15) td tbody tr td:last-child {
@@ -283,9 +202,8 @@
       tbody tr:nth-child(16) td tbody tr td:last-child {
         border: 0 !important;
         white-space: normal !important;
-        width: 100% !important;
+        width: 100%;
       }
-
       tbody tr:nth-child(17) td tbody tr td:last-child {
         border: 0 !important;
         white-space: normal !important;
@@ -307,11 +225,6 @@
         width: 100%;
       }
       tbody tr:nth-child(21) td tbody tr td:last-child {
-        border: 0 !important;
-        white-space: normal !important;
-        width: 100%;
-      }
-      tbody tr:nth-child(22) td tbody tr td:last-child {
         border: 0 !important;
         white-space: normal !important;
         width: 100%;
@@ -455,6 +368,24 @@
       }
 
       /* Magias Divinas */
+      div#ficha > div > table > tbody > tr:nth-child(12) > td > table > tbody > tr {
+        background-color: rgba(0,0,0,0) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+
+      div#ficha > div > table > tbody > tr:nth-child(12) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
+        background-color: rgba(0,0,0,0.1) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+      }
+      /* Magias Divinas */
+
+      /* Grimório */
       div#ficha > div > table > tbody > tr:nth-child(13) > td > table > tbody > tr {
         background-color: rgba(0,0,0,0) !important;
         width: 100% !important;
@@ -470,9 +401,9 @@
         word-wrap: break-word !important;
         white-space: normal !important;
       }
-      /* Magias Divinas */
-
       /* Grimório */
+
+      /* Magia Cigana */
       div#ficha > div > table > tbody > tr:nth-child(14) > td > table > tbody > tr {
         background-color: rgba(0,0,0,0) !important;
         width: 100% !important;
@@ -482,24 +413,6 @@
       }
 
       div#ficha > div > table > tbody > tr:nth-child(14) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
-        background-color: rgba(0,0,0,0.1) !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        word-wrap: break-word !important;
-        white-space: normal !important;
-      }
-      /* Grimório */
-
-      /* Magia Cigana */
-      div#ficha > div > table > tbody > tr:nth-child(15) > td > table > tbody > tr {
-        background-color: rgba(0,0,0,0) !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        word-wrap: break-word !important;
-        white-space: normal !important;
-      }
-
-      div#ficha > div > table > tbody > tr:nth-child(15) > td > table > tbody > tr > td > table > tbody > tr:nth-child(odd) {
         background-color: rgba(0,0,0,0.1) !important;
         width: 100% !important;
         box-sizing: border-box !important;

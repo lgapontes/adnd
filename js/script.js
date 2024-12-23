@@ -10,6 +10,10 @@ function error(texto) {
   console.error(texto);
 }
 
+function warning(texto) {
+  console.warn(texto);
+}
+
 var forcar_classe = 'Todas';
 var forcar_raca = 'Todas';
 var forcar_havenloft = false;

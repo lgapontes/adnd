@@ -230,6 +230,10 @@ main.texto > div.bloco-campos > label.magia {
   width: 30%;
 }
 
+main.texto > div.bloco-campos > label.disciplina {
+  font-size: 0.9em;
+}
+
 main.texto > div.bloco-checkbox > label {
   background-color: rgba(0, 0, 0, 0);
   width: 90%;

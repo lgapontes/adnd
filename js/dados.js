@@ -745,14 +745,49 @@ const DISCIPLINAS_PSIONICAS = {
     "Devoções": ['Projeção astral', 'Caminhante da Dimensão', 'Porta Dimensional', 'Viagem dos sonhos', 'Duodimensão', 'Viajante etéreo', 'Estágio', 'Dimensão do bolso', 'Caminhada nas sombras', 'Distorção espacial', 'Âncora Tempo/Espaço', 'Chave inglesa']
   },
   'Telepáticos': {
-    "Ciências": ['Mindlink'],
-    "Devoções": ['Aceitação', 'Estabilização de alinhamento', 'Amnésia', 'Atração', 'Aversão', 'Temor', 'Ocultar pensamentos', 'Sonhar Acordado', 'Empatia', 'ESP', 'Entrada Sensorial Falsa', 'Concentre-se no perdão', 'Mente de colméia', 'Penetração de identidade', 'Tarefa impossível', 'Consciência da Encarnação', 'Infligir dor', 'Mente de inseto', 'Inimigos invencíveis', 'Invisibilidade', 'Detecção de Vida', 'Barreira Mental', 'Barra Mental', 'Viajante misterioso', 'Ampliação de Fobia', 'Mente de planta', 'Sugestão pós-hipnótica', 'Resíduo psiônico', 'Mensageiro Psíquico', 'Mente de réptil', 'Enviar pensamentos', 'Link de visão', 'Link de som', 'Suprimir o medo', 'Sináptico Estático', 'Link do gosto', 'Projeção Telempática', 'Adoração verdadeira', 'Ouvir a verdade']
+    "Ciências": [
+      'Mindlink',
+      // Ataques
+      // 'Esmagamento Psíquico'
+    ],
+    "Devoções": [
+      'Aceitação', 'Estabilização de alinhamento', 'Amnésia', 'Atração', 'Aversão', 'Temor', 'Ocultar pensamentos', 'Sonhar Acordado', 'Empatia', 'ESP', 'Entrada Sensorial Falsa', 'Concentre-se no perdão', 'Mente de colméia', 'Penetração de identidade', 'Tarefa impossível', 'Consciência da Encarnação', 'Infligir dor', 'Mente de inseto', 'Inimigos invencíveis', 'Invisibilidade', 'Detecção de Vida', 'Barra Mental', 'Viajante misterioso', 'Ampliação de Fobia', 'Mente de planta', 'Sugestão pós-hipnótica', 'Resíduo psiônico', 'Mensageiro Psíquico', 'Mente de réptil', 'Enviar pensamentos', 'Link de visão', 'Link de som', 'Suprimir o medo', 'Sináptico Estático', 'Link do gosto', 'Projeção Telempática', 'Adoração verdadeira', 'Ouvir a verdade',
+      // Ataques
+      // 'Chicote do Ego', 'Insinuação de Identificação', 'Impulso Mental', 'Explosão Psiônica',
+    ]
   },
   'Metapsiônicos': {
     "Ciências": ['Avaliação'],
     "Devoções": ['Chave inglesa']
   }
 };
+
+const DEFESAS_PSIONICAS = [
+  'Fortaleza do Intelecto', 'Barreira Mental', 'Mente em Branco', 'Escudo do Pensamento', 'Torre da Vontade de Ferro'
+];
+
+const ATAQUES_PSIONICAS = [
+  {
+    poder: 'Chicote do Ego',
+    ciencia: false,
+  },
+  {
+    poder: 'Insinuação de Identificação',
+    ciencia: false,
+  },
+  {
+    poder: 'Impulso Mental',
+    ciencia: false,
+  },
+  {
+    poder: 'Explosão Psiônica',
+    ciencia: false,
+  },
+  {
+    poder: 'Esmagamento Psíquico',
+    ciencia: true,
+  },
+];
 
 const ESCOLAS_ARCANAS_OPOSTAS = {
   //Abjuração
