@@ -151,6 +151,7 @@ function poderes_psionicos(personagem,callback) {
   if (personagem["Classe"] == "Psionicista") {
     let nivel_personagem = personagem["Dados Básicos"]['Nível'];
     let disciplinas_keys = Object.keys(DISCIPLINAS_PSIONICAS);
+    let valores_combos_nao_escolhidos = ['Todas','Nenhuma','Selecione a Disciplina'];
 
     let disciplinas = 1
     let ciencias = 1;
@@ -169,15 +170,22 @@ function poderes_psionicos(personagem,callback) {
       defesas = 2;
     }
 
-    /* Retirar 'Metapsiônicos' caso seja nível 1 (pois há poucos poderes disponíveis) */
+    /* Retirar Metapsionics caso seja nível 1 (pois há poucos poderes disponíveis) */
     if (nivel_personagem == 1) {
-      let index_metapsionicos = disciplinas_keys.indexOf('Metapsiônicos');
+      let index_metapsionicos = disciplinas_keys.indexOf('Metapsionics');
       disciplinas_keys.splice(index_metapsionicos, 1);
     }
 
     /* Disciplinas */
     personagem["Dados Básicos"]["Disciplinas Psiônicas"] = [];
     let primeira_disciplina = disciplinas_keys[Math.floor(Math.random() * disciplinas_keys.length)];
+
+    let combo_disciplina = document.getElementById('texto-formulario-disciplina');
+    let combo_disciplina_value = combo_disciplina.options[combo_disciplina.selectedIndex].value;
+    if (valores_combos_nao_escolhidos.indexOf(combo_disciplina_value) == -1) {
+      primeira_disciplina = combo_disciplina_value;
+    }
+
     personagem["Dados Básicos"]["Disciplinas Psiônicas"].push(primeira_disciplina);
     disciplinas = disciplinas - 1;
     if (disciplinas > 0) {
@@ -192,8 +200,16 @@ function poderes_psionicos(personagem,callback) {
     let array_defesas = JSON.parse(JSON.stringify(DEFESAS_PSIONICAS));
     let primeira_defesa = array_defesas[Math.floor(Math.random() * array_defesas.length)];
     personagem["Poderes Psiônicos"]["Modos de Defesa"] = [];
+
+    let combo_modo_defesa = document.getElementById('texto-formulario-modo-defesa');
+    let combo_modo_defesa_value = combo_modo_defesa.options[combo_modo_defesa.selectedIndex].value;
+    if (valores_combos_nao_escolhidos.indexOf(combo_modo_defesa_value) == -1) {
+      primeira_defesa = combo_modo_defesa_value;
+    }
+
     personagem["Poderes Psiônicos"]["Modos de Defesa"].push(primeira_defesa);
     defesas = defesas - 1;
+
     if (defesas > 0) {
       let index_primeira_defesa = array_defesas.indexOf(primeira_defesa);
       array_defesas.splice(index_primeira_defesa, 1);
@@ -215,6 +231,30 @@ function poderes_psionicos(personagem,callback) {
       array_devocoes_dois = JSON.parse(JSON.stringify(DISCIPLINAS_PSIONICAS[array_disciplinas[1]]["Devoções"]));
     }
 
+    /* Definir ciencias e devocoes escolhidas nas combos */
+    let combo_ciencia = document.getElementById('texto-formulario-ciencia');
+    let combo_ciencia_value = combo_ciencia.options[combo_ciencia.selectedIndex].value;
+    if (valores_combos_nao_escolhidos.indexOf(combo_ciencia_value) == -1) {
+      let combo_ciencia_value_index = array_ciencias_um.indexOf(combo_ciencia_value);
+      if (combo_ciencia_value_index > -1) {
+        personagem["Poderes Psiônicos"]["Ciências"].push(combo_ciencia_value);
+        array_ciencias_um.splice(combo_ciencia_value_index, 1);
+        ciencias = ciencias - 1;
+      }
+    }
+
+    let combo_devocao = document.getElementById('texto-formulario-devocao');
+    let combo_devocao_value = combo_devocao.options[combo_devocao.selectedIndex].value;
+    if (valores_combos_nao_escolhidos.indexOf(combo_devocao_value) == -1) {
+      let combo_devocao_value_index = array_devocoes_um.indexOf(combo_devocao_value);
+      if (combo_devocao_value_index > -1) {
+        personagem["Poderes Psiônicos"]["Devoções"].push(combo_devocao_value);
+        array_devocoes_um.splice(combo_devocao_value_index, 1);
+        devocoes = devocoes - 1;
+      }
+    }
+
+    /* Definir outras ciencias e devocoes */
     let index_disciplina_nao_removida = -1;
 
     while ( (ciencias + devocoes) > 0 ) {
@@ -247,7 +287,7 @@ function poderes_psionicos(personagem,callback) {
 
       // Colocar ataque?
       if (Math.floor(Math.random() * 2) == 0) {
-        if (qual_disciplina == 'Telepáticos') {
+        if (qual_disciplina == 'Telepathic') {
 
           let index_array_ataque = Math.floor(Math.random() * array_ataques.length);
           let modo_ataque = array_ataques[index_array_ataque];

@@ -148,8 +148,14 @@ function openPersonagens(event) {
           carregarComboLinhagem(()=>{
             carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
               carregarComboDivindades(()=>{
-                render(() => {
-                  closeLoading();
+                carregarComboDisciplinas(()=>{
+                  carregarComboModosDefesa(()=>{
+                    carregarComboCienciasEDevocoes(()=>{
+                      render(() => {
+                        closeLoading();
+                      });
+                    });
+                  });
                 });
               });
             });
@@ -331,6 +337,14 @@ document.getElementById('texto-formulario-darksun').addEventListener('input',(ev
   definirAtributosMinimos();
 });
 
+document.getElementById('texto-formulario-nivel').addEventListener('input',(event)=>{
+  carregarComboDisciplinas(()=>{});
+});
+
+document.getElementById('texto-formulario-disciplina').addEventListener('input',(event)=>{
+  carregarComboCienciasEDevocoes(()=>{});
+});
+
 document.getElementById('texto-botao-mostrar1').addEventListener('click',(event)=>{
   event.preventDefault();
   document.getElementById('texto-botao-mostrar1').style.display = 'none';
@@ -449,6 +463,26 @@ function obterEscolaSelecionada() {
   }
 
   return retorno;
+}
+
+function obterDisciplinaSelecionada() {
+  let selecionada = {
+    disciplina: 'Nenhuma',
+    ciencias: [],
+    devocoes: [],
+  };
+  let combo = document.getElementById('texto-formulario-disciplina');
+
+  if (combo.options.length > 0) {
+    selecionada.disciplina = combo.options[combo.selectedIndex].value;
+
+    if ( (selecionada.disciplina != 'Nenhuma') && (selecionada.disciplina != 'Todas') ) {
+      selecionada.ciencias = DISCIPLINAS_PSIONICAS[selecionada.disciplina]["Ciências"];
+      selecionada.devocoes = DISCIPLINAS_PSIONICAS[selecionada.disciplina]["Devoções"];
+    }
+  }
+
+  return selecionada;
 }
 
 function obterClasseSelecionada() {
@@ -591,6 +625,104 @@ function carregarComboTendencias(callback) {
       callback();
     }
   });
+}
+
+function carregarComboCienciasEDevocoes(callback) {
+  let classe_selecionada = obterClasseSelecionada();
+  let selecionada = obterDisciplinaSelecionada();
+
+  let combo_ciencia = document.getElementById('texto-formulario-ciencia');
+  combo_ciencia.innerHTML = '';
+
+  let combo_devocoes = document.getElementById('texto-formulario-devocao');
+  combo_devocoes.innerHTML = '';
+
+  if ( (classe_selecionada == 'Todas') || (classe_selecionada == 'Psionicista') ) {
+
+    /* Preecnher combos */
+    if ( (selecionada.disciplina == 'Todas') || (selecionada.disciplina == 'Nenhuma') ) {
+      let texto_padrao = 'Selecione a Disciplina';
+      criarOption(combo_ciencia,texto_padrao,texto_padrao);
+      criarOption(combo_devocoes,texto_padrao,texto_padrao);
+      callback();
+    } else {
+
+      criarOption(combo_ciencia,'Todas','Todas');
+      selecionada.ciencias.forEach((ciencia, index_ciencias) => {
+        criarOption(combo_ciencia,ciencia,ciencia);
+        if (index_ciencias == (selecionada.ciencias.length - 1)) {
+
+          criarOption(combo_devocoes,'Todas','Todas');
+          selecionada.devocoes.forEach((devocao, index_devocoes) => {
+            criarOption(combo_devocoes,devocao,devocao);
+            if (index_devocoes == (selecionada.devocoes.length - 1)) {
+              callback();
+            }
+          });
+
+        }
+      });
+    }
+    /* Preencher combos */
+
+  } else {
+    criarOption(combo_ciencia,'Nenhuma','Nenhuma');
+    criarOption(combo_devocoes,'Nenhuma','Nenhuma');
+    callback();
+  }
+}
+
+function carregarComboModosDefesa(callback) {
+  let classe_selecionada = obterClasseSelecionada();
+  let nivel_selecionado = obterNivelSelecionado();
+
+  let combo = document.getElementById('texto-formulario-modo-defesa');
+  combo.innerHTML = '';
+
+  if ( (classe_selecionada == 'Todas') || (classe_selecionada == 'Psionicista') ) {
+    let keys = JSON.parse(JSON.stringify(DEFESAS_PSIONICAS));
+
+    criarOption(combo,'Todas','Todas');
+    keys.forEach((entry, index) => {
+      criarOption(combo,entry,entry);
+      if (index == (keys.length - 1)) {
+        callback();
+      }
+    });
+
+  } else {
+    criarOption(combo,'Nenhuma','Nenhuma');
+    callback();
+  }
+}
+
+function carregarComboDisciplinas(callback) {
+  let classe_selecionada = obterClasseSelecionada();
+  let nivel_selecionado = obterNivelSelecionado();
+
+  let combo = document.getElementById('texto-formulario-disciplina');
+  combo.innerHTML = '';
+
+  if ( (classe_selecionada == 'Todas') || (classe_selecionada == 'Psionicista') ) {
+    let keys_disciplinas = Object.keys(DISCIPLINAS_PSIONICAS);
+
+    if (nivel_selecionado == 1) {
+      let index_metapsionicos = keys_disciplinas.indexOf('Metapsionics');
+      keys_disciplinas.splice(index_metapsionicos, 1);
+    }
+
+    criarOption(combo,'Todas','Todas');
+    keys_disciplinas.forEach((disciplina, index_disciplina) => {
+      criarOption(combo,disciplina,disciplina);
+      if (index_disciplina == (keys_disciplinas.length - 1)) {
+        callback();
+      }
+    });
+
+  } else {
+    criarOption(combo,'Nenhuma','Nenhuma');
+    callback();
+  }
 }
 
 function carregarComboDivindades(callback) {
@@ -1067,7 +1199,13 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
       carregarComboTendencias(()=>{
         carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
           carregarComboDivindades(()=>{
-            definirAtributosMinimos();
+            carregarComboDisciplinas(()=>{
+              carregarComboModosDefesa(()=>{
+                carregarComboCienciasEDevocoes(()=>{
+                  definirAtributosMinimos();
+                });
+              });
+            });
           });
         });
       });
@@ -1076,7 +1214,13 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
     carregarComboTendencias(()=>{
       carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
         carregarComboDivindades(()=>{
-          definirAtributosMinimos();
+          carregarComboDisciplinas(()=>{
+            carregarComboModosDefesa(()=>{
+              carregarComboCienciasEDevocoes(()=>{
+                definirAtributosMinimos();
+              });
+            });
+          });
         });
       });
     });
@@ -1116,6 +1260,7 @@ document.getElementById('tela-botao-fab').addEventListener('click',(event)=>{
 });
 
 function iniciar() {
+  console.log(`Versão ${VERSION}`);
   let url = new URLSearchParams(window.location.search);
   let pagina = url.get('p');
 

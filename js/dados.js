@@ -728,63 +728,67 @@ const MAGIAS_ARCANAS = [
 ];
 
 const DISCIPLINAS_PSIONICAS = {
-  'Clariscientes': {
-    "Ciências": ['Avaliar', 'Visão da Aura', 'Clariaudiência', 'Clarividência', 'Leitura de objetos', 'Precognição', 'Sensibilidade a Impressões Psíquicas'],
-    "Devoções": ['Visão geral', 'Mente de Combate', 'Sentido de Perigo', 'Ambiente', 'Sinta-se leve', 'Sinta a umidade', 'Sinta o som', 'Ouvir a luz', 'Conheça o Curso', 'Conheça a direção', 'Conheça a localização', 'Sentido de Veneno', 'Navegação Radial', 'Ver Etéreo', 'Ver Magia', 'Ver som', 'Sensibilidade à observação', 'Sentido do Espírito', 'Ala do Vigilante']
-  },
-  'Psicocinéticos': {
-    "Ciências": ['Suprimir magia', 'Telecinese'],
-    "Devoções": ['Animar sombra', 'Compactar', 'Luz de controle', 'Controlar som', 'Cirocinese', 'Magnetizar', 'Agitação Molecular', 'Vôo de regresso', 'Suavizar']
-  },
-  'Psicometabólicos': {
-    "Ciências": ['Afinidade Animal', 'Cura Completa', 'Campo da Morte', 'Contenção de Energia', 'Drenagem de Vida', 'Metamorfose', 'Forma de sombra'],
-    "Devoções": ['Absorver Doença', 'Controle de adrenalina', 'Envelhecimento', 'Biofeedback', 'Controle Corporal', 'Equilíbrio Corporal', 'Armamento corporal', 'Carapaça', 'Catfall', 'Causar Decadência', 'Causar sono', 'Ajuste de Célula', 'Poder Camaleão', 'Simulação Química', 'Transe cognitivo', 'Deslocamento', 'Dor Dupla', 'Forma Ectoplasmática', 'Força Aprimorada', 'Expansão', 'Combate ao transe', 'Armadura de Carne', 'Simetria forçada', 'Arma de enxerto', 'Sentidos Aguçados', 'Imobilidade', 'Vontade de ferro', 'Emprestar Saúde', 'Mente sobre o corpo', 'Descarga de feromônio', 'Fotossíntese', 'Redução', 'Compartilhar Força', 'Toque de aranha', 'Suspender animação']
-  },
-  'Psicoportivos': {
-    "Ciências": ['Probabilidade de viagem', 'Teleporte', 'Viagem no tempo'],
-    "Devoções": ['Projeção astral', 'Caminhante da Dimensão', 'Porta Dimensional', 'Viagem dos sonhos', 'Duodimensão', 'Viajante etéreo', 'Estágio', 'Dimensão do bolso', 'Caminhada nas sombras', 'Distorção espacial', 'Âncora Tempo/Espaço', 'Chave inglesa']
-  },
-  'Telepáticos': {
-    "Ciências": [
-      'Mindlink',
-      // Ataques
-      // 'Esmagamento Psíquico'
-    ],
+  'Clairsentient': {
+    "Ciências": ['Appraise', 'Aura Sight', 'Clairaudience', 'Clairvoyance', 'Object Reading', 'Precognition', 'Sensitivity to Psychic Impressions', 'Cosmic Awareness', 'Detection', 'Psychic Clone', 'Spirit lore', 'Subjective reality', 'True sight'],
     "Devoções": [
-      'Aceitação', 'Estabilização de alinhamento', 'Amnésia', 'Atração', 'Aversão', 'Temor', 'Ocultar pensamentos', 'Sonhar Acordado', 'Empatia', 'ESP', 'Entrada Sensorial Falsa', 'Concentre-se no perdão', 'Mente de colméia', 'Penetração de identidade', 'Tarefa impossível', 'Consciência da Encarnação', 'Infligir dor', 'Mente de inseto', 'Inimigos invencíveis', 'Invisibilidade', 'Detecção de Vida', 'Barra Mental', 'Viajante misterioso', 'Ampliação de Fobia', 'Mente de planta', 'Sugestão pós-hipnótica', 'Resíduo psiônico', 'Mensageiro Psíquico', 'Mente de réptil', 'Enviar pensamentos', 'Link de visão', 'Link de som', 'Suprimir o medo', 'Sináptico Estático', 'Link do gosto', 'Projeção Telempática', 'Adoração verdadeira', 'Ouvir a verdade',
-      // Ataques
-      // 'Chicote do Ego', 'Insinuação de Identificação', 'Impulso Mental', 'Explosão Psiônica',
+      'All-Round Vision', 'Bone Reading', 'Combat Mind', 'Danger Sense', 'Environment', 'Feel Light', 'Feel Moisture', 'Feel Sound', 'Hear Light', 'Know Course', 'Know Direction', 'Know Location', 'Martial Trance', 'Poison Sense', 'Predestination',  'Probability manipulation', 'Psionic Sense', 'Radial Navigation', 'Retrospection', 'Safe Path', 'See Ethereal', 'See Magic', 'See Sound', 'Sensitivity to observation', 'Spirit Sense', 'Trail of destruction', 'Watcher\'s ward', 'Weather prediction'
     ]
   },
-  'Metapsiônicos': {
-    "Ciências": ['Avaliação'],
-    "Devoções": ['Chave inglesa']
+  'Psychokinetic': {
+    "Ciências": ['Create Object', 'Detonate', 'Disintegrate', 'Kinetic Control', 'Megakinesis', 'Molecular Rearrangement', 'Project Force', 'Suppress magic', 'Telekinesis', 'Telekinetic barrier', 'Telekinetic flight'],
+    "Devoções": [
+      'Animate Object', 'Animate Shadow', 'Ballistic Attack', 'Compact', 'Concentrate Water', 'Control Body', 'Control Flames', 'Control Light', 'Control Sound', 'Control Wind', 'Create Sound', 'Cyrokinesis', 'Deflect', 'Ghost writing', 'Inertial Barrier', 'Levitation', 'Magnetize', 'Mass manipulation', 'Molecular Agitation', 'Molecular bonding', 'Molecular Manipulation', 'Momentum theft', 'Opposite reaction', 'Return flight', 'Soften', 'Stasis Field', 'Static discharge'
+    ]
+  },
+  'Psychometabolic': {
+    "Ciências": ['Animal Affinity', 'Complete Healing', 'Death Field', 'Elemental composition', 'Energy Containment', 'Life Draining', 'Metamorphosis', 'Nerve manipulation', 'Poison simulation', 'Regenerate', 'Shadow-form', 'Split Personality'],
+    "Devoções": [
+      'Absorb Disease', 'Accelerate', 'Adrenaline Control', 'Aging', 'Alter Features', 'Biofeedback', 'Body Control', 'Body Equilibrium', 'Body Weaponry', 'Cannibalize', 'Carapace', 'Catfall', 'Cause Decay', 'Cause sleep', 'Cell Adjustment', 'Chameleon Power', 'Chemical Simulation', 'Cognitive trance', 'Displacement', 'Double Pain', 'Ectoplasmic Form', 'Enhanced Strength', 'Enhancement', 'Expansion', 'Fighting trance', 'Flesh Armour', 'Forced symmetry', 'Gird', 'Graft Weapon', 'Heightened Senses', 'Immovability', 'Intensify', 'Iron will', 'Lend Health', 'Magnify', 'Mind Over Body', 'Pheromone discharge', 'Photosynthesis', 'Prolong', 'Reduction', 'Rigidity', 'Share Strength', 'Spider touch', 'Splice', 'Strength of the land', 'Suspend Animation'
+    ]
+  },
+  'Psychoportative': {
+    "Ciências": ['Banishment', 'Planar transposition', 'Probability Travel', 'Summon Planar Creature', 'Summon planar energies', 'Teleport', 'Teleport Other', 'Time travel', 'Wormhole'],
+    "Devoções": [
+      'Astral Projection', 'Blink', 'Dimension blade', 'Dimension Walk', 'Dimensional Door', 'Dimensional screen', 'Dream Travel', 'Duo-dimension', 'Ethereal traveller', 'Phase', 'Phase object', 'Pocket dimension', 'Shadow walk', 'Spatial distortion', 'Summon object', 'Teleport lock', 'Teleport object', 'Teleport Trigger', 'Time dilation', 'Time duplicate', 'Time Shift', 'Time/Space Anchor', 'Wrench'
+    ]
+  },
+  'Telepathic': {
+    "Ciências": [
+      'Aura Alteration', 'Domination', 'Empower', 'Fate Link', 'Hallucination', 'Mass Domination', 'Mindflame', 'Mindlink', 'Mindwipe', 'Probe', 'Psychic Surgery', 'Superior Invisibility', 'Switch Personality', 'Ultrablast'
+    ],
+    "Devoções": [
+      'Contact', 'Acceptance', 'Alignment stabilization', 'Amnesia', 'Attraction', 'Aversion', 'Awe', 'Beast mastery', 'Conceal Thoughts', 'Convergence', 'Daydream', 'Empathy', 'ESP', 'False Sensory Input', 'Focus forgiveness', 'Hivemind',  'Identity Penetration', 'Impossible task', 'Incarnation Awareness', 'Inflict Pain', 'Insect mind',  'Invincible Foes', 'Invisibility', 'Life Detection', 'Mental Barrier', 'Mind Bar', 'Mysterious traveller', 'Phobia Amplification', 'Plant mind', 'Post-Hypnotic Suggestion', 'Psionic Inflation',  'Psionic residue', 'Psionic vampirism', 'Psychic blade', 'Psychic Drain', 'Psychic Impersonation',  'Psychic Messenger', 'Receptacle', 'Reptile mind', 'Repugnance', 'Send Thoughts', 'Sensory suppression', 'Sight Link', 'Sound Link', 'Suppress fear', 'Synaptic Static', 'Taste Link', 'Telempathic Projection', 'True worship', 'Truthear'
+    ]
+  },
+  'Metapsionics': {
+    "Ciências": ['Appraise', 'Aura Alteration', 'Empower', 'Psychic Clone', 'Psychic Surgery', 'Split Personality', 'Ultrablast'],
+    "Devoções": ['Cannibalize', 'Convergence', 'Enhancement', 'Gird', 'Intensify', 'Magnify', 'Prolong', 'Psionic Inflation', 'Psionic Sense', 'Psychic Drain', 'Receptacle', 'Retrospection', 'Splice', 'Stasis Field', 'Wrench']
   }
 };
 
 const DEFESAS_PSIONICAS = [
-  'Fortaleza do Intelecto', 'Barreira Mental', 'Mente em Branco', 'Escudo do Pensamento', 'Torre da Vontade de Ferro'
+  'Intellect Fortress', 'Mental Barrier', 'Mind Blank', 'Thought Shield', 'Tower of Iron Will'
 ];
 
 const ATAQUES_PSIONICAS = [
   {
-    poder: 'Chicote do Ego',
+    poder: 'Ego Whip',
     ciencia: false,
   },
   {
-    poder: 'Insinuação de Identificação',
+    poder: 'Insinuation Id',
     ciencia: false,
   },
   {
-    poder: 'Impulso Mental',
+    poder: 'Mind Thrust',
     ciencia: false,
   },
   {
-    poder: 'Explosão Psiônica',
+    poder: 'Psionic Blast',
     ciencia: false,
   },
   {
-    poder: 'Esmagamento Psíquico',
+    poder: 'Psychic Crush',
     ciencia: true,
   },
 ];
@@ -2869,7 +2873,7 @@ const CLASSES = {
     tendencias: [ TENDENCIAS[0], TENDENCIAS[1], TENDENCIAS[2], TENDENCIAS[3], TENDENCIAS[4], TENDENCIAS[5] ],
     dado_de_vida: 6,
     detalhes: [
-      'Veja todos os poderes psiônicos (para descrição dos poderes aqui listados, em inglês) no site: https://publish.uwo.ca/~vince/DnD/Psionics/PsionicAbilityDescriptions.html',
+      'Veja todos os poderes psiônicos no The Complete Psionics Handbook.',
       'Psionicistas com valores de Constituição e Sabedoria maiores ou iguais a 16 ganham +10% de experiência.',
       'O psiônico molda, controla, atrela e utiliza as forças naturais que infundem seu próprio ser. Seu esforço se concentra mais para dentro do que para fora. Ele deve estar completamente em contato e ciente até mesmo dos menores funcionamentos de seu corpo e mente.',
       'Pontos de Força Psiônica: cada vez que um psiônico usa uma devoção (poderes mais fracos) ou ciência psiônica (poderes mais fortes), ele deve pagar seu "custo". Este custo é deduzido do % total de pontos de força psiônica do personagem (PSPs). PSPs são semelhantes aos pontos de vida, exceto que o psiônico os gasta de boa vontade, e ele pode recuperá-los muito mais rápido do que os pontos de vida perdidos.',

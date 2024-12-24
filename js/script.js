@@ -1,3 +1,6 @@
+/* version */
+const VERSION = 'v1.0.2';
+
 /* debug */
 const DEBUG = false;
 function debug(texto) {
