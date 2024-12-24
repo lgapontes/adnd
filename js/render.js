@@ -422,6 +422,22 @@ function criarOption(select,value,texto) {
   select.appendChild(opt);
 }
 
+function criarOptionCienciasEDevocoes(select,value,texto) {
+  let opt = document.createElement('option');
+  if ( (value == 'Todas') || (value == 'Todos') ) {
+    value = 'Todas';
+  }
+
+  let array_ataque = ATAQUES_PSIONICAS.filter(entry => entry.poder == texto);
+  if (array_ataque.length == 1) {
+    texto = `${texto} (Modo de Ataque)`;
+  }
+
+  opt.value = value;
+  opt.innerHTML = texto;
+  select.appendChild(opt);
+}
+
 function criarOptionEscola(select,value,texto) {
   let opt = document.createElement('option');
   if ( (value != 'Todas') && (value != 'Nenhuma') ) {
@@ -649,12 +665,12 @@ function carregarComboCienciasEDevocoes(callback) {
 
       criarOption(combo_ciencia,'Todas','Todas');
       selecionada.ciencias.forEach((ciencia, index_ciencias) => {
-        criarOption(combo_ciencia,ciencia,ciencia);
+        criarOptionCienciasEDevocoes(combo_ciencia,ciencia,ciencia);
         if (index_ciencias == (selecionada.ciencias.length - 1)) {
 
           criarOption(combo_devocoes,'Todas','Todas');
           selecionada.devocoes.forEach((devocao, index_devocoes) => {
-            criarOption(combo_devocoes,devocao,devocao);
+            criarOptionCienciasEDevocoes(combo_devocoes,devocao,devocao);
             if (index_devocoes == (selecionada.devocoes.length - 1)) {
               callback();
             }

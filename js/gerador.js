@@ -237,7 +237,15 @@ function poderes_psionicos(personagem,callback) {
     if (valores_combos_nao_escolhidos.indexOf(combo_ciencia_value) == -1) {
       let combo_ciencia_value_index = array_ciencias_um.indexOf(combo_ciencia_value);
       if (combo_ciencia_value_index > -1) {
-        personagem["Poderes Psiônicos"]["Ciências"].push(combo_ciencia_value);
+
+        let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == combo_ciencia_value);
+        if (possui_array_ataque_index > -1) {
+          personagem["Poderes Psiônicos"]["Modos de Ataque"].push(combo_ciencia_value);
+          array_ataques.splice(possui_array_ataque_index, 1);
+        } else {
+          personagem["Poderes Psiônicos"]["Ciências"].push(combo_ciencia_value);
+        }
+
         array_ciencias_um.splice(combo_ciencia_value_index, 1);
         ciencias = ciencias - 1;
       }
@@ -248,7 +256,15 @@ function poderes_psionicos(personagem,callback) {
     if (valores_combos_nao_escolhidos.indexOf(combo_devocao_value) == -1) {
       let combo_devocao_value_index = array_devocoes_um.indexOf(combo_devocao_value);
       if (combo_devocao_value_index > -1) {
-        personagem["Poderes Psiônicos"]["Devoções"].push(combo_devocao_value);
+
+        let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == combo_devocao_value);
+        if (possui_array_ataque_index > -1) {
+          personagem["Poderes Psiônicos"]["Modos de Ataque"].push(combo_devocao_value);
+          array_ataques.splice(possui_array_ataque_index, 1);
+        } else {
+          personagem["Poderes Psiônicos"]["Devoções"].push(combo_devocao_value);  
+        }
+
         array_devocoes_um.splice(combo_devocao_value_index, 1);
         devocoes = devocoes - 1;
       }
@@ -257,6 +273,7 @@ function poderes_psionicos(personagem,callback) {
     /* Definir outras ciencias e devocoes */
     let index_disciplina_nao_removida = -1;
 
+    // LOOP
     while ( (ciencias + devocoes) > 0 ) {
 
       let array_ciencias_da_vez = array_ciencias_um;
@@ -287,7 +304,7 @@ function poderes_psionicos(personagem,callback) {
 
       // Colocar ataque?
       if (Math.floor(Math.random() * 2) == 0) {
-        if (qual_disciplina == 'Telepathic') {
+        if (qual_disciplina == 'Telepathy') {
 
           let index_array_ataque = Math.floor(Math.random() * array_ataques.length);
           let modo_ataque = array_ataques[index_array_ataque];
@@ -296,12 +313,20 @@ function poderes_psionicos(personagem,callback) {
             if (ciencias > 0) {
               personagem["Poderes Psiônicos"]["Modos de Ataque"].push(modo_ataque.poder);
               array_ataques.splice(index_array_ataque, 1);
+
+              let index_remover_modo_ataque = array_ciencias_da_vez.indexOf(modo_ataque.poder);
+              array_ciencias_da_vez.splice(index_remover_modo_ataque, 1);
+
               ciencias = ciencias - 1;
             }
           } else {
             if (devocoes > 0) {
               personagem["Poderes Psiônicos"]["Modos de Ataque"].push(modo_ataque.poder);
               array_ataques.splice(index_array_ataque, 1);
+
+              let index_remover_modo_ataque = array_devocoes_da_vez.indexOf(modo_ataque.poder);
+              array_devocoes_da_vez.splice(index_remover_modo_ataque, 1);
+
               devocoes = devocoes - 1;
             }
           }
@@ -313,12 +338,25 @@ function poderes_psionicos(personagem,callback) {
 
         if (array_ciencias_da_vez.length > 0) {
           if (array_ciencias_da_vez.length == 1) {
-            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias_da_vez[0]);
+            let poder = array_ciencias_da_vez[0];
+            personagem["Poderes Psiônicos"]["Ciências"].push(poder);
             array_ciencias_da_vez.splice(0, 1);
+
+            let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == poder);
+            if (possui_array_ataque_index > -1) {
+              array_ataques.splice(possui_array_ataque_index, 1);
+            }
+
           } else {
             let index_array_ciencias = Math.floor(Math.random() * array_ciencias_da_vez.length);
-            personagem["Poderes Psiônicos"]["Ciências"].push(array_ciencias_da_vez[index_array_ciencias]);
+            let poder = array_ciencias_da_vez[index_array_ciencias];
+            personagem["Poderes Psiônicos"]["Ciências"].push(poder);
             array_ciencias_da_vez.splice(index_array_ciencias, 1);
+
+            let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == poder);
+            if (possui_array_ataque_index > -1) {
+              array_ataques.splice(possui_array_ataque_index, 1);
+            }
           }
         } else {
           ciencias = 0;
@@ -337,12 +375,24 @@ function poderes_psionicos(personagem,callback) {
             devocoes = 0;
           }
         } else if (array_devocoes_da_vez.length == 1) {
-          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes_da_vez[0]);
+          let poder = array_devocoes_da_vez[0];
+          personagem["Poderes Psiônicos"]["Devoções"].push(poder);
           array_devocoes_da_vez.splice(0, 1);
+
+          let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == poder);
+          if (possui_array_ataque_index > -1) {
+            array_ataques.splice(possui_array_ataque_index, 1);
+          }
         } else {
           let index_array_devocoes = Math.floor(Math.random() * array_devocoes_da_vez.length);
-          personagem["Poderes Psiônicos"]["Devoções"].push(array_devocoes_da_vez[index_array_devocoes]);
+          let poder = array_devocoes_da_vez[index_array_devocoes];
+          personagem["Poderes Psiônicos"]["Devoções"].push(poder);
           array_devocoes_da_vez.splice(index_array_devocoes, 1);
+
+          let possui_array_ataque_index = array_ataques.findIndex(entry => entry.poder == poder);
+          if (possui_array_ataque_index > -1) {
+            array_ataques.splice(possui_array_ataque_index, 1);
+          }
         }
       }
 
@@ -351,6 +401,8 @@ function poderes_psionicos(personagem,callback) {
         return;
       }
     }
+    // LOOP
+
   } else {
     callback();
     return;

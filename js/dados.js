@@ -728,36 +728,42 @@ const MAGIAS_ARCANAS = [
 ];
 
 const DISCIPLINAS_PSIONICAS = {
-  'Clairsentient': {
+  'Clairsentience': {
     "Ciências": ['Appraise', 'Aura Sight', 'Clairaudience', 'Clairvoyance', 'Object Reading', 'Precognition', 'Sensitivity to Psychic Impressions', 'Cosmic Awareness', 'Detection', 'Psychic Clone', 'Spirit lore', 'Subjective reality', 'True sight'],
     "Devoções": [
       'All-Round Vision', 'Bone Reading', 'Combat Mind', 'Danger Sense', 'Environment', 'Feel Light', 'Feel Moisture', 'Feel Sound', 'Hear Light', 'Know Course', 'Know Direction', 'Know Location', 'Martial Trance', 'Poison Sense', 'Predestination',  'Probability manipulation', 'Psionic Sense', 'Radial Navigation', 'Retrospection', 'Safe Path', 'See Ethereal', 'See Magic', 'See Sound', 'Sensitivity to observation', 'Spirit Sense', 'Trail of destruction', 'Watcher\'s ward', 'Weather prediction'
     ]
   },
-  'Psychokinetic': {
+  'Psychokinesis': {
     "Ciências": ['Create Object', 'Detonate', 'Disintegrate', 'Kinetic Control', 'Megakinesis', 'Molecular Rearrangement', 'Project Force', 'Suppress magic', 'Telekinesis', 'Telekinetic barrier', 'Telekinetic flight'],
     "Devoções": [
       'Animate Object', 'Animate Shadow', 'Ballistic Attack', 'Compact', 'Concentrate Water', 'Control Body', 'Control Flames', 'Control Light', 'Control Sound', 'Control Wind', 'Create Sound', 'Cyrokinesis', 'Deflect', 'Ghost writing', 'Inertial Barrier', 'Levitation', 'Magnetize', 'Mass manipulation', 'Molecular Agitation', 'Molecular bonding', 'Molecular Manipulation', 'Momentum theft', 'Opposite reaction', 'Return flight', 'Soften', 'Stasis Field', 'Static discharge'
     ]
   },
-  'Psychometabolic': {
+  'Psychometabolism': {
     "Ciências": ['Animal Affinity', 'Complete Healing', 'Death Field', 'Elemental composition', 'Energy Containment', 'Life Draining', 'Metamorphosis', 'Nerve manipulation', 'Poison simulation', 'Regenerate', 'Shadow-form', 'Split Personality'],
     "Devoções": [
       'Absorb Disease', 'Accelerate', 'Adrenaline Control', 'Aging', 'Alter Features', 'Biofeedback', 'Body Control', 'Body Equilibrium', 'Body Weaponry', 'Cannibalize', 'Carapace', 'Catfall', 'Cause Decay', 'Cause sleep', 'Cell Adjustment', 'Chameleon Power', 'Chemical Simulation', 'Cognitive trance', 'Displacement', 'Double Pain', 'Ectoplasmic Form', 'Enhanced Strength', 'Enhancement', 'Expansion', 'Fighting trance', 'Flesh Armour', 'Forced symmetry', 'Gird', 'Graft Weapon', 'Heightened Senses', 'Immovability', 'Intensify', 'Iron will', 'Lend Health', 'Magnify', 'Mind Over Body', 'Pheromone discharge', 'Photosynthesis', 'Prolong', 'Reduction', 'Rigidity', 'Share Strength', 'Spider touch', 'Splice', 'Strength of the land', 'Suspend Animation'
     ]
   },
-  'Psychoportative': {
+  'Psychoportation': {
     "Ciências": ['Banishment', 'Planar transposition', 'Probability Travel', 'Summon Planar Creature', 'Summon planar energies', 'Teleport', 'Teleport Other', 'Time travel', 'Wormhole'],
     "Devoções": [
       'Astral Projection', 'Blink', 'Dimension blade', 'Dimension Walk', 'Dimensional Door', 'Dimensional screen', 'Dream Travel', 'Duo-dimension', 'Ethereal traveller', 'Phase', 'Phase object', 'Pocket dimension', 'Shadow walk', 'Spatial distortion', 'Summon object', 'Teleport lock', 'Teleport object', 'Teleport Trigger', 'Time dilation', 'Time duplicate', 'Time Shift', 'Time/Space Anchor', 'Wrench'
     ]
   },
-  'Telepathic': {
+  'Telepathy': {
     "Ciências": [
-      'Aura Alteration', 'Domination', 'Empower', 'Fate Link', 'Hallucination', 'Mass Domination', 'Mindflame', 'Mindlink', 'Mindwipe', 'Probe', 'Psychic Surgery', 'Superior Invisibility', 'Switch Personality', 'Ultrablast'
+      // Modos de Ataque
+      'Psychic Crush',
+      
+      'Aura Alteration', 'Domination', 'Empower', 'Fate Link', 'Hallucination', 'Mass Domination', 'Mindflame', 'Mindlink', 'Mindwipe', 'Probe', 'Psychic Surgery', 'Superior Invisibility', 'Switch Personality', 'Ultrablast',
     ],
     "Devoções": [
-      'Contact', 'Acceptance', 'Alignment stabilization', 'Amnesia', 'Attraction', 'Aversion', 'Awe', 'Beast mastery', 'Conceal Thoughts', 'Convergence', 'Daydream', 'Empathy', 'ESP', 'False Sensory Input', 'Focus forgiveness', 'Hivemind',  'Identity Penetration', 'Impossible task', 'Incarnation Awareness', 'Inflict Pain', 'Insect mind',  'Invincible Foes', 'Invisibility', 'Life Detection', 'Mental Barrier', 'Mind Bar', 'Mysterious traveller', 'Phobia Amplification', 'Plant mind', 'Post-Hypnotic Suggestion', 'Psionic Inflation',  'Psionic residue', 'Psionic vampirism', 'Psychic blade', 'Psychic Drain', 'Psychic Impersonation',  'Psychic Messenger', 'Receptacle', 'Reptile mind', 'Repugnance', 'Send Thoughts', 'Sensory suppression', 'Sight Link', 'Sound Link', 'Suppress fear', 'Synaptic Static', 'Taste Link', 'Telempathic Projection', 'True worship', 'Truthear'
+      // Modos de Ataque
+      'Ego Whip', 'Id Insinuation', 'Mind Thrust', 'Psionic Blast',
+
+      'Contact', 'Acceptance', 'Alignment stabilization', 'Amnesia', 'Attraction', 'Aversion', 'Awe', 'Beast mastery', 'Conceal Thoughts', 'Convergence', 'Daydream', 'Empathy', 'ESP', 'False Sensory Input', 'Focus forgiveness', 'Hivemind',  'Identity Penetration', 'Impossible task', 'Incarnation Awareness', 'Inflict Pain', 'Insect mind',  'Invincible Foes', 'Invisibility', 'Life Detection', 'Mental Barrier', 'Mind Bar', 'Mysterious traveller', 'Phobia Amplification', 'Plant mind', 'Post-Hypnotic Suggestion', 'Psionic Inflation',  'Psionic residue', 'Psionic vampirism', 'Psychic blade', 'Psychic Drain', 'Psychic Impersonation',  'Psychic Messenger', 'Receptacle', 'Reptile mind', 'Repugnance', 'Send Thoughts', 'Sensory suppression', 'Sight Link', 'Sound Link', 'Suppress fear', 'Synaptic Static', 'Taste Link', 'Telempathic Projection', 'True worship', 'Truthear',
     ]
   },
   'Metapsionics': {
@@ -776,7 +782,7 @@ const ATAQUES_PSIONICAS = [
     ciencia: false,
   },
   {
-    poder: 'Insinuation Id',
+    poder: 'Id Insinuation',
     ciencia: false,
   },
   {
