@@ -326,7 +326,9 @@ function definirAtributosTela(callback) {
 document.getElementById('texto-formulario-darksun').addEventListener('input',(event)=>{
   document.getElementById('texto-formulario-ravenloft').checked = false;
   if (document.getElementById('texto-formulario-darksun').checked) {
-    document.getElementById('texto-formulario-nivel').value = 3;
+    //document.getElementById('texto-formulario-nivel').value = 3;
+    document.getElementById('texto-formulario-nivel').selectedIndex = 2;
+
     document.getElementById('texto-formulario-darksun-tipo-mago').disabled = false;
     document.getElementById('texto-formulario-darksun-tipo-mago').readonly = false;
   } else {
@@ -338,7 +340,10 @@ document.getElementById('texto-formulario-darksun').addEventListener('input',(ev
 });
 
 document.getElementById('texto-formulario-nivel').addEventListener('input',(event)=>{
-  carregarComboDisciplinas(()=>{});
+  carregarComboDisciplinas(()=>{
+    let parametro = { armas: false, escudos: false, armaduras: false, pericias: false, escolas: false, magias_arcanas: true };
+    carregarCombosItens(parametro,()=>{});
+  });
 });
 
 document.getElementById('texto-formulario-disciplina').addEventListener('input',(event)=>{
@@ -517,8 +522,147 @@ function obterTendenciaSelecionada() {
   return selecionada;
 }
 
+function compareItensCombo( a, b ) {
+  if ( a.text < b.text ){
+    return -1;
+  }
+  if ( a.text > b.text ){
+    return 1;
+  }
+  return 0;
+}
+
+function loadingCriar_Option(combo,list,selectedIndex,callback) {
+  /*
+    list = {
+      value: '',
+      text: '',
+    }
+  */
+
+  if ( (list == undefined) || (list == null) || (list == '') || (list.length == 0) ) {
+    criarOption(combo,'Todas','Todas');
+    combo.disabled = true;
+    combo.readonly = true;
+    error('Erro ao montar a lista:');
+    console.error(combo);
+    callback();
+  } else {
+    combo.disabled = false;
+    combo.readonly = false;
+
+    if (list.length == 1) {
+      criarOption(combo,list[0].value,list[0].text);
+      callback();
+    } else { // LOOP
+      let entryTodas = {
+        possui: false,
+        value: '',
+        text: '',
+        tem_grupo: false,
+        grupo: '',
+      };
+      let lista_conferencia = [];
+      let selectedIndexAjustado = -1;
+      let valueSelectedIndex = 'NAO_EXISTE';
+      if (selectedIndex > -1) {
+        valueSelectedIndex = list[selectedIndex].value;
+      }
+
+      let index_todas = list.findIndex(entry => ( (entry.text == 'Todas') || (entry.text == 'Todos') ));
+      if (index_todas > -1) {
+        entryTodas.possui = true;
+        entryTodas.value = list[index_todas].value;
+        entryTodas.text = list[index_todas].text;
+        entryTodas.tem_grupo = list[index_todas].tem_grupo;
+        entryTodas.grupo = list[index_todas].grupo;
+        list.splice(index_todas, 1);
+      }
+
+      list.sort(compareItensCombo);
+
+      list.forEach((entry, index) => {
+        if ( (entryTodas.possui) && (index == 0) ) {
+          if (entryTodas.tem_grupo) {
+            criarOptionPericias(combo,{option: entryTodas.text, value: entryTodas.value, grupo: entryTodas.grupo});
+          } else {
+            criarOption(combo,entryTodas.value,entryTodas.text);
+          }
+        }
+
+        if (valueSelectedIndex == entry.value) {
+          selectedIndexAjustado = index;
+        }
+
+        let index_ja_tem = lista_conferencia.findIndex(inner => (inner == entry.value));
+        if (index_ja_tem == -1) {
+          lista_conferencia.push(entry.value);
+
+          if (entry.tem_grupo) {
+            criarOptionPericias(combo,{option: entry.text, value: entry.value, grupo: entry.grupo});
+          } else {
+            criarOption(combo,entry.value,entry.text);
+          }
+        }
+
+        if (index == (list.length - 1)) {
+          if (selectedIndexAjustado > -1) {
+            combo.selectedIndex = selectedIndexAjustado;
+          }
+
+          callback();
+        }
+      });
+    } // LOOP
+  }
+}
+
+function loadingNewItem(list,value,text) {
+  list.push({
+    value: value,
+    text: text,
+    tem_grupo: false,
+    grupo: '',
+  });
+}
+
+function loadingNewItemPericias(list,pericia) {
+  list.push({
+    value: pericia.value,
+    text: pericia.option,
+    tem_grupo: true,
+    grupo: pericia.grupo,
+  });
+}
+
+function loadingNewItemEscola(list,value,text) {
+  if ( (value != 'Todas') && (value != 'Nenhuma') ) {
+    text = LISTA_ESCOLAS_ARCANAS_MAGO_PARA_ESCOLA[value];
+
+    if (["Ar","Terra","Água","Fogo"].indexOf(text) > -1) {
+      text = `${text} (Elementalista)`;
+    }
+  }
+
+  list.push({
+    value: value,
+    text: text,
+    tem_grupo: false,
+    grupo: '',
+  });
+}
+
+function loadingNewItem_CienciasEDevocoes(list,value,texto) {
+  let array_ataque = ATAQUES_PSIONICAS.filter(entry => entry.poder == texto);
+  if (array_ataque.length == 1) {
+    texto = `${texto} (Modo de Ataque)`;
+  }
+  loadingNewItem(list,value,texto);
+}
+
 function carregarCombosRacas(callback) {
   let selecionada = obterClasseSelecionada();
+  let list_combo = [];
 
   let combo = document.getElementById('texto-formulario-raca');
   combo.innerHTML = '';
@@ -529,9 +673,14 @@ function carregarCombosRacas(callback) {
 
     CLASSES[selecionada]["Raças Permitidas"].forEach((classe, i) => {
       COMBO_RACAS.forEach((item, j) => {
+
+        if ( (i == 0) && (j == 0) ) {
+          loadingNewItem(list_combo,'Todas','Todas');
+        }
+
         if (classe == item.value) {
           contador = contador + 1;
-          criarOption(combo,item.value,item.texto);
+          loadingNewItem(list_combo,item.value,item.texto);
 
           if (item.value == 'Humano') {
             index_humano = contador;
@@ -540,21 +689,25 @@ function carregarCombosRacas(callback) {
 
         if (i == (CLASSES[selecionada]["Raças Permitidas"].length - 1)) {
           if (j == (COMBO_RACAS.length - 1)) {
-            if (index_humano > -1) {
-              combo.selectedIndex = index_humano;
+
+            let selectedIndex = -1;
+            let index_tabaxi = list_combo.findIndex(entry => (entry.value == 'Tabaxi'));
+            if ( (index_tabaxi > -1) && (list_combo.length == 3) ) {
+              // Quando só tem humano e tabaxi, definir index selecionado
+              selectedIndex = index_humano;
             }
 
-            callback();
+            loadingCriar_Option(combo,list_combo,selectedIndex,callback);
           }
         }
       });
     });
   } else {
     COMBO_RACAS.forEach((item, i) => {
-      criarOption(combo,item.value,item.texto);
+      loadingNewItem(list_combo,item.value,item.texto);
 
       if (i == (COMBO_RACAS.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
   }
@@ -569,6 +722,8 @@ function obterRacaSelecionada() {
 }
 
 function carregarCombosClasses(selecionada,callback) {
+  let list_combo = [];
+
   let forcar_classe = false;
   if ( (selecionada) && (selecionada != null) && (selecionada != undefined) && (selecionada != 'Todas') ) {
     forcar_classe = true;
@@ -582,19 +737,24 @@ function carregarCombosClasses(selecionada,callback) {
   if ( (raca_selecionada != 'Todas') && (!forcar_classe) ) {
     let keys_classes = Object.keys(CLASSES);
     keys_classes.forEach((key_classe, i) => {
+
+      if (i == 0) {
+        loadingNewItem(list_combo,'Todas','Todas');
+      }
+
       if (CLASSES[key_classe]["Raças Permitidas"].includes(raca_selecionada)) {
-        criarOption(combo,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].value,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].texto);
+        loadingNewItem(list_combo,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].value,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].texto);
       }
 
       if (i == (keys_classes.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
   } else {
     let index_forcar = -1;
 
     COMBO_CLASSES.forEach((item, i) => {
-      criarOption(combo,item.value,item.texto);
+      loadingNewItem(list_combo,item.value,item.texto);
 
       if (forcar_classe) {
         if (selecionada == item.value) {
@@ -603,11 +763,12 @@ function carregarCombosClasses(selecionada,callback) {
       }
 
       if (i == (COMBO_CLASSES.length - 1)) {
+        let selectedIndex = -1;
         if (index_forcar > -1) {
-          combo.selectedIndex = index_forcar;
+          selectedIndex = index_forcar;
         }
 
-        callback();
+        loadingCriar_Option(combo,list_combo,selectedIndex,callback);
       }
     });
   }
@@ -621,6 +782,7 @@ document.getElementById('texto-formulario-tendencia').addEventListener('input',(
 });
 
 function carregarComboTendencias(callback) {
+  //let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let keys_tendencias = [];
 
@@ -644,6 +806,9 @@ function carregarComboTendencias(callback) {
 }
 
 function carregarComboCienciasEDevocoes(callback) {
+  let list_combo_ciencia = [];
+  let list_combo_devocoes = [];
+
   let classe_selecionada = obterClasseSelecionada();
   let selecionada = obterDisciplinaSelecionada();
 
@@ -662,17 +827,21 @@ function carregarComboCienciasEDevocoes(callback) {
       criarOption(combo_devocoes,texto_padrao,texto_padrao);
       callback();
     } else {
+      loadingNewItem(list_combo_ciencia,'Todas','Todas');
 
-      criarOption(combo_ciencia,'Todas','Todas');
       selecionada.ciencias.forEach((ciencia, index_ciencias) => {
-        criarOptionCienciasEDevocoes(combo_ciencia,ciencia,ciencia);
-        if (index_ciencias == (selecionada.ciencias.length - 1)) {
+        loadingNewItem_CienciasEDevocoes(list_combo_ciencia,ciencia,ciencia);
 
-          criarOption(combo_devocoes,'Todas','Todas');
+        if (index_ciencias == (selecionada.ciencias.length - 1)) {
+          loadingNewItem(list_combo_devocoes,'Todas','Todas');
+
           selecionada.devocoes.forEach((devocao, index_devocoes) => {
-            criarOptionCienciasEDevocoes(combo_devocoes,devocao,devocao);
+            loadingNewItem_CienciasEDevocoes(list_combo_devocoes,devocao,devocao);
+
             if (index_devocoes == (selecionada.devocoes.length - 1)) {
-              callback();
+              loadingCriar_Option(combo_ciencia,list_combo_ciencia,-1,()=>{
+                loadingCriar_Option(combo_devocoes,list_combo_devocoes,-1,callback);
+              });
             }
           });
 
@@ -689,6 +858,7 @@ function carregarComboCienciasEDevocoes(callback) {
 }
 
 function carregarComboModosDefesa(callback) {
+  let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let nivel_selecionado = obterNivelSelecionado();
 
@@ -698,11 +868,13 @@ function carregarComboModosDefesa(callback) {
   if ( (classe_selecionada == 'Todas') || (classe_selecionada == 'Psionicista') ) {
     let keys = JSON.parse(JSON.stringify(DEFESAS_PSIONICAS));
 
-    criarOption(combo,'Todas','Todas');
+    loadingNewItem(list_combo,'Todas','Todas');
+
     keys.forEach((entry, index) => {
-      criarOption(combo,entry,entry);
+      loadingNewItem(list_combo,entry,entry);
+
       if (index == (keys.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
 
@@ -713,6 +885,7 @@ function carregarComboModosDefesa(callback) {
 }
 
 function carregarComboDisciplinas(callback) {
+  let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let nivel_selecionado = obterNivelSelecionado();
 
@@ -727,11 +900,13 @@ function carregarComboDisciplinas(callback) {
       keys_disciplinas.splice(index_metapsionicos, 1);
     }
 
-    criarOption(combo,'Todas','Todas');
+    loadingNewItem(list_combo,'Todas','Todas');
+
     keys_disciplinas.forEach((disciplina, index_disciplina) => {
-      criarOption(combo,disciplina,disciplina);
+      loadingNewItem(list_combo,disciplina,disciplina);
+
       if (index_disciplina == (keys_disciplinas.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
 
@@ -742,29 +917,32 @@ function carregarComboDisciplinas(callback) {
 }
 
 function carregarComboDivindades(callback) {
+  let list_combo = [];
   let raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
   let tendencia = document.getElementById('texto-formulario-tendencia').options[document.getElementById('texto-formulario-tendencia').selectedIndex].value;
   let classe = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
   let combo = document.getElementById('texto-formulario-divindade');
   combo.innerHTML = '';
-  criarOption(combo,'Todas','Todas');
+
+  loadingNewItem(list_combo,'Todas','Todas');
 
   organizar_divindades_permitidas_tela(raca,tendencia,classe,(lista_divindades)=>{
     if (lista_divindades.length > 0) {
       lista_divindades.forEach((divindade, index_divindade) => {
-        criarOption(combo,divindade,divindade);
+        loadingNewItem(list_combo,divindade,divindade);
 
         if (index_divindade == (lista_divindades.length - 1)) {
-          callback();
+          loadingCriar_Option(combo,list_combo,-1,callback);
         }
       });
     } else {
-      callback();
+      loadingCriar_Option(combo,list_combo,-1,callback);
     }
   });
 }
 
 function carregarComboLinhagem(callback) {
+  let list_combo = [];
   let combo = document.getElementById('texto-formulario-linhagem');
   combo.innerHTML = '';
 
@@ -779,10 +957,10 @@ function carregarComboLinhagem(callback) {
   }
 
   lista_linhagens.forEach((linhagem, index_linhagem) => {
-    criarOption(combo,linhagem,linhagem);
+    loadingNewItem(list_combo,linhagem,linhagem);
 
     if (index_linhagem == (lista_linhagens.length - 1)) {
-      callback();
+      loadingCriar_Option(combo,list_combo,-1,callback);
     }
   });
 }
@@ -827,6 +1005,7 @@ function carregarComboEscolasOptions(escolas,callback) {
   let combo = document.getElementById('texto-formulario-escola');
   combo.innerHTML = '';
 
+  let list_combo = [];
   let options = [];
 
   if (escolas.length == 1) {
@@ -836,10 +1015,10 @@ function carregarComboEscolasOptions(escolas,callback) {
   }
 
   options.forEach((option, index_option) => {
-    criarOptionEscola(combo,option,option);
+    loadingNewItemEscola(list_combo,option,option);
 
     if (index_option == (options.length - 1)) {
-      callback();
+      loadingCriar_Option(combo,list_combo,-1,callback);
     }
   });
 }
@@ -875,6 +1054,7 @@ function carregarComboEscolas(carregar,callback) {
 }
 
 function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
+  let list_combo = [];
   let combo = document.getElementById('texto-formulario-escola-magia');
   combo.innerHTML = '';
 
@@ -896,7 +1076,7 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
       MAGIAS_ARCANAS[nivel][escola].forEach((magia, index_magia) => {
 
         if ( (index_nivel == 0) && (index_escola == 0) && (index_magia == 0) ) {
-          criarOption(combo,'Todas','Todas');
+          loadingNewItem(list_combo,'Todas','Todas');
         }
 
         let nome_escola_convertido = LISTA_ESCOLAS_ARCANAS_MAGO_PARA_ESCOLA[escola];
@@ -908,24 +1088,24 @@ function carregarComboMagiasArcanasOptions(keys_escolas,callback) {
             if (classe_selecionada == 'Cigano') {
               if (MAGIAS_ARCANAS[0]["Adivinho"].indexOf(magia) > -1) {
                 lista_conferencia.push(magia);
-                criarOption(combo,magia,texto);
+                loadingNewItem(list_combo,magia,texto);
               }
             } else {
               if (ESCOLAS_ARCANAS_OPOSTAS[escola].indexOf(nome_escola_convertido) == -1) {
                 lista_conferencia.push(magia);
-                criarOption(combo,magia,texto);
+                loadingNewItem(list_combo,magia,texto);
               }
             }
           } else {
             lista_conferencia.push(magia);
-            criarOption(combo,magia,texto);
+            loadingNewItem(list_combo,magia,texto);
           }
         }
 
         if (index_magia == (MAGIAS_ARCANAS[nivel][escola].length - 1)) {
           if (index_escola == (keys_escolas.length - 1)) {
             if (index_nivel == (niveis.length - 1)) {
-              callback();
+              loadingCriar_Option(combo,list_combo,-1,callback);
             }
           }
         }
@@ -977,15 +1157,16 @@ function carregarComboPericiaOptions(keys_pericias,callback) {
   let combo = document.getElementById('texto-formulario-pericia');
   combo.innerHTML = '';
 
+  let list_combo = [];
   let pericias = [
     {option: 'Todas', value: 'Todas', grupo: 'Geral'}
   ].concat(keys_pericias);
 
   pericias.forEach((pericia, index_pericia) => {
-    criarOptionPericias(combo,pericia);
+    loadingNewItemPericias(list_combo,pericia);
 
     if (index_pericia == (pericias.length - 1)) {
-      callback();
+      loadingCriar_Option(combo,list_combo,-1,callback);
     }
   });
 }
@@ -1031,6 +1212,7 @@ function carregarComboArmaduras(carregar,callback) {
     return;
   }
 
+  let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let keys_armaduras = [];
   let nomes_armaduras = ARMADURAS.map(e => e.nome);
@@ -1051,10 +1233,10 @@ function carregarComboArmaduras(carregar,callback) {
   if (keys_armaduras.length > 0) {
     let armaduras = ['Todas'].concat(keys_armaduras);
     armaduras.forEach((armadura, index_armadura) => {
-      criarOption(combo,armadura,armadura);
+      loadingNewItem(list_combo,armadura,armadura);
 
       if (index_armadura == (armaduras.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
   } else {
@@ -1069,6 +1251,7 @@ function carregarComboEscudos(carregar,callback) {
     return;
   }
 
+  let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let keys_escudos = [];
   let nomes_escudos = ESCUDOS.map(e => e.nome);
@@ -1089,10 +1272,10 @@ function carregarComboEscudos(carregar,callback) {
   if (keys_escudos.length > 0) {
     let escudos = ['Todos'].concat(keys_escudos);
     escudos.forEach((escudo, index_escudo) => {
-      criarOptionSemAlterarTexto(combo,escudo,escudo);
+      loadingNewItem(list_combo,escudo,escudo);
 
       if (index_escudo == (escudos.length - 1)) {
-        callback();
+        loadingCriar_Option(combo,list_combo,-1,callback);
       }
     });
   } else {
@@ -1107,6 +1290,7 @@ function carregarComboArmas(carregar,callback) {
     return;
   }
 
+  let list_combo = [];
   let classe_selecionada = obterClasseSelecionada();
   let keys_armas = [];
 
@@ -1135,10 +1319,10 @@ function carregarComboArmas(carregar,callback) {
 
   let armas = ['Todas'].concat(keys_armas);
   armas.forEach((arma, index_arma) => {
-    criarOption(combo,arma,arma);
+    loadingNewItem(list_combo,arma,arma);
 
     if (index_arma == (armas.length - 1)) {
-      callback();
+      loadingCriar_Option(combo,list_combo,-1,callback);
     }
   });
 }

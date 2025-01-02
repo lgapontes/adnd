@@ -272,8 +272,17 @@
       </div>
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-nivel">Nível</label>
+        <!--
         <input type="number" class="pequeno" max="3" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel">
-        <span class="dica">Nível máximo: 3</span>
+        -->
+        <select class="medio" name="texto-formulario-nivel" id="texto-formulario-nivel">
+          <option value="1">Nível 1</option>
+          <option value="2">Nível 2</option>
+          <option value="3">Nível 3</option>
+        </select>
+
+        <label class="coluna-interna" for="texto-formulario-vida-fixa">PV Inicial</label>
+        <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
       </div>
 
       <div class="bloco bloco-campos bloco-checkbox">
@@ -294,11 +303,14 @@
       </div>
       -->
       <div class="bloco bloco-campos direita">
+        <!--
         <label for="texto-formulario-vida-fixa">PV Inicial</label>
         <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
+        -->
 
-        <label class="coluna-interna" for="texto-formulario-idade">Idade</label>
-        <input type="number" class="medio" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
+        <label for="texto-formulario-idade">Idade</label>
+        <input type="number" class="pequeno" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
+        <span class="dica" id="texto-formulario-idade-dica"></span>
       </div>
 
       <div class="bloco bloco-campos">

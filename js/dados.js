@@ -472,7 +472,7 @@ const DIVINDADES_PERSONAGENS = {
     ],
     "Bondoso (bom e neutro)": [],
     "Neutro": [
-      ' Cat Lord (Faerûn)',
+      'Cat Lord (Faerûn)',
     ],
     "Egoista (neutro e maligno)": [],
     "Honrado (caótico e bom)": [],

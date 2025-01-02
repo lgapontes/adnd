@@ -262,7 +262,7 @@ function poderes_psionicos(personagem,callback) {
           personagem["Poderes Psiônicos"]["Modos de Ataque"].push(combo_devocao_value);
           array_ataques.splice(possui_array_ataque_index, 1);
         } else {
-          personagem["Poderes Psiônicos"]["Devoções"].push(combo_devocao_value);  
+          personagem["Poderes Psiônicos"]["Devoções"].push(combo_devocao_value);
         }
 
         array_devocoes_um.splice(combo_devocao_value_index, 1);
@@ -1953,6 +1953,7 @@ function atributos_carisma(atributo, carisma) {
 }
 
 function obterNivelSelecionado() {
+  /*
   let texto_formulario_nivel = document.getElementById('texto-formulario-nivel');
   let nivel = 1;
   if (isInt(texto_formulario_nivel.value)) {
@@ -1961,6 +1962,11 @@ function obterNivelSelecionado() {
     if (nivel < 1) nivel = 1;
     if (nivel > 3) nivel = 3;
   }
+  return nivel;
+  */
+
+  let combo = document.getElementById('texto-formulario-nivel');
+  let nivel = parseInt(combo.options[combo.selectedIndex].value);
   return nivel;
 }
 
@@ -2897,6 +2903,16 @@ function organizar_divindades_permitidas_tela(raca,tendencia,classe,callback) {
         callback(lista_final);
       }
     });
+  } else if ( (raca == 'Todas') && (tendencia != 'Todas') ) {
+    let lista_final = [];
+    let keys_racas = Object.keys(DIVINDADES_PERSONAGENS);
+    keys_racas.forEach((key_raca, index_raca) => {
+      lista_final = lista_final.concat(DIVINDADES_PERSONAGENS[key_raca][tendencia]);
+
+      if (index_raca == (keys_racas.length - 1)) {
+        callback(lista_final);
+      }
+    });
   } else {
     organizar_divindades_permitidas(false,{
       'Raça': raca,
@@ -2937,6 +2953,7 @@ function organizar_divindades_permitidas(ja_foi,personagem,callback) {
 
         organizar_divindades_tendencias(personagem['Classe'],personagem['Tendência'],(lista_tendencias)=>{
           lista_tendencias.forEach((tendencia, index_tendencia) => {
+            // AQUI
             lista_opcoes = lista_opcoes.concat(DIVINDADES_PERSONAGENS[raca][tendencia]);
 
             if (index_tendencia == (lista_tendencias.length - 1)) {
@@ -4164,7 +4181,15 @@ function sortear_magias(classe, personagem, callback) {
 
     let list_circulo_magia = ["1º Círculo","2º Círculo"];
     list_circulo_magia.forEach((entry_circulo_magia, index_circulo_magia) => {
-      let qtde_magias = personagem["Dados Básicos"]["Magias Arcanas no Grimório"][entry_circulo_magia];
+
+      let qtde_magias = 0;
+      if (personagem["Dados Básicos"]) {
+        if (personagem["Dados Básicos"]["Magias Arcanas no Grimório"]) {
+          if (personagem["Dados Básicos"]["Magias Arcanas no Grimório"][entry_circulo_magia]) {
+            qtde_magias = personagem["Dados Básicos"]["Magias Arcanas no Grimório"][entry_circulo_magia];
+          }
+        }
+      }
 
       if ( (qtde_magias == undefined) || (qtde_magias == null) || (qtde_magias == '') || (qtde_magias == '0') || (qtde_magias == 0) ) {
         debug(`Magias sorteadas: ${personagem["Grimório"][entry_circulo_magia]}`);

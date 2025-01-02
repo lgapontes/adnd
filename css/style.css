@@ -309,6 +309,10 @@ main.texto > div.bloco-campos > input[type=number].medio {
   width: 28%;
 }
 
+main.texto > div.bloco-campos > select.medio {
+  width: 28%;
+}
+
 main.texto > div.bloco-atributos > input[type=number] {
   display: block;
   float: left;
