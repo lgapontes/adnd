@@ -756,7 +756,7 @@ const DISCIPLINAS_PSIONICAS = {
     "Ciências": [
       // Modos de Ataque
       'Psychic Crush',
-      
+
       'Aura Alteration', 'Domination', 'Empower', 'Fate Link', 'Hallucination', 'Mass Domination', 'Mindflame', 'Mindlink', 'Mindwipe', 'Probe', 'Psychic Surgery', 'Superior Invisibility', 'Switch Personality', 'Ultrablast',
     ],
     "Devoções": [

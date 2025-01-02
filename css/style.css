@@ -641,6 +641,11 @@ main.menu > a.menu > span {
     display: none !important;
   }
 
+  div#ficha > div > table > tbody > tr:nth-child(5) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
   div#ficha > div > table > tbody > tr:nth-child(6) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
     background-color: rgba(240,240,240) !important;
     -webkit-print-color-adjust: exact !important;
@@ -709,5 +714,14 @@ main.menu > a.menu > span {
   div#ficha > div > table > tbody > tr:nth-child(20) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
     background-color: rgba(240,240,240) !important;
     -webkit-print-color-adjust: exact !important;
+  }
+
+  div#ficha > div > table > tbody > tr:nth-child(21) > td:nth-child(2) > table > tbody > tr:nth-child(odd) {
+    background-color: rgba(240,240,240) !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  button.fab {
+    display: none !important;
   }
 }
