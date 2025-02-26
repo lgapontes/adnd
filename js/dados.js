@@ -1307,6 +1307,47 @@ const ARMADURAS_BARDO = [
   ARMADURAS[8]
 ];
 
+/*
+const MULTICLASSES = {
+  "Anão": {
+    "Guerreiro/Ladrão",
+    "Guerreiro/Clérigo",
+  },
+  "Elfo": {
+    "Guerreiro/Mago",
+    "Guerreiro/Ladrão",
+    "Mago/Ladrão",
+  },
+  "Gnomo": {
+    "Guerreiro/Clérigo",
+    "Guerreiro/Ilusionista",
+    "Guerreiro/Ladrão",
+    "Clérigo/Ilusionista",
+    "Clérigo/Ladrão",
+    "Ilusionista/Ladrão",
+  },
+  "Meio-Elfo": {
+    "Guerreiro/Clérigo",
+    "Guerreiro/Druida",
+    "Guerreiro/Ladrão",
+    "Guerreiro/Mago",
+    "Clérigo/Ranger",
+    "Druida/Ranger",
+    "Clérigo/Mago",
+    "Druida/Mago",
+    "Ladrão/Mago",
+    "Guerreiro/Mago/Clérigo",
+    "Guerreiro/Mago/Druida",
+    "Guerreiro/Mago/Ladrão",
+  },
+  "Halfling": {
+    "Guerreiro/Ladrão",
+  },
+  "Meio-Vistani": {},
+  "Tabaxi": {},
+};
+*/
+
 const RACAS = {
   "Humano": {
     "Força": { minimo: 3, maximo: 18 },

@@ -260,6 +260,8 @@ function definirIdadeMinimaMaxima(callback) {
 function definirAtributoMinimo(darksun,number,atributo) {
   let raca = obterRacaSelecionada();
   let classe = obterClasseSelecionada();
+  let classe2_selecionada = obterMulticlasseSelecionada2();
+  let classe3_selecionada = obterMulticlasseSelecionada3();
 
   let minimo = 3;
   number.setAttribute("min", minimo);
@@ -274,6 +276,18 @@ function definirAtributoMinimo(darksun,number,atributo) {
   }
   if (classe != 'Todas') {
     let ajuste = CLASSES[classe]["Habilidades Exigidas"][atributo];
+    if (ajuste > minimo) {
+      minimo = ajuste;
+    }
+  }
+  if (classe2_selecionada != 'Todas') {
+    let ajuste = CLASSES[classe2_selecionada]["Habilidades Exigidas"][atributo];
+    if (ajuste > minimo) {
+      minimo = ajuste;
+    }
+  }
+  if (classe3_selecionada != 'Nenhuma') {
+    let ajuste = CLASSES[classe3_selecionada]["Habilidades Exigidas"][atributo];
     if (ajuste > minimo) {
       minimo = ajuste;
     }
@@ -508,8 +522,24 @@ function obterDisciplinaSelecionada() {
 
 function obterClasseSelecionada() {
   let selecionada = 'Todas';
-  if (document.getElementById('texto-formulario-classe').options.length > 0) {
-    selecionada = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
+  if (document.getElementById('texto-formulario-classe1').options.length > 0) {
+    selecionada = document.getElementById('texto-formulario-classe1').options[document.getElementById('texto-formulario-classe1').selectedIndex].value;
+  }
+  return selecionada;
+}
+
+function obterMulticlasseSelecionada2() {
+  let selecionada = 'Todas';
+  if (document.getElementById('texto-formulario-classe2').options.length > 0) {
+    selecionada = document.getElementById('texto-formulario-classe2').options[document.getElementById('texto-formulario-classe2').selectedIndex].value;
+  }
+  return selecionada;
+}
+
+function obterMulticlasseSelecionada3() {
+  let selecionada = 'Nenhuma';
+  if (document.getElementById('texto-formulario-classe3').options.length > 0) {
+    selecionada = document.getElementById('texto-formulario-classe3').options[document.getElementById('texto-formulario-classe3').selectedIndex].value;
   }
   return selecionada;
 }
@@ -569,7 +599,7 @@ function loadingCriar_Option(combo,list,selectedIndex,callback) {
         valueSelectedIndex = list[selectedIndex].value;
       }
 
-      let index_todas = list.findIndex(entry => ( (entry.text == 'Todas') || (entry.text == 'Todos') ));
+      let index_todas = list.findIndex(entry => ( (entry.text == 'Todas') || (entry.text == 'Todos') || (entry.text == 'Nenhuma') ));
       if (index_todas > -1) {
         entryTodas.possui = true;
         entryTodas.value = list[index_todas].value;
@@ -664,6 +694,8 @@ function carregarCombosRacas(callback) {
   let selecionada = obterClasseSelecionada();
   let list_combo = [];
 
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
   let combo = document.getElementById('texto-formulario-raca');
   combo.innerHTML = '';
 
@@ -678,7 +710,18 @@ function carregarCombosRacas(callback) {
           loadingNewItem(list_combo,'Todas','Todas');
         }
 
-        if (classe == item.value) {
+        if (!multiclasse) {
+          /* Não é multiclasse */
+          if (classe == item.value) {
+            contador = contador + 1;
+            loadingNewItem(list_combo,item.value,item.texto);
+
+            if (item.value == 'Humano') {
+              index_humano = contador;
+            }
+          }
+        } else {
+          /* É multiclasse */
           contador = contador + 1;
           loadingNewItem(list_combo,item.value,item.texto);
 
@@ -704,7 +747,9 @@ function carregarCombosRacas(callback) {
     });
   } else {
     COMBO_RACAS.forEach((item, i) => {
-      loadingNewItem(list_combo,item.value,item.texto);
+      if ( (!multiclasse) || ((multiclasse) && (item.value != 'Humano') && (item.value != 'Meio-Vistani')) ) {
+        loadingNewItem(list_combo,item.value,item.texto);
+      }
 
       if (i == (COMBO_RACAS.length - 1)) {
         loadingCriar_Option(combo,list_combo,-1,callback);
@@ -721,8 +766,130 @@ function obterRacaSelecionada() {
   return raca_selecionada;
 }
 
+// AQUI - proximo passo, alterar no GERADOR.JS a regra para gerar mais de uma classe, obedecendo as restrições
+
+document.getElementById('texto-formulario-multiclasse').addEventListener('input',(event)=>{
+  event.preventDefault();
+
+  let combo1 = document.getElementById('texto-formulario-classe1');
+  combo1.selectedIndex = 0;
+
+  carregarCombosClasses(null,()=>{
+    carregarCombosRacas(()=>{
+      carregarComboTendencias(()=>{
+        carregarCombosItens(PARAMETRO_ITENS_PADRAO,()=>{
+          carregarComboDivindades(()=>{
+            carregarComboDisciplinas(()=>{
+              carregarComboModosDefesa(()=>{
+                carregarComboCienciasEDevocoes(()=>{
+                  carregarCombosMulticlasses2(()=>{
+                    definirAtributosMinimos();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+document.getElementById('texto-formulario-classe2').addEventListener('input',(event)=>{
+  carregarCombosMulticlasses3(()=>{
+    definirAtributosMinimos();
+  });
+});
+
+document.getElementById('texto-formulario-classe3').addEventListener('input',(event)=>{
+  definirAtributosMinimos();
+});
+
+function carregarCombosMulticlasses3(callback) {
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+  let combo3 = document.getElementById('texto-formulario-classe3');
+
+  if (!multiclasse) {
+    combo3.innerHTML = '<option value="Nenhuma">Nenhuma</option>';
+    callback();
+
+  } else {
+    /* Combo 3 */
+    let list_combo3 = [];
+    let classe1_selecionada = obterClasseSelecionada();
+    let classe2_selecionada = obterMulticlasseSelecionada2();
+
+    combo3.innerHTML = '';
+
+    COMBO_CLASSES.forEach((classe3, index3) => {
+
+      if (classe3.value == 'Todas') {
+        loadingNewItem(list_combo3,'Nenhuma','Nenhuma');
+      } else {
+        if ( (classe3.value != classe1_selecionada) && (classe3.value != classe2_selecionada) ) {
+          loadingNewItem(list_combo3,classe3.value,classe3.texto);
+        }
+      }
+
+      if (index3 == (COMBO_CLASSES.length - 1)) {
+        loadingCriar_Option(combo3,list_combo3,-1,()=>{
+          callback();
+        });
+      }
+    });
+    /* Combo 3 */
+  }
+}
+
+function carregarCombosMulticlasses2(callback) {
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+  let combo2 = document.getElementById('texto-formulario-classe2');
+  let combo3 = document.getElementById('texto-formulario-classe3');
+
+  if (!multiclasse) {
+    combo2.innerHTML = '<option value="Nenhuma">Nenhuma</option>';
+    combo3.innerHTML = '<option value="Nenhuma">Nenhuma</option>';
+    callback();
+
+  } else {
+    /* Combo 2 */
+    let list_combo2 = [];
+    let classe1_selecionada = obterClasseSelecionada();
+
+    combo2.innerHTML = '';
+
+    COMBO_CLASSES.forEach((classe2, index2) => {
+      if ((classe2.value == 'Todas') || (classe2.value != classe1_selecionada)) {
+        loadingNewItem(list_combo2,classe2.value,classe2.texto);
+      }
+
+      if (index2 == (COMBO_CLASSES.length - 1)) {
+        loadingCriar_Option(combo2,list_combo2,-1,()=>{
+          /* Combo 3 */
+          carregarCombosMulticlasses3(callback);
+
+        });
+      }
+    });
+    /* Combo 2 */
+  }
+}
+
 function carregarCombosClasses(selecionada,callback) {
   let list_combo = [];
+
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+  if (multiclasse) {
+    document.getElementById('texto-formulario-classe2').disabled = false;
+    document.getElementById('texto-formulario-classe2').readonly = false;
+    document.getElementById('texto-formulario-classe3').disabled = false;
+    document.getElementById('texto-formulario-classe3').readonly = false;
+  } else {
+    document.getElementById('texto-formulario-classe2').disabled = true;
+    document.getElementById('texto-formulario-classe2').readonly = true;
+    document.getElementById('texto-formulario-classe3').disabled = true;
+    document.getElementById('texto-formulario-classe3').readonly = true;
+  }
 
   let forcar_classe = false;
   if ( (selecionada) && (selecionada != null) && (selecionada != undefined) && (selecionada != 'Todas') ) {
@@ -731,7 +898,7 @@ function carregarCombosClasses(selecionada,callback) {
 
   let raca_selecionada = obterRacaSelecionada();
 
-  let combo = document.getElementById('texto-formulario-classe');
+  let combo = document.getElementById('texto-formulario-classe1');
   combo.innerHTML = '';
 
   if ( (raca_selecionada != 'Todas') && (!forcar_classe) ) {
@@ -920,7 +1087,7 @@ function carregarComboDivindades(callback) {
   let list_combo = [];
   let raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
   let tendencia = document.getElementById('texto-formulario-tendencia').options[document.getElementById('texto-formulario-tendencia').selectedIndex].value;
-  let classe = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
+  let classe = document.getElementById('texto-formulario-classe1').options[document.getElementById('texto-formulario-classe1').selectedIndex].value;
   let combo = document.getElementById('texto-formulario-divindade');
   combo.innerHTML = '';
 
@@ -1379,7 +1546,7 @@ document.getElementById('texto-formulario-raca').addEventListener('input',event=
   }
 });
 
-document.getElementById('texto-formulario-classe').addEventListener('input',event=>{
+document.getElementById('texto-formulario-classe1').addEventListener('input',event=>{
   let selecionada = obterClasseSelecionada();
 
   if (COMBO_SELECIONADO == 'nenhum') {
@@ -1402,7 +1569,9 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
             carregarComboDisciplinas(()=>{
               carregarComboModosDefesa(()=>{
                 carregarComboCienciasEDevocoes(()=>{
-                  definirAtributosMinimos();
+                  carregarCombosMulticlasses2(()=>{
+                    definirAtributosMinimos();
+                  });
                 });
               });
             });
@@ -1417,7 +1586,9 @@ document.getElementById('texto-formulario-classe').addEventListener('input',even
           carregarComboDisciplinas(()=>{
             carregarComboModosDefesa(()=>{
               carregarComboCienciasEDevocoes(()=>{
-                definirAtributosMinimos();
+                carregarCombosMulticlasses2(()=>{
+                  definirAtributosMinimos();
+                });
               });
             });
           });

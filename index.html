@@ -272,18 +272,27 @@
       </div>
       <div class="bloco bloco-campos direita">
         <label for="texto-formulario-nivel">Nível</label>
-        <!--
-        <input type="number" class="pequeno" max="3" min="1" value="1" name="texto-formulario-nivel" id="texto-formulario-nivel">
-        -->
-        <select class="medio" name="texto-formulario-nivel" id="texto-formulario-nivel">
+        <select name="texto-formulario-nivel" id="texto-formulario-nivel">
           <option value="1">Nível 1</option>
           <option value="2">Nível 2</option>
           <option value="3">Nível 3</option>
         </select>
-
-        <label class="coluna-interna" for="texto-formulario-vida-fixa">PV Inicial</label>
-        <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
       </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-vida-fixa">PV Inicial</label>
+        <input type="number" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-idade">Idade</label>
+        <input type="number" class="pequeno" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
+        <span class="dica" id="texto-formulario-idade-dica"></span>
+      </div>
+
+      <!--
+      <label class="coluna-interna" for="texto-formulario-vida-fixa">PV Inicial</label>
+      <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
+      -->
 
       <div class="bloco bloco-campos bloco-checkbox">
         <input type="checkbox" name="texto-formulario-ravenloft" id="texto-formulario-ravenloft">
@@ -302,15 +311,14 @@
       <div class="bloco bloco-campos direita invisivel">
       </div>
       -->
-      <div class="bloco bloco-campos direita">
+      <div class="bloco bloco-campos bloco-checkbox direita">
         <!--
         <label for="texto-formulario-vida-fixa">PV Inicial</label>
         <input type="number" class="medio" max="200" min="1" value="" name="texto-formulario-vida-fixa" id="texto-formulario-vida-fixa">
         -->
 
-        <label for="texto-formulario-idade">Idade</label>
-        <input type="number" class="pequeno" max="1000" min="1" value="" name="texto-formulario-idade" id="texto-formulario-idade">
-        <span class="dica" id="texto-formulario-idade-dica"></span>
+        <input type="checkbox" name="texto-formulario-multiclasse" id="texto-formulario-multiclasse">
+        <label for="texto-formulario-multiclasse">Utilizar Multiclasses*</label>
       </div>
 
       <div class="bloco bloco-campos">
@@ -319,9 +327,26 @@
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-classe" id="texto-formulario-classe-label">Classe</label>
-        <select name="texto-formulario-classe" id="texto-formulario-classe">
+        <label for="texto-formulario-classe1" id="texto-formulario-classe1-label">1ᵃ Classe</label>
+        <select name="texto-formulario-classe1" id="texto-formulario-classe1">
         </select>
+      </div>
+
+      <div class="bloco bloco-campos">
+        <label for="texto-formulario-classe2" id="texto-formulario-classe2-label">2ᵃ Classe</label>
+        <select name="texto-formulario-classe2" id="texto-formulario-classe2" readonly disabled>
+          <option value="Nenhuma">Nenhuma</option>
+        </select>
+      </div>
+      <div class="bloco bloco-campos direita">
+        <label for="texto-formulario-classe3" id="texto-formulario-classe3-label">3ᵃ Classe</label>
+        <select name="texto-formulario-classe3" id="texto-formulario-classe3" readonly disabled>
+          <option value="Nenhuma">Nenhuma</option>
+        </select>
+      </div>
+
+      <div class="bloco-texto bloco-texto-apoio">
+        <span class="asterisco">*</span> Ao marcar a opção <b>Utilizar Multiclasses</b> o personagem precisa obrigatoriamente ser de raça semihumana e poderá escolher uma composição de até três multiclasses. Note que o <b>Livro do Jogador</b> traz restrições de quais combinações são possíveis por raça, mas há diversos complementos que habilitam outras combinações. Aqui você pode escolher qualquer combinação, <b>mas deve conversar com o narrador e verificar nos livros</b> se tal combinação é permitida.
       </div>
 
       <div class="bloco bloco-campos">
@@ -336,33 +361,33 @@
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-arma">Arma*</label>
+        <label for="texto-formulario-arma">Arma¹</label>
         <select name="texto-formulario-arma" id="texto-formulario-arma">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-escudo">Escudo*</label>
+        <label for="texto-formulario-escudo">Escudo¹</label>
         <select name="texto-formulario-escudo" id="texto-formulario-escudo">
         </select>
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-armadura" class="menor">Armadura*</label>
+        <label for="texto-formulario-armadura" class="menor">Armadura¹</label>
         <select name="texto-formulario-armadura" id="texto-formulario-armadura">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-pericia">Perícia*</label>
+        <label for="texto-formulario-pericia">Perícia¹</label>
         <select name="texto-formulario-pericia" id="texto-formulario-pericia">
         </select>
       </div>
 
       <div class="bloco-texto bloco-texto-apoio">
-        <span class="asterisco">*</span> A escolha da <b>Arma</b>, da <b>Armadura</b>, do <b>Escudo</b> e da <b>Perícia</b> depende de vários fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
+        <span class="asterisco">¹</span> A escolha da <b>Arma</b>, da <b>Armadura</b>, do <b>Escudo</b> e da <b>Perícia</b> depende de vários fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-darksun-tipo-mago">DarkSun¹</label>
+        <label for="texto-formulario-darksun-tipo-mago">DarkSun²</label>
         <select name="texto-formulario-darksun-tipo-mago" id="texto-formulario-darksun-tipo-mago" readonly disabled>
           <option value="Todos" selected>Todos</option>
           <option value="Defiler">Defiler (Profanador)</option>
@@ -376,46 +401,46 @@
       </div>
 
       <div class="bloco-texto bloco-texto-apoio">
-        <span class="asterisco">¹</span> A opção <b>DarkSun</b> estará disponível apenas se a opção <b>Campanha Dark Sun</b> estiver marcada. Ela permite escolher entre <b>Defiler (Profanador)</b> ou <b>Preserver (Preservador)</b> para os conjuradores arcanos. Esta opção será utilizada apenas caso um mago ou mago especialista seja rolado.
+        <span class="asterisco">²</span> A opção <b>DarkSun</b> estará disponível apenas se a opção <b>Campanha Dark Sun</b> estiver marcada. Ela permite escolher entre <b>Defiler (Profanador)</b> ou <b>Preserver (Preservador)</b> para os conjuradores arcanos. Esta opção será utilizada apenas caso um mago ou mago especialista seja rolado.
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-escola">Escola²</label>
+        <label for="texto-formulario-escola">Escola³</label>
         <select name="texto-formulario-escola" id="texto-formulario-escola">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-escola-magia" class="magia">Magia Arcana²</label>
+        <label for="texto-formulario-escola-magia" class="magia">Magia Arcana³</label>
         <select name="texto-formulario-escola-magia" id="texto-formulario-escola-magia" class="magia">
         </select>
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-disciplina" class="disciplina">Disciplina²</label>
+        <label for="texto-formulario-disciplina" class="disciplina">Disciplina³</label>
         <select name="texto-formulario-disciplina" id="texto-formulario-disciplina">
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-modo-defesa" class="magia">Modo Defesa²</label>
+        <label for="texto-formulario-modo-defesa" class="magia">Modo Defesa³</label>
         <select name="texto-formulario-modo-defesa" id="texto-formulario-modo-defesa" class="magia">
         </select>
       </div>
 
       <div class="bloco bloco-campos">
-        <label for="texto-formulario-ciencia">Ciência²</label>
+        <label for="texto-formulario-ciencia">Ciência³</label>
         <select name="texto-formulario-ciencia" id="texto-formulario-ciencia">
           <option value="Todas" selected>Em construção</option>
         </select>
       </div>
       <div class="bloco bloco-campos direita">
-        <label for="texto-formulario-devocao">Devoção²</label>
+        <label for="texto-formulario-devocao">Devoção³</label>
         <select name="texto-formulario-devocao" id="texto-formulario-devocao">
           <option value="Todas" selected>Em construção</option>
         </select>
       </div>
 
       <div class="bloco-texto bloco-texto-apoio">
-        <span class="asterisco">²</span> A escolha da <b>Escola</b>, da <b>Magia Arcana</b>, da <b>Disciplina</b>, do <b>Modo Defesa</b>, da <b>Ciência</b> e da <b>Devoção</b> depende da classe escolhida e outros fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
+        <span class="asterisco">³</span> A escolha da <b>Escola</b>, da <b>Magia Arcana</b>, da <b>Disciplina</b>, do <b>Modo Defesa</b>, da <b>Ciência</b> e da <b>Devoção</b> depende da classe escolhida e outros fatores da ficha. Isso significa que o itens escolhidos acima podem <b>não</b> ser sorteados no rolador.
       </div>
 
       <br>

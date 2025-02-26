@@ -2437,7 +2437,7 @@ function validar_classes_por_habilidades(classes, personagem, callback) {
 
       if (classes_permitidas.length == 0) {
 
-        let texto_formulario_classe = document.getElementById('texto-formulario-classe');
+        let texto_formulario_classe = document.getElementById('texto-formulario-classe1');
         let texto_formulario_classe_valor = texto_formulario_classe.options[texto_formulario_classe.selectedIndex].value;
         let classe_selecionada = '';
 
@@ -2710,7 +2710,7 @@ function render(callback) {
 
   forcar_havenloft = document.getElementById('texto-formulario-ravenloft').checked;
   forcar_darksun = document.getElementById('texto-formulario-darksun').checked;
-  forcar_classe = document.getElementById('texto-formulario-classe').options[document.getElementById('texto-formulario-classe').selectedIndex].value;
+  forcar_classe = document.getElementById('texto-formulario-classe1').options[document.getElementById('texto-formulario-classe1').selectedIndex].value;
   forcar_raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
 
   obter_dados_personagem(personagem => {
