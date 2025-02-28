@@ -280,7 +280,7 @@ function definirAtributoMinimo(darksun,number,atributo) {
       minimo = ajuste;
     }
   }
-  if (classe2_selecionada != 'Todas') {
+  if ( (classe2_selecionada != 'Nenhuma') && (classe2_selecionada != 'Todas') ) {
     let ajuste = CLASSES[classe2_selecionada]["Habilidades Exigidas"][atributo];
     if (ajuste > minimo) {
       minimo = ajuste;
@@ -891,9 +891,9 @@ function carregarCombosClasses(selecionada,callback) {
     document.getElementById('texto-formulario-classe3').readonly = true;
   }
 
-  let forcar_classe = false;
+  let boolean_classe = false;
   if ( (selecionada) && (selecionada != null) && (selecionada != undefined) && (selecionada != 'Todas') ) {
-    forcar_classe = true;
+    boolean_classe = true;
   }
 
   let raca_selecionada = obterRacaSelecionada();
@@ -901,7 +901,7 @@ function carregarCombosClasses(selecionada,callback) {
   let combo = document.getElementById('texto-formulario-classe1');
   combo.innerHTML = '';
 
-  if ( (raca_selecionada != 'Todas') && (!forcar_classe) ) {
+  if ( (raca_selecionada != 'Todas') && (!boolean_classe) ) {
     let keys_classes = Object.keys(CLASSES);
     keys_classes.forEach((key_classe, i) => {
 
@@ -923,7 +923,7 @@ function carregarCombosClasses(selecionada,callback) {
     COMBO_CLASSES.forEach((item, i) => {
       loadingNewItem(list_combo,item.value,item.texto);
 
-      if (forcar_classe) {
+      if (boolean_classe) {
         if (selecionada == item.value) {
           index_forcar = i;
         }

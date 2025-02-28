@@ -4,20 +4,6 @@ botao_PDF.addEventListener('click',()=>{
 });
 */
 
-/*
-document.querySelector("div.classes > form").addEventListener("submit", evento => {
-  evento.preventDefault();
-  var radios = document.getElementsByName('forcar_classe');
-  for (var i = 0, length = radios.length; i < length; i++) {
-    if (radios[i].checked) {
-      forcar_classe = radios[i].value;
-      render();
-      break;
-    }
-  }
-});
-*/
-
 function isInt(value) {
   return !isNaN(value) &&
          parseInt(Number(value)) == value &&
@@ -2145,47 +2131,6 @@ function sortear_atributos(callback) {
 
   callback(obter_dados_json_personagem(habilidades_sorteadas["Força"], habilidades_sorteadas["Destreza"], habilidades_sorteadas["Constituição"], habilidades_sorteadas["Inteligência"], habilidades_sorteadas["Sabedoria"], habilidades_sorteadas["Carisma"]));
   return;
-
-  /*
-  rolar3d6(forca => {
-    rolar3d6(destreza => {
-      rolar3d6(constituicao => {
-        rolar3d6(inteligencia => {
-          rolar3d6(sabedoria => {
-            rolar3d6(carisma => {
-
-              habilidades_sorteadas = {
-                "Força": valor_comparador_atributo(forca,atributos_setados.forca),
-                "Destreza": valor_comparador_atributo(destreza,atributos_setados.destreza),
-                "Constituição": valor_comparador_atributo(constituicao,atributos_setados.constituicao),
-                "Inteligência": valor_comparador_atributo(inteligencia,atributos_setados.inteligencia),
-                "Sabedoria": valor_comparador_atributo(sabedoria,atributos_setados.sabedoria),
-                "Carisma": valor_comparador_atributo(carisma,atributos_setados.carisma)
-              };
-
-              if (forcar_classe != 'Todas') {
-                let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe);
-                let keys_habilidades = Object.keys(CLASSES[classe_ajustada]["Habilidades Exigidas"]);
-                keys_habilidades.forEach((habilidade, index_habilidade) => {
-
-                  if (CLASSES[classe_ajustada]["Habilidades Exigidas"][habilidade] > habilidades_sorteadas[habilidade]) {
-                    habilidades_sorteadas[habilidade] = CLASSES[classe_ajustada]["Habilidades Exigidas"][habilidade];
-                  }
-
-                  if (index_habilidade == (keys_habilidades.length - 1)) {
-                    callback(obter_dados_json_personagem(habilidades_sorteadas["Força"], habilidades_sorteadas["Destreza"], habilidades_sorteadas["Constituição"], habilidades_sorteadas["Inteligência"], habilidades_sorteadas["Sabedoria"], habilidades_sorteadas["Carisma"]));
-                  }
-                });
-              } else {
-                callback(obter_dados_json_personagem(habilidades_sorteadas["Força"], habilidades_sorteadas["Destreza"], habilidades_sorteadas["Constituição"], habilidades_sorteadas["Inteligência"], habilidades_sorteadas["Sabedoria"], habilidades_sorteadas["Carisma"]));
-              }
-            });
-          });
-        });
-      });
-    });
-  });
-  */
 }
 
 function obter_valores_setados_atributos_tela(id,atributo) {
@@ -2211,6 +2156,7 @@ function obter_todos_atributos_tela() {
   return retorno;
 }
 
+/* Rolar atributos tela - INICIO */
 function sortear_atributos_tela(callback) {
 
   let atributos_setados = obter_todos_atributos_tela();
@@ -2231,8 +2177,53 @@ function sortear_atributos_tela(callback) {
                 "Carisma": valor_comparador_atributo(carisma,atributos_setados.carisma)
               };
 
-              if (forcar_classe != 'Todas') {
-                let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe);
+              if (forcar_classe.multiclasse) {
+
+                lista_classes = [];
+                lista_classes.push(forcar_classe.primeira);
+                lista_classes.push(forcar_classe.segunda);
+                lista_classes.push(forcar_classe.terceira);
+
+                lista_classes.forEach((classe_forcada, index_classe_forcada) => {
+
+                  let classe_ajustada = ajustar_nome_classe_variavel(classe_forcada);
+                  let pode_conferir_atributo = ( (classe_ajustada != 'Todas') && (classe_ajustada != 'Nenhuma') );
+
+                  let keys_habilidades = ["Força","Destreza","Constituição","Inteligência","Sabedoria","Carisma"];
+                  if (pode_conferir_atributo) {
+                    keys_habilidades = Object.keys(CLASSES[classe_ajustada]["Habilidades Exigidas"]);
+                  }
+
+                  keys_habilidades.forEach((habilidade, index_habilidade) => {
+                    /* Atributos */
+                    if (pode_conferir_atributo) {
+                      if (CLASSES[classe_ajustada]["Habilidades Exigidas"][habilidade] > habilidades_sorteadas[habilidade]) {
+                        habilidades_sorteadas[habilidade] = CLASSES[classe_ajustada]["Habilidades Exigidas"][habilidade];
+                      }
+                    }
+
+                    if (index_habilidade == (keys_habilidades.length - 1)) {
+                      if (index_classe_forcada == (lista_classes.length - 1)) {
+                        /* Classes */
+                        callback({
+                          "Força": habilidades_sorteadas["Força"],
+                          "Destreza": habilidades_sorteadas["Destreza"],
+                          "Constituição": habilidades_sorteadas["Constituição"],
+                          "Inteligência": habilidades_sorteadas["Inteligência"],
+                          "Sabedoria": habilidades_sorteadas["Sabedoria"],
+                          "Carisma": habilidades_sorteadas["Carisma"],
+                        });
+                        return;
+                        /* Classes */
+                      }
+                    }
+                    /* Atributos */
+                  });
+                });
+
+              } else if (forcar_classe.primeira != 'Todas') {
+                /* Uma classe forçada */
+                let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira);
                 let keys_habilidades = Object.keys(CLASSES[classe_ajustada]["Habilidades Exigidas"]);
                 keys_habilidades.forEach((habilidade, index_habilidade) => {
 
@@ -2252,7 +2243,9 @@ function sortear_atributos_tela(callback) {
                     return;
                   }
                 });
+                /* Uma classe forçada */
               } else {
+                /* Uma classe sorteada */
                 callback({
                   "Força": habilidades_sorteadas["Força"],
                   "Destreza": habilidades_sorteadas["Destreza"],
@@ -2262,6 +2255,7 @@ function sortear_atributos_tela(callback) {
                   "Carisma": habilidades_sorteadas["Carisma"],
                 });
                 return;
+                /* Uma classe sorteada */
               }
 
             });
@@ -2271,6 +2265,7 @@ function sortear_atributos_tela(callback) {
     });
   });
 }
+/* Rolar atributos tela - FIM */
 
 function validar_habilidades(personagem, callback) {
 
@@ -2318,25 +2313,165 @@ function ajustar_nome_raca(personagem) {
   return raca;
 }
 
+/* Sortear raça INÍCIO */
 function sortear_raca(personagem, callback) {
   validar_habilidades(personagem, racas => {
 
     let raca = '';
     let raca_nao_forcada = (forcar_raca == 'Todas');
 
-    if (raca_nao_forcada) {
-      if (forcar_classe == 'Todas') {
-        let index = Math.floor(Math.random() * racas.length);
-        raca = racas[index];
+    if (forcar_classe.multiclasse) {
+      /* É multiclasse */
+
+      if (raca_nao_forcada) {
+        /* Raça não forçada */
+        if (forcar_classe.primeira == 'Todas') {
+          if (forcar_classe.segunda == 'Todas') {
+            if (forcar_classe.terceira == 'Nenhuma') {
+              let index = Math.floor(Math.random() * racas.length);
+
+              // PAREI NESSE PONTO
+              // AQUI
+              // Se nenhum for selecionado, deve rolar uma multiclasse
+
+              raca = racas[index];
+            } else {
+              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira);
+              let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
+              raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+            }
+          } else if (forcar_classe.segunda == 'Nenhuma') {
+            if (forcar_classe.terceira == 'Nenhuma') {
+              let index = Math.floor(Math.random() * racas.length);
+              raca = racas[index];
+            } else {
+              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira);
+              let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
+              raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+            }
+          } else {
+            let segunda = ajustar_nome_classe_variavel(forcar_classe.segunda);
+
+            if (forcar_classe.terceira != 'Nenhuma') {
+              let multiclasse = `${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+
+              if (multiclasse in MULTICLASSES) {
+                let lista_racas = MULTICLASSES[multiclasse];
+                let index = Math.floor(Math.random() * lista_racas.length);
+                raca = lista_racas[index];
+
+                forcar_classe.tem_multiclasse_sugerida = true;
+                forcar_classe.multiclasse_sugerida = multiclasse;
+              } else {
+                let index = Math.floor(Math.random() * CLASSES[segunda]["Raças Permitidas"].length);
+                raca = CLASSES[segunda]["Raças Permitidas"][index];
+              }
+            } else {
+              let index = Math.floor(Math.random() * CLASSES[segunda]["Raças Permitidas"].length);
+              raca = CLASSES[segunda]["Raças Permitidas"][index];
+            }
+          }
+        } else {
+          let primeira = ajustar_nome_classe_variavel(forcar_classe.primeira);
+
+          if (forcar_classe.segunda == 'Todas') {
+            let multiclasse = '';
+
+            let lista_racas = MULTICLASSES_POR_PRIMEIRA[primeira];
+            let index = Math.floor(Math.random() * lista_racas.length);
+            let segunda = ajustar_nome_classe_variavel(lista_racas[index]);
+
+            if (forcar_classe.terceira == 'Nenhuma') {
+              multiclasse = `${primeira}/${segunda}`;
+            } else {
+              let multiclasse_com2 = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+              let multiclasse_com3 = `${primeira}/${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+
+              if (multiclasse_com3 in MULTICLASSES) {
+                multiclasse = multiclasse_com3;
+              } else {
+                multiclasse = multiclasse_com2;
+              }
+            }
+
+            if (multiclasse in MULTICLASSES) {
+              let lista_racas = MULTICLASSES[multiclasse];
+              let index = Math.floor(Math.random() * lista_racas.length);
+              raca = lista_racas[index];
+
+              forcar_classe.tem_multiclasse_sugerida = true;
+              forcar_classe.multiclasse_sugerida = multiclasse;
+            } else {
+              let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
+              raca = CLASSES[primeira]["Raças Permitidas"][index];
+            }
+
+          } else if (forcar_classe.segunda == 'Nenhuma') {
+
+            if (forcar_classe.terceira == 'Nenhuma') {
+              let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
+              raca = CLASSES[primeira]["Raças Permitidas"][index];
+            } else {
+              let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+
+              if (multiclasse in MULTICLASSES) {
+                let lista_racas = MULTICLASSES[multiclasse];
+                let index = Math.floor(Math.random() * lista_racas.length);
+                raca = lista_racas[index];
+
+                forcar_classe.tem_multiclasse_sugerida = true;
+                forcar_classe.multiclasse_sugerida = multiclasse;
+              } else {
+                let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
+                raca = CLASSES[primeira]["Raças Permitidas"][index];
+              }
+            }
+
+          } else {
+            let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.segunda)}`;
+
+            if (forcar_classe.terceira != 'Nenhuma') {
+              multiclasse = multiclasse + `/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+            }
+
+            if (multiclasse in MULTICLASSES) {
+              let lista_racas = MULTICLASSES[multiclasse];
+              let index = Math.floor(Math.random() * lista_racas.length);
+              raca = lista_racas[index];
+
+              forcar_classe.tem_multiclasse_sugerida = true;
+              forcar_classe.multiclasse_sugerida = multiclasse;
+            } else {
+              let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
+              raca = CLASSES[primeira]["Raças Permitidas"][index];
+            }
+          }
+        }
+        /* Raça não forçada */
       } else {
-        let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe);
-        let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
-        raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+        raca = forcar_raca;
       }
+
+      /* É multiclasse */
     } else {
-      raca = forcar_raca;
+      /* Não é multiclasse */
+      if (raca_nao_forcada) {
+        if (forcar_classe.primeira == 'Todas') {
+          let index = Math.floor(Math.random() * racas.length);
+          raca = racas[index];
+        } else {
+          let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira);
+          let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
+          raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+        }
+      } else {
+        raca = forcar_raca;
+      }
+      /* Não é multiclasse */
     }
 
+    console.log(forcar_classe.multiclasse_sugerida);
+    console.log(raca); // AQUI testar opções das classes
     personagem["Raça"] = raca;
 
     if (raca == "Meio-Vistani") {
@@ -2389,6 +2524,7 @@ function sortear_raca(personagem, callback) {
 
   });
 }
+/* Sortear raça FIM */
 
 function definir_valor_basico_classe(personagem,classe_selecionada) {
   if (personagem["Habilidades"]["Força"]["Valor da Habilidade"] < CLASSES[classe_selecionada]["Habilidades Exigidas"]["Força"]) {
@@ -2594,8 +2730,8 @@ function sortear_classe(personagem, callback) {
             let classe_final = '';
             let ja_sorteada = false;
 
-            if (forcar_classe != "Todas") {
-              classe_final = forcar_classe;
+            if (forcar_classe.primeira != "Todas") {
+              classe_final = forcar_classe.primeira;
             } else if (classes_selecionadas.length > 0) {
               sortear_classes_do_clan(classes_selecionadas, personagem, classe_final=>{
                 ja_sorteada = true;
@@ -2621,7 +2757,7 @@ function sortear_classe(personagem, callback) {
             }
 
             /*
-            if ( (classe_final == "Clérigo") && (forcar_classe == "Todas") ) {
+            if ( (classe_final == "Clérigo") && (forcar_classe.primeira == "Todas") ) {
               let lista_clerigos = [
                 "Clérigo", "Clérigo", "Clérigo", "Clérigo",
                 "Clérigo", "Clérigo", "Clérigo", "Clérigo",
@@ -2704,34 +2840,40 @@ function sortear_classe(personagem, callback) {
   });
 }
 
+function obter_classe_forcada() {
+  let tag_classe1 = document.getElementById('texto-formulario-classe1');
+  let tag_classe2 = document.getElementById('texto-formulario-classe2');
+  let tag_classe3 = document.getElementById('texto-formulario-classe3');
+
+  let classe1 = tag_classe1.options[tag_classe1.selectedIndex].value;
+  let classe2 = tag_classe2.options[tag_classe2.selectedIndex].value;
+  let classe3 = tag_classe3.options[tag_classe3.selectedIndex].value;
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
+  let forcar_classe = {
+    primeira: classe1,
+    segunda: classe2,
+    terceira: classe3,
+    multiclasse: multiclasse,
+
+    tem_multiclasse_sugerida: false,
+    multiclasse_sugerida: '',
+  };
+
+  return forcar_classe;
+}
+
 function render(callback) {
   if (DEBUG)
     console.clear();
 
+  /* Variáveis globais */
   forcar_havenloft = document.getElementById('texto-formulario-ravenloft').checked;
   forcar_darksun = document.getElementById('texto-formulario-darksun').checked;
-  forcar_classe = document.getElementById('texto-formulario-classe1').options[document.getElementById('texto-formulario-classe1').selectedIndex].value;
+  forcar_classe = obter_classe_forcada();
   forcar_raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
 
-  obter_dados_personagem(personagem => {
-
-    if (personagem["Dados Básicos"]["Escolas de Magia"].length == 0) {
-      //personagem["Dados Básicos"]["Escolas de Magia"] = personagem["Dados Básicos"]["Escolas de Magia"].join(", ");
-      personagem["Dados Básicos"]["Escolas de Magia"] = "Nenhuma";
-    }
-    if (personagem["Dados Básicos"]["Escolas Opostas"].length == 0) {
-      //personagem["Dados Básicos"]["Escolas Opostas"] = personagem["Dados Básicos"]["Escolas Opostas"].join(", ");
-      personagem["Dados Básicos"]["Escolas Opostas"] = "Nenhuma";
-    }
-    if (personagem["Dados Básicos"]["Escolas Adjacentes"].length == 0) {
-      //personagem["Dados Básicos"]["Escolas Adjacentes"] = personagem["Dados Básicos"]["Escolas Adjacentes"].join(", ");
-      personagem["Dados Básicos"]["Escolas Adjacentes"] = "Nenhuma";
-    }
-
-    if (personagem["Dados Básicos"]["Esferas"].length == 0) {
-      personagem["Dados Básicos"]["Esferas"] = "Nenhuma";
-    }
-
+  sortear_personagem(personagem => {
     let output = document.getElementById('ficha');
     output.innerHTML = "";
     var node = prettyPrint(personagem);
@@ -2742,9 +2884,25 @@ function render(callback) {
   });
 }
 
+function sortear_personagem_ajustes_finais(personagem,callback) {
+  if (personagem["Dados Básicos"]["Escolas de Magia"].length == 0) {
+    personagem["Dados Básicos"]["Escolas de Magia"] = "Nenhuma";
+  }
+  if (personagem["Dados Básicos"]["Escolas Opostas"].length == 0) {
+    personagem["Dados Básicos"]["Escolas Opostas"] = "Nenhuma";
+  }
+  if (personagem["Dados Básicos"]["Escolas Adjacentes"].length == 0) {
+    personagem["Dados Básicos"]["Escolas Adjacentes"] = "Nenhuma";
+  }
+  if (personagem["Dados Básicos"]["Esferas"].length == 0) {
+    personagem["Dados Básicos"]["Esferas"] = "Nenhuma";
+  }
+  callback(personagem);
+}
+
 function sortear_personagem(callback) {
   debug('Chamando sortear_atributos()');
-  sortear_atributos(personagem => {
+  sortear_atributos(personagem => { // OK
     debug('Chamando sortear_raca()');
     sortear_raca(personagem, () => {
       debug('Chamando sortear_classe()');
@@ -2757,7 +2915,7 @@ function sortear_personagem(callback) {
               organizar_divindades_permitidas(false,personagem,(lista_divindades)=>{
                 definir_divindade_no_personagem(personagem,lista_divindades);
                 sortear_dados_basicos(personagem, () => {
-                  callback(personagem);
+                  sortear_personagem_ajustes_finais(personagem,callback);
                   return;
                 });
               });
@@ -2768,7 +2926,7 @@ function sortear_personagem(callback) {
             organizar_divindades_permitidas(false,personagem,(lista_divindades)=>{
               definir_divindade_no_personagem(personagem,lista_divindades);
               sortear_dados_basicos(personagem, () => {
-                callback(personagem);
+                sortear_personagem_ajustes_finais(personagem,callback);
                 return;
               });
             });
@@ -2953,7 +3111,7 @@ function organizar_divindades_permitidas(ja_foi,personagem,callback) {
 
         organizar_divindades_tendencias(personagem['Classe'],personagem['Tendência'],(lista_tendencias)=>{
           lista_tendencias.forEach((tendencia, index_tendencia) => {
-            // AQUI
+
             lista_opcoes = lista_opcoes.concat(DIVINDADES_PERSONAGENS[raca][tendencia]);
 
             if (index_tendencia == (lista_tendencias.length - 1)) {
@@ -5222,36 +5380,6 @@ function sortear_dados_basicos(personagem, callback) {
 
     // Pontos de vida definidos
   });
-}
-
-function obter_dados_personagem(callback) {
-  let urlParams = new URLSearchParams(window.location.search);
-  let h = urlParams.get('h');
-  let raca = urlParams.get('r');
-  let habilidades = [];
-
-  // ?h=10,11,12,13,14,15&r=Anão
-  if ( (h != undefined) && (h != null) && (h != '') && (h.length > 0) && (h.split(',').length == 6) ) {
-    let hs = h.split(',');
-    let personagem = {
-      "Habilidades": {
-        "Força": { "Valor da Habilidade": parseInt(hs[0]) },
-        "Destreza": { "Valor da Habilidade": parseInt(hs[1]) },
-        "Constituição": { "Valor da Habilidade": parseInt(hs[2]) },
-        "Inteligência": { "Valor da Habilidade": parseInt(hs[3]) },
-        "Sabedoria": { "Valor da Habilidade": parseInt(hs[4]) },
-        "Carisma": { "Valor da Habilidade": parseInt(hs[5]) },
-      },
-      "Raça": raca
-    };
-    callback(personagem);
-    return;
-  } else {
-    sortear_personagem(personagem => {
-      callback(personagem);
-      return;
-    });
-  }
 }
 
 // AQUI TODO

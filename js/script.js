@@ -1,5 +1,5 @@
 /* version */
-const VERSION = '1.0.5';
+const VERSION = '1.0.6';
 let versao_texto = `Versão ${VERSION}`;
 document.getElementById('texto-formulario-versao1').innerHTML = versao_texto;
 document.getElementById('texto-formulario-versao2').innerHTML = versao_texto;
@@ -23,26 +23,15 @@ function warning(texto) {
   console.warn(texto);
 }
 
-var forcar_classe = 'Todas';
+var forcar_classe = {
+  primeira: 'Todas',
+  segunda: 'Nenhuma',
+  terceira: 'Nenhuma',
+  multiclasse: false,
+
+  tem_multiclasse_sugerida: false,
+  multiclasse_sugerida: '',
+};
 var forcar_raca = 'Todas';
 var forcar_havenloft = false;
 var forcar_darksun = false;
-//forcar_classe = 'Vingador';
-//forcar_havenloft = true;
-
-
-/*
-function popularSelectRacas(callback) {
-  let racas = Object.keys(RACAS);
-  racas.unshift('Todas');
-  let selectRacas = document.getElementById('racas');
-  selectRacas.innerHTML = '';
-  racas.forEach((raca, index) => {
-    criarOption(selectRacas,raca,raca);
-    if (index == (racas.length - 1)) {
-      selectRacas.selectedIndex = 0;
-      callback();
-    }
-  });
-}
-*/

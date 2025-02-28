@@ -1307,6 +1307,78 @@ const ARMADURAS_BARDO = [
   ARMADURAS[8]
 ];
 
+const MULTICLASSES = {
+  "Guerreiro/Ladrão": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
+  "Ladrão/Guerreiro": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
+
+  "Guerreiro/Clérigo": ["Anão", "Gnomo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Guerreiro": ["Anão", "Gnomo", "Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Mago": ["Elfo","Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro": ["Elfo","Meio-Elfo", "Tabaxi"],
+
+  "Mago/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Ilusionista": ["Gnomo", "Tabaxi"],
+  "Ilusionista/Guerreiro": ["Gnomo", "Tabaxi"],
+
+  "Clérigo/Ilusionista": ["Gnomo", "Tabaxi"],
+  "Ilusionista/Clérigo": ["Gnomo", "Tabaxi"],
+
+  "Clérigo/Ladrão": ["Gnomo", "Tabaxi"],
+  "Ladrão/Clérigo": ["Gnomo", "Tabaxi"],
+
+  "Ilusionista/Ladrão": ["Gnomo", "Tabaxi"],
+  "Ladrão/Ilusionista": ["Gnomo", "Tabaxi"],
+
+  "Guerreiro/Druida": ["Meio-Elfo", "Tabaxi"],
+  "Druida/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Ranger": ["Meio-Elfo", "Tabaxi"],
+  "Ranger/Clérigo": ["Meio-Elfo", "Tabaxi"],
+
+  "Druida/Ranger": ["Meio-Elfo", "Tabaxi"],
+  "Ranger/Druida": ["Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo": ["Meio-Elfo", "Tabaxi"],
+
+  "Druida/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Druida": ["Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Mago/Clérigo": ["Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Clérigo/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Clérigo/Guerreiro/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Clérigo/Mago/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Clérigo": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Mago/Druida": ["Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Druida/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Druida/Guerreiro/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Druida/Mago/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Druida": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Druida/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Mago/Ladrão": ["Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Ladrão/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Ladrão/Guerreiro/Mago": ["Meio-Elfo", "Tabaxi"],
+  "Ladrão/Mago/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Ladrão": ["Meio-Elfo", "Tabaxi"],
+  "Mago/Ladrão/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+};
+
+const MULTICLASSES_POR_PRIMEIRA = {
+  "Guerreiro": ["Ladrão", "Clérigo", "Mago", "Ilusionista", "Druida", ],
+  "Ladrão": ["Guerreiro", "Mago", "Clérigo", "Ilusionista", ],
+  "Clérigo": ["Guerreiro", "Ilusionista", "Ladrão", "Ranger", "Mago", ],
+  "Mago": ["Guerreiro", "Ladrão", "Clérigo", "Druida", ],
+  "Ilusionista": ["Guerreiro", "Clérigo", "Ladrão", ],
+  "Druida": ["Guerreiro", "Ranger", "Mago", ],
+  "Ranger": ["Clérigo", "Druida", ],
+};
+
 /*
 const MULTICLASSES = {
   "Anão": {
