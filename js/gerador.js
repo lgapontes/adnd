@@ -2328,19 +2328,37 @@ function sortear_raca(personagem, callback) {
         if (forcar_classe.primeira == 'Todas') {
           if (forcar_classe.segunda == 'Todas') {
             if (forcar_classe.terceira == 'Nenhuma') {
-              let index = Math.floor(Math.random() * racas.length);
+              let index_multiclasses_livro = Math.floor(Math.random() * MULTICLASSES_LIVRO.length);
+              let multiclasse_livro = MULTICLASSES_LIVRO[index_multiclasses_livro];
 
-              // PAREI NESSE PONTO
-              // AQUI
-              // Se nenhum for selecionado, deve rolar uma multiclasse
+              let racas_multiclasse = MULTICLASSES[multiclasse_livro];
+              let index = Math.floor(Math.random() * racas_multiclasse.length);
+              raca = racas_multiclasse[index];
 
-              raca = racas[index];
+              forcar_classe.tem_multiclasse_sugerida = true;
+              forcar_classe.multiclasse_sugerida = multiclasse_livro;
             } else {
               let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira);
-              let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
-              raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+
+              if (classe_ajustada in MULTICLASSES_POR_PRIMEIRA) {
+                let lista_multiclasses = MULTICLASSES_POR_PRIMEIRA[classe_ajustada];
+                let index_multiclasse = Math.floor(Math.random() * lista_multiclasses.length);
+                let outra = lista_multiclasses[index_multiclasse];
+                let multiclasse = `${classe_ajustada}/${outra}`;
+
+                let lista_racas = MULTICLASSES[multiclasse];
+                let index = Math.floor(Math.random() * lista_racas.length);
+                raca = lista_racas[index];
+
+                forcar_classe.tem_multiclasse_sugerida = true;
+                forcar_classe.multiclasse_sugerida = multiclasse;
+              } else {
+                let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
+                raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+              }
             }
-          } else if (forcar_classe.segunda == 'Nenhuma') {
+          } else
+          /* if (forcar_classe.segunda == 'Nenhuma') {
             if (forcar_classe.terceira == 'Nenhuma') {
               let index = Math.floor(Math.random() * racas.length);
               raca = racas[index];
@@ -2349,7 +2367,8 @@ function sortear_raca(personagem, callback) {
               let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
               raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
             }
-          } else {
+          } else */
+          {
             let segunda = ajustar_nome_classe_variavel(forcar_classe.segunda);
 
             if (forcar_classe.terceira != 'Nenhuma') {
@@ -2406,7 +2425,8 @@ function sortear_raca(personagem, callback) {
               raca = CLASSES[primeira]["Raças Permitidas"][index];
             }
 
-          } else if (forcar_classe.segunda == 'Nenhuma') {
+          } else
+          /* if (forcar_classe.segunda == 'Nenhuma') {
 
             if (forcar_classe.terceira == 'Nenhuma') {
               let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
@@ -2426,8 +2446,8 @@ function sortear_raca(personagem, callback) {
                 raca = CLASSES[primeira]["Raças Permitidas"][index];
               }
             }
-
-          } else {
+          } else */
+          {
             let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.segunda)}`;
 
             if (forcar_classe.terceira != 'Nenhuma') {
@@ -2470,8 +2490,7 @@ function sortear_raca(personagem, callback) {
       /* Não é multiclasse */
     }
 
-    console.log(forcar_classe.multiclasse_sugerida);
-    console.log(raca); // AQUI testar opções das classes
+    /* Neste ponto a raça já foi definida */
     personagem["Raça"] = raca;
 
     if (raca == "Meio-Vistani") {
@@ -2693,6 +2712,7 @@ function sortear_classes_do_clan(classes, personagem, callback) {
   }
 }
 
+// AQUI
 function sortear_classe(personagem, callback) {
   debug('Executando validar_classes_por_raca()');
   validar_classes_por_raca(personagem, classes => {
@@ -2904,7 +2924,7 @@ function sortear_personagem(callback) {
   debug('Chamando sortear_atributos()');
   sortear_atributos(personagem => { // OK
     debug('Chamando sortear_raca()');
-    sortear_raca(personagem, () => {
+    sortear_raca(personagem, () => { // OK
       debug('Chamando sortear_classe()');
       sortear_classe(personagem, resultado => {
 

@@ -1307,6 +1307,25 @@ const ARMADURAS_BARDO = [
   ARMADURAS[8]
 ];
 
+const MULTICLASSES_LIVRO = [
+  "Guerreiro/Ladrão",
+  "Guerreiro/Clérigo",
+  "Guerreiro/Mago",
+  "Mago/Ladrão",
+  "Guerreiro/Ilusionista",
+  "Clérigo/Ilusionista",
+  "Clérigo/Ladrão",
+  "Ilusionista/Ladrão",
+  "Guerreiro/Druida",
+  "Clérigo/Ranger",
+  "Druida/Ranger",
+  "Clérigo/Mago",
+  "Druida/Mago",
+  "Guerreiro/Mago/Clérigo",
+  "Guerreiro/Mago/Druida",
+  "Guerreiro/Mago/Ladrão",
+];
+
 const MULTICLASSES = {
   "Guerreiro/Ladrão": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
   "Ladrão/Guerreiro": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
