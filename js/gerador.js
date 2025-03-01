@@ -2613,6 +2613,7 @@ function validar_classes_por_habilidades(classes, personagem, callback) {
   });
 }
 
+// AQUI - parei aqui
 function validar_classes_por_raca(personagem, callback) {
   let keys_classes = Object.keys(CLASSES);
   let classes_permitidas = [];
