@@ -70,7 +70,7 @@ function rolarAtributo(callback) {
 function calcular_PSP(personagem) {
 
   if (personagem["Classe"] == "Psionicista") {
-    let nivel_personagem = personagem["Dados Básicos"]['Nível'];
+    let nivel_personagem = personagem["Dados Básicos"]["Nível"][0];
 
     let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
     let inteligencia = personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"];
@@ -135,7 +135,7 @@ function calcular_PSP(personagem) {
 
 function poderes_psionicos(personagem,callback) {
   if (personagem["Classe"] == "Psionicista") {
-    let nivel_personagem = personagem["Dados Básicos"]['Nível'];
+    let nivel_personagem = personagem["Dados Básicos"]["Nível"][0];
     let disciplinas_keys = Object.keys(DISCIPLINAS_PSIONICAS);
     let valores_combos_nao_escolhidos = ['Todas','Nenhuma','Selecione a Disciplina'];
 
@@ -908,6 +908,9 @@ function atributos_destreza(atributo, destreza) {
 }
 
 function atributos_constituicao(atributo, constituicao, classe) {
+
+  let guerreiro_paladino_ranger = personagem["Classes Separadas"].includes("Guerreiro") || personagem["Classes Separadas"].includes("Paladino") || personagem["Classes Separadas"].includes("Ranger");
+
   if (constituicao == 1) {
     if (atributo == "Ajuste dos Pontos de Vida") {
       return -3;
@@ -1102,7 +1105,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 17) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 3;
       } else {
         return 2;
@@ -1118,7 +1121,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 18) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 4;
       } else {
         return 2;
@@ -1134,7 +1137,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 19) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 5;
       } else {
         return 2;
@@ -1150,7 +1153,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 20) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 5;
       } else {
         return 2;
@@ -1166,7 +1169,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 21) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 6;
       } else {
         return 2;
@@ -1182,7 +1185,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 22) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 6;
       } else {
         return 2;
@@ -1198,7 +1201,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 23) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 6;
       } else {
         return 2;
@@ -1214,7 +1217,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 24) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 7;
       } else {
         return 2;
@@ -1230,7 +1233,7 @@ function atributos_constituicao(atributo, constituicao, classe) {
     }
   } else if (constituicao == 25) {
     if (atributo == "Ajuste dos Pontos de Vida") {
-      if ( (classe == "Guerreiro") || (classe == "Paladino") || (classe == "Ranger") ) {
+      if (guerreiro_paladino_ranger) {
         return 7;
       } else {
         return 2;
@@ -1939,25 +1942,19 @@ function atributos_carisma(atributo, carisma) {
 }
 
 function obterNivelSelecionado() {
-  /*
-  let texto_formulario_nivel = document.getElementById('texto-formulario-nivel');
-  let nivel = 1;
-  if (isInt(texto_formulario_nivel.value)) {
-    nivel = parseInt(texto_formulario_nivel.value);
-
-    if (nivel < 1) nivel = 1;
-    if (nivel > 3) nivel = 3;
-  }
-  return nivel;
-  */
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
 
   let combo = document.getElementById('texto-formulario-nivel');
   let nivel = parseInt(combo.options[combo.selectedIndex].value);
-  return nivel;
+  let niveis_separados = [nivel];
+
+  return niveis_separados;
 }
 
 function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia, sabedoria, carisma) {
   return {
+    "Classes Separadas": [],
+
     "Nome": '',
     "Raça": '',
     "Classe": '',
@@ -2186,7 +2183,7 @@ function sortear_atributos_tela(callback) {
 
                 lista_classes.forEach((classe_forcada, index_classe_forcada) => {
 
-                  let classe_ajustada = ajustar_nome_classe_variavel(classe_forcada);
+                  let classe_ajustada = ajustar_nome_classe_variavel(classe_forcada,false);
                   let pode_conferir_atributo = ( (classe_ajustada != 'Todas') && (classe_ajustada != 'Nenhuma') );
 
                   let keys_habilidades = ["Força","Destreza","Constituição","Inteligência","Sabedoria","Carisma"];
@@ -2223,7 +2220,7 @@ function sortear_atributos_tela(callback) {
 
               } else if (forcar_classe.primeira != 'Todas') {
                 /* Uma classe forçada */
-                let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira);
+                let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira,false);
                 let keys_habilidades = Object.keys(CLASSES[classe_ajustada]["Habilidades Exigidas"]);
                 keys_habilidades.forEach((habilidade, index_habilidade) => {
 
@@ -2326,7 +2323,7 @@ function sortear_raca(personagem, callback) {
       if (raca_nao_forcada) {
         /* Raça não forçada */
         if (forcar_classe.primeira == 'Todas') {
-          if (forcar_classe.segunda == 'Todas') {
+          if ( (forcar_classe.segunda == 'Todas') || (forcar_classe.segunda == 'Nenhuma') ) {
             if (forcar_classe.terceira == 'Nenhuma') {
               let index_multiclasses_livro = Math.floor(Math.random() * MULTICLASSES_LIVRO.length);
               let multiclasse_livro = MULTICLASSES_LIVRO[index_multiclasses_livro];
@@ -2338,7 +2335,7 @@ function sortear_raca(personagem, callback) {
               forcar_classe.tem_multiclasse_sugerida = true;
               forcar_classe.multiclasse_sugerida = multiclasse_livro;
             } else {
-              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira);
+              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira,true);
 
               if (classe_ajustada in MULTICLASSES_POR_PRIMEIRA) {
                 let lista_multiclasses = MULTICLASSES_POR_PRIMEIRA[classe_ajustada];
@@ -2363,16 +2360,16 @@ function sortear_raca(personagem, callback) {
               let index = Math.floor(Math.random() * racas.length);
               raca = racas[index];
             } else {
-              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira);
+              let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.terceira,false);
               let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
               raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
             }
           } else */
           {
-            let segunda = ajustar_nome_classe_variavel(forcar_classe.segunda);
+            let segunda = ajustar_nome_classe_variavel(forcar_classe.segunda,true);
 
             if (forcar_classe.terceira != 'Nenhuma') {
-              let multiclasse = `${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+              let multiclasse = `${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira,true)}`;
 
               if (multiclasse in MULTICLASSES) {
                 let lista_racas = MULTICLASSES[multiclasse];
@@ -2386,25 +2383,36 @@ function sortear_raca(personagem, callback) {
                 raca = CLASSES[segunda]["Raças Permitidas"][index];
               }
             } else {
-              let index = Math.floor(Math.random() * CLASSES[segunda]["Raças Permitidas"].length);
-              raca = CLASSES[segunda]["Raças Permitidas"][index];
+              let lista_classe_para_sugerir = MULTICLASSES_POR_PRIMEIRA[segunda];
+              let index = Math.floor(Math.random() * lista_classe_para_sugerir.length);
+              let multiclasse_sugerida = `${segunda}/${lista_classe_para_sugerir[index]}`;
+
+              forcar_classe.tem_multiclasse_sugerida = true;
+              forcar_classe.multiclasse_sugerida = multiclasse_sugerida;
+
+              console.log(multiclasse_sugerida);
+              console.log(MULTICLASSES[multiclasse_sugerida]);
+
+              let index_raca = Math.floor(Math.random() * MULTICLASSES[multiclasse_sugerida].length);
+              raca = MULTICLASSES[multiclasse_sugerida][index_raca];
             }
           }
         } else {
-          let primeira = ajustar_nome_classe_variavel(forcar_classe.primeira);
+          let primeira = ajustar_nome_classe_variavel(forcar_classe.primeira,true);
 
-          if (forcar_classe.segunda == 'Todas') {
+          if ( (forcar_classe.segunda == 'Todas') || (forcar_classe.segunda == 'Nenhuma') ) {
             let multiclasse = '';
 
             let lista_racas = MULTICLASSES_POR_PRIMEIRA[primeira];
+
             let index = Math.floor(Math.random() * lista_racas.length);
-            let segunda = ajustar_nome_classe_variavel(lista_racas[index]);
+            let segunda = ajustar_nome_classe_variavel(lista_racas[index],true);
 
             if (forcar_classe.terceira == 'Nenhuma') {
               multiclasse = `${primeira}/${segunda}`;
             } else {
-              let multiclasse_com2 = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
-              let multiclasse_com3 = `${primeira}/${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+              let multiclasse_com2 = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira,true)}`;
+              let multiclasse_com3 = `${primeira}/${segunda}/${ajustar_nome_classe_variavel(forcar_classe.terceira,true)}`;
 
               if (multiclasse_com3 in MULTICLASSES) {
                 multiclasse = multiclasse_com3;
@@ -2432,7 +2440,7 @@ function sortear_raca(personagem, callback) {
               let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
               raca = CLASSES[primeira]["Raças Permitidas"][index];
             } else {
-              let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+              let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.terceira,true)}`;
 
               if (multiclasse in MULTICLASSES) {
                 let lista_racas = MULTICLASSES[multiclasse];
@@ -2448,10 +2456,10 @@ function sortear_raca(personagem, callback) {
             }
           } else */
           {
-            let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.segunda)}`;
+            let multiclasse = `${primeira}/${ajustar_nome_classe_variavel(forcar_classe.segunda,true)}`;
 
             if (forcar_classe.terceira != 'Nenhuma') {
-              multiclasse = multiclasse + `/${ajustar_nome_classe_variavel(forcar_classe.terceira)}`;
+              multiclasse = multiclasse + `/${ajustar_nome_classe_variavel(forcar_classe.terceira,true)}`;
             }
 
             if (multiclasse in MULTICLASSES) {
@@ -2480,7 +2488,7 @@ function sortear_raca(personagem, callback) {
           let index = Math.floor(Math.random() * racas.length);
           raca = racas[index];
         } else {
-          let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira);
+          let classe_ajustada = ajustar_nome_classe_variavel(forcar_classe.primeira,false);
           let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
           raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
         }
@@ -2571,87 +2579,141 @@ function validar_classes_por_habilidades(classes, personagem, callback) {
   let keys_habilidades = Object.keys(personagem["Habilidades"]);
   let classes_permitidas = [];
 
-  keys_classes.forEach((classe,index_classes) => {
+  if (forcar_classe.multiclasse) {
 
-    let habilidade_valida = true;
-    keys_habilidades.forEach((habilidade,index_habilidades) => {
-        let valor = personagem["Habilidades"][habilidade]["Valor da Habilidade"];
-        let limite = CLASSES[classe]["Habilidades Exigidas"][habilidade];
-        if (valor < limite) {
-          habilidade_valida = false;
-        }
+    // Multiclasses
+    let clones = JSON.parse(JSON.stringify(keys_classes));
+    keys_classes = [];
 
-        if (index_habilidades == (keys_habilidades.length - 1)) {
-          if (habilidade_valida) {
-            classes_permitidas.push(classe);
-          }
-        }
-    });
+    clones.forEach((clone,index_clone) => {
+      classes_permitidas.push(clone);
 
-    if (index_classes == (keys_classes.length - 1)) {
+      let partes_multiclasse_clonada = clone.split("/");
+      keys_classes = keys_classes.concat(partes_multiclasse_clonada);
 
-      if (classes_permitidas.length == 0) {
+      if (index_clone == (clones.length - 1)) {
 
-        let texto_formulario_classe = document.getElementById('texto-formulario-classe1');
-        let texto_formulario_classe_valor = texto_formulario_classe.options[texto_formulario_classe.selectedIndex].value;
-        let classe_selecionada = '';
+        keys_classes.forEach((classe,index_classes) => {
 
-        if (texto_formulario_classe_valor != 'Todas') {
-          classe_selecionada = texto_formulario_classe_valor;
-        }
-        if (classe_selecionada == '') {
-          classe_selecionada = 'Guerreiro';
-        }
+          keys_habilidades.forEach((habilidade,index_habilidades) => {
+              let valor = personagem["Habilidades"][habilidade]["Valor da Habilidade"];
+              let limite = CLASSES[classe]["Habilidades Exigidas"][habilidade];
+              if (valor < limite) {
+                personagem["Habilidades"][habilidade]["Valor da Habilidade"] = limite;
+              }
 
-        definir_valor_basico_classe(personagem,classe_selecionada);
-        classes_permitidas.push(classe_selecionada);
+              if (index_habilidades == (keys_habilidades.length - 1)) {
+                if (index_classes == (keys_classes.length - 1)) {
+
+                  callback(classes_permitidas);
+                  return;
+                }
+              }
+          });
+
+        });
+
       }
+    });
+    // Multiclasses
 
-      callback(classes_permitidas);
-      return;
-    }
-  });
+  } else {
+    keys_classes.forEach((classe,index_classes) => {
+
+      let habilidade_valida = true;
+      keys_habilidades.forEach((habilidade,index_habilidades) => {
+          let valor = personagem["Habilidades"][habilidade]["Valor da Habilidade"];
+          let limite = CLASSES[classe]["Habilidades Exigidas"][habilidade];
+          if (valor < limite) {
+            habilidade_valida = false;
+          }
+
+          if (index_habilidades == (keys_habilidades.length - 1)) {
+            if (habilidade_valida) {
+              classes_permitidas.push(classe);
+            }
+
+            // FIM da validação
+            if (index_classes == (keys_classes.length - 1)) {
+
+              if (classes_permitidas.length == 0) {
+
+                let texto_formulario_classe = document.getElementById('texto-formulario-classe1');
+                let texto_formulario_classe_valor = texto_formulario_classe.options[texto_formulario_classe.selectedIndex].value;
+                let classe_selecionada = '';
+
+                if (texto_formulario_classe_valor != 'Todas') {
+                  classe_selecionada = texto_formulario_classe_valor;
+                }
+                if (classe_selecionada == '') {
+                  classe_selecionada = 'Guerreiro';
+                }
+
+                definir_valor_basico_classe(personagem,classe_selecionada);
+                classes_permitidas.push(classe_selecionada);
+              }
+
+              callback(classes_permitidas);
+              return;
+            }
+            // FIM da validação
+          }
+      });
+
+    });
+  }
 }
 
-// AQUI - parei aqui
 function validar_classes_por_raca(personagem, callback) {
   let keys_classes = Object.keys(CLASSES);
   let classes_permitidas = [];
 
   let classes_100_por_cento = false;
 
-  if (CLANS[personagem["Dados Básicos"]["Linhagem"]].vistani) {
-    classes_100_por_cento = CLANS[personagem["Dados Básicos"]["Linhagem"]].classes_100_por_cento;
-  }
-
-  if ( (ajustar_nome_raca(personagem) == 'Meio-Vistani') && classes_100_por_cento) {
-    let classes_clans = Object.keys(CLANS[personagem["Dados Básicos"]["Linhagem"]].classes);
-    callback(classes_clans);
-    return;
+  if (forcar_classe.multiclasse) {
+    if (forcar_classe.tem_multiclasse_sugerida) {
+      let lista_classe_sugerida = [forcar_classe.multiclasse_sugerida];
+      callback(lista_classe_sugerida);
+      return;
+    } else {
+      let lista_classes_por_raca = MULTICLASSES_POR_RACA[ajustar_nome_raca(personagem)];
+      callback(lista_classes_por_raca);
+      return;
+    }
   } else {
+    if (CLANS[personagem["Dados Básicos"]["Linhagem"]].vistani) {
+      classes_100_por_cento = CLANS[personagem["Dados Básicos"]["Linhagem"]].classes_100_por_cento;
+    }
 
-    keys_classes.forEach((classe,index_classes) => {
-      let keys_racas = CLASSES[classe]["Raças Permitidas"];
-      let classe_permitida = false;
+    if ( (ajustar_nome_raca(personagem) == 'Meio-Vistani') && classes_100_por_cento) {
+      let classes_clans = Object.keys(CLANS[personagem["Dados Básicos"]["Linhagem"]].classes);
+      callback(classes_clans);
+      return;
+    } else {
 
-      keys_racas.forEach((raca, index_classe_permitida) => {
-        if (ajustar_nome_raca(personagem) == raca) {
-          classe_permitida = true;
-        }
+      keys_classes.forEach((classe,index_classes) => {
+        let keys_racas = CLASSES[classe]["Raças Permitidas"];
+        let classe_permitida = false;
 
-        if (index_classe_permitida == (keys_racas.length - 1)) {
-          if (classe_permitida) {
-            classes_permitidas.push(classe);
+        keys_racas.forEach((raca, index_classe_permitida) => {
+          if (ajustar_nome_raca(personagem) == raca) {
+            classe_permitida = true;
           }
+
+          if (index_classe_permitida == (keys_racas.length - 1)) {
+            if (classe_permitida) {
+              classes_permitidas.push(classe);
+            }
+          }
+        });
+
+        if (index_classes == (keys_classes.length - 1)) {
+          callback(classes_permitidas);
+          return;
         }
       });
 
-      if (index_classes == (keys_classes.length - 1)) {
-        callback(classes_permitidas);
-        return;
-      }
-    });
-
+    }
   }
 }
 
@@ -2713,10 +2775,11 @@ function sortear_classes_do_clan(classes, personagem, callback) {
   }
 }
 
-// AQUI
 function sortear_classe(personagem, callback) {
   debug('Executando validar_classes_por_raca()');
+
   validar_classes_por_raca(personagem, classes => {
+
     validar_classes_por_habilidades(classes, personagem, classes_permitidas => {
 
       /* Classes validadas */
@@ -2725,140 +2788,55 @@ function sortear_classe(personagem, callback) {
         callback({ valores_invalidos: true });
         return;
       } else {
-        let classes_fortes = ["Paladino", "Vingador", "Ranger", "Elementalista Fogo", "Elementalista Terra", "Elementalista Ar", "Elementalista Água", "Arcanista", "Psionicista", "Abjurante", "Conjurador", "Adivinho", "Feiticeiro", "Ilusionista", "Invocador", "Necromante", "Transmutador", "Druida", "Anacoreta", "Bardo", "Cigano"];
-        let classes_selecionadas = [];
+        /* RETORNO */
 
-        classes_fortes.forEach((classe_forte, index_classes_fortes) => {
-          /* Iteracao classes fortes */
+        if (forcar_classe.multiclasse) {
 
-          /*
-          classes_permitidas.forEach((classe_permitida, index_classe_permitida) => {
-            if (classe_permitida == classe_forte) {
-              classes_selecionadas.push(classe_permitida);
-            }
-          });
-          */
+          // Multiclasse
+          let classe_final = '';
 
-          for (let index_classe_permitida = 0; index_classe_permitida < classes_permitidas.length; index_classe_permitida++) {
-            if (classes_permitidas[index_classe_permitida] == classe_forte) {
-              classes_selecionadas.push(classes_permitidas[index_classe_permitida]);
-            }
+          if (forcar_classe.tem_multiclasse_sugerida) {
+            classe_final = forcar_classe.multiclasse_sugerida;
+          } else {
+            let index_classes_permitidas = Math.floor(Math.random() * classes_permitidas.length);
+            classe_final = classes_permitidas[index_classes_permitidas];
           }
 
-          if (index_classes_fortes == (classes_fortes.length - 1)) {
-            /* Definicao */
+          personagem["Classes Separadas"] = classe_final.split('/');
+          personagem["Classe"] = classe_final;
+          callback({ valores_invalidos: false });
+          return;
+          // Multiclasse
 
-            let classe_final = '';
-            let ja_sorteada = false;
+        } else {
 
-            if (forcar_classe.primeira != "Todas") {
-              classe_final = forcar_classe.primeira;
-            } else if (classes_selecionadas.length > 0) {
-              sortear_classes_do_clan(classes_selecionadas, personagem, classe_final=>{
-                ja_sorteada = true;
-                personagem["Classe"] = classe_final;
-                callback({ valores_invalidos: false });
-                return;
-              });
-              /*
-              let index = Math.floor(Math.random() * classes_selecionadas.length);
-              classe_final = classes_selecionadas[index];
-              */
-            } else {
-              sortear_classes_do_clan(classes_permitidas, personagem, classe_final=>{
-                ja_sorteada = true;
-                personagem["Classe"] = classe_final;
-                callback({ valores_invalidos: false });
-                return;
-              });
-              /*
-              let index = Math.floor(Math.random() * classes_permitidas.length);
-              classe_final = classes_permitidas[index];
-              */
-            }
-
-            /*
-            if ( (classe_final == "Clérigo") && (forcar_classe.primeira == "Todas") ) {
-              let lista_clerigos = [
-                "Clérigo", "Clérigo", "Clérigo", "Clérigo",
-                "Clérigo", "Clérigo", "Clérigo", "Clérigo",
-                "Clérigo", "Clérigo", "Clérigo", "Clérigo",
-                "Clérigo", "Clérigo", "Clérigo", "Clérigo",
-                "Clérigo", "Clérigo", "Clérigo", "Clérigo",
-                "Clérigo da Agricultura",
-                "Clérigo dos Ferreiros",
-                "Clérigo da Morte",
-                "Clérigo da Doença",
-                "Clérigo da Terra",
-                "Clérigo da Cura",
-                "Clérigo da Caça",
-                "Clérigo do Relâmpago",
-                "Clérigo do Amor",
-                "Clérigo da Natureza",
-                "Clérigo dos Oceanos",
-                "Clérigo da Paz",
-                "Clérigo da Força",
-                "Clérigo do Trovão",
-                "Clérigo da Guerra",
-                "Clérigo dos Ventos"
-              ];
-              let index_clerigo = Math.floor(Math.random() * lista_clerigos.length);
-              classe_final = lista_clerigos[index_clerigo];
-            }
-            */
-
-            if (!ja_sorteada) {
-
-              if (classe_final == "Clérigo da Agricultura") {
-                CLASSES['Clérigo'].armas_divindade = ["Podão", "Foice", "Mangual"];
-              } else if (classe_final == "Clérigo dos Ferreiros") {
-                CLASSES['Clérigo'].armas_divindade = ["Martelo de Batalha"];
-              } else if (classe_final == "Clérigo da Morte") {
-                CLASSES['Clérigo'].armas_divindade = ["Foice"];
-              } else if (classe_final == "Clérigo da Doença") {
-                CLASSES['Clérigo'].armas_divindade = ["Açoite", "Chicote"];
-              } else if (classe_final == "Clérigo da Terra") {
-                CLASSES['Clérigo'].armas_divindade = ["Alvião"];
-              } else if (classe_final == "Clérigo da Cura") {
-                CLASSES['Clérigo'].armas_divindade = ["Aprisionador", "Bordão"];
-              } else if (classe_final == "Clérigo da Caça") {
-                CLASSES['Clérigo'].armas_divindade = ["Arco Curto", "Azagaia", "Lança de Cavalaria", "Funda"];
-              } else if (classe_final == "Clérigo do Relâmpago") {
-                CLASSES['Clérigo'].armas_divindade = ["Dardo", "Lança", "Azagaia"];
-              } else if (classe_final == "Clérigo do Amor") {
-                CLASSES['Clérigo'].armas_divindade = ["Arco Curto", "Aprisionador"];
-              } else if (classe_final == "Clérigo da Natureza") {
-                CLASSES['Clérigo'].armas_divindade = ["Clava", "Cimitarra", "Foice"];
-              } else if (classe_final == "Clérigo dos Oceanos") {
-                CLASSES['Clérigo'].armas_divindade = ["Arpão", "Lança", "Tridente"];
-              } else if (classe_final == "Clérigo da Paz") {
-                CLASSES['Clérigo'].armas_divindade = ["Bordão"];
-              } else if (classe_final == "Clérigo da Força") {
-                CLASSES['Clérigo'].armas_divindade = ["Martelo"];
-              } else if (classe_final == "Clérigo do Trovão") {
-                CLASSES['Clérigo'].armas_divindade = ["Clava", "Maça", "Martelo de Batalha"];
-              } else if (classe_final == "Clérigo da Guerra") {
-                CLASSES['Clérigo'].armas_divindade = ["Machado de Batalha", "Maça", "Maça-Estrela", "Montante", "Espada"];
-              } else if (classe_final == "Clérigo dos Ventos") {
-                CLASSES['Clérigo'].armas_divindade = ["Zarabatana", "Dardo"];
-              }
-
+          // Não é multiclasse
+          if (forcar_classe.primeira != "Todas") {
+            personagem["Classes Separadas"] = [forcar_classe.primeira];
+            personagem["Classe"] = forcar_classe.primeira;
+            callback({ valores_invalidos: false });
+            return;
+          } else {
+            sortear_classes_do_clan(classes_permitidas, personagem, (classe_final)=>{
+              personagem["Classes Separadas"] = [classe_final];
               personagem["Classe"] = classe_final;
               callback({ valores_invalidos: false });
               return;
-            }
-
-            /* Definicao */
+            });
           }
+          // Não é multiclasse
 
-          /* Iteracao classes fortes */
-        });
+        }
+
+        /* RETORNO */
       }
 
       /* Classes validadas */
 
     });
+
   });
+
 }
 
 function obter_classe_forcada() {
@@ -2895,6 +2873,11 @@ function render(callback) {
   forcar_raca = document.getElementById('texto-formulario-raca').options[document.getElementById('texto-formulario-raca').selectedIndex].value;
 
   sortear_personagem(personagem => {
+
+    /* Limpar campos não necessários */
+    delete personagem["Classes Separadas"];
+    personagem["Dados Básicos"]["Nível"] = personagem["Dados Básicos"]["Nível"].join(' / ');
+
     let output = document.getElementById('ficha');
     output.innerHTML = "";
     var node = prettyPrint(personagem);
@@ -2921,6 +2904,18 @@ function sortear_personagem_ajustes_finais(personagem,callback) {
   callback(personagem);
 }
 
+function sortear_personagem_inner(personagem, callback) {
+  sortear_tendencia(personagem, () => {
+    organizar_divindades_permitidas(false,personagem,(lista_divindades)=>{
+      definir_divindade_no_personagem(personagem,lista_divindades);
+      sortear_dados_basicos(personagem, () => {
+        sortear_personagem_ajustes_finais(personagem,callback);
+        return;
+      });
+    });
+  });
+}
+
 function sortear_personagem(callback) {
   debug('Chamando sortear_atributos()');
   sortear_atributos(personagem => { // OK
@@ -2932,26 +2927,12 @@ function sortear_personagem(callback) {
         if (resultado.valores_invalidos) {
           sortear_personagem(personagem => {
             error("Foi necessário outro lance de dados pois não foi possível escolher uma classe.");
-            sortear_tendencia(personagem, () => {
-              organizar_divindades_permitidas(false,personagem,(lista_divindades)=>{
-                definir_divindade_no_personagem(personagem,lista_divindades);
-                sortear_dados_basicos(personagem, () => {
-                  sortear_personagem_ajustes_finais(personagem,callback);
-                  return;
-                });
-              });
-            });
+            sortear_personagem_inner(personagem, callback);
+            return;
           });
         } else {
-          sortear_tendencia(personagem, () => {
-            organizar_divindades_permitidas(false,personagem,(lista_divindades)=>{
-              definir_divindade_no_personagem(personagem,lista_divindades);
-              sortear_dados_basicos(personagem, () => {
-                sortear_personagem_ajustes_finais(personagem,callback);
-                return;
-              });
-            });
-          });
+          sortear_personagem_inner(personagem, callback);
+          return;
         }
 
       });
@@ -2960,6 +2941,10 @@ function sortear_personagem(callback) {
 }
 
 function ajustar_nome_grupo(classe) {
+  if (forcar_classe.multiclasse) {
+    classe = classe.split('/')[0];
+  }
+
   if (CLASSES[classe]["Grupo"] == "Homem de Armas") {
     return "Homem de Armas";
   } else if (CLASSES[classe]["Grupo"] == "Sacerdote") {
@@ -2975,16 +2960,62 @@ function ajustar_nome_grupo(classe) {
   }
 }
 
-function ajustar_nome_classe_variavel(classe) {
+function ajustar_nome_classe_variavel(classe,para_multiclasse) {
+
+  if ( (para_multiclasse == null) || (para_multiclasse == undefined) ) {
+    para_multiclasse = false;
+  }
+
   if (classe.indexOf('Clérigo') > -1) {
     classe = 'Clérigo';
   }
+
+  if (para_multiclasse) {
+    if (classe.indexOf("Abjurante") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Conjurador") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Adivinho") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Feiticeiro") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Ilusionista") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Invocador") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Necromante") > -1) {
+      classe = "Mago";
+    }
+    if (classe.indexOf("Transmutador") > -1) {
+      classe = "Mago";
+    }
+
+    if (classe.indexOf("Elementalista Ar") > -1) {
+      classe = "Elementalista";
+    }
+    if (classe.indexOf("Elementalista Terra") > -1) {
+      classe = "Elementalista";
+    }
+    if (classe.indexOf("Elementalista Água") > -1) {
+      classe = "Elementalista";
+    }
+    if (classe.indexOf("Elementalista Fogo") > -1) {
+      classe = "Elementalista";
+    }
+  }
+
   return classe;
 }
 
 function ajustar_nome_classe(personagem) {
   let classe = personagem["Classe"];
-  return ajustar_nome_classe_variavel(classe);
+  return ajustar_nome_classe_variavel(classe,false);
 }
 
 function sortear_tendencia(personagem, callback) {
@@ -2993,9 +3024,35 @@ function sortear_tendencia(personagem, callback) {
 
   if (tendencia_selecionada == 'Todas') {
     let classe = ajustar_nome_classe(personagem);
-    let tendencias = CLASSES[classe].tendencias;
-    let index = Math.floor(Math.random() * tendencias.length);
-    personagem["Tendência"] = tendencias[index];
+
+    if (personagem["Classes Separadas"].length > 1) {
+      // Multiclasse
+      let todas_tendencias = TENDENCIAS;
+
+      if (personagem["Classes Separadas"].includes("Cigano")) {
+        todas_tendencias = CLASSES["Cigano"].tendencias;
+      } else if (personagem["Classes Separadas"].includes("Druida")) {
+        todas_tendencias = CLASSES["Druida"].tendencias;
+      } else if (personagem["Classes Separadas"].includes("Ranger")) {
+        todas_tendencias = CLASSES["Ranger"].tendencias;
+      } else if (personagem["Classes Separadas"].includes("Clérigo")) {
+        todas_tendencias = CLASSES["Clérigo"].tendencias;
+      } else if (personagem["Classes Separadas"].includes("Psionicista")) {
+        todas_tendencias = CLASSES["Psionicista"].tendencias;
+      } else if (personagem["Classes Separadas"].includes("Ladrão")) {
+        todas_tendencias = CLASSES["Ladrão"].tendencias;
+      }
+
+      let index = Math.floor(Math.random() * todas_tendencias.length);
+      personagem["Tendência"] = todas_tendencias[index];
+
+      // Multiclasse
+    } else {
+      let tendencias = CLASSES[classe].tendencias;
+      let index = Math.floor(Math.random() * tendencias.length);
+      personagem["Tendência"] = tendencias[index];
+    }
+
   } else {
     personagem["Tendência"] = tendencia_selecionada;
   }
@@ -3239,7 +3296,7 @@ function sortear_pontos_talentos(classe, personagem, callback) {
     pontos_extras = 20;
   }
 
-  let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
+  let nivel_para_magias = personagem["Dados Básicos"]["Nível"][0];
   if (nivel_para_magias == 3) {
     bonus_limite_maximo = 30;
     if (personagem['Classe'] == "Bardo") {
@@ -4292,7 +4349,7 @@ function sortear_pericias(armas_mais_fortes, classe, raca, personagem, callback)
 function sortear_magias(classe, personagem, callback) {
   let grupo = ajustar_nome_grupo(classe);
   let index_nivel = 0;
-  if (personagem["Dados Básicos"]['Nível'] > 1) {
+  if (personagem["Dados Básicos"]["Nível"][0] > 1) {
     index_nivel = 1;
   }
 
@@ -4497,8 +4554,9 @@ function obterVidaFixa() {
   return { possui: false, vida: 0 };
 }
 
+// PAREI AQUI - ajustar esse ponto para dividir os níveis entre as classes
 function rolarDadosVida(personagem,callback) {
-  let nivel = personagem["Dados Básicos"]["Nível"];
+  let nivel = personagem["Dados Básicos"]["Nível"][0];
   let constituicao = personagem["Habilidades"]["Constituição"]["Valor da Habilidade"];
   let classe = ajustar_nome_classe(personagem);
   let vida_maxima_nivel_1 = document.getElementById('texto-formulario-vida').checked;
@@ -4567,11 +4625,826 @@ function rolarDadosVida(personagem,callback) {
   }
 }
 
+
+function sortear_dados_basicos_por_nivel(personagem, callback) {
+  let classes_separadas = personagem["Classes Separadas"];
+
+  classes_separadas.forEach((classe_separada, index_classe_separada) => {
+
+    // Sortear dados básicos por Nível
+    // Nivel para ser usado em algumas partes da criacao
+    let nivel_para_magias = personagem["Dados Básicos"]["Nível"][0];
+    let nivel_para_magias_index = 0;
+    if (nivel_para_magias == 2) nivel_para_magias_index = 1;
+    if (nivel_para_magias == 3) nivel_para_magias_index = 2;
+
+
+    // PAREI AQUI - ajustar esse ponto para dividir os níveis entre as classes
+    // Definir regra para avanço de níveis, talvez na regra acima
+
+    /* Definição dos níveis */
+    if (forcar_classe.multiclasse) {
+
+      let texto_proximo_nível = '';
+      let texto_xp_extra = '';
+
+      texto_proximo_nível += CLASSES[personagem["Classes Separadas"][0]]["Próximo Nível"][nivel_para_magias_index];
+      texto_xp_extra += CLASSES[personagem["Classes Separadas"][0]].xp_extra(personagem);
+
+      if (personagem["Classes Separadas"].length > 1) {
+        texto_proximo_nível += ' / ' + CLASSES[personagem["Classes Separadas"][1]]["Próximo Nível"][nivel_para_magias_index];
+        texto_xp_extra += ' / ' + CLASSES[personagem["Classes Separadas"][1]].xp_extra(personagem);
+      }
+
+      if (personagem["Classes Separadas"].length > 2) {
+        texto_proximo_nível += ' / ' + CLASSES[personagem["Classes Separadas"][2]]["Próximo Nível"][nivel_para_magias_index];
+        texto_xp_extra += ' / ' + CLASSES[personagem["Classes Separadas"][2]].xp_extra(personagem);
+      }
+
+      personagem["Dados Básicos"]["Próximo Nível"] = texto_proximo_nível;
+      personagem["Dados Básicos"]["XP Extra"] = texto_xp_extra;
+
+    } else {
+      personagem["Dados Básicos"]["Próximo Nível"] = CLASSES[classe]["Próximo Nível"][nivel_para_magias_index];
+      personagem["Dados Básicos"]["XP Extra"] = CLASSES[classe].xp_extra(personagem);
+    }
+
+    /* Detalhes Meio-Vistani */
+    if (raca == "Meio-Vistani") {
+      personagem["Detalhes"].push.apply(personagem["Detalhes"], CLANS[personagem["Dados Básicos"]["Linhagem"]].detalhes);
+    }
+
+    let base_movimentacao = 0;
+
+    if (personagem["Raça"].indexOf('Halfling') > -1) {
+
+      base_movimentacao = 6;
+
+      let detalheRobusto = 'Qualquer Halfling Robusto puro tem 15% de chance de ter uma infravisão normal, até 20 metros.';
+      let detalheNaoRobustos = 'Halflings que não são Robustos puros, tem 25% de chance de ter uma infravisão limitada, até 10 metros.';
+      let resultadoDado = 0;
+
+      if (personagem["Raça"] == 'Halfling Robustos') {
+
+        personagem["Detalhes"].push('Halflings com sangue Robusto podem notar o desnível de uma passagem com 75% de precisão (1-3 em 1d4).');
+        personagem["Detalhes"].push('Halflings com sangue Robusto podem determinar a direção com 50% de eficiência (1-3 em 1d6).');
+
+        resultadoDado = Math.floor(Math.random() * 100);
+        if (resultadoDado < 15) {
+          personagem["Detalhes"].push(detalheRobusto);
+          personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
+        } else {
+          resultadoDado = Math.floor(Math.random() * 100);
+          if (resultadoDado < 25) {
+            personagem["Detalhes"].push(detalheNaoRobustos);
+            personagem["Dados Básicos"]["Infravisão"] = '10 metros no escuro';
+          }
+        }
+      } else {
+        resultadoDado = Math.floor(Math.random() * 100);
+        if (resultadoDado < 25) {
+          personagem["Detalhes"].push(detalheNaoRobustos);
+          personagem["Dados Básicos"]["Infravisão"] = '10 metros no escuro';
+        }
+      }
+    } else if (raca == "Anão") {
+      personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
+      base_movimentacao = 6;
+    } else if (raca == "Elfo") {
+      personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
+      base_movimentacao = 12;
+    } else if (raca == "Gnomo") {
+      personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
+      base_movimentacao = 6;
+    } else if (raca == "Meio-Elfo") {
+      personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
+      base_movimentacao = 12;
+    } else if (raca == "Humano") {
+      base_movimentacao = 12;
+    } else if (raca == "Tabaxi") {
+      base_movimentacao = 14;
+    }
+
+    /* Movimentação */
+    personagem["Movimentação"]["Taxa-Base"] = base_movimentacao;
+    personagem["Movimentação"]["Em campo aberto"] = (base_movimentacao * 9);
+    personagem["Movimentação"]["Correndo"] = (personagem["Movimentação"]["Em campo aberto"] * 2);
+    personagem["Movimentação"]["Em dungeons"] = Math.floor(personagem["Movimentação"]["Em campo aberto"] / 3);
+    personagem["Movimentação"]["Em combates"] = Math.floor(personagem["Movimentação"]["Em dungeons"] / 2);
+    personagem["Movimentação"]["Investida"] = Math.floor(personagem["Movimentação"]["Em combates"] * 1.5);
+    personagem["Movimentação"]["Natação"] = Math.floor(personagem["Movimentação"]["Em campo aberto"] / 2);
+    if (personagem["Classes Separadas"].includes("Ladrão")) {
+      personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 60);
+    } else {
+      if (raca == "Tabaxi") {
+        personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 35);
+      } else {
+        personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 30);
+      }
+    }
+    personagem["Movimentação"]["Em campo aberto"] = personagem["Movimentação"]["Em campo aberto"] + "m";
+    personagem["Movimentação"]["Correndo"] = personagem["Movimentação"]["Correndo"] + "m";
+    personagem["Movimentação"]["Em dungeons"] = personagem["Movimentação"]["Em dungeons"] + "m";
+    personagem["Movimentação"]["Em combates"] = personagem["Movimentação"]["Em combates"] + "m";
+    personagem["Movimentação"]["Investida"] = personagem["Movimentação"]["Investida"] + "m";
+    personagem["Movimentação"]["Natação"] = personagem["Movimentação"]["Natação"] + "m";
+    personagem["Movimentação"]["Escalada (Irregular, Seca)"] = personagem["Movimentação"]["Escalada (Irregular, Seca)"] + "cm";
+
+    /* Ajustes atributos */
+    let forca = personagem["Habilidades"]["Força"]["Valor da Habilidade"];
+    let forca_extraordinaria = 0;
+    if ( (forca == 18) && (personagem["Raça"].indexOf('Halfling') == -1) ) {
+      forca_extraordinaria = Math.floor(Math.random() * 100) + 1;
+      personagem["Habilidades"]["Força"]["Força Extraordinária"] = forca_extraordinaria;
+    }
+    personagem["Habilidades"]["Força"]["Chance de Acertar"] = atributos_forca("Chance de Acertar", forca, forca_extraordinaria);
+    personagem["Habilidades"]["Força"]["Ajuste de Dano"] = atributos_forca("Ajuste de Dano", forca, forca_extraordinaria);
+    personagem["Habilidades"]["Força"]["Carga Permitida"] = atributos_forca("Carga Permitida", forca, forca_extraordinaria);
+    personagem["Habilidades"]["Força"]["Sustentação"] = atributos_forca("Sustentação", forca, forca_extraordinaria);
+    personagem["Habilidades"]["Força"]["Abrir Portas"] = atributos_forca("Abrir Portas", forca, forca_extraordinaria);
+    personagem["Habilidades"]["Força"]["Barras/Portais"] = atributos_forca("Barras/Portais", forca, forca_extraordinaria);
+
+    let destreza = personagem["Habilidades"]["Destreza"]["Valor da Habilidade"];
+    personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] = atributos_destreza("Ajuste de Reação", destreza);
+    personagem["Habilidades"]["Destreza"]["Ataque à Distância"] = atributos_destreza("Ataque à Distância", destreza);
+    personagem["Habilidades"]["Destreza"]["Ajuste Defensivo"] = atributos_destreza("Ajuste Defensivo", destreza);
+    personagem["Dados Básicos"]["Teste de Surpresa"] = "Até 3 em 1d10";
+    if (personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] < 0) {
+      personagem["Dados Básicos"]["Teste de Surpresa"] = personagem["Dados Básicos"]["Teste de Surpresa"] + personagem["Habilidades"]["Destreza"]["Ajuste de Reação"];
+    } else if (personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] > 0) {
+      personagem["Dados Básicos"]["Teste de Surpresa"] = personagem["Dados Básicos"]["Teste de Surpresa"] + "+" + personagem["Habilidades"]["Destreza"]["Ajuste de Reação"];
+    }
+
+    let constituicao = personagem["Habilidades"]["Constituição"]["Valor da Habilidade"];
+    let ajuste_pontos_de_vida = atributos_constituicao("Ajuste dos Pontos de Vida", constituicao, classe);
+    personagem["Habilidades"]["Constituição"]["Ajuste dos Pontos de Vida"] = ajuste_pontos_de_vida;
+    personagem["Habilidades"]["Constituição"]["Colapso"] = atributos_constituicao("Colapso", constituicao, classe);
+    personagem["Habilidades"]["Constituição"]["Chance de Ressurreição"] = atributos_constituicao("Chance de Ressurreição", constituicao, classe);
+    personagem["Habilidades"]["Constituição"]["Resistência contra Veneno"] = atributos_constituicao("Resistência contra Veneno", constituicao, classe);
+    personagem["Habilidades"]["Constituição"]["Regeneração"] = atributos_constituicao("Regeneração", constituicao, classe);
+
+    rolarDadosVida(personagem,()=>{
+      // Pontos de vida definidos
+
+      let inteligencia = personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"];
+      let numero_de_linguas = atributos_inteligencia("Número de Línguas", inteligencia);
+      personagem["Habilidades"]["Inteligência"]["Número de Línguas"] = numero_de_linguas;
+      personagem["Habilidades"]["Inteligência"]["Círculo de Magia"] = atributos_inteligencia("Círculo de Magia", inteligencia);
+      personagem["Habilidades"]["Inteligência"]["Chance de Aprender Magia"] = atributos_inteligencia("Chance de Aprender Magia", inteligencia);
+      personagem["Habilidades"]["Inteligência"]["Número Máx Magias/Círculo"] = atributos_inteligencia("Número Máx Magias/Círculo", inteligencia);
+      personagem["Habilidades"]["Inteligência"]["Imunidade a Magias"] = atributos_inteligencia("Imunidade a Magias", inteligencia);
+
+      acrescentar_novas_linguas(personagem, raca, numero_de_linguas, (numero_de_linguas) => {
+
+        let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
+        personagem["Habilidades"]["Sabedoria"]["Ajuste de Defesa Contra Magia"] = atributos_sabedoria("Ajuste de Defesa Contra Magia", sabedoria);
+        personagem["Habilidades"]["Sabedoria"]["Magias Extras"] = atributos_sabedoria("Magias Extras", sabedoria);
+        personagem["Habilidades"]["Sabedoria"]["Chance da Magia Falhar"] = atributos_sabedoria("Chance da Magia Falhar", sabedoria);
+        personagem["Habilidades"]["Sabedoria"]["Imunidade à Magia"] = atributos_sabedoria("Imunidade à Magia", sabedoria);
+
+        let carisma = personagem["Habilidades"]["Carisma"]["Valor da Habilidade"];
+        personagem["Habilidades"]["Carisma"]["Nº Máximo de aliados"] = atributos_carisma("Nº Máximo de aliados", carisma);
+        personagem["Habilidades"]["Carisma"]["Fator de Lealdade"] = atributos_carisma("Fator de Lealdade", carisma);
+        personagem["Habilidades"]["Carisma"]["Ajuste de reação"] = atributos_carisma("Ajuste de reação", carisma);
+
+        if (CLASSES[classe]["Grupo"] == "Homem de Armas") {
+          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 4;
+          personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 3;
+          personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -1;
+          personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -2;
+          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
+          personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
+
+          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 14;
+          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 16;
+          personagem["Resistência"]["Petrificação ou Transformação"] = 15;
+          personagem["Resistência"]["Sopro-de-Dragão"] = 17;
+          personagem["Resistência"]["Magia"] = 17;
+
+          if (nivel_para_magias == 3) {
+            personagem["Dados Básicos"]["TAC0"] = 18;
+
+            personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = personagem["Pontos de Perícia"]["Perícias Armas Inicial"] + 1;
+            personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
+            personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias de armas e comuns no nível 3.');
+
+            personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
+            personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 15;
+            personagem["Resistência"]["Petrificação ou Transformação"] = 14;
+            personagem["Resistência"]["Sopro-de-Dragão"] = 16;
+            personagem["Resistência"]["Magia"] = 16;
+          }
+          if (nivel_para_magias == 2) {
+            personagem["Dados Básicos"]["TAC0"] = 19;
+          }
+
+        } else if (CLASSES[classe]["Grupo"] == "Arcano") {
+          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 1;
+          personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 6;
+          personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -3;
+          personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -5;
+          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 4 + numero_de_linguas;
+          personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
+
+          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 14;
+          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 11;
+          personagem["Resistência"]["Petrificação ou Transformação"] = 13;
+          personagem["Resistência"]["Sopro-de-Dragão"] = 15;
+          personagem["Resistência"]["Magia"] = 12;
+
+          if (classe == "Mago") {
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 6,
+              "2º Círculo": 0,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 0,
+              '2º Círculo': 0,
+            };
+
+            if (nivel_para_magias == 3) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 3;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 1;
+            } else if (nivel_para_magias == 2) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 7;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
+            } else {
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 1;
+            }
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
+            personagem["Dados Básicos"]["Escolas Opostas"] = [];
+            personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
+          } else if ( (classe == "Elementalista Ar") || (classe == "Elementalista Terra") || (classe == "Elementalista Água") || (classe == "Elementalista Fogo") ) {
+            let escolas_elementais = Object.keys(MAGIAS_ELEMENTAIS);
+            let index_escolas_elementais = Math.floor(Math.random() * escolas_elementais.length);
+            let escola_elemental = escolas_elementais[index_escolas_elementais];
+            personagem["Dados Básicos"]["Escolas de Magia"] = [ escola_elemental ];
+            personagem["Dados Básicos"]["Escolas Opostas"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Opostas"];
+            personagem["Dados Básicos"]["Escolas Adjacentes"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Adjacentes"];
+
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 7,
+              "2º Círculo": 0,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 0,
+              '2º Círculo': 0,
+            };
+
+            if (nivel_para_magias == 3) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
+            } else if (nivel_para_magias == 2) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+            } else {
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
+            }
+
+          } else if (classe == "Arcanista") {
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 7,
+              "2º Círculo": 0,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 0,
+              '2º Círculo': 0,
+            };
+
+            personagem["Poder da Fé"] = {
+              "Esqueleto ou 1 DV": '13',
+              "Zumbi": '16',
+              "Carniçal ou 2 DV": '19',
+              "Sombra ou 3-4 DV": '20',
+              "Vulto ou 5 DV": '-',
+              "Carneçal": '-',
+              "Aparição ou 6 DV": '-',
+              "Múmia ou 7 DV": '-',
+              "Espectro ou 8 DV": '-',
+              "Vampiro ou 9 DV": '-',
+              "Fantasma ou 10 DV": '-',
+              "Lich ou 11+ DV": '-',
+              "Especial": '-'
+            };
+
+            if (nivel_para_magias == 3) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
+
+              personagem["Poder da Fé"] = {
+                "Esqueleto ou 1 DV": '7',
+                "Zumbi": '10',
+                "Carniçal ou 2 DV": '13',
+                "Sombra ou 3-4 DV": '16',
+                "Vulto ou 5 DV": '19',
+                "Carneçal": '20',
+                "Aparição ou 6 DV": '-',
+                "Múmia ou 7 DV": '-',
+                "Espectro ou 8 DV": '-',
+                "Vampiro ou 9 DV": '-',
+                "Fantasma ou 10 DV": '-',
+                "Lich ou 11+ DV": '-',
+                "Especial": '-'
+              };
+
+            } else if (nivel_para_magias == 2) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+
+              personagem["Poder da Fé"] = {
+                "Esqueleto ou 1 DV": '10',
+                "Zumbi": '13',
+                "Carniçal ou 2 DV": '16',
+                "Sombra ou 3-4 DV": '19',
+                "Vulto ou 5 DV": '20',
+                "Carneçal": '-',
+                "Aparição ou 6 DV": '-',
+                "Múmia ou 7 DV": '-',
+                "Espectro ou 8 DV": '-',
+                "Vampiro ou 9 DV": '-',
+                "Fantasma ou 10 DV": '-',
+                "Lich ou 11+ DV": '-',
+                "Especial": '-'
+              };
+
+            } else {
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
+            }
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
+            personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
+            personagem["Dados Básicos"]["Escolas Adjacentes"] = ['Conjuração/Convocação', 'Abjuração'];
+
+            personagem["Detalhes"].push('Os Arcanista podem usar o Poder da Fé para comandar (no caso de personagens malignos) ou afastar (no caso dos benignos) criaturas mortas-vivas como se fossem clérigos. Os jogadores que estiverem representando arcanistas ordeiros (leais e neutros) devem decidir no momento da criação do personagem se seus personagens irão controlar ou afastar mortos-vivos. Depois que tiver feita, a escolha não poderá ser revertida.');
+
+            if ( (personagem["Tendência"] == "Vil (maligno e leal)") || (personagem["Tendência"] == "Egoista (neutro e maligno)") || (personagem["Tendência"] == "Cruel (caótico e maligno)") ) {
+              personagem["Detalhes"].push('Por ter alinhamento maligno, o Arcanista pode comandar mortos-vivos com o Poder da Fé. O sucesso na jogada do 1d20 (maior ou igual ao valor indicado), os mortos-vivos seguem seus comandos.');
+            } else if ( (personagem["Tendência"] == "Justo (bom e leal)") || (personagem["Tendência"] == "Bondoso (bom e neutro)") || (personagem["Tendência"] == "Honrado (caótico e bom)") ) {
+              personagem["Detalhes"].push('Por ter alinhamento benigno, o Arcanista pode afastar mortos-vivos com o Poder da Fé da mesma forma que os Clérigos.');
+            } else {
+              personagem["Detalhes"].push('Arcanistas neutros devem decidir no momento da criação do personagem se seus personagens irão controlar ou afastar mortos-vivos. Depois que tiver feita, a escolha não poderá ser revertida.');
+              let opcao_poder_da_fe = Math.floor(Math.random() * 2);
+              if (opcao_poder_da_fe == 0) {
+                personagem["Detalhes"].push('Por rolagem (o jogador pode alterar esta escolha somente na criação do personagem), este Arcanista pode afastar mortos-vivos com o Poder da Fé da mesma forma que os Clérigos.');
+              } else {
+                personagem["Detalhes"].push('Por rolagem (o jogador pode alterar esta escolha somente na criação do personagem), este Arcanista pode comandar mortos-vivos com o Poder da Fé. O sucesso na jogada do 1d20 (maior ou igual ao valor indicado), os mortos-vivos seguem seus comandos.');
+              }
+            }
+
+          } else {
+            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+              "1º Círculo": 7,
+              "2º Círculo": 0,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 0,
+              '2º Círculo': 0,
+            };
+
+            if (nivel_para_magias == 3) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
+            } else if (nivel_para_magias == 2) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
+            } else {
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
+            }
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
+            personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
+            personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
+          }
+
+        } else if (CLASSES[classe]["Grupo"] == "Sacerdote") {
+          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
+          personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 4;
+          personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
+          personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -3;
+          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 4 + numero_de_linguas;
+          personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
+
+          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 10;
+          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 14;
+          personagem["Resistência"]["Petrificação ou Transformação"] = 13;
+          personagem["Resistência"]["Sopro-de-Dragão"] = 16;
+          personagem["Resistência"]["Magia"] = 15;
+
+          if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 13) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 2,
+              '2º Círculo': 0,
+              '3º Círculo': 0,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 14) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 3,
+              '2º Círculo': 0,
+              '3º Círculo': 0,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 15) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 3,
+              '2º Círculo': 1,
+              '3º Círculo': 0,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 16) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 3,
+              '2º Círculo': 2,
+              '3º Círculo': 0,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 17) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 3,
+              '2º Círculo': 2,
+              '3º Círculo': 1,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 18) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 3,
+              '2º Círculo': 2,
+              '3º Círculo': 1,
+              '4º Círculo': 1,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 19) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 2,
+              '3º Círculo': 1,
+              '4º Círculo': 2,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 20) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 1,
+              '4º Círculo': 3,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 21) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 2,
+              '4º Círculo': 3,
+              '5º Círculo': 1,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 22) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 2,
+              '4º Círculo': 4,
+              '5º Círculo': 2,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 23) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 2,
+              '4º Círculo': 4,
+              '5º Círculo': 4,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 24) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 2,
+              '4º Círculo': 4,
+              '5º Círculo': 4,
+              '6º Círculo': 2,
+              '7º Círculo': 0,
+            };
+          } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 25) {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 4,
+              '2º Círculo': 3,
+              '3º Círculo': 2,
+              '4º Círculo': 4,
+              '5º Círculo': 4,
+              '6º Círculo': 3,
+              '7º Círculo': 1,
+            };
+          } else {
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
+              '1º Círculo': 0,
+              '2º Círculo': 0,
+              '3º Círculo': 0,
+              '4º Círculo': 0,
+              '5º Círculo': 0,
+              '6º Círculo': 0,
+              '7º Círculo': 0,
+            };
+          }
+
+          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+            '1º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'],
+            '2º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'],
+          };
+
+          if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
+            if (forcar_havenloft) {
+
+              if (classe == "Clérigo") {
+                personagem["Detalhes"].push('Os clérigos de tendências boas também podem usar seu poder da fé para afastar (ou até mesmo destruir) criaturas mortas-vivas. Os clérigos neutros podem tanto afastar como controlar mortos-vivos de modo que eles sigam suas ordens.');
+              } else if (classe == "Anacoreta") {
+                personagem["Detalhes"].push('Um anacoreta de qualquer tendência tem a habilidade de afastar mortos-vivos com o Poder da Fé da mesma forma que os clérigos. No entanto, nenhum seguidor de Ezra tem a habilidade de comandar mortos-vivos.');
+              }
+
+              personagem["Poder da Fé"] = {
+                "Esqueleto ou 1 DV": '13',
+                "Zumbi": '16',
+                "Carniçal ou 2 DV": '19',
+                "Sombra ou 3-4 DV": '20',
+                "Vulto ou 5 DV": '-',
+                "Carneçal": '-',
+                "Aparição ou 6 DV": '-',
+                "Múmia ou 7 DV": '-',
+                "Espectro ou 8 DV": '-',
+                "Vampiro ou 9 DV": '-',
+                "Fantasma ou 10 DV": '-',
+                "Lich ou 11+ DV": '-',
+                "Especial": '-'
+              };
+
+            } else {
+              personagem["Poder da Fé"] = {
+                "Esqueleto ou 1 DV": '10',
+                "Zumbi": '13',
+                "Carniçal ou 2 DV": '16',
+                "Sombra ou 3-4 DV": '19',
+                "Vulto ou 5 DV": '20',
+                "Carneçal": '-',
+                "Aparição ou 6 DV": '-',
+                "Múmia ou 7 DV": '-',
+                "Espectro ou 8 DV": '-',
+                "Vampiro ou 9 DV": '-',
+                "Fantasma ou 10 DV": '-',
+                "Lich ou 11+ DV": '-',
+                "Especial": '-'
+              };
+            }
+          }
+
+          if (nivel_para_magias == 3) {
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] + 1;
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'] + 1;
+
+            if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
+              if (forcar_havenloft) {
+                personagem["Poder da Fé"] = {
+                  "Esqueleto ou 1 DV": '7',
+                  "Zumbi": '10',
+                  "Carniçal ou 2 DV": '13',
+                  "Sombra ou 3-4 DV": '16',
+                  "Vulto ou 5 DV": '19',
+                  "Carneçal": '20',
+                  "Aparição ou 6 DV": '-',
+                  "Múmia ou 7 DV": '-',
+                  "Espectro ou 8 DV": '-',
+                  "Vampiro ou 9 DV": '-',
+                  "Fantasma ou 10 DV": '-',
+                  "Lich ou 11+ DV": '-',
+                  "Especial": '-'
+                };
+              } else {
+                personagem["Poder da Fé"] = {
+                  "Esqueleto ou 1 DV": '4',
+                  "Zumbi": '7',
+                  "Carniçal ou 2 DV": '10',
+                  "Sombra ou 3-4 DV": '13',
+                  "Vulto ou 5 DV": '16',
+                  "Carneçal": '19',
+                  "Aparição ou 6 DV": '20',
+                  "Múmia ou 7 DV": '-',
+                  "Espectro ou 8 DV": '-',
+                  "Vampiro ou 9 DV": '-',
+                  "Fantasma ou 10 DV": '-',
+                  "Lich ou 11+ DV": '-',
+                  "Especial": '-'
+                };
+              }
+            }
+
+          } else if (nivel_para_magias == 2) {
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
+
+            if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
+              if (forcar_havenloft) {
+                personagem["Poder da Fé"] = {
+                  "Esqueleto ou 1 DV": '10',
+                  "Zumbi": '13',
+                  "Carniçal ou 2 DV": '16',
+                  "Sombra ou 3-4 DV": '19',
+                  "Vulto ou 5 DV": '20',
+                  "Carneçal": '-',
+                  "Aparição ou 6 DV": '-',
+                  "Múmia ou 7 DV": '-',
+                  "Espectro ou 8 DV": '-',
+                  "Vampiro ou 9 DV": '-',
+                  "Fantasma ou 10 DV": '-',
+                  "Lich ou 11+ DV": '-',
+                  "Especial": '-'
+                };
+              } else {
+                personagem["Poder da Fé"] = {
+                  "Esqueleto ou 1 DV": '7',
+                  "Zumbi": '10',
+                  "Carniçal ou 2 DV": '13',
+                  "Sombra ou 3-4 DV": '16',
+                  "Vulto ou 5 DV": '19',
+                  "Carneçal": '20',
+                  "Aparição ou 6 DV": '-',
+                  "Múmia ou 7 DV": '-',
+                  "Espectro ou 8 DV": '-',
+                  "Vampiro ou 9 DV": '-',
+                  "Fantasma ou 10 DV": '-',
+                  "Lich ou 11+ DV": '-',
+                  "Especial": '-'
+                };
+              }
+            }
+
+          } else {
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 1;
+            personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 1;
+          }
+
+        } else if (CLASSES[classe]["Grupo"] == "Ladino") {
+          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
+          personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 4;
+          personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
+          personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -3;
+          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
+          personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 4;
+
+          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
+          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 14;
+          personagem["Resistência"]["Petrificação ou Transformação"] = 12;
+          personagem["Resistência"]["Sopro-de-Dragão"] = 16;
+          personagem["Resistência"]["Magia"] = 15;
+
+          if (nivel_para_magias == 3) {
+            personagem["Dados Básicos"]["TAC0"] = 19;
+
+            personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
+            personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+          }
+
+          if (classe == "Cigano") {
+            personagem["Dados Básicos"]["Magias ciganas conhecidas"] = {
+              "1º Círculo": 4,
+            };
+            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+              '1º Círculo': 1,
+            };
+
+            personagem["Dados Básicos"]["Escolas de Magia"] = ['Profecia','Augúrio'];
+          }
+
+          if (classe == "Bardo") {
+            if (nivel_para_magias == 2) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+                "1º Círculo": 4,
+              };
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+                '1º Círculo': 1,
+              };
+
+              personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
+            }
+            if (nivel_para_magias == 3) {
+              personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
+                "1º Círculo": 5,
+              };
+              personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
+                '1º Círculo': 2,
+              };
+
+              personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
+            }
+          }
+
+        } else if (CLASSES[classe]["Grupo"] == "Psionicista") {
+          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
+          personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 5;
+          personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
+          personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -4;
+          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
+          personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
+
+          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
+          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 15;
+          personagem["Resistência"]["Petrificação ou Transformação"] = 10;
+          personagem["Resistência"]["Sopro-de-Dragão"] = 16;
+          personagem["Resistência"]["Magia"] = 15;
+
+          if (nivel_para_magias == 3) {
+            personagem["Dados Básicos"]["TAC0"] = 19;
+
+            personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
+            personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+          }
+        }
+
+        // A definição de sabedoria e carisma estava neste ponto, mas precisou ir para cima do código
+
+        /* Poder psiônico */
+        calcular_PSP(personagem);
+        poderes_psionicos(personagem,()=>{
+
+          /* Medo, Horror e Loucura */
+          valores_medo(personagem);
+
+          /* Ajustar talentos dos ladinos */
+          definir_talentos(classe, personagem, () => {
+
+            /* Detalhes */
+            personagem["Detalhes"].push.apply(personagem["Detalhes"], CLASSES[classe].detalhes);
+
+            sortear_itens(classe, raca, personagem, (armas_mais_fortes) => {
+
+              sortear_pericias(armas_mais_fortes, classe, raca, personagem, () => {
+                debug(`Perícias sorteadas:${personagem['Perícias'].map(p => ` ${p.split(',')[0]}`)}`);
+
+                sortear_magias(classe, personagem, () => {
+
+                  if (index_classe_separada == (classes_separadas.length - 1)) {
+                    callback();
+                    return;
+                  }
+
+                });
+
+              });
+
+            });
+
+          });
+
+        });
+
+      });
+
+      // Pontos de vida definidos
+    });
+    // Sortear dados básicos por Nível
+
+  });
+}
+
 function sortear_dados_basicos(personagem, callback) {
   let classe = ajustar_nome_classe(personagem);
   let raca = ajustar_nome_raca(personagem);
   let grupo = ajustar_nome_grupo(classe);
-  personagem["Dados Básicos"]["Grupo"] = CLASSES[classe]["Grupo"];
+  personagem["Dados Básicos"]["Grupo"] = grupo;
 
   /* Ajustes de Resistências */
   personagem["Detalhes"].push('Para realizar um teste de Perícias, adicione o modificador à Habilidade apropriada. Jogue 1d20, se o resultado for menor ou igual, houve sucesso (20 sempre é uma falha).');
@@ -4623,784 +5496,16 @@ function sortear_dados_basicos(personagem, callback) {
 
   personagem["Dados Básicos"]["Idade"] = idade;
 
+  /* Definir peso */
   let ajuste_peso = RACAS[raca].peso[genero].maximo - RACAS[raca].peso[genero].minimo;
   let peso = (Math.random() * ajuste_peso) + RACAS[raca].peso[genero].minimo;
   personagem["Dados Básicos"]["Peso"] = peso.toFixed(2);
 
+  /* Definir detalhes */
   personagem["Detalhes"].push.apply(personagem["Detalhes"], RACAS[raca].detalhes);
 
-  // Nivel para ser usado em algumas partes da criacao
-  let nivel_para_magias = personagem["Dados Básicos"]["Nível"];
-  let nivel_para_magias_index = 0;
-  if (nivel_para_magias == 2) nivel_para_magias_index = 1;
-  if (nivel_para_magias == 3) nivel_para_magias_index = 2;
-
-  personagem["Dados Básicos"]["Próximo Nível"] = CLASSES[classe]["Próximo Nível"][nivel_para_magias_index];
-  personagem["Dados Básicos"]["XP Extra"] = CLASSES[classe].xp_extra(personagem);
-
-  if (raca == "Meio-Vistani") {
-    personagem["Detalhes"].push.apply(personagem["Detalhes"], CLANS[personagem["Dados Básicos"]["Linhagem"]].detalhes);
-  }
-
-  let base_movimentacao = 0;
-
-  if (personagem["Raça"].indexOf('Halfling') > -1) {
-
-    base_movimentacao = 6;
-
-    let detalheRobusto = 'Qualquer Halfling Robusto puro tem 15% de chance de ter uma infravisão normal, até 20 metros.';
-    let detalheNaoRobustos = 'Halflings que não são Robustos puros, tem 25% de chance de ter uma infravisão limitada, até 10 metros.';
-    let resultadoDado = 0;
-
-    if (personagem["Raça"] == 'Halfling Robustos') {
-
-      personagem["Detalhes"].push('Halflings com sangue Robusto podem notar o desnível de uma passagem com 75% de precisão (1-3 em 1d4).');
-      personagem["Detalhes"].push('Halflings com sangue Robusto podem determinar a direção com 50% de eficiência (1-3 em 1d6).');
-
-      resultadoDado = Math.floor(Math.random() * 100);
-      if (resultadoDado < 15) {
-        personagem["Detalhes"].push(detalheRobusto);
-        personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
-      } else {
-        resultadoDado = Math.floor(Math.random() * 100);
-        if (resultadoDado < 25) {
-          personagem["Detalhes"].push(detalheNaoRobustos);
-          personagem["Dados Básicos"]["Infravisão"] = '10 metros no escuro';
-        }
-      }
-    } else {
-      resultadoDado = Math.floor(Math.random() * 100);
-      if (resultadoDado < 25) {
-        personagem["Detalhes"].push(detalheNaoRobustos);
-        personagem["Dados Básicos"]["Infravisão"] = '10 metros no escuro';
-      }
-    }
-  } else if (raca == "Anão") {
-    personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
-    base_movimentacao = 6;
-  } else if (raca == "Elfo") {
-    personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
-    base_movimentacao = 12;
-  } else if (raca == "Gnomo") {
-    personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
-    base_movimentacao = 6;
-  } else if (raca == "Meio-Elfo") {
-    personagem["Dados Básicos"]["Infravisão"] = '20 metros no escuro';
-    base_movimentacao = 12;
-  } else if (raca == "Humano") {
-    base_movimentacao = 12;
-  } else if (raca == "Tabaxi") {
-    base_movimentacao = 14;
-  }
-
-  /* Movimentação */
-  personagem["Movimentação"]["Taxa-Base"] = base_movimentacao;
-  personagem["Movimentação"]["Em campo aberto"] = (base_movimentacao * 9);
-  personagem["Movimentação"]["Correndo"] = (personagem["Movimentação"]["Em campo aberto"] * 2);
-  personagem["Movimentação"]["Em dungeons"] = Math.floor(personagem["Movimentação"]["Em campo aberto"] / 3);
-  personagem["Movimentação"]["Em combates"] = Math.floor(personagem["Movimentação"]["Em dungeons"] / 2);
-  personagem["Movimentação"]["Investida"] = Math.floor(personagem["Movimentação"]["Em combates"] * 1.5);
-  personagem["Movimentação"]["Natação"] = Math.floor(personagem["Movimentação"]["Em campo aberto"] / 2);
-  if (classe == "Ladrão") {
-    personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 60);
-  } else {
-    if (raca == "Tabaxi") {
-      personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 35);
-    } else {
-      personagem["Movimentação"]["Escalada (Irregular, Seca)"] = (base_movimentacao * 30);
-    }
-  }
-  personagem["Movimentação"]["Em campo aberto"] = personagem["Movimentação"]["Em campo aberto"] + "m";
-  personagem["Movimentação"]["Correndo"] = personagem["Movimentação"]["Correndo"] + "m";
-  personagem["Movimentação"]["Em dungeons"] = personagem["Movimentação"]["Em dungeons"] + "m";
-  personagem["Movimentação"]["Em combates"] = personagem["Movimentação"]["Em combates"] + "m";
-  personagem["Movimentação"]["Investida"] = personagem["Movimentação"]["Investida"] + "m";
-  personagem["Movimentação"]["Natação"] = personagem["Movimentação"]["Natação"] + "m";
-  personagem["Movimentação"]["Escalada (Irregular, Seca)"] = personagem["Movimentação"]["Escalada (Irregular, Seca)"] + "cm";
-
-  /* Ajustes atributos */
-  let forca = personagem["Habilidades"]["Força"]["Valor da Habilidade"];
-  let forca_extraordinaria = 0;
-  if ( (forca == 18) && (personagem["Raça"].indexOf('Halfling') == -1) ) {
-    forca_extraordinaria = Math.floor(Math.random() * 100) + 1;
-    personagem["Habilidades"]["Força"]["Força Extraordinária"] = forca_extraordinaria;
-  }
-  personagem["Habilidades"]["Força"]["Chance de Acertar"] = atributos_forca("Chance de Acertar", forca, forca_extraordinaria);
-  personagem["Habilidades"]["Força"]["Ajuste de Dano"] = atributos_forca("Ajuste de Dano", forca, forca_extraordinaria);
-  personagem["Habilidades"]["Força"]["Carga Permitida"] = atributos_forca("Carga Permitida", forca, forca_extraordinaria);
-  personagem["Habilidades"]["Força"]["Sustentação"] = atributos_forca("Sustentação", forca, forca_extraordinaria);
-  personagem["Habilidades"]["Força"]["Abrir Portas"] = atributos_forca("Abrir Portas", forca, forca_extraordinaria);
-  personagem["Habilidades"]["Força"]["Barras/Portais"] = atributos_forca("Barras/Portais", forca, forca_extraordinaria);
-
-  let destreza = personagem["Habilidades"]["Destreza"]["Valor da Habilidade"];
-  personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] = atributos_destreza("Ajuste de Reação", destreza);
-  personagem["Habilidades"]["Destreza"]["Ataque à Distância"] = atributos_destreza("Ataque à Distância", destreza);
-  personagem["Habilidades"]["Destreza"]["Ajuste Defensivo"] = atributos_destreza("Ajuste Defensivo", destreza);
-  personagem["Dados Básicos"]["Teste de Surpresa"] = "Até 3 em 1d10";
-  if (personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] < 0) {
-    personagem["Dados Básicos"]["Teste de Surpresa"] = personagem["Dados Básicos"]["Teste de Surpresa"] + personagem["Habilidades"]["Destreza"]["Ajuste de Reação"];
-  } else if (personagem["Habilidades"]["Destreza"]["Ajuste de Reação"] > 0) {
-    personagem["Dados Básicos"]["Teste de Surpresa"] = personagem["Dados Básicos"]["Teste de Surpresa"] + "+" + personagem["Habilidades"]["Destreza"]["Ajuste de Reação"];
-  }
-
-  let constituicao = personagem["Habilidades"]["Constituição"]["Valor da Habilidade"];
-  let ajuste_pontos_de_vida = atributos_constituicao("Ajuste dos Pontos de Vida", constituicao, classe);
-  personagem["Habilidades"]["Constituição"]["Ajuste dos Pontos de Vida"] = ajuste_pontos_de_vida;
-  personagem["Habilidades"]["Constituição"]["Colapso"] = atributos_constituicao("Colapso", constituicao, classe);
-  personagem["Habilidades"]["Constituição"]["Chance de Ressurreição"] = atributos_constituicao("Chance de Ressurreição", constituicao, classe);
-  personagem["Habilidades"]["Constituição"]["Resistência contra Veneno"] = atributos_constituicao("Resistência contra Veneno", constituicao, classe);
-  personagem["Habilidades"]["Constituição"]["Regeneração"] = atributos_constituicao("Regeneração", constituicao, classe);
-
-  rolarDadosVida(personagem,()=>{
-    // Pontos de vida definidos
-
-    let inteligencia = personagem["Habilidades"]["Inteligência"]["Valor da Habilidade"];
-    let numero_de_linguas = atributos_inteligencia("Número de Línguas", inteligencia);
-    personagem["Habilidades"]["Inteligência"]["Número de Línguas"] = numero_de_linguas;
-    personagem["Habilidades"]["Inteligência"]["Círculo de Magia"] = atributos_inteligencia("Círculo de Magia", inteligencia);
-    personagem["Habilidades"]["Inteligência"]["Chance de Aprender Magia"] = atributos_inteligencia("Chance de Aprender Magia", inteligencia);
-    personagem["Habilidades"]["Inteligência"]["Número Máx Magias/Círculo"] = atributos_inteligencia("Número Máx Magias/Círculo", inteligencia);
-    personagem["Habilidades"]["Inteligência"]["Imunidade a Magias"] = atributos_inteligencia("Imunidade a Magias", inteligencia);
-
-    acrescentar_novas_linguas(personagem, raca, numero_de_linguas, (numero_de_linguas) => {
-
-      let sabedoria = personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"];
-      personagem["Habilidades"]["Sabedoria"]["Ajuste de Defesa Contra Magia"] = atributos_sabedoria("Ajuste de Defesa Contra Magia", sabedoria);
-      personagem["Habilidades"]["Sabedoria"]["Magias Extras"] = atributos_sabedoria("Magias Extras", sabedoria);
-      personagem["Habilidades"]["Sabedoria"]["Chance da Magia Falhar"] = atributos_sabedoria("Chance da Magia Falhar", sabedoria);
-      personagem["Habilidades"]["Sabedoria"]["Imunidade à Magia"] = atributos_sabedoria("Imunidade à Magia", sabedoria);
-
-      let carisma = personagem["Habilidades"]["Carisma"]["Valor da Habilidade"];
-      personagem["Habilidades"]["Carisma"]["Nº Máximo de aliados"] = atributos_carisma("Nº Máximo de aliados", carisma);
-      personagem["Habilidades"]["Carisma"]["Fator de Lealdade"] = atributos_carisma("Fator de Lealdade", carisma);
-      personagem["Habilidades"]["Carisma"]["Ajuste de reação"] = atributos_carisma("Ajuste de reação", carisma);
-
-      if (CLASSES[classe]["Grupo"] == "Homem de Armas") {
-        personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 4;
-        personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 3;
-        personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -1;
-        personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -2;
-        personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
-        personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
-
-        personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 14;
-        personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 16;
-        personagem["Resistência"]["Petrificação ou Transformação"] = 15;
-        personagem["Resistência"]["Sopro-de-Dragão"] = 17;
-        personagem["Resistência"]["Magia"] = 17;
-
-        if (nivel_para_magias == 3) {
-          personagem["Dados Básicos"]["TAC0"] = 18;
-
-          personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = personagem["Pontos de Perícia"]["Perícias Armas Inicial"] + 1;
-          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
-          personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias de armas e comuns no nível 3.');
-
-          personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
-          personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 15;
-          personagem["Resistência"]["Petrificação ou Transformação"] = 14;
-          personagem["Resistência"]["Sopro-de-Dragão"] = 16;
-          personagem["Resistência"]["Magia"] = 16;
-        }
-        if (nivel_para_magias == 2) {
-          personagem["Dados Básicos"]["TAC0"] = 19;
-        }
-
-      } else if (CLASSES[classe]["Grupo"] == "Arcano") {
-        personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 1;
-        personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 6;
-        personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -3;
-        personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -5;
-        personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 4 + numero_de_linguas;
-        personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
-
-        personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 14;
-        personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 11;
-        personagem["Resistência"]["Petrificação ou Transformação"] = 13;
-        personagem["Resistência"]["Sopro-de-Dragão"] = 15;
-        personagem["Resistência"]["Magia"] = 12;
-
-        if (classe == "Mago") {
-          personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-            "1º Círculo": 6,
-            "2º Círculo": 0,
-          };
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-            '1º Círculo': 0,
-            '2º Círculo': 0,
-          };
-
-          if (nivel_para_magias == 3) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 3;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 1;
-          } else if (nivel_para_magias == 2) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 7;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
-          } else {
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 1;
-          }
-
-          personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
-          personagem["Dados Básicos"]["Escolas Opostas"] = [];
-          personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
-        } else if ( (classe == "Elementalista Ar") || (classe == "Elementalista Terra") || (classe == "Elementalista Água") || (classe == "Elementalista Fogo") ) {
-          let escolas_elementais = Object.keys(MAGIAS_ELEMENTAIS);
-          let index_escolas_elementais = Math.floor(Math.random() * escolas_elementais.length);
-          let escola_elemental = escolas_elementais[index_escolas_elementais];
-          personagem["Dados Básicos"]["Escolas de Magia"] = [ escola_elemental ];
-          personagem["Dados Básicos"]["Escolas Opostas"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Opostas"];
-          personagem["Dados Básicos"]["Escolas Adjacentes"] = MAGIAS_ELEMENTAIS[escola_elemental]["Escolas Adjacentes"];
-
-          personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-            "1º Círculo": 7,
-            "2º Círculo": 0,
-          };
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-            '1º Círculo': 0,
-            '2º Círculo': 0,
-          };
-
-          if (nivel_para_magias == 3) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
-          } else if (nivel_para_magias == 2) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-          } else {
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
-          }
-
-        } else if (classe == "Arcanista") {
-          personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-            "1º Círculo": 7,
-            "2º Círculo": 0,
-          };
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-            '1º Círculo': 0,
-            '2º Círculo': 0,
-          };
-
-          personagem["Poder da Fé"] = {
-            "Esqueleto ou 1 DV": '13',
-            "Zumbi": '16',
-            "Carniçal ou 2 DV": '19',
-            "Sombra ou 3-4 DV": '20',
-            "Vulto ou 5 DV": '-',
-            "Carneçal": '-',
-            "Aparição ou 6 DV": '-',
-            "Múmia ou 7 DV": '-',
-            "Espectro ou 8 DV": '-',
-            "Vampiro ou 9 DV": '-',
-            "Fantasma ou 10 DV": '-',
-            "Lich ou 11+ DV": '-',
-            "Especial": '-'
-          };
-
-          if (nivel_para_magias == 3) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
-
-            personagem["Poder da Fé"] = {
-              "Esqueleto ou 1 DV": '7',
-              "Zumbi": '10',
-              "Carniçal ou 2 DV": '13',
-              "Sombra ou 3-4 DV": '16',
-              "Vulto ou 5 DV": '19',
-              "Carneçal": '20',
-              "Aparição ou 6 DV": '-',
-              "Múmia ou 7 DV": '-',
-              "Espectro ou 8 DV": '-',
-              "Vampiro ou 9 DV": '-',
-              "Fantasma ou 10 DV": '-',
-              "Lich ou 11+ DV": '-',
-              "Especial": '-'
-            };
-
-          } else if (nivel_para_magias == 2) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-
-            personagem["Poder da Fé"] = {
-              "Esqueleto ou 1 DV": '10',
-              "Zumbi": '13',
-              "Carniçal ou 2 DV": '16',
-              "Sombra ou 3-4 DV": '19',
-              "Vulto ou 5 DV": '20',
-              "Carneçal": '-',
-              "Aparição ou 6 DV": '-',
-              "Múmia ou 7 DV": '-',
-              "Espectro ou 8 DV": '-',
-              "Vampiro ou 9 DV": '-',
-              "Fantasma ou 10 DV": '-',
-              "Lich ou 11+ DV": '-',
-              "Especial": '-'
-            };
-
-          } else {
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
-          }
-
-          personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
-          personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
-          personagem["Dados Básicos"]["Escolas Adjacentes"] = ['Conjuração/Convocação', 'Abjuração'];
-
-          personagem["Detalhes"].push('Os Arcanista podem usar o Poder da Fé para comandar (no caso de personagens malignos) ou afastar (no caso dos benignos) criaturas mortas-vivas como se fossem clérigos. Os jogadores que estiverem representando arcanistas ordeiros (leais e neutros) devem decidir no momento da criação do personagem se seus personagens irão controlar ou afastar mortos-vivos. Depois que tiver feita, a escolha não poderá ser revertida.');
-
-          if ( (personagem["Tendência"] == "Vil (maligno e leal)") || (personagem["Tendência"] == "Egoista (neutro e maligno)") || (personagem["Tendência"] == "Cruel (caótico e maligno)") ) {
-            personagem["Detalhes"].push('Por ter alinhamento maligno, o Arcanista pode comandar mortos-vivos com o Poder da Fé. O sucesso na jogada do 1d20 (maior ou igual ao valor indicado), os mortos-vivos seguem seus comandos.');
-          } else if ( (personagem["Tendência"] == "Justo (bom e leal)") || (personagem["Tendência"] == "Bondoso (bom e neutro)") || (personagem["Tendência"] == "Honrado (caótico e bom)") ) {
-            personagem["Detalhes"].push('Por ter alinhamento benigno, o Arcanista pode afastar mortos-vivos com o Poder da Fé da mesma forma que os Clérigos.');
-          } else {
-            personagem["Detalhes"].push('Arcanistas neutros devem decidir no momento da criação do personagem se seus personagens irão controlar ou afastar mortos-vivos. Depois que tiver feita, a escolha não poderá ser revertida.');
-            let opcao_poder_da_fe = Math.floor(Math.random() * 2);
-            if (opcao_poder_da_fe == 0) {
-              personagem["Detalhes"].push('Por rolagem (o jogador pode alterar esta escolha somente na criação do personagem), este Arcanista pode afastar mortos-vivos com o Poder da Fé da mesma forma que os Clérigos.');
-            } else {
-              personagem["Detalhes"].push('Por rolagem (o jogador pode alterar esta escolha somente na criação do personagem), este Arcanista pode comandar mortos-vivos com o Poder da Fé. O sucesso na jogada do 1d20 (maior ou igual ao valor indicado), os mortos-vivos seguem seus comandos.');
-            }
-          }
-
-        } else {
-          personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-            "1º Círculo": 7,
-            "2º Círculo": 0,
-          };
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-            '1º Círculo': 0,
-            '2º Círculo': 0,
-          };
-
-          if (nivel_para_magias == 3) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 9;
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["2º Círculo"] = 4;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = 2;
-          } else if (nivel_para_magias == 2) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"]["1º Círculo"] = 8;
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 3;
-          } else {
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = 2;
-          }
-
-          personagem["Dados Básicos"]["Escolas de Magia"] = CLASSES[classe].escola;
-          personagem["Dados Básicos"]["Escolas Opostas"] = ESCOLAS_ARCANAS_OPOSTAS[classe];
-          personagem["Dados Básicos"]["Escolas Adjacentes"] = [];
-        }
-
-      } else if (CLASSES[classe]["Grupo"] == "Sacerdote") {
-        personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
-        personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 4;
-        personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
-        personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -3;
-        personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 4 + numero_de_linguas;
-        personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
-
-        personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 10;
-        personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 14;
-        personagem["Resistência"]["Petrificação ou Transformação"] = 13;
-        personagem["Resistência"]["Sopro-de-Dragão"] = 16;
-        personagem["Resistência"]["Magia"] = 15;
-
-        if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 13) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 2,
-            '2º Círculo': 0,
-            '3º Círculo': 0,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 14) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 3,
-            '2º Círculo': 0,
-            '3º Círculo': 0,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 15) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 3,
-            '2º Círculo': 1,
-            '3º Círculo': 0,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 16) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 3,
-            '2º Círculo': 2,
-            '3º Círculo': 0,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 17) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 3,
-            '2º Círculo': 2,
-            '3º Círculo': 1,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 18) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 3,
-            '2º Círculo': 2,
-            '3º Círculo': 1,
-            '4º Círculo': 1,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 19) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 2,
-            '3º Círculo': 1,
-            '4º Círculo': 2,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 20) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 1,
-            '4º Círculo': 3,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 21) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 2,
-            '4º Círculo': 3,
-            '5º Círculo': 1,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 22) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 2,
-            '4º Círculo': 4,
-            '5º Círculo': 2,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 23) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 2,
-            '4º Círculo': 4,
-            '5º Círculo': 4,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 24) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 2,
-            '4º Círculo': 4,
-            '5º Círculo': 4,
-            '6º Círculo': 2,
-            '7º Círculo': 0,
-          };
-        } else if (personagem["Habilidades"]["Sabedoria"]["Valor da Habilidade"] == 25) {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 4,
-            '2º Círculo': 3,
-            '3º Círculo': 2,
-            '4º Círculo': 4,
-            '5º Círculo': 4,
-            '6º Círculo': 3,
-            '7º Círculo': 1,
-          };
-        } else {
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"] = {
-            '1º Círculo': 0,
-            '2º Círculo': 0,
-            '3º Círculo': 0,
-            '4º Círculo': 0,
-            '5º Círculo': 0,
-            '6º Círculo': 0,
-            '7º Círculo': 0,
-          };
-        }
-
-        personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-          '1º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'],
-          '2º Círculo': personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'],
-        };
-
-        if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
-          if (forcar_havenloft) {
-
-            if (classe == "Clérigo") {
-              personagem["Detalhes"].push('Os clérigos de tendências boas também podem usar seu poder da fé para afastar (ou até mesmo destruir) criaturas mortas-vivas. Os clérigos neutros podem tanto afastar como controlar mortos-vivos de modo que eles sigam suas ordens.');
-            } else if (classe == "Anacoreta") {
-              personagem["Detalhes"].push('Um anacoreta de qualquer tendência tem a habilidade de afastar mortos-vivos com o Poder da Fé da mesma forma que os clérigos. No entanto, nenhum seguidor de Ezra tem a habilidade de comandar mortos-vivos.');
-            }
-
-            personagem["Poder da Fé"] = {
-              "Esqueleto ou 1 DV": '13',
-              "Zumbi": '16',
-              "Carniçal ou 2 DV": '19',
-              "Sombra ou 3-4 DV": '20',
-              "Vulto ou 5 DV": '-',
-              "Carneçal": '-',
-              "Aparição ou 6 DV": '-',
-              "Múmia ou 7 DV": '-',
-              "Espectro ou 8 DV": '-',
-              "Vampiro ou 9 DV": '-',
-              "Fantasma ou 10 DV": '-',
-              "Lich ou 11+ DV": '-',
-              "Especial": '-'
-            };
-
-          } else {
-            personagem["Poder da Fé"] = {
-              "Esqueleto ou 1 DV": '10',
-              "Zumbi": '13',
-              "Carniçal ou 2 DV": '16',
-              "Sombra ou 3-4 DV": '19',
-              "Vulto ou 5 DV": '20',
-              "Carneçal": '-',
-              "Aparição ou 6 DV": '-',
-              "Múmia ou 7 DV": '-',
-              "Espectro ou 8 DV": '-',
-              "Vampiro ou 9 DV": '-',
-              "Fantasma ou 10 DV": '-',
-              "Lich ou 11+ DV": '-',
-              "Especial": '-'
-            };
-          }
-        }
-
-        if (nivel_para_magias == 3) {
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['2º Círculo'] + 1;
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['2º Círculo'] + 1;
-
-          if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
-            if (forcar_havenloft) {
-              personagem["Poder da Fé"] = {
-                "Esqueleto ou 1 DV": '7',
-                "Zumbi": '10',
-                "Carniçal ou 2 DV": '13',
-                "Sombra ou 3-4 DV": '16',
-                "Vulto ou 5 DV": '19',
-                "Carneçal": '20',
-                "Aparição ou 6 DV": '-',
-                "Múmia ou 7 DV": '-',
-                "Espectro ou 8 DV": '-',
-                "Vampiro ou 9 DV": '-',
-                "Fantasma ou 10 DV": '-',
-                "Lich ou 11+ DV": '-',
-                "Especial": '-'
-              };
-            } else {
-              personagem["Poder da Fé"] = {
-                "Esqueleto ou 1 DV": '4',
-                "Zumbi": '7',
-                "Carniçal ou 2 DV": '10',
-                "Sombra ou 3-4 DV": '13',
-                "Vulto ou 5 DV": '16',
-                "Carneçal": '19',
-                "Aparição ou 6 DV": '20',
-                "Múmia ou 7 DV": '-',
-                "Espectro ou 8 DV": '-',
-                "Vampiro ou 9 DV": '-',
-                "Fantasma ou 10 DV": '-',
-                "Lich ou 11+ DV": '-',
-                "Especial": '-'
-              };
-            }
-          }
-
-        } else if (nivel_para_magias == 2) {
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 2;
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2;
-
-          if ( (classe == "Clérigo") || (classe == "Anacoreta") ) {
-            if (forcar_havenloft) {
-              personagem["Poder da Fé"] = {
-                "Esqueleto ou 1 DV": '10',
-                "Zumbi": '13',
-                "Carniçal ou 2 DV": '16',
-                "Sombra ou 3-4 DV": '19',
-                "Vulto ou 5 DV": '20',
-                "Carneçal": '-',
-                "Aparição ou 6 DV": '-',
-                "Múmia ou 7 DV": '-',
-                "Espectro ou 8 DV": '-',
-                "Vampiro ou 9 DV": '-',
-                "Fantasma ou 10 DV": '-',
-                "Lich ou 11+ DV": '-',
-                "Especial": '-'
-              };
-            } else {
-              personagem["Poder da Fé"] = {
-                "Esqueleto ou 1 DV": '7',
-                "Zumbi": '10',
-                "Carniçal ou 2 DV": '13',
-                "Sombra ou 3-4 DV": '16',
-                "Vulto ou 5 DV": '19',
-                "Carneçal": '20',
-                "Aparição ou 6 DV": '-',
-                "Múmia ou 7 DV": '-',
-                "Espectro ou 8 DV": '-',
-                "Vampiro ou 9 DV": '-',
-                "Fantasma ou 10 DV": '-',
-                "Lich ou 11+ DV": '-',
-                "Especial": '-'
-              };
-            }
-          }
-
-        } else {
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] = personagem["Dados Básicos"]["Quantas magias pode decorar?"]['1º Círculo'] + 1;
-          personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] = personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 1;
-        }
-
-      } else if (CLASSES[classe]["Grupo"] == "Ladino") {
-        personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
-        personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 4;
-        personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
-        personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -3;
-        personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
-        personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 4;
-
-        personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
-        personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 14;
-        personagem["Resistência"]["Petrificação ou Transformação"] = 12;
-        personagem["Resistência"]["Sopro-de-Dragão"] = 16;
-        personagem["Resistência"]["Magia"] = 15;
-
-        if (nivel_para_magias == 3) {
-          personagem["Dados Básicos"]["TAC0"] = 19;
-
-          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
-          personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
-        }
-
-        if (classe == "Cigano") {
-          personagem["Dados Básicos"]["Magias ciganas conhecidas"] = {
-            "1º Círculo": 4,
-          };
-          personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-            '1º Círculo': 1,
-          };
-
-          personagem["Dados Básicos"]["Escolas de Magia"] = ['Profecia','Augúrio'];
-        }
-
-        if (classe == "Bardo") {
-          if (nivel_para_magias == 2) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-              "1º Círculo": 4,
-            };
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-              '1º Círculo': 1,
-            };
-
-            personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
-          }
-          if (nivel_para_magias == 3) {
-            personagem["Dados Básicos"]["Magias Arcanas no Grimório"] = {
-              "1º Círculo": 5,
-            };
-            personagem["Dados Básicos"]["Quantas magias pode decorar?"] = {
-              '1º Círculo': 2,
-            };
-
-            personagem["Dados Básicos"]["Escolas de Magia"] = ['Todas'];
-          }
-        }
-
-      } else if (CLASSES[classe]["Grupo"] == "Psionicista") {
-        personagem["Pontos de Perícia"]["Perícias Armas Inicial"] = 2;
-        personagem["Pontos de Perícia"]["Perícias Armas Nº Níveis"] = 5;
-        personagem["Pontos de Perícia"]["Perícias Armas Semelhantes"] = -2;
-        personagem["Pontos de Perícia"]["Perícias Armas Penalidades"] = -4;
-        personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = 3 + numero_de_linguas;
-        personagem["Pontos de Perícia"]["Perícias Comuns Nº Níveis"] = 3;
-
-        personagem["Resistência"]["Paralisação, Veneno ou Morte por Magia"] = 13;
-        personagem["Resistência"]["Bastão, Cajado ou Varinha"] = 15;
-        personagem["Resistência"]["Petrificação ou Transformação"] = 10;
-        personagem["Resistência"]["Sopro-de-Dragão"] = 16;
-        personagem["Resistência"]["Magia"] = 15;
-
-        if (nivel_para_magias == 3) {
-          personagem["Dados Básicos"]["TAC0"] = 19;
-
-          personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] = personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1;
-          personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
-        }
-      }
-
-      // A definição de sabedoria e carisma estava aqui, mas precisou ir para cima do código
-
-      /* Poder psiônico */
-      calcular_PSP(personagem);
-      poderes_psionicos(personagem,()=>{
-
-        /* Medo, Horror e Loucura */
-        valores_medo(personagem);
-
-        /* Ajustar talentos dos ladinos */
-        definir_talentos(classe, personagem, () => {
-
-          /* Detalhes */
-          personagem["Detalhes"].push.apply(personagem["Detalhes"], CLASSES[classe].detalhes);
-
-          sortear_itens(classe, raca, personagem, (armas_mais_fortes) => {
-
-            sortear_pericias(armas_mais_fortes, classe, raca, personagem, () => {
-              debug(`Perícias sorteadas:${personagem['Perícias'].map(p => ` ${p.split(',')[0]}`)}`);
-
-              sortear_magias(classe, personagem, () => {
-
-                callback();
-                return;
-
-              });
-
-            });
-
-          });
-
-        });
-
-      });
-
-    });
-
-    // Pontos de vida definidos
-  });
+  sortear_dados_basicos_por_nivel(personagem, callback);
+  return;
 }
 
 // AQUI TODO
@@ -5412,4 +5517,42 @@ Combos psionicos
 poderes psionicos
 
 falta dar uma olhada classe a classe para ver algo no nivel 2 ou 3
+*/
+
+/*
+NÃO UTILIZADO
+
+if (classe_final == "Clérigo da Agricultura") {
+  CLASSES['Clérigo'].armas_divindade = ["Podão", "Foice", "Mangual"];
+} else if (classe_final == "Clérigo dos Ferreiros") {
+  CLASSES['Clérigo'].armas_divindade = ["Martelo de Batalha"];
+} else if (classe_final == "Clérigo da Morte") {
+  CLASSES['Clérigo'].armas_divindade = ["Foice"];
+} else if (classe_final == "Clérigo da Doença") {
+  CLASSES['Clérigo'].armas_divindade = ["Açoite", "Chicote"];
+} else if (classe_final == "Clérigo da Terra") {
+  CLASSES['Clérigo'].armas_divindade = ["Alvião"];
+} else if (classe_final == "Clérigo da Cura") {
+  CLASSES['Clérigo'].armas_divindade = ["Aprisionador", "Bordão"];
+} else if (classe_final == "Clérigo da Caça") {
+  CLASSES['Clérigo'].armas_divindade = ["Arco Curto", "Azagaia", "Lança de Cavalaria", "Funda"];
+} else if (classe_final == "Clérigo do Relâmpago") {
+  CLASSES['Clérigo'].armas_divindade = ["Dardo", "Lança", "Azagaia"];
+} else if (classe_final == "Clérigo do Amor") {
+  CLASSES['Clérigo'].armas_divindade = ["Arco Curto", "Aprisionador"];
+} else if (classe_final == "Clérigo da Natureza") {
+  CLASSES['Clérigo'].armas_divindade = ["Clava", "Cimitarra", "Foice"];
+} else if (classe_final == "Clérigo dos Oceanos") {
+  CLASSES['Clérigo'].armas_divindade = ["Arpão", "Lança", "Tridente"];
+} else if (classe_final == "Clérigo da Paz") {
+  CLASSES['Clérigo'].armas_divindade = ["Bordão"];
+} else if (classe_final == "Clérigo da Força") {
+  CLASSES['Clérigo'].armas_divindade = ["Martelo"];
+} else if (classe_final == "Clérigo do Trovão") {
+  CLASSES['Clérigo'].armas_divindade = ["Clava", "Maça", "Martelo de Batalha"];
+} else if (classe_final == "Clérigo da Guerra") {
+  CLASSES['Clérigo'].armas_divindade = ["Machado de Batalha", "Maça", "Maça-Estrela", "Montante", "Espada"];
+} else if (classe_final == "Clérigo dos Ventos") {
+  CLASSES['Clérigo'].armas_divindade = ["Zarabatana", "Dardo"];
+}
 */

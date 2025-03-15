@@ -766,8 +766,6 @@ function obterRacaSelecionada() {
   return raca_selecionada;
 }
 
-// AQUI - proximo passo, alterar no GERADOR.JS a regra para gerar mais de uma classe, obedecendo as restrições
-
 document.getElementById('texto-formulario-multiclasse').addEventListener('input',(event)=>{
   event.preventDefault();
 
@@ -821,7 +819,7 @@ function carregarCombosMulticlasses3(callback) {
 
     combo3.innerHTML = '';
 
-    COMBO_CLASSES.forEach((classe3, index3) => {
+    COMBO_MULTICLASSES.forEach((classe3, index3) => {
 
       if (classe3.value == 'Todas') {
         loadingNewItem(list_combo3,'Nenhuma','Nenhuma');
@@ -831,7 +829,7 @@ function carregarCombosMulticlasses3(callback) {
         }
       }
 
-      if (index3 == (COMBO_CLASSES.length - 1)) {
+      if (index3 == (COMBO_MULTICLASSES.length - 1)) {
         loadingCriar_Option(combo3,list_combo3,-1,()=>{
           callback();
         });
@@ -858,12 +856,12 @@ function carregarCombosMulticlasses2(callback) {
 
     combo2.innerHTML = '';
 
-    COMBO_CLASSES.forEach((classe2, index2) => {
+    COMBO_MULTICLASSES.forEach((classe2, index2) => {
       if ((classe2.value == 'Todas') || (classe2.value != classe1_selecionada)) {
         loadingNewItem(list_combo2,classe2.value,classe2.texto);
       }
 
-      if (index2 == (COMBO_CLASSES.length - 1)) {
+      if (index2 == (COMBO_MULTICLASSES.length - 1)) {
         loadingCriar_Option(combo2,list_combo2,-1,()=>{
           /* Combo 3 */
           carregarCombosMulticlasses3(callback);
@@ -901,43 +899,88 @@ function carregarCombosClasses(selecionada,callback) {
   let combo = document.getElementById('texto-formulario-classe1');
   combo.innerHTML = '';
 
-  if ( (raca_selecionada != 'Todas') && (!boolean_classe) ) {
-    let keys_classes = Object.keys(CLASSES);
-    keys_classes.forEach((key_classe, i) => {
+  if (multiclasse) {
+    // É multiclasse
+    if ( (raca_selecionada != 'Todas') && (!boolean_classe) ) {
+      let keys_classes = Object.keys(MULTICLASSES_POR_PRIMEIRA);
+      keys_classes.forEach((key_classe, i) => {
 
-      if (i == 0) {
-        loadingNewItem(list_combo,'Todas','Todas');
-      }
+        if (i == 0) {
+          loadingNewItem(list_combo,'Todas','Todas');
+        }
 
-      if (CLASSES[key_classe]["Raças Permitidas"].includes(raca_selecionada)) {
-        loadingNewItem(list_combo,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].value,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].texto);
-      }
+        if (CLASSES[key_classe]["Raças Permitidas"].includes(raca_selecionada)) {
+          loadingNewItem(list_combo,COMBO_MULTICLASSES[COMBO_MULTICLASSES_INDEX[key_classe]].value,COMBO_MULTICLASSES[COMBO_MULTICLASSES_INDEX[key_classe]].texto);
+        }
 
-      if (i == (keys_classes.length - 1)) {
-        loadingCriar_Option(combo,list_combo,-1,callback);
-      }
-    });
+        if (i == (keys_classes.length - 1)) {
+          loadingCriar_Option(combo,list_combo,-1,callback);
+        }
+      });
+    } else {
+      let index_forcar = -1;
+
+      COMBO_MULTICLASSES.forEach((item, i) => {
+        loadingNewItem(list_combo,item.value,item.texto);
+
+        if (boolean_classe) {
+          if (selecionada == item.value) {
+            index_forcar = i;
+          }
+        }
+
+        if (i == (COMBO_MULTICLASSES.length - 1)) {
+          let selectedIndex = -1;
+          if (index_forcar > -1) {
+            selectedIndex = index_forcar;
+          }
+
+          loadingCriar_Option(combo,list_combo,selectedIndex,callback);
+        }
+      });
+    }
+    // É multiclasse
   } else {
-    let index_forcar = -1;
+    // Não é multiclasse
+    if ( (raca_selecionada != 'Todas') && (!boolean_classe) ) {
+      let keys_classes = Object.keys(CLASSES);
+      keys_classes.forEach((key_classe, i) => {
 
-    COMBO_CLASSES.forEach((item, i) => {
-      loadingNewItem(list_combo,item.value,item.texto);
-
-      if (boolean_classe) {
-        if (selecionada == item.value) {
-          index_forcar = i;
-        }
-      }
-
-      if (i == (COMBO_CLASSES.length - 1)) {
-        let selectedIndex = -1;
-        if (index_forcar > -1) {
-          selectedIndex = index_forcar;
+        if (i == 0) {
+          loadingNewItem(list_combo,'Todas','Todas');
         }
 
-        loadingCriar_Option(combo,list_combo,selectedIndex,callback);
-      }
-    });
+        if (CLASSES[key_classe]["Raças Permitidas"].includes(raca_selecionada)) {
+          loadingNewItem(list_combo,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].value,COMBO_CLASSES[COMBO_CLASSES_INDEX[key_classe]].texto);
+        }
+
+        if (i == (keys_classes.length - 1)) {
+          loadingCriar_Option(combo,list_combo,-1,callback);
+        }
+      });
+    } else {
+      let index_forcar = -1;
+
+      COMBO_CLASSES.forEach((item, i) => {
+        loadingNewItem(list_combo,item.value,item.texto);
+
+        if (boolean_classe) {
+          if (selecionada == item.value) {
+            index_forcar = i;
+          }
+        }
+
+        if (i == (COMBO_CLASSES.length - 1)) {
+          let selectedIndex = -1;
+          if (index_forcar > -1) {
+            selectedIndex = index_forcar;
+          }
+
+          loadingCriar_Option(combo,list_combo,selectedIndex,callback);
+        }
+      });
+    }
+    // Não é multiclasse
   }
 }
 

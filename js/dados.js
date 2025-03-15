@@ -1307,6 +1307,10 @@ const ARMADURAS_BARDO = [
   ARMADURAS[8]
 ];
 
+// Próximo passo: restringir as classes dos selects
+
+// https://adnd2e.fandom.com/wiki/Dual-_and_Multiclass_Characters_(DSC)
+// https://adnd2e.fandom.com/wiki/Multi-Class_and_Dual-Class_Characters_(PHB)
 const MULTICLASSES_LIVRO = [
   "Guerreiro/Ladrão",
   "Guerreiro/Clérigo",
@@ -1324,14 +1328,32 @@ const MULTICLASSES_LIVRO = [
   "Guerreiro/Mago/Clérigo",
   "Guerreiro/Mago/Druida",
   "Guerreiro/Mago/Ladrão",
+
+  "Clérigo/Guerreiro/Ladrão",
+  "Clérigo/Mago/Ladrão",
+
+  "Guerreiro/Psionicista",
+  "Ladrão/Psionicista",
+  "Clérigo/Psionicista",
+  "Mago/Psionicista",
+  "Guerreiro/Clérigo/Psionicista",
+  "Guerreiro/Ladrão/Psionicista",
+  "Guerreiro/Mago/Psionicista",
+  "Clérigo/Mago/Psionicista",
+  "Clérigo/Ladrão/Psionicista",
+  "Mago/Ladrão/Psionicista",
+
+  "Guerreiro/Cigano",
+  "Ladrão/Cigano",
 ];
 
+// AQUI
 const MULTICLASSES = {
   "Guerreiro/Ladrão": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
   "Ladrão/Guerreiro": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
 
-  "Guerreiro/Clérigo": ["Anão", "Gnomo", "Meio-Elfo", "Tabaxi"],
-  "Clérigo/Guerreiro": ["Anão", "Gnomo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Clérigo": ["Anão", "Gnomo", "Elfo", "Meio-Elfo", "Halfling", "Tabaxi"],
+  "Clérigo/Guerreiro": ["Anão", "Gnomo", "Elfo", "Meio-Elfo", "Halfling", "Tabaxi"],
 
   "Guerreiro/Mago": ["Elfo","Meio-Elfo", "Tabaxi"],
   "Mago/Guerreiro": ["Elfo","Meio-Elfo", "Tabaxi"],
@@ -1345,8 +1367,8 @@ const MULTICLASSES = {
   "Clérigo/Ilusionista": ["Gnomo", "Tabaxi"],
   "Ilusionista/Clérigo": ["Gnomo", "Tabaxi"],
 
-  "Clérigo/Ladrão": ["Gnomo", "Tabaxi"],
-  "Ladrão/Clérigo": ["Gnomo", "Tabaxi"],
+  "Clérigo/Ladrão": ["Elfo", "Meio-Elfo", "Gnomo", "Halfling", "Tabaxi"],
+  "Ladrão/Clérigo": ["Elfo", "Meio-Elfo", "Gnomo", "Halfling", "Tabaxi"],
 
   "Ilusionista/Ladrão": ["Gnomo", "Tabaxi"],
   "Ladrão/Ilusionista": ["Gnomo", "Tabaxi"],
@@ -1360,18 +1382,18 @@ const MULTICLASSES = {
   "Druida/Ranger": ["Meio-Elfo", "Tabaxi"],
   "Ranger/Druida": ["Meio-Elfo", "Tabaxi"],
 
-  "Clérigo/Mago": ["Meio-Elfo", "Tabaxi"],
-  "Mago/Clérigo": ["Meio-Elfo", "Tabaxi"],
+  "Clérigo/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
 
   "Druida/Mago": ["Meio-Elfo", "Tabaxi"],
   "Mago/Druida": ["Meio-Elfo", "Tabaxi"],
 
-  "Guerreiro/Mago/Clérigo": ["Meio-Elfo", "Tabaxi"],
-  "Guerreiro/Clérigo/Mago": ["Meio-Elfo", "Tabaxi"],
-  "Clérigo/Guerreiro/Mago": ["Meio-Elfo", "Tabaxi"],
-  "Clérigo/Mago/Guerreiro": ["Meio-Elfo", "Tabaxi"],
-  "Mago/Guerreiro/Clérigo": ["Meio-Elfo", "Tabaxi"],
-  "Mago/Clérigo/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Mago/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Clérigo/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Guerreiro/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Mago/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
 
   "Guerreiro/Mago/Druida": ["Meio-Elfo", "Tabaxi"],
   "Guerreiro/Druida/Mago": ["Meio-Elfo", "Tabaxi"],
@@ -1380,44 +1402,141 @@ const MULTICLASSES = {
   "Mago/Guerreiro/Druida": ["Meio-Elfo", "Tabaxi"],
   "Mago/Druida/Guerreiro": ["Meio-Elfo", "Tabaxi"],
 
-  "Guerreiro/Mago/Ladrão": ["Meio-Elfo", "Tabaxi"],
-  "Guerreiro/Ladrão/Mago": ["Meio-Elfo", "Tabaxi"],
-  "Ladrão/Guerreiro/Mago": ["Meio-Elfo", "Tabaxi"],
-  "Ladrão/Mago/Guerreiro": ["Meio-Elfo", "Tabaxi"],
-  "Mago/Guerreiro/Ladrão": ["Meio-Elfo", "Tabaxi"],
-  "Mago/Ladrão/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Mago/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Ladrão/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Guerreiro/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Mago/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Ladrão/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Mago/Ladrão/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Psionicista/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Mago/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Ladrão/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Mago/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Psionicista/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Mago/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Ladrão/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Ladrão/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Ladrão/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Guerreiro/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Ladrão/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Clérigo/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Guerreiro/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Clérigo/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Ladrão/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Ladrão/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Psionicista/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Clérigo/Ladrão": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Ladrão/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Clérigo/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Ladrão/Psionicista/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Mago/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Guerreiro/Psionicista/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Guerreiro/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Mago/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Guerreiro/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Psionicista/Guerreiro": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Mago/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Clérigo/Psionicista/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Clérigo/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Mago/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Clérigo/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Mago/Psionicista/Clérigo": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Guerreiro/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Psionicista/Guerreiro": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+
+  "Ladrão/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Psionicista/Ladrão": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+
+  "Mago/Psionicista": ["Elfo", "Meio-Elfo", "Tabaxi"],
+  "Psionicista/Mago": ["Elfo", "Meio-Elfo", "Tabaxi"],
+
+  "Clérigo/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Psionicista/Clérigo": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+
+  "Guerreiro/Clérigo/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+  "Guerreiro/Psionicista/Clérigo": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+  "Psionicista/Guerreiro/Clérigo": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+  "Psionicista/Clérigo/Guerreiro": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+  "Clérigo/Guerreiro/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+  "Clérigo/Psionicista/Guerreiro": ["Elfo", "Meio-Elfo", "Anão", "Tabaxi"],
+
+  "Guerreiro/Ladrão/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Guerreiro/Psionicista/Ladrão": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Psionicista/Guerreiro/Ladrão": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Psionicista/Ladrão/Guerreiro": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Ladrão/Guerreiro/Psionicista": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+  "Ladrão/Psionicista/Guerreiro": ["Elfo", "Meio-Elfo", "Anão", "Halfling", "Tabaxi"],
+
+  "Guerreiro/Cigano": ["Meio-Elfo", "Tabaxi"],
+  "Cigano/Guerreiro": ["Meio-Elfo", "Tabaxi"],
+
+  "Ladrão/Cigano": ["Meio-Elfo", "Tabaxi"],
+  "Cigano/Ladrão": ["Meio-Elfo", "Tabaxi"],
 };
 
 const MULTICLASSES_POR_PRIMEIRA = {
-  "Guerreiro": ["Ladrão", "Clérigo", "Mago", "Ilusionista", "Druida", ],
-  "Ladrão": ["Guerreiro", "Mago", "Clérigo", "Ilusionista", ],
-  "Clérigo": ["Guerreiro", "Ilusionista", "Ladrão", "Ranger", "Mago", ],
-  "Mago": ["Guerreiro", "Ladrão", "Clérigo", "Druida", ],
+  "Guerreiro": ["Ladrão", "Clérigo", "Mago", "Ilusionista", "Druida", "Psionicista", "Cigano", ],
+  "Ladrão": ["Guerreiro", "Mago", "Clérigo", "Ilusionista", "Psionicista", "Cigano", ],
+  "Clérigo": ["Guerreiro", "Ilusionista", "Ladrão", "Ranger", "Mago", "Psionicista", ],
+  "Mago": ["Guerreiro", "Ladrão", "Clérigo", "Druida", "Psionicista", ],
   "Ilusionista": ["Guerreiro", "Clérigo", "Ladrão", ],
   "Druida": ["Guerreiro", "Ranger", "Mago", ],
   "Ranger": ["Clérigo", "Druida", ],
+  "Psionicista": ["Guerreiro", "Ladrão", "Clérigo", "Mago",  ],
+  "Cigano": ["Guerreiro", "Ladrão", ],
 };
 
-/*
-const MULTICLASSES = {
-  "Anão": {
+const MULTICLASSES_POR_RACA = {
+  "Anão": [
     "Guerreiro/Ladrão",
     "Guerreiro/Clérigo",
-  },
-  "Elfo": {
+    "Guerreiro/Psionicista",
+    "Ladrão/Psionicista",
+    "Clérigo/Psionicista",
+    "Guerreiro/Clérigo/Psionicista",
+    "Guerreiro/Ladrão/Psionicista",
+  ],
+  "Elfo": [
     "Guerreiro/Mago",
+    "Guerreiro/Mago/Clérigo",
     "Guerreiro/Ladrão",
+    "Guerreiro/Mago/Ladrão",
+    "Guerreiro/Psionicista",
+    "Clérigo/Mago/Ladrão",
+    "Guerreiro/Clérigo",
+    "Clérigo/Guerreiro/Ladrão",
+    "Clérigo/Mago",
+    "Guerreiro/Mago/Psionicista",
+    "Clérigo/Psionicista",
+    "Guerreiro/Ladrão/Psionicista",
+    "Clérigo/Ladrão",
+    "Guerreiro/Clérigo/Psionicista",
+    "Mago/Psionicista",
+    "Clérigo/Mago/Psionicista",
     "Mago/Ladrão",
-  },
-  "Gnomo": {
+    "Clérigo/Ladrão/Psionicista",
+    "Ladrão/Psionicista",
+    "Mago/Ladrão/Psionicista",
+  ],
+  "Gnomo": [
     "Guerreiro/Clérigo",
     "Guerreiro/Ilusionista",
     "Guerreiro/Ladrão",
     "Clérigo/Ilusionista",
     "Clérigo/Ladrão",
     "Ilusionista/Ladrão",
-  },
-  "Meio-Elfo": {
+  ],
+  "Meio-Elfo": [
     "Guerreiro/Clérigo",
     "Guerreiro/Druida",
     "Guerreiro/Ladrão",
@@ -1430,14 +1549,63 @@ const MULTICLASSES = {
     "Guerreiro/Mago/Clérigo",
     "Guerreiro/Mago/Druida",
     "Guerreiro/Mago/Ladrão",
-  },
-  "Halfling": {
+    "Guerreiro/Psionicista",
+    "Clérigo/Mago/Ladrão",
+    "Clérigo/Guerreiro/Ladrão",
+    "Guerreiro/Mago/Psionicista",
+    "Clérigo/Psionicista",
+    "Guerreiro/Ladrão/Psionicista",
+    "Clérigo/Ladrão",
+    "Guerreiro/Clérigo/Psionicista",
+    "Mago/Psionicista",
+    "Clérigo/Mago/Psionicista",
+    "Mago/Ladrão",
+    "Clérigo/Ladrão/Psionicista",
+    "Ladrão/Psionicista",
+    "Mago/Ladrão/Psionicista",
+    "Guerreiro/Cigano",
+    "Ladrão/Cigano",
+  ],
+  "Halfling": [
     "Guerreiro/Ladrão",
-  },
-  "Meio-Vistani": {},
-  "Tabaxi": {},
+    "Guerreiro/Psionicista",
+    "Ladrão/Psionicista",
+    "Clérigo/Psionicista",
+    "Guerreiro/Clérigo",
+    "Guerreiro/Ladrão/Psionicista",
+    "Clérigo/Ladrão",
+  ],
+  "Tabaxi": [
+    "Guerreiro/Clérigo",
+    "Guerreiro/Druida",
+    "Guerreiro/Ladrão",
+    "Guerreiro/Mago",
+    "Clérigo/Ranger",
+    "Druida/Ranger",
+    "Clérigo/Mago",
+    "Druida/Mago",
+    "Ladrão/Mago",
+    "Guerreiro/Mago/Clérigo",
+    "Guerreiro/Mago/Druida",
+    "Guerreiro/Mago/Ladrão",
+    "Guerreiro/Psionicista",
+    "Clérigo/Mago/Ladrão",
+    "Clérigo/Guerreiro/Ladrão",
+    "Guerreiro/Mago/Psionicista",
+    "Clérigo/Psionicista",
+    "Guerreiro/Ladrão/Psionicista",
+    "Clérigo/Ladrão",
+    "Guerreiro/Clérigo/Psionicista",
+    "Mago/Psionicista",
+    "Clérigo/Mago/Psionicista",
+    "Mago/Ladrão",
+    "Clérigo/Ladrão/Psionicista",
+    "Ladrão/Psionicista",
+    "Mago/Ladrão/Psionicista",
+    "Guerreiro/Cigano",
+    "Ladrão/Cigano",
+  ],
 };
-*/
 
 const RACAS = {
   "Humano": {
@@ -3159,6 +3327,46 @@ const COMBO_CLASSES_INDEX = {
   'Anacoreta': 23,
   'Cigano': 24,
   'Psionicista': 25
+};
+
+const COMBO_MULTICLASSES = [
+  { value: 'Todas', texto: 'Todas' },
+  { value: 'Guerreiro', texto: 'Guerreiro (Livro do Jogador)' },
+  { value: 'Ranger', texto: 'Ranger (Livro do Jogador)' },
+  { value: 'Mago', texto: 'Mago (Livro do Jogador)' },
+  { value: 'Abjurante', texto: 'Abjurante (Livro do Jogador)' },
+  { value: 'Conjurador', texto: 'Conjurador (Livro do Jogador)' },
+  { value: 'Adivinho', texto: 'Adivinho (Livro do Jogador)' },
+  { value: 'Feiticeiro', texto: 'Feiticeiro (Livro do Jogador)' },
+  { value: 'Ilusionista', texto: 'Ilusionista (Livro do Jogador)' },
+  { value: 'Invocador', texto: 'Invocador (Livro do Jogador)' },
+  { value: 'Necromante', texto: 'Necromante (Livro do Jogador)' },
+  { value: 'Transmutador', texto: 'Transmutador (Livro do Jogador)' },
+  { value: 'Clérigo', texto: 'Clérigo (Livro do Jogador)' },
+  { value: 'Druida', texto: 'Druida (Livro do Jogador)' },
+  { value: 'Ladrão', texto: 'Ladrão (Livro do Jogador)' },
+  { value: 'Cigano', texto: 'Cigano (Ravenloft: Domínios do Medo)' },
+  { value: 'Psionicista', texto: 'Psionicista (The Complete Psionics Handbook)' }
+];
+
+const COMBO_MULTICLASSES_INDEX = {
+  'Todas': 0,
+  'Guerreiro': 1,
+  'Ranger': 2,
+  'Mago': 3,
+  'Abjurante': 4,
+  'Conjurador': 5,
+  'Adivinho': 6,
+  'Feiticeiro': 7,
+  'Ilusionista': 8,
+  'Invocador': 9,
+  'Necromante': 10,
+  'Transmutador': 11,
+  'Clérigo': 12,
+  'Druida': 13,
+  'Ladrão': 14,
+  'Cigano': 15,
+  'Psionicista': 16
 };
 
 const DIVINDADES = {
