@@ -35,3 +35,5 @@ var forcar_classe = {
 var forcar_raca = 'Todas';
 var forcar_havenloft = false;
 var forcar_darksun = false;
+
+var ARMAS_MAIS_FORTES_GLOBAL = [];
