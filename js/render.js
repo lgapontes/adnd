@@ -1242,7 +1242,9 @@ function carregarComboEscolas(carregar,callback) {
   let classe_selecionada = obterClasseSelecionada();
   let keys = [];
 
-  if (classe_selecionada == 'Todas') {
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
+  if ( (classe_selecionada == 'Todas') || (multiclasse) ) {
     keys = LISTA_ESCOLAS_ARCANAS;
     carregarComboEscolasOptions(keys,callback);
   } else {
@@ -1427,10 +1429,12 @@ function carregarComboArmaduras(carregar,callback) {
   let keys_armaduras = [];
   let nomes_armaduras = ARMADURAS.map(e => e.nome);
 
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
   let combo = document.getElementById('texto-formulario-armadura');
   combo.innerHTML = '';
 
-  if (classe_selecionada == 'Todas') {
+  if ( (classe_selecionada == 'Todas') || (multiclasse) ) {
     keys_armaduras = nomes_armaduras;
   } else {
     if (CLASSES[classe_selecionada].armaduras.length > 0) {
@@ -1466,10 +1470,12 @@ function carregarComboEscudos(carregar,callback) {
   let keys_escudos = [];
   let nomes_escudos = ESCUDOS.map(e => e.nome);
 
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
   let combo = document.getElementById('texto-formulario-escudo');
   combo.innerHTML = '';
 
-  if (classe_selecionada == 'Todas') {
+  if ( (classe_selecionada == 'Todas') || (multiclasse) ) {
     keys_escudos = nomes_escudos;
   } else {
     if (CLASSES[classe_selecionada].escudos.length > 0) {
@@ -1504,10 +1510,12 @@ function carregarComboArmas(carregar,callback) {
   let classe_selecionada = obterClasseSelecionada();
   let keys_armas = [];
 
+  let multiclasse = document.getElementById('texto-formulario-multiclasse').checked;
+
   let combo = document.getElementById('texto-formulario-arma');
   combo.innerHTML = '';
 
-  if (classe_selecionada == 'Todas') {
+  if ( (classe_selecionada == 'Todas') || (multiclasse) ) {
     keys_armas = Object.keys(ARMAS);
   } else {
     if (CLASSES[classe_selecionada].armas.length > 0) {

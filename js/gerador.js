@@ -2363,8 +2363,9 @@ function sortear_raca(personagem, callback) {
                 forcar_classe.tem_multiclasse_sugerida = true;
                 forcar_classe.multiclasse_sugerida = multiclasse;
               } else {
-                let index = Math.floor(Math.random() * CLASSES[classe_ajustada]["Raças Permitidas"].length);
-                raca = CLASSES[classe_ajustada]["Raças Permitidas"][index];
+                let lista_racas_para_multiclasses = Object.keys(MULTICLASSES_POR_RACA);
+                let index = Math.floor(Math.random() * lista_racas_para_multiclasses.length);
+                raca = lista_racas_para_multiclasses[index];
               }
             }
           } else
@@ -2392,8 +2393,9 @@ function sortear_raca(personagem, callback) {
                 forcar_classe.tem_multiclasse_sugerida = true;
                 forcar_classe.multiclasse_sugerida = multiclasse;
               } else {
-                let index = Math.floor(Math.random() * CLASSES[segunda]["Raças Permitidas"].length);
-                raca = CLASSES[segunda]["Raças Permitidas"][index];
+                let lista_racas_para_multiclasses = Object.keys(MULTICLASSES_POR_RACA);
+                let index = Math.floor(Math.random() * lista_racas_para_multiclasses.length);
+                raca = lista_racas_para_multiclasses[index];
               }
             } else {
               let lista_classe_para_sugerir = MULTICLASSES_POR_PRIMEIRA[segunda];
@@ -2402,9 +2404,6 @@ function sortear_raca(personagem, callback) {
 
               forcar_classe.tem_multiclasse_sugerida = true;
               forcar_classe.multiclasse_sugerida = multiclasse_sugerida;
-
-              console.log(multiclasse_sugerida);
-              console.log(MULTICLASSES[multiclasse_sugerida]);
 
               let index_raca = Math.floor(Math.random() * MULTICLASSES[multiclasse_sugerida].length);
               raca = MULTICLASSES[multiclasse_sugerida][index_raca];
@@ -2442,8 +2441,9 @@ function sortear_raca(personagem, callback) {
               forcar_classe.tem_multiclasse_sugerida = true;
               forcar_classe.multiclasse_sugerida = multiclasse;
             } else {
-              let index = Math.floor(Math.random() * CLASSES[primeira]["Raças Permitidas"].length);
-              raca = CLASSES[primeira]["Raças Permitidas"][index];
+              let lista_racas_para_multiclasses = Object.keys(MULTICLASSES_POR_RACA);
+              let index = Math.floor(Math.random() * lista_racas_para_multiclasses.length);
+              raca = lista_racas_para_multiclasses[index];
             }
 
           } else
@@ -2483,7 +2483,6 @@ function sortear_raca(personagem, callback) {
               forcar_classe.tem_multiclasse_sugerida = true;
               forcar_classe.multiclasse_sugerida = multiclasse;
             } else {
-              /// XXX - verificar outros casos de humanos em multiclasse
               let lista_racas_para_multiclasses = Object.keys(MULTICLASSES_POR_RACA);
               let index = Math.floor(Math.random() * lista_racas_para_multiclasses.length);
               raca = lista_racas_para_multiclasses[index];
@@ -2877,6 +2876,8 @@ function obter_classe_forcada() {
   return forcar_classe;
 }
 
+let ITERACAO = 0;
+
 function render(callback) {
   if (DEBUG)
     console.clear();
@@ -2889,7 +2890,13 @@ function render(callback) {
 
   sortear_personagem(personagem => {
 
+    if (UNIT_TESTS) {
+      console.log(`Roagem ${ITERACAO} >> Multiclasse? ${forcar_classe.multiclasse}, ${personagem['Classe']}, Nível ${personagem["Dados Básicos"]['Nível']}`);
+      ITERACAO = ITERACAO + 1;
+    }
+
     /* Limpar campos não necessários */
+    forcar_classe.classes_separadas = personagem["Classes Separadas"];
     delete personagem["Classes Separadas"];
     delete personagem["Ajuste dos Pontos de Vida Separados"];
 

@@ -7,6 +7,9 @@ document.getElementById('texto-formulario-versao3').innerHTML = versao_texto;
 document.getElementById('texto-formulario-versao4').innerHTML = versao_texto;
 document.getElementById('texto-formulario-versao5').innerHTML = versao_texto;
 
+/* Testes unitários */
+const UNIT_TESTS = false;
+
 /* debug */
 const DEBUG = false;
 function debug(texto) {
