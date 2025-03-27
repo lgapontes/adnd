@@ -766,9 +766,7 @@ function obterRacaSelecionada() {
   return raca_selecionada;
 }
 
-document.getElementById('texto-formulario-multiclasse').addEventListener('input',(event)=>{
-  event.preventDefault();
-
+function marcarCheckMulticlasse(callback) {
   let combo1 = document.getElementById('texto-formulario-classe1');
   combo1.selectedIndex = 0;
 
@@ -782,6 +780,7 @@ document.getElementById('texto-formulario-multiclasse').addEventListener('input'
                 carregarComboCienciasEDevocoes(()=>{
                   carregarCombosMulticlasses2(()=>{
                     definirAtributosMinimos();
+                    callback();
                   });
                 });
               });
@@ -791,6 +790,12 @@ document.getElementById('texto-formulario-multiclasse').addEventListener('input'
       });
     });
   });
+}
+
+document.getElementById('texto-formulario-multiclasse').addEventListener('input',(event)=>{
+  event.preventDefault();
+
+  marcarCheckMulticlasse(()=>{});
 });
 
 document.getElementById('texto-formulario-classe2').addEventListener('input',(event)=>{

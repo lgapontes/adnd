@@ -1,6 +1,4 @@
 
-const QTDE_TESTS = 1000;
-
 function sortear100Percento() {
   return true;
 }
@@ -134,87 +132,92 @@ function makeUnitTests(callback) {
 
   let multiclasse = sortearCheck('texto-formulario-multiclasse',sortear80Percento);
 
-  sortearValorSelect('texto-formulario-classe1',sortear50Percento);
+  marcarCheckMulticlasse(()=>{
 
-  if (multiclasse) {
-    sortearValorSelect('texto-formulario-classe2',sortear50Percento);
+    sortearValorSelect('texto-formulario-classe1',sortear50Percento);
 
-    sortearValorSelect('texto-formulario-classe3',sortear50Percento);
-  }
+    if (multiclasse) {
+      sortearValorSelect('texto-formulario-classe2',sortear50Percento);
 
-  sortearValorSelect('texto-formulario-tendencia',sortear50Percento);
+      sortearValorSelect('texto-formulario-classe3',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-linhagem')) {
-    sortearValorSelect('texto-formulario-linhagem',sortear50Percento);
-  }
+    sortearValorSelect('texto-formulario-tendencia',sortear50Percento);
 
-  sortearValorSelect('texto-formulario-arma',sortear50Percento);
+    if (selectTemMuitosOptions('texto-formulario-linhagem')) {
+      sortearValorSelect('texto-formulario-linhagem',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-escudo')) {
-    sortearValorSelect('texto-formulario-escudo',sortear50Percento);
-  }
+    sortearValorSelect('texto-formulario-arma',sortear50Percento);
 
-  if (selectTemMuitosOptions('texto-formulario-armadura')) {
-    sortearValorSelect('texto-formulario-armadura',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-escudo')) {
+      sortearValorSelect('texto-formulario-escudo',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-armadura')) {
-    sortearValorSelect('texto-formulario-armadura',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-armadura')) {
+      sortearValorSelect('texto-formulario-armadura',sortear50Percento);
+    }
 
-  sortearValorSelect('texto-formulario-pericia',sortear50Percento);
+    if (selectTemMuitosOptions('texto-formulario-armadura')) {
+      sortearValorSelect('texto-formulario-armadura',sortear50Percento);
+    }
 
-  // sortearValorSelect('texto-formulario-darksun-tipo-mago',sortear50Percento);
+    sortearValorSelect('texto-formulario-pericia',sortear50Percento);
 
-  sortearValorSelect('texto-formulario-divindade',sortear50Percento);
+    // sortearValorSelect('texto-formulario-darksun-tipo-mago',sortear50Percento);
 
-  if (selectTemMuitosOptions('texto-formulario-escola')) {
-    sortearValorSelect('texto-formulario-escola',sortear50Percento);
-  }
+    sortearValorSelect('texto-formulario-divindade',sortear50Percento);
 
-  if (selectTemMuitosOptions('texto-formulario-escola-magia')) {
-    sortearValorSelect('texto-formulario-escola-magia',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-escola')) {
+      sortearValorSelect('texto-formulario-escola',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-disciplina')) {
-    sortearValorSelect('texto-formulario-disciplina',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-escola-magia')) {
+      sortearValorSelect('texto-formulario-escola-magia',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-modo-defesa')) {
-    sortearValorSelect('texto-formulario-modo-defesa',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-disciplina')) {
+      sortearValorSelect('texto-formulario-disciplina',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-ciencia')) {
-    sortearValorSelect('texto-formulario-ciencia',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-modo-defesa')) {
+      sortearValorSelect('texto-formulario-modo-defesa',sortear50Percento);
+    }
 
-  if (selectTemMuitosOptions('texto-formulario-devocao')) {
-    sortearValorSelect('texto-formulario-devocao',sortear50Percento);
-  }
+    if (selectTemMuitosOptions('texto-formulario-ciencia')) {
+      sortearValorSelect('texto-formulario-ciencia',sortear50Percento);
+    }
 
-  definirValorTexto('texto-formulario-minimo-forca',sortear40Percento,17);
-  definirValorTexto('texto-formulario-minimo-destreza',sortear40Percento,17);
-  definirValorTexto('texto-formulario-minimo-constituicao',sortear40Percento,17);
-  definirValorTexto('texto-formulario-minimo-inteligencia',sortear40Percento,17);
-  definirValorTexto('texto-formulario-minimo-sabedoria',sortear40Percento,17);
-  definirValorTexto('texto-formulario-minimo-carisma',sortear40Percento,17);
+    if (selectTemMuitosOptions('texto-formulario-devocao')) {
+      sortearValorSelect('texto-formulario-devocao',sortear50Percento);
+    }
 
-  // texto-botao-rolar-atributos - botao
+    definirValorTexto('texto-formulario-minimo-forca',sortear40Percento,17);
+    definirValorTexto('texto-formulario-minimo-destreza',sortear40Percento,17);
+    definirValorTexto('texto-formulario-minimo-constituicao',sortear40Percento,17);
+    definirValorTexto('texto-formulario-minimo-inteligencia',sortear40Percento,17);
+    definirValorTexto('texto-formulario-minimo-sabedoria',sortear40Percento,17);
+    definirValorTexto('texto-formulario-minimo-carisma',sortear40Percento,17);
 
-  testDefinirAtributosTela(()=>{
+    // texto-botao-rolar-atributos - botao
 
-    definirValorTexto('texto-formulario-atributo-forca',sortear40Percento,17);
-    definirValorTexto('texto-formulario-atributo-destreza',sortear40Percento,17);
-    definirValorTexto('texto-formulario-atributo-constituicao',sortear40Percento,17);
-    definirValorTexto('texto-formulario-atributo-inteligencia',sortear40Percento,17);
-    definirValorTexto('texto-formulario-atributo-sabedoria',sortear40Percento,17);
-    definirValorTexto('texto-formulario-atributo-carisma',sortear40Percento,17);
+    testDefinirAtributosTela(()=>{
 
-    render(()=>{
-      callback();
+      definirValorTexto('texto-formulario-atributo-forca',sortear40Percento,17);
+      definirValorTexto('texto-formulario-atributo-destreza',sortear40Percento,17);
+      definirValorTexto('texto-formulario-atributo-constituicao',sortear40Percento,17);
+      definirValorTexto('texto-formulario-atributo-inteligencia',sortear40Percento,17);
+      definirValorTexto('texto-formulario-atributo-sabedoria',sortear40Percento,17);
+      definirValorTexto('texto-formulario-atributo-carisma',sortear40Percento,17);
+
+      render(()=>{
+        callback();
+      });
+
     });
 
   });
+
 }
 
 function unitTests() {

@@ -1347,7 +1347,6 @@ const MULTICLASSES_LIVRO = [
   "Ladrão/Cigano",
 ];
 
-// AQUI
 const MULTICLASSES = {
   "Guerreiro/Ladrão": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],
   "Ladrão/Guerreiro": ["Anão", "Elfo", "Gnomo", "Meio-Elfo", "Halfling", "Tabaxi"],

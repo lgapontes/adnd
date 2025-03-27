@@ -1,5 +1,5 @@
 /* version */
-const VERSION = '1.0.6';
+const VERSION = '1.0.7';
 let versao_texto = `Versão ${VERSION}`;
 document.getElementById('texto-formulario-versao1').innerHTML = versao_texto;
 document.getElementById('texto-formulario-versao2').innerHTML = versao_texto;
@@ -9,6 +9,7 @@ document.getElementById('texto-formulario-versao5').innerHTML = versao_texto;
 
 /* Testes unitários */
 const UNIT_TESTS = false;
+const QTDE_TESTS = 1000;
 
 /* debug */
 const DEBUG = false;

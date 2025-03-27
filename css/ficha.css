@@ -421,6 +421,14 @@
       }
       /* Magia Cigana */
 
+      tbody > tr > td:first-child {
+        border: 1px solid #000 !important;
+      }
+
+      tbody > tr > td tbody > tr > td:first-child {
+        border: 0 !important;
+      }
+
       @media (min-width: 800px) {
         div#ficha > div > table > tbody > tr > td > table > tbody > tr > td:nth-child(1) {
           width: auto !important;
