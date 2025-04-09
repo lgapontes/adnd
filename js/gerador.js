@@ -3593,7 +3593,6 @@ function sortear_pontos_talentos(personagem, classe_separada, index_classe_separ
   }
 }
 
-// ZZZ Tem um problema aqui, mantendo sempre a ultima classe
 function definir_talentos(personagem, classe_separada, index_classe_separada, callback) {
 
   if ( (personagem["Talentos"] == undefined) || (personagem["Talentos"] == null) || (Object.keys(personagem["Talentos"]).length == 0) ) {
@@ -5169,8 +5168,6 @@ function rolarDadosVidaPorClasses(personagem,classe_separada,index_classe_separa
     callback();
   } else {
 
-    /// ZZZ - ver problema da vida
-
     /* Rolar dados de vida */
     let vida_total = personagem["Dados Básicos"]["Pontos de Vida"];
 
@@ -5199,6 +5196,13 @@ function rolarDadosVidaPorClasses(personagem,classe_separada,index_classe_separa
         if ( (vida_rolada >= 1) && (vida_rolada <= 3) ) {
           vida_rolada = 4;
         }
+      }
+
+      /* Dividir pelo número de classes */
+      vida_rolada = Math.floor(vida_rolada / numero_classes);
+
+      if (vida_rolada < 1) {
+        vida_rolada = 1;
       }
 
       vida_rolada = vida_rolada + personagem["Ajuste dos Pontos de Vida Separados"][index_classe_separada];
