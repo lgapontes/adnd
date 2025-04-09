@@ -2070,7 +2070,7 @@ function obter_dados_json_personagem(forca, destreza, constituicao, inteligencia
     "Idiomas": [],
     "Pontos de Perícia": {
       "Perícias Armas Inicial": 0,
-      "Perícias Armas Nº Níveis": 0,
+      "Perícias Armas Nº Níveis": 10,
       "Perícias Armas Semelhantes": -10,
       "Perícias Armas Penalidades": -10,
       "Perícias Comuns Inicial": 0,
@@ -3593,9 +3593,13 @@ function sortear_pontos_talentos(personagem, classe_separada, index_classe_separ
   }
 }
 
+// ZZZ Tem um problema aqui, mantendo sempre a ultima classe
 function definir_talentos(personagem, classe_separada, index_classe_separada, callback) {
 
-  personagem["Talentos"] = {};
+  if ( (personagem["Talentos"] == undefined) || (personagem["Talentos"] == null) || (Object.keys(personagem["Talentos"]).length == 0) ) {
+    personagem["Talentos"] = {};
+  }
+
   let keys_talentos = Object.keys(CLASSES[classe_separada].talentos);
 
   keys_talentos.forEach((talento, index_talento) => {
@@ -3638,6 +3642,7 @@ function definir_talentos(personagem, classe_separada, index_classe_separada, ca
     definirValorCampoSeMaiorDoisCampos(personagem,"Talentos",talento,novo_valor_talento);
 
     if (index_talento == (keys_talentos.length - 1)) {
+
       sortear_pontos_talentos(personagem, classe_separada, index_classe_separada, () => {
 
         // Ajuste FINAL
@@ -5163,6 +5168,9 @@ function rolarDadosVidaPorClasses(personagem,classe_separada,index_classe_separa
     }
     callback();
   } else {
+
+    /// ZZZ - ver problema da vida
+
     /* Rolar dados de vida */
     let vida_total = personagem["Dados Básicos"]["Pontos de Vida"];
 
@@ -5722,7 +5730,7 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
         if (CLASSES[classe_separada]["Grupo"] == "Homem de Armas") {
 
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Inicial",4);
-          definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",3);
+          definirValorCampoSeMenorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",3);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Semelhantes",-1);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Penalidades",-2);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(3 + numero_de_linguas));
@@ -5754,7 +5762,7 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
         } else if (CLASSES[classe_separada]["Grupo"] == "Arcano") {
 
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Inicial",1);
-          definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",6);
+          definirValorCampoSeMenorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",6);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Semelhantes",-3);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Penalidades",-5);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(4 + numero_de_linguas));
@@ -5794,6 +5802,9 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","2º Círculo",0);
 
             if (nivel_para_magias == 3) {
+              definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
+              personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",8);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","2º Círculo",3);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Arcanas pode decorar?",'1º Círculo',2);
@@ -5845,6 +5856,9 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",7);
 
             if (nivel_para_magias == 3) {
+              definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
+              personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",9);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","2º Círculo",4);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Arcanas pode decorar?",'1º Círculo',3);
@@ -5897,6 +5911,9 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
             definirValorCampoSeMenorDoisCampos(personagem,"Poder da Fé","Especial",'-');
 
             if (nivel_para_magias == 3) {
+              definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
+              personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",9);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","2º Círculo",4);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Arcanas pode decorar?",'1º Círculo',3);
@@ -5989,6 +6006,9 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",7);
 
             if (nivel_para_magias == 3) {
+              definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
+              personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","1º Círculo",9);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Arcanas no Grimório","2º Círculo",4);
               definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Arcanas pode decorar?",'1º Círculo',3);
@@ -6012,7 +6032,7 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
         } else if (CLASSES[classe_separada]["Grupo"] == "Sacerdote") {
 
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Inicial",2);
-          definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",4);
+          definirValorCampoSeMenorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",4);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Semelhantes",-2);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Penalidades",-3);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(4 + numero_de_linguas));
@@ -6161,6 +6181,9 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
           }
 
           if (nivel_para_magias == 3) {
+            definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
+            personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
+
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Divinas pode decorar?",'1º Círculo',(personagem["Dados Básicos"]["Quantas Magias Divinas pode decorar?"]['1º Círculo'] + 2));
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Quantas Magias Divinas pode decorar?",'2º Círculo',(personagem["Dados Básicos"]["Quantas Magias Divinas pode decorar?"]['2º Círculo'] + 1));
             definirValorCampoSeMaiorTresCampos(personagem,"Dados Básicos","Magias Divinas por Círculo",'1º Círculo',(personagem["Dados Básicos"]["Magias Divinas por Círculo"]['1º Círculo'] + 2));
@@ -6242,7 +6265,7 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
         } else if (CLASSES[classe_separada]["Grupo"] == "Ladino") {
 
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Inicial",2);
-          definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",4);
+          definirValorCampoSeMenorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",4);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Semelhantes",-2);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Penalidades",-3);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(3 + numero_de_linguas));
@@ -6256,9 +6279,6 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
 
           if (nivel_para_magias == 3) {
             definirValorCampoSeMenorDoisCampos(personagem,"Dados Básicos","TAC0",19);
-
-            definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(personagem["Pontos de Perícia"]["Perícias Comuns Inicial"] + 1));
-            personagem["Detalhes"].push('Este personagem recebeu +1 ponto de perícias comuns no nível 3.');
           }
 
           if (classe_separada == "Cigano") {
@@ -6340,7 +6360,7 @@ function sortear_dados_basicos_por_nivel(personagem, raca, callback) {
         } else if (CLASSES[classe_separada]["Grupo"] == "Psionicista") {
 
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Inicial",2);
-          definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",5);
+          definirValorCampoSeMenorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Nº Níveis",5);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Semelhantes",-2);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Armas Penalidades",-4);
           definirValorCampoSeMaiorDoisCampos(personagem,"Pontos de Perícia","Perícias Comuns Inicial",(3 + numero_de_linguas));
