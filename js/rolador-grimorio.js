@@ -129,50 +129,85 @@ function sortear_protecao_grimorio(callback) {
   callback(protecao);
 }
 
+function inner_render_paginas(lista,circulo_magia,callback) {
+  if (lista.length == 0) {
+    callback(lista);
+  } else {
+    let lista_com_paginas = [];
+
+    lista.forEach((magia, index_magia) => {
+      let paginas = Math.floor(Math.random() * 6) + circulo_magia;
+      lista_com_paginas.push(`${magia} (${paginas} páginas)`);
+
+      if (index_magia == (lista.length - 1)) {
+        callback(lista_com_paginas);
+      }
+    });
+  }
+}
+
+function render_paginas(magias,callback) {
+  let keys_circulos = Object.keys(magias.lista);
+  keys_circulos.forEach((circulo, index_circulo) => {
+    let circulo_magia = index_circulo + 1;
+
+    inner_render_paginas(magias.lista[circulo],circulo_magia,(lista)=>{
+      magias.lista[circulo] = lista;
+
+      if (index_circulo == (keys_circulos.length - 1)) {
+        callback(magias);
+      }
+    });
+  });
+}
+
 function render_grimorio(nivel,callback) {
   sortear_nome_grimorio((nome,genero)=>{
 
     sortear_protecao_grimorio(protecao=>{
 
-      sortear_magias_grimorio(nivel,"Mago",(magias)=>{
-        let s_magias = '';
-        if (magias.conjurador) {
-          s_magias = '\n>> Magias:';
-          if (magias.lista["1º Círculo"].length > 0) {
-            s_magias += `\n1º Círculo: ${magias.lista["1º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["2º Círculo"].length > 0) {
-            s_magias += `\n2º Círculo: ${magias.lista["2º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["3º Círculo"].length > 0) {
-            s_magias += `\n3º Círculo: ${magias.lista["3º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["4º Círculo"].length > 0) {
-            s_magias += `\n4º Círculo: ${magias.lista["4º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["5º Círculo"].length > 0) {
-            s_magias += `\n5º Círculo: ${magias.lista["5º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["6º Círculo"].length > 0) {
-            s_magias += `\n6º Círculo: ${magias.lista["6º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["7º Círculo"].length > 0) {
-            s_magias += `\n7º Círculo: ${magias.lista["7º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["8º Círculo"].length > 0) {
-            s_magias += `\n8º Círculo: ${magias.lista["8º Círculo"].join('; ')}`;
-          }
-          if (magias.lista["9º Círculo"].length > 0) {
-            s_magias += `\n9º Círculo: ${magias.lista["9º Círculo"].join('; ')}`;
-          }
-        }
+      sortear_magias_grimorio(nivel,"Mago",(magias_sem_paginas)=>{
 
-        let s_protecao = '\n>> Proteção: ';
+        render_paginas(magias_sem_paginas,(magias)=>{
 
-        if (protecao == 'Nenhuma proteção') {
-          s_protecao += 'Nenhuma proteção';
-        } else {
-          s_protecao +=
+          let s_magias = '';
+          if (magias.conjurador) {
+            s_magias = '\n>> Magias:\n';
+            if (magias.lista["1º Círculo"].length > 0) {
+              s_magias += `\n1º Círculo:\n- ${magias.lista["1º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["2º Círculo"].length > 0) {
+              s_magias += `\n2º Círculo:\n- ${magias.lista["2º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["3º Círculo"].length > 0) {
+              s_magias += `\n3º Círculo:\n- ${magias.lista["3º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["4º Círculo"].length > 0) {
+              s_magias += `\n4º Círculo:\n- ${magias.lista["4º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["5º Círculo"].length > 0) {
+              s_magias += `\n5º Círculo:\n- ${magias.lista["5º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["6º Círculo"].length > 0) {
+              s_magias += `\n6º Círculo:\n- ${magias.lista["6º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["7º Círculo"].length > 0) {
+              s_magias += `\n7º Círculo:\n- ${magias.lista["7º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["8º Círculo"].length > 0) {
+              s_magias += `\n8º Círculo:\n- ${magias.lista["8º Círculo"].join('\n- ')}\n`;
+            }
+            if (magias.lista["9º Círculo"].length > 0) {
+              s_magias += `\n9º Círculo:\n- ${magias.lista["9º Círculo"].join('\n- ')}\n`;
+            }
+          }
+
+          let s_protecao = '\n>> Proteção: ';
+
+          if (protecao == 'Nenhuma proteção') {
+            s_protecao += 'Nenhuma proteção';
+          } else {
+            s_protecao +=
 `${protecao}
 Nível da magia: ${PROTECAO_GRIMORIOS[protecao]['Nível']}
 Escola: ${PROTECAO_GRIMORIOS[protecao]['Escola']}
@@ -181,17 +216,20 @@ Duração: ${PROTECAO_GRIMORIOS[protecao]['Duração']}
 Resistência: ${PROTECAO_GRIMORIOS[protecao]['Resistência']}\n
 ${PROTECAO_GRIMORIOS[protecao]['Efeito']}
 `;
-        }
+          }
 
-        let text = document.querySelector('#ficha-grimorio');
+          let text = document.querySelector('#ficha-grimorio');
 
-        text.value =
-`${nome} [${genero}], Nível: ${nivel}
-${s_magias}
-${s_protecao}
-`;
+          text.value =
+  `${nome} [${genero}], Nível: ${nivel}
+  ${s_magias}
+  ${s_protecao}
+  `;
 
-        callback();
+          callback();
+
+        });
+
       });
 
     });

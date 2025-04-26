@@ -1,5 +1,5 @@
 /* version */
-const VERSION = '1.0.7';
+const VERSION = '1.0.8';
 let versao_texto = `Versão ${VERSION}`;
 document.getElementById('texto-formulario-versao1').innerHTML = versao_texto;
 document.getElementById('texto-formulario-versao2').innerHTML = versao_texto;
