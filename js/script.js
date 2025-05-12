@@ -1,11 +1,6 @@
 /* version */
 const VERSION = '1.0.8';
 let versao_texto = `Versão ${VERSION}`;
-document.getElementById('texto-formulario-versao1').innerHTML = versao_texto;
-document.getElementById('texto-formulario-versao2').innerHTML = versao_texto;
-document.getElementById('texto-formulario-versao3').innerHTML = versao_texto;
-document.getElementById('texto-formulario-versao4').innerHTML = versao_texto;
-document.getElementById('texto-formulario-versao5').innerHTML = versao_texto;
 
 /* Testes unitários */
 const UNIT_TESTS = false;

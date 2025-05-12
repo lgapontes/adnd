@@ -1,3 +1,9 @@
+document.getElementById('texto-formulario-versao1').innerHTML = versao_texto;
+document.getElementById('texto-formulario-versao2').innerHTML = versao_texto;
+document.getElementById('texto-formulario-versao3').innerHTML = versao_texto;
+document.getElementById('texto-formulario-versao4').innerHTML = versao_texto;
+document.getElementById('texto-formulario-versao5').innerHTML = versao_texto;
+
 const NOMES_RACAS = {
   "Humano": {
     "Masculino": [
