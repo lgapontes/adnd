@@ -592,6 +592,77 @@ main.menu > a.menu > span {
   display: none;
 }
 
+/* Inventário */
+
+div.inventario > h2 {
+  display: block;
+  width: 800px;
+  max-width: 95%;
+  min-width: 380px;
+  box-sizing: border-box;
+
+  background-image: linear-gradient(#4b3921, #000000) !important;
+  margin: 10px auto 0 auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 5px 5px 5px 15px;
+
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+div.inventario > div.linha {
+  display: block;
+  width: 800px;
+  max-width: 95%;
+  min-width: 380px;
+  box-sizing: border-box;
+
+  background-image: linear-gradient(#edecd1, #dbdabd);
+  margin: 5px auto 5px auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0 15px 5px 15px;
+
+  border: 2px solid rgba(59, 39, 11, .3);
+}
+
+div.inventario > div.linha > div.bloco {
+  width: 100%;
+  display: block;
+  float: left;
+  margin-top: 5px;
+  min-height: 26px;
+}
+
+div.inventario > div.linha > div.bloco > label {
+  display: block;
+  float: left;
+  width: 20%;
+  box-sizing: border-box;
+  padding-left: 4px;
+  line-height: 26px;
+  font-weight: bold;
+  background-color: rgba(59, 39, 11, .3);
+}
+
+div.inventario > div.linha > div.bloco > input[type=text],
+div.inventario > div.linha > div.bloco > input[type=number] {
+  display: block;
+  float: left;
+  width: 80%;
+  line-height: 22px;
+  text-indent: 3px;
+  box-sizing: border-box;
+  padding-top: 4px;
+
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+
+  font-size: 1.1em;
+  background-color: rgba(59, 39, 11, .1);
+}
+
 /* Configurações por IDs */
 
 @media (min-width: 800px) {
@@ -634,6 +705,32 @@ main.menu > a.menu > span {
 
   main.texto > div.invisivel {
     display: block;
+  }
+
+  div.inventario > div.linha > div.menor {
+    width: 49%;
+  }
+
+  div.inventario > div.linha > div.menor:nth-child(odd) {
+    margin-left: 2%;
+  }
+
+  div.inventario > div.linha > div.bloco > label {
+    width: 10%;
+  }
+
+  div.inventario > div.linha > div.bloco > input[type=text],
+  div.inventario > div.linha > div.bloco > input[type=number] {
+    width: 90%;
+  }
+
+  div.inventario > div.linha > div.menor > label {
+    width: 20%;
+  }
+
+  div.inventario > div.linha > div.menor > input[type=text],
+  div.inventario > div.linha > div.menor > input[type=number] {
+    width: 80%;
   }
 }
 
