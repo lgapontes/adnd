@@ -31,28 +31,128 @@
     <main class="texto">
       <h2>Inventário de AD&D 2ed</h2>
       <div class="em-construcao" id="texto-formulario-versao">Versão 0.0.1</div>
+
       <br>
+      <button type="button" class="mostrar" id="texto-botao-mostrar">
+        <img src="img/arrow-down-wide-short-solid.svg">
+        <span>Mostrar</span>
+      </button>
+      <button type="button" class="mostrar" id="texto-botao-esconder">
+        <img src="img/arrow-up-wide-short-solid.svg">
+        <span>Esconder</span>
+      </button>
+      <span>Sobre este gerador</span>
+
       <br>
-      Este é um gerenciador de inventário de itens de personagens para <b>Advanced Dungeons and Dragons 2ª edição</b>. Crie suas campanhas, configure os jogadores e organize o inventário para facilitar o consumo e manutenção dos itens durante os jogos. Ao criar sua campanha <b>SALVE</b> os links indicados, principalmente o <b>Link do Narrador</b> - somente através dele você poderá modificar os dados de sua campanha. Caso o perca não será possível acessá-la como narrador. O <b>Link dos Jogadores</b> pode ser distribuído aos jogadores. O <b>Link de Visualização</b> é acessível por todos neste site e é útil para acompanhar as alterações dos inventários (como por exemplo em uma Stream).
-      <br>
+      <div class="bloco-texto" id="texto-bloco">
+        Este é um gerenciador de inventário de itens de personagens para <b>Advanced Dungeons and Dragons 2ª edição</b>. Crie suas campanhas, configure os jogadores e organize o inventário para facilitar o consumo e manutenção dos itens durante os jogos. Ao criar sua campanha <b>SALVE</b> os links indicados, principalmente o <b>Link do Narrador</b> - somente através dele você poderá modificar os dados de sua campanha. Caso o perca não será possível acessá-la como narrador. O <b>Link dos Jogadores</b> pode ser distribuído aos jogadores. O <b>Link de Visualização</b> é acessível por todos neste site e é útil para acompanhar as alterações dos inventários (como por exemplo em uma Stream).
+      </div>
     </main>
 
     <div class="inventario">
-      <h2>Campanhas</h2>
+      <!-- Títulos -->
+      <div class="titulo" id="campanhas_titulo">
+        <h2>Campanhas</h2>
+        <button>
+          <img src="img/plus-solid.svg" />
+          <span>Inserir Campanha</span>
+        </button>
+      </div>
 
-      <div class="linha">
+      <div class="titulo titulo-editar" id="campanhas_editar">
+        <h2>Campanha</h2>
+        <button>
+          <img src="img/floppy-disk-solid.svg" />
+          <span>Salvar Campanha</span>
+        </button>
+      </div>
+
+      <!-- Edição -->
+      <div class="linha linha-editar">
         <div class="bloco">
-          <label>Nome</label>
-          <input type="text" value="teste" readonly disabled>
+          <label for="campanhas_editar_nome">Nome</label>
+          <input type="text" value="" id="campanhas_editar_nome" name="campanhas_editar_nome">
         </div>
         <div class="bloco menor">
-          <label>Narrador</label>
-          <input type="text" value="SirLockee" readonly disabled>
+          <label for="campanhas_editar_narrador">Narrador</label>
+          <input type="text" value="" id="campanhas_editar_narrador" name="campanhas_editar_narrador">
         </div>
-        <div class="bloco menor">
+        <div class="bloco menor menor-direita">
           <label>Criação</label>
-          <input type="text" value="2025-05-12 19:34:26" readonly disabled>
+          <input type="text" value="" readonly disabled id="campanhas_editar_data_cadastro">
         </div>
+
+        <div class="bloco menor bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_controlar_peso" name="campanhas_editar_controlar_peso">
+          <label for="campanhas_editar_controlar_peso">Controlar peso dos itens</label>
+        </div>
+        <div class="bloco menor menor-direita bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_incluir_item" name="campanhas_editar_permitir_incluir_item">
+          <label for="campanhas_editar_permitir_incluir_item">Permitir incluir item</label>
+        </div>
+        <div class="bloco menor bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_alterar_item" name="campanhas_editar_permitir_alterar_item">
+          <label for="campanhas_editar_permitir_alterar_item">Permitir alterar item</label>
+        </div>
+        <div class="bloco menor menor-direita bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_alterar_quantidade_item" name="campanhas_editar_permitir_alterar_quantidade_item">
+          <label for="campanhas_editar_permitir_alterar_quantidade_item">Permitir alterar a quantidade do item</label>
+        </div>
+        <div class="bloco menor bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_excluir_item" name="campanhas_editar_permitir_excluir_item">
+          <label for="campanhas_editar_permitir_excluir_item">Permitir excluir item</label>
+        </div>
+        <div class="bloco menor menor-direita bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_entregar_item" name="campanhas_editar_permitir_entregar_item">
+          <label for="campanhas_editar_permitir_entregar_item">Permitir entregar item</label>
+        </div>
+        <div class="bloco menor bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_alterar_moedas" name="campanhas_editar_permitir_alterar_moedas">
+          <label for="campanhas_editar_permitir_alterar_moedas">Permitir alterar moedas</label>
+        </div>
+        <div class="bloco menor menor-direita bloco-checkbox">
+          <input type="checkbox" id="campanhas_editar_permitir_entregar_moedas" name="campanhas_editar_permitir_entregar_moedas">
+          <label for="campanhas_editar_permitir_entregar_moedas">Permitir entregar moedas</label>
+        </div>
+
+        <div class="bloco">
+          <label for="campanhas_editar_uuid_medida_padrao" class="maior">Moeda Padrão</label>
+          <select id="campanhas_editar_uuid_medida_padrao" name="campanhas_editar_uuid_medida_padrao"></select>
+        </div>
+
+        <div class="bloco">
+          <label class="subtitulo">Moedas disponíveis na campanha</label>
+        </div>
+        <div class="lista">
+          <div class="bloco menor bloco-checkbox">
+            <input type="checkbox">
+            <label>Peça de Cerâmica (pc)</label>
+          </div>
+          <div class="bloco menor menor-direita bloco-checkbox">
+            <input type="checkbox">
+            <label>Peça de Cobre (pc)</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Listas -->
+      <div class="linhas" id="campanhas_listar">
+        <!--
+        <div class="linha">
+          <div class="bloco">
+            <label>Nome</label>
+            <input type="text" value="teste" readonly disabled>
+          </div>
+          <div class="bloco menor">
+            <label>Narrador</label>
+            <input type="text" value="SirLockee" readonly disabled>
+          </div>
+          <div class="bloco menor">
+            <label>Criação</label>
+            <input type="text" value="2025-05-12 19:34:26" readonly disabled>
+          </div>
+        </div>
+        -->
       </div>
 
     </div>

@@ -594,7 +594,7 @@ main.menu > a.menu > span {
 
 /* Inventário */
 
-div.inventario > h2 {
+div.inventario > div.titulo {
   display: block;
   width: 800px;
   max-width: 95%;
@@ -605,13 +605,64 @@ div.inventario > h2 {
   margin: 10px auto 0 auto;
   border-radius: 5px;
   box-sizing: border-box;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 0 5px 15px;
+}
 
+div.inventario > div.titulo-editar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+div.inventario > div.titulo > h2 {
+  display: block;
+  float: left;
   font-size: 1.5em;
   color: #ffffff;
 }
 
-div.inventario > div.linha {
+div.inventario > div.titulo > button {
+  display: block;
+  float: right;
+  margin-right: 15px;
+  margin-top: 0.5px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #7b6951;
+  box-shadow: 1px 1px 2px #ffffff;
+  border-radius: 4px;
+}
+
+div.inventario > div.titulo > button:hover {
+  background-color: #5b4931;
+}
+
+div.inventario > div.titulo > button > span {
+  display: block;
+  float: right;
+  margin: 0 3px 0 2px;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+div.inventario > div.titulo > button > img {
+  display: block;
+  float: left;
+  margin: 0 5px 0 0;
+  height: 20px;
+  width: 20px;
+}
+
+div.inventario > div.linhas {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+}
+
+div.inventario div.linha {
   display: block;
   width: 800px;
   max-width: 95%;
@@ -624,10 +675,18 @@ div.inventario > div.linha {
   box-sizing: border-box;
   padding: 0 15px 5px 15px;
 
-  border: 2px solid rgba(59, 39, 11, .3);
+  border: 2px solid #000000; /* rgba(59, 39, 11, .3); */
 }
 
-div.inventario > div.linha > div.bloco {
+div.inventario div.linha-editar {
+  margin: 0 auto 5px auto;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+div.inventario div.linha div.bloco {
   width: 100%;
   display: block;
   float: left;
@@ -635,7 +694,28 @@ div.inventario > div.linha > div.bloco {
   min-height: 26px;
 }
 
-div.inventario > div.linha > div.bloco > label {
+div.inventario div.linha div.bloco > label.subtitulo {
+  display: block;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  line-height: 30px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+div.inventario div.linha div.lista {
+  width: 100%;
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+div.inventario div.linha div.bloco > label {
   display: block;
   float: left;
   width: 20%;
@@ -646,8 +726,12 @@ div.inventario > div.linha > div.bloco > label {
   background-color: rgba(59, 39, 11, .3);
 }
 
-div.inventario > div.linha > div.bloco > input[type=text],
-div.inventario > div.linha > div.bloco > input[type=number] {
+div.inventario div.linha div.bloco > label.maior {
+  width: 30%;
+}
+
+div.inventario div.linha div.bloco > input[type=text],
+div.inventario div.linha div.bloco > input[type=number] {
   display: block;
   float: left;
   width: 80%;
@@ -661,6 +745,62 @@ div.inventario > div.linha > div.bloco > input[type=number] {
 
   font-size: 1.1em;
   background-color: rgba(59, 39, 11, .1);
+}
+
+div.inventario div.linha div.bloco > input[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+div.inventario div.linha div.bloco > select {
+  display: block;
+  float: left;
+  width: 70%;
+  height: 26px;
+  text-indent: 3px;
+  background-color: rgba(59, 39, 11, .1);
+}
+
+div.inventario div.linha div.bloco > select > option {
+  font-size: 1.1em;
+  font-family: "Oregon-LDO", sans-serif;
+  color: #423c2b;
+}
+
+div.inventario div.linha div.bloco-checkbox {
+  width: 100%;
+  background-color: rgba(59, 39, 11, .3);
+}
+
+div.inventario div.linha div.bloco-checkbox > label {
+  background-color: rgba(0, 0, 0, 0);
+  width: 90%;
+}
+
+div.inventario div.linha div.bloco-checkbox > input[type=checkbox] {
+  display: block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin: 6px 2px 0 5px;
+}
+
+/* Inventário - render */
+
+#campanhas_titulo {
+  display: none;
+}
+
+#campanhas_listar {
+  display: none;
+}
+
+#texto-bloco {
+  display: none;
+}
+
+#texto-botao-esconder {
+  display: none;
 }
 
 /* Configurações por IDs */
@@ -707,30 +847,42 @@ div.inventario > div.linha > div.bloco > input[type=number] {
     display: block;
   }
 
-  div.inventario > div.linha > div.menor {
+  div.inventario div.linha div.menor {
     width: 49%;
   }
 
-  div.inventario > div.linha > div.menor:nth-child(odd) {
+  div.inventario div.linha div.menor-direita {
     margin-left: 2%;
   }
 
-  div.inventario > div.linha > div.bloco > label {
+  div.inventario div.linha div.bloco > label {
     width: 10%;
   }
 
-  div.inventario > div.linha > div.bloco > input[type=text],
-  div.inventario > div.linha > div.bloco > input[type=number] {
-    width: 90%;
-  }
-
-  div.inventario > div.linha > div.menor > label {
+  div.inventario div.linha div.bloco > label.maior {
     width: 20%;
   }
 
-  div.inventario > div.linha > div.menor > input[type=text],
-  div.inventario > div.linha > div.menor > input[type=number] {
+  div.inventario div.linha div.bloco > select {
     width: 80%;
+  }
+
+  div.inventario div.linha div.bloco > input[type=text],
+  div.inventario div.linha div.bloco > input[type=number] {
+    width: 90%;
+  }
+
+  div.inventario div.linha div.menor > label {
+    width: 20%;
+  }
+
+  div.inventario div.linha div.menor > input[type=text],
+  div.inventario div.linha div.menor > input[type=number] {
+    width: 80%;
+  }
+
+  div.inventario div.linha div.bloco-checkbox > label {
+    width: 90%;
   }
 }
 

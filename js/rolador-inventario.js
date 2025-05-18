@@ -4,6 +4,14 @@
 
 document.getElementById('texto-formulario-versao').innerHTML = versao_texto;
 
+function openLoading() {
+  document.getElementById('loading').style.display = 'block';
+}
+
+function closeLoading() {
+  document.getElementById('loading').style.display = 'none';
+}
+
 function generateUUID() {
   // uuid char(36)
   return crypto.randomUUID();
@@ -49,7 +57,26 @@ function listar(url,sucesso,falha) {
     );
 }
 
+function obter_com_parametro(url,parametro,valor,sucesso,falha) {
+    consumirAPI(
+        'GET',
+        `${url}?${parametro}=${valor}`,
+        sucesso,
+        falha
+    );
+}
+
 function obter(url,uuid,sucesso,falha) {
+    obter_com_parametro(
+        url,
+        'uuid',
+        uuid,
+        sucesso,
+        falha
+    );
+}
+
+function obterCampanha(url,hash,sucesso,falha) {
     consumirAPI(
         'GET',
         `${url}?uuid=${uuid}`,
@@ -156,6 +183,21 @@ excluir(
 
 // Campanhas
 
+permitir_incluir_item boolean NOT NULL
+
+permitir_alterar_item boolean NOT NULL
+
+permitir_alterar_quantidade_item boolean NOT NULL
+
+permitir_excluir_item boolean NOT NULL
+
+permitir_entregar_item boolean NOT NULL
+
+permitir_alterar_moedas boolean NOT NULL
+
+permitir_entregar_moedas boolean NOT NULL
+
+
 inserir(
   'https://www.flechamagica.com.br/aded2/api/campanhas.php',
   {
@@ -210,8 +252,9 @@ listar(
   },
 );
 
-obter(
+obter_com_parametro(
   'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+  'hash',
   'df901cea-04cf-40f1-900c-bf32d6689e78',
   (json)=>{
     console.log(json);
@@ -383,20 +426,196 @@ excluir(
 
 */
 
-listar(
-  'https://www.flechamagica.com.br/aded2/api/medidas.php',
-  (json)=>{
-    console.log(json);
-  },
-  (erro)=>{
-    console.error(erro);
-  },
-);
+/******************************************************************************/
+/******************************     MOEDAS     ********************************/
+/******************************************************************************/
+
+/*
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('60b339ec-e9ab-477e-838c-baccf2805e02','Peça de Cobre','pc',2);
+60b339ec-e9ab-477e-838c-baccf2805e02
+Peça de Cobre
+pc
+100pc = 1gp
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('a19f19a8-64e0-459e-8ec4-4b56f62af80c','Peça de Prata','pp',3);
+a19f19a8-64e0-459e-8ec4-4b56f62af80c
+Peça de Prata
+pp
+10pp = 1gp
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('996904ad-51ad-42ae-b831-6c08346e7bed','Peça de Electrum','pe',4);
+996904ad-51ad-42ae-b831-6c08346e7bed
+Peça de Electrum
+pe
+2pe = 1gp
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('982e8a4e-386c-4f4f-b394-c6a78fc636b0','Peça de Ouro','po',5);
+982e8a4e-386c-4f4f-b394-c6a78fc636b0
+Peça de Ouro
+po
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('b8d1653f-1cc3-436a-ad22-f87ab6b59e86','Peça de Platina','pl',6);
+b8d1653f-1cc3-436a-ad22-f87ab6b59e86
+Peça de Platina
+pl
+1pl = 5po
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('f2f2ac1d-f8dc-4dd2-a243-778155d8f98b','Peça de Cerâmica','pc',1);
+f2f2ac1d-f8dc-4dd2-a243-778155d8f98b
+Peça de Cerâmica
+pc
+100pc = 1gp
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('0f88bf2c-a224-4990-b0cf-ea04dc22f0f1','Bits (1/10 Peça de Cerâmica)','bits',0);
+0f88bf2c-a224-4990-b0cf-ea04dc22f0f1
+Bits (1/10 Peça de Cerâmica)
+bits
+(1/10 Peça de Cerâmica)
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('9382c783-7888-4e15-9eb8-4777a22afee3','Trade Bar de Prata','trade bar (prata)',7);
+9382c783-7888-4e15-9eb8-4777a22afee3
+Trade Bar de Prata
+trade bar (prata)
+25po
+
+insert into moedas (uuid,moeda,sigla,ordenacao) values ('1657f8c3-578a-4a1e-b4b0-8554e7b5479d','Trade Bar de Ouro','trade bar (ouro)',8);
+1657f8c3-578a-4a1e-b4b0-8554e7b5479d
+Trade Bar de Ouro
+trade bar (ouro)
+250po
+*/
 
 /******************************************************************************/
 /******************************     RENDER     ********************************/
 /******************************************************************************/
 
-function renderLinhaCampanha(campanha,callback) {
-  
+function mostrar_elemento(id) {
+  document.getElementById(id).style.display = 'block';
 }
+
+function esconder_elemento(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+document.getElementById('texto-botao-mostrar').addEventListener('click',(event)=>{
+  event.preventDefault();
+  document.getElementById('texto-botao-mostrar').style.display = 'none';
+  document.getElementById('texto-botao-esconder').style.display = 'block';
+  document.getElementById('texto-bloco').style.display = 'block';
+});
+
+document.getElementById('texto-botao-esconder').addEventListener('click',(event)=>{
+  event.preventDefault();
+  document.getElementById('texto-botao-esconder').style.display = 'none';
+  document.getElementById('texto-botao-mostrar').style.display = 'block';
+  document.getElementById('texto-bloco').style.display = 'none';
+});
+
+function renderBloco(textLabel,inputType,inputDisabled,inputValue,blocoMenor) {
+  let bloco = document.createElement('div');
+  bloco.classList.add('bloco');
+
+  if (blocoMenor) {
+    bloco.classList.add('menor');
+  }
+
+  let label = document.createElement('label');
+  label.innerHTML = textLabel;
+
+  let input = document.createElement('input');
+  input.setAttribute('type',inputType);
+
+  if (inputDisabled) {
+    input.setAttribute('readonly','readonly');
+    input.setAttribute('disabled','disabled');
+  }
+
+  input.value = inputValue;
+
+  bloco.appendChild(label);
+  bloco.appendChild(input);
+
+  return bloco;
+}
+
+function renderLinhaCampanha(nome,narrador,criacao) {
+  let linha = document.createElement('div');
+  linha.classList.add('linha');
+  linha.appendChild(renderBloco('Nome','text',true,nome,false));
+  linha.appendChild(renderBloco('Narrador','text',true,narrador,true));
+  linha.appendChild(renderBloco('Criação','text',true,criacao,true));
+  return linha;
+}
+
+function renderCampanhas(lista,callback) {
+  let linhas = document.getElementById('campanhas_listar');
+  linhas.innerHTML = '';
+
+  if (lista.length == 0) {
+    callback();
+  } else {
+    lista.forEach((entry, index) => {
+      let linha = renderLinhaCampanha(entry.nome,entry.narrador,entry.cadastro);
+      linhas.appendChild(linha);
+
+      if (index == (lista.length - 1)) {
+        callback();
+      }
+    });
+
+  }
+}
+
+/******************************************************************************/
+/******************************     INICIAR     *******************************/
+/******************************************************************************/
+
+function iniciar() {
+  openLoading();
+
+  console.log(`Versão ${VERSION}`);
+  let url = new URLSearchParams(window.location.search);
+  let hash = url.get('hash');
+  let possui_hash = false;
+  if ( (hash !== undefined) && (hash !== null) && (hash !== '') ) {
+    if (typeof hash === 'string' || hash instanceof String) {
+      if (hash.length === 36) {
+        possui_hash = true;
+      }
+    }
+  }
+
+  if (possui_hash) {
+    obter_com_parametro(
+      'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+      'hash',
+      hash,
+      (json)=>{
+        console.log(json);
+        closeLoading();
+      },
+      (erro)=>{
+        console.error(erro);
+        closeLoading();
+      },
+    );
+  } else {
+    mostrar_elemento('campanhas_titulo');
+    mostrar_elemento('campanhas_listar');
+    
+    listar(
+      'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+      (json)=>{
+        renderCampanhas(json,()=>{
+          closeLoading();
+        });
+      },
+      (erro)=>{
+        console.error(erro);
+        closeLoading();
+      },
+    );
+  }
+}
+
+iniciar();
