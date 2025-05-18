@@ -566,6 +566,52 @@ function renderCampanhas(lista,callback) {
   }
 }
 
+function render_campanhas_editar_campo(propriedade,valor,callback) {
+  let ignorar_propriedades = ['medida','sigla','eh_narrador','eh_jogador','eh_visualizador'];
+  if (ignorar_propriedades.includes(propriedade)) {
+    callback();
+  } else {
+    let nome_tag = `campanhas_editar_${propriedade}`;
+    let tag = document.getElementById(nome_tag);
+
+    if (propriedade === 'uuid_medida_padrao') {
+      callback();
+    } else {
+      if (tag.type === 'checkbox') {
+        tag.checked = (valor === 1);
+        callback();
+      } else {
+        tag.value = valor;
+        callback();
+      }
+    }
+  }
+}
+
+/*
+function criarOption(select,value,texto) {
+  let opt = document.createElement('option');
+  if ( (value == 'Todas') || (value == 'Todos') ) {
+    value = 'Todas';
+  }
+  opt.value = value;
+  opt.innerHTML = texto;
+  select.appendChild(opt);
+}
+*/
+
+function render_campanhas_editar(json,callback) {
+  let propriedades = Object.keys(json.campanha);
+  propriedades.forEach((propriedade, index) => {
+    let valor = json.campanha[propriedade];
+    render_campanhas_editar_campo(propriedade,valor,()=>{
+      if (index === (propriedades.length - 1)) {
+        callback();
+      }
+    });
+  });
+}
+
 /******************************************************************************/
 /******************************     INICIAR     *******************************/
 /******************************************************************************/
@@ -591,8 +637,10 @@ function iniciar() {
       'hash',
       hash,
       (json)=>{
-        console.log(json);
-        closeLoading();
+        render_campanhas_editar(json,()=>{
+          console.log(json);
+          closeLoading();
+        });
       },
       (erro)=>{
         console.error(erro);
@@ -602,7 +650,7 @@ function iniciar() {
   } else {
     mostrar_elemento('campanhas_titulo');
     mostrar_elemento('campanhas_listar');
-    
+
     listar(
       'https://www.flechamagica.com.br/aded2/api/campanhas.php',
       (json)=>{
