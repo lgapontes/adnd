@@ -50,7 +50,8 @@
     </main>
 
     <div class="inventario">
-      <!-- Títulos -->
+
+      <!-- Campanhas Listar -->
       <div class="titulo" id="campanhas_titulo">
         <h2>Campanhas</h2>
         <button>
@@ -59,85 +60,6 @@
         </button>
       </div>
 
-      <div class="titulo titulo-editar" id="campanhas_editar">
-        <h2>Campanha</h2>
-        <button>
-          <img src="img/floppy-disk-solid.svg" />
-          <span>Salvar Campanha</span>
-        </button>
-      </div>
-
-      <!-- Edição -->
-      <div class="linha linha-editar">
-        <input type="hidden" value="" id="campanhas_editar_uuid">
-
-        <div class="bloco">
-          <label for="campanhas_editar_nome">Nome</label>
-          <input type="text" value="" id="campanhas_editar_nome" name="campanhas_editar_nome">
-        </div>
-        <div class="bloco menor">
-          <label for="campanhas_editar_narrador">Narrador</label>
-          <input type="text" value="" id="campanhas_editar_narrador" name="campanhas_editar_narrador">
-        </div>
-        <div class="bloco menor menor-direita">
-          <label>Criação</label>
-          <input type="text" value="" readonly disabled id="campanhas_editar_data_cadastro">
-        </div>
-
-        <div class="bloco menor bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_controlar_peso" name="campanhas_editar_controlar_peso">
-          <label for="campanhas_editar_controlar_peso">Controlar peso dos itens</label>
-        </div>
-        <div class="bloco menor menor-direita bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_incluir_item" name="campanhas_editar_permitir_incluir_item">
-          <label for="campanhas_editar_permitir_incluir_item">Permitir incluir item</label>
-        </div>
-        <div class="bloco menor bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_alterar_item" name="campanhas_editar_permitir_alterar_item">
-          <label for="campanhas_editar_permitir_alterar_item">Permitir alterar item</label>
-        </div>
-        <div class="bloco menor menor-direita bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_alterar_quantidade_item" name="campanhas_editar_permitir_alterar_quantidade_item">
-          <label for="campanhas_editar_permitir_alterar_quantidade_item">Permitir alterar a quantidade do item</label>
-        </div>
-        <div class="bloco menor bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_excluir_item" name="campanhas_editar_permitir_excluir_item">
-          <label for="campanhas_editar_permitir_excluir_item">Permitir excluir item</label>
-        </div>
-        <div class="bloco menor menor-direita bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_entregar_item" name="campanhas_editar_permitir_entregar_item">
-          <label for="campanhas_editar_permitir_entregar_item">Permitir entregar item</label>
-        </div>
-        <div class="bloco menor bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_alterar_moedas" name="campanhas_editar_permitir_alterar_moedas">
-          <label for="campanhas_editar_permitir_alterar_moedas">Permitir alterar moedas</label>
-        </div>
-        <div class="bloco menor menor-direita bloco-checkbox">
-          <input type="checkbox" id="campanhas_editar_permitir_entregar_moedas" name="campanhas_editar_permitir_entregar_moedas">
-          <label for="campanhas_editar_permitir_entregar_moedas">Permitir entregar moedas</label>
-        </div>
-
-        <div class="bloco">
-          <label for="campanhas_editar_uuid_medida_padrao" class="maior">Moeda Padrão</label>
-          <select id="campanhas_editar_uuid_medida_padrao" name="campanhas_editar_uuid_medida_padrao"></select>
-        </div>
-
-        <div class="bloco">
-          <label class="subtitulo">Moedas disponíveis na campanha</label>
-        </div>
-        <div class="lista">
-          <div class="bloco menor bloco-checkbox">
-            <input type="checkbox">
-            <label>Peça de Cerâmica (pc)</label>
-          </div>
-          <div class="bloco menor menor-direita bloco-checkbox">
-            <input type="checkbox">
-            <label>Peça de Cobre (pc)</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Listas -->
       <div class="linhas" id="campanhas_listar">
         <!--
         <div class="linha">
@@ -156,6 +78,109 @@
         </div>
         -->
       </div>
+      <!-- Campanhas Listar -->
+
+      <!-- Campanhas Editar -->
+      <div class="titulo titulo-editar" id="campanhas_editar">
+        <h2>Campanha</h2>
+        <button id="campanhas_editar_salvar">
+          <img src="img/floppy-disk-solid.svg" />
+          <span>Salvar</span>
+        </button>
+        <button id="campanhas_editar_atualizar">
+          <img src="img/rotate-right-solid.svg" />
+          <span>Atualizar</span>
+        </button>
+      </div>
+
+      <div class="linha linha-editar">
+        <input type="hidden" value="" id="campanhas_editar_uuid">
+
+        <div class="bloco">
+          <label for="campanhas_editar_nome">Nome</label>
+          <input type="text" value="" id="campanhas_editar_nome" name="campanhas_editar_nome" readonly disabled>
+        </div>
+        <div class="bloco menor">
+          <label for="campanhas_editar_narrador">Narrador</label>
+          <input type="text" value="" id="campanhas_editar_narrador" name="campanhas_editar_narrador" readonly disabled>
+        </div>
+        <div class="bloco menor menor-direita">
+          <label>Criação</label>
+          <input type="text" value="" id="campanhas_editar_data_cadastro" readonly disabled>
+        </div>
+
+        <div class="permissao" id="campanhas_editar_permissao">
+
+          <!-- Permissão -->
+          <div class="bloco menor bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_controlar_peso" name="campanhas_editar_controlar_peso">
+            <label for="campanhas_editar_controlar_peso">Controlar peso dos itens</label>
+          </div>
+          <div class="bloco menor menor-direita bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_incluir_item" name="campanhas_editar_permitir_incluir_item">
+            <label for="campanhas_editar_permitir_incluir_item">Permitir incluir item</label>
+          </div>
+          <div class="bloco menor bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_alterar_item" name="campanhas_editar_permitir_alterar_item">
+            <label for="campanhas_editar_permitir_alterar_item">Permitir alterar item</label>
+          </div>
+          <div class="bloco menor menor-direita bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_alterar_quantidade_item" name="campanhas_editar_permitir_alterar_quantidade_item">
+            <label for="campanhas_editar_permitir_alterar_quantidade_item">Permitir alterar a quantidade do item</label>
+          </div>
+          <div class="bloco menor bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_excluir_item" name="campanhas_editar_permitir_excluir_item">
+            <label for="campanhas_editar_permitir_excluir_item">Permitir excluir item</label>
+          </div>
+          <div class="bloco menor menor-direita bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_entregar_item" name="campanhas_editar_permitir_entregar_item">
+            <label for="campanhas_editar_permitir_entregar_item">Permitir entregar item</label>
+          </div>
+          <div class="bloco menor bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_alterar_moedas" name="campanhas_editar_permitir_alterar_moedas">
+            <label for="campanhas_editar_permitir_alterar_moedas">Permitir alterar moedas</label>
+          </div>
+          <div class="bloco menor menor-direita bloco-checkbox">
+            <input type="checkbox" id="campanhas_editar_permitir_entregar_moedas" name="campanhas_editar_permitir_entregar_moedas">
+            <label for="campanhas_editar_permitir_entregar_moedas">Permitir entregar moedas</label>
+          </div>
+
+          <div class="bloco">
+            <label for="campanhas_editar_uuid_medida_padrao" class="maior">Medida Padrão</label>
+            <select id="campanhas_editar_uuid_medida_padrao" name="campanhas_editar_uuid_medida_padrao"></select>
+          </div>
+
+          <div class="bloco">
+            <label class="subtitulo">Moedas disponíveis na campanha</label>
+          </div>
+          <div class="lista" id="campanhas_editar_lista_moedas">
+            <!--
+            <div class="bloco menor bloco-checkbox">
+              <input type="checkbox">
+              <label>Peça de Cerâmica (pc)</label>
+            </div>
+            <div class="bloco menor menor-direita bloco-checkbox">
+              <input type="checkbox">
+              <label>Peça de Cobre (pc)</label>
+            </div>
+            -->
+          </div>
+
+          <!-- Permissão -->
+        </div>
+
+      </div>
+      <!-- Campanhas Editar -->
+
+      <!-- Personagens Listar -->
+      <div class="titulo" id="personagens_listar">
+        <h2>Personagens</h2>
+        <button id="personagens_listar_inserir">
+          <img src="img/plus-solid.svg" />
+          <span>Inserir</span>
+        </button>
+      </div>
+      <!-- Personagens Listar -->
 
     </div>
 

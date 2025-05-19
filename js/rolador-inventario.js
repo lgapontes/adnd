@@ -1,5 +1,5 @@
 /******************************************************************************/
-/******************************      API       ********************************/
+/******************************      APOIO     ********************************/
 /******************************************************************************/
 
 document.getElementById('texto-formulario-versao').innerHTML = versao_texto;
@@ -16,6 +16,92 @@ function generateUUID() {
   // uuid char(36)
   return crypto.randomUUID();
 }
+
+function criarOption(select,value,texto) {
+  let opt = document.createElement('option');
+  opt.value = value;
+  opt.innerHTML = texto;
+  select.appendChild(opt);
+}
+
+function preecherSelect(id,lista,campoValue,functionTexto,selectedValue,callback) {
+  let select = document.getElementById(id);
+  select.innerHTML = '';
+  let selectedIndex = -1;
+  lista.forEach((entry, index) => {
+    if (entry[campoValue] === selectedValue) {
+      selectedIndex = index;
+    }
+    criarOption(select,entry[campoValue],functionTexto(entry));
+
+    if (index === (lista.length -1)) {
+      if (selectedIndex > -1) {
+        select.selectedIndex = selectedIndex;
+      }
+      callback();
+    }
+  });
+}
+
+function isOdd(num) {
+  return num % 2;
+}
+
+function itsTrue(valor) {
+  return valor === 1;
+}
+
+function itsFalse(valor) {
+  return valor === 0;
+}
+
+function disableInput(id) {
+  document.getElementById(id).setAttribute('disabled','disabled');
+  document.getElementById(id).setAttribute('readonly','readonly');
+}
+
+function enableInput(id) {
+  document.getElementById(id).removeAttribute('disabled');
+  document.getElementById(id).removeAttribute('readonly');
+}
+
+function hashEhValido(hash) {
+  if ( (hash !== undefined) && (hash !== null) && (hash !== '') ) {
+    if (typeof hash === 'string' || hash instanceof String) {
+      if (hash.length === 36) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function salvarHash(hash) {
+  if (hashEhValido(hash)) {
+    localStorage.setItem('hash', hash);
+    return true;
+  } else {
+    limparHash();
+    return false;
+  }
+}
+
+function limparHash() {
+  localStorage.removeItem('hash');
+}
+
+function obterHash() {
+  let hash = localStorage.getItem('hash');
+  if (hash !== null) {
+    return {valido: true, valor: hash};
+  } else {
+    return {valido: false, valor: null};
+  }
+}
+
+/******************************************************************************/
+/******************************      API       ********************************/
+/******************************************************************************/
 
 function consumirAPI(metodo,url,sucesso,falha,json) {
     var xhr = new XMLHttpRequest();
@@ -588,28 +674,133 @@ function render_campanhas_editar_campo(propriedade,valor,callback) {
   }
 }
 
-/*
-function criarOption(select,value,texto) {
-  let opt = document.createElement('option');
-  if ( (value == 'Todas') || (value == 'Todos') ) {
-    value = 'Todas';
+function createItemLista(index,id,texto,selecionado) {
+  let div = document.createElement('div');
+  div.classList.add('bloco');
+  div.classList.add('menor');
+  if (isOdd(index)) {
+    div.classList.add('menor-direita');
   }
-  opt.value = value;
-  opt.innerHTML = texto;
-  select.appendChild(opt);
+  div.classList.add('bloco-checkbox');
+
+  let checkbox = document.createElement('input');
+  checkbox.id = id;
+  checkbox.setAttribute('name', id);
+  checkbox.setAttribute('type', 'checkbox');
+  checkbox.checked = selecionado;
+
+  let label = document.createElement('label');
+  label.htmlFor = id;
+  label.innerHTML = texto;
+
+  div.appendChild(checkbox);
+  div.appendChild(label);
+  return div;
 }
+
+function renderLista(id,lista,campoChaveLista,campoTextoLista,selecionados,campoChaveSelecionados,callback) {
+  let div = document.getElementById(id);
+  div.innerHTML = '';
+  lista.forEach((entry, index) => {
+    let selecionado = false;
+    if (selecionados.some(s => s[campoChaveSelecionados] === entry[campoChaveLista])) {
+      selecionado = true;
+    }
+
+    let item = createItemLista(index,entry[campoChaveLista],entry[campoTextoLista],selecionado);
+    div.appendChild(item);
+
+    if (index === (lista.length - 1)) {
+      callback();
+    }
+  });
+}
+
+/*
+  TODO
+  Lista de personagens
+  Colocar rota pra hash até de personagens
+  opcao de salvar campanha deve validar hash salvo no localStorage
+  criar opçao de salvar campanha
 */
 
+function render_campanhas_editar_permissoes(json) {
+  document.getElementById('campanhas_editar_atualizar').addEventListener('click',campanhas_editar_atualizar);
+
+  if (itsTrue(json.campanha.eh_narrador)) {
+    document.getElementById('campanhas_editar_salvar').style.display = 'block';
+    enableInput('campanhas_editar_nome');
+    enableInput('campanhas_editar_narrador');
+    document.getElementById('campanhas_editar_permissao').style.display = 'block';
+    document.getElementById('personagens_listar_inserir').style.display = 'block';
+    document.getElementById('campanhas_editar_salvar').addEventListener('click',campanhas_editar_salvar);
+  } else if (itsTrue(json.campanha.eh_jogador)) {
+    document.getElementById('campanhas_editar_salvar').style.display = 'none';
+    disableInput('campanhas_editar_nome');
+    disableInput('campanhas_editar_narrador');
+    document.getElementById('campanhas_editar_permissao').style.display = 'none';
+    document.getElementById('personagens_listar_inserir').style.display = 'block';
+  } else {
+    document.getElementById('campanhas_editar_salvar').style.display = 'none';
+    disableInput('campanhas_editar_nome');
+    disableInput('campanhas_editar_narrador');
+    document.getElementById('campanhas_editar_permissao').style.display = 'none';
+    document.getElementById('personagens_listar_inserir').style.display = 'none';
+  }
+}
+
 function render_campanhas_editar(json,callback) {
-  let propriedades = Object.keys(json.campanha);
-  propriedades.forEach((propriedade, index) => {
-    let valor = json.campanha[propriedade];
-    render_campanhas_editar_campo(propriedade,valor,()=>{
-      if (index === (propriedades.length - 1)) {
-        callback();
+  render_campanhas_editar_permissoes(json);
+
+  if (itsTrue(json.campanha.eh_narrador)) {
+    preecherSelect(
+      'campanhas_editar_uuid_medida_padrao',
+      json.medidas,'uuid',(entry)=>`${entry.medida} (${entry.sigla})`,json.campanha.uuid_medida_padrao,()=>{
+        let propriedades = Object.keys(json.campanha);
+        propriedades.forEach((propriedade, index) => {
+          let valor = json.campanha[propriedade];
+          render_campanhas_editar_campo(propriedade,valor,()=>{
+            if (index === (propriedades.length - 1)) {
+              renderLista(
+                'campanhas_editar_lista_moedas',
+                json.moedas,
+                'uuid','moeda',
+                json.moedas_utilizadas,
+                'uuid_moeda',
+                ()=>{
+                  callback();
+                }
+              );
+            }
+          });
+        });
       }
+    );
+  } else {
+    let propriedades = ['nome','narrador','data_cadastro'];
+    propriedades.forEach((propriedade, index) => {
+      let valor = json.campanha[propriedade];
+      render_campanhas_editar_campo(propriedade,valor,()=>{
+        if (index === (propriedades.length - 1)) {
+          callback();
+        }
+      });
     });
-  });
+  }
+}
+
+/******************************************************************************/
+/******************************     EVENTOS     *******************************/
+/******************************************************************************/
+
+function campanhas_editar_atualizar(event) {
+  event.preventDefault();
+  location.reload();
+}
+
+function campanhas_editar_salvar(event) {
+  event.preventDefault();
+  console.log('blz');
 }
 
 /******************************************************************************/
@@ -622,14 +813,7 @@ function iniciar() {
   console.log(`Versão ${VERSION}`);
   let url = new URLSearchParams(window.location.search);
   let hash = url.get('hash');
-  let possui_hash = false;
-  if ( (hash !== undefined) && (hash !== null) && (hash !== '') ) {
-    if (typeof hash === 'string' || hash instanceof String) {
-      if (hash.length === 36) {
-        possui_hash = true;
-      }
-    }
-  }
+  let possui_hash = salvarHash(hash);
 
   if (possui_hash) {
     obter_com_parametro(

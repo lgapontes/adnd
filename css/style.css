@@ -715,6 +715,14 @@ div.inventario div.linha div.lista {
   padding: 0;
 }
 
+div.inventario div.linha div.permissao {
+  width: 100%;
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
 div.inventario div.linha div.bloco > label {
   display: block;
   float: left;
@@ -800,6 +808,18 @@ div.inventario div.linha div.bloco-checkbox > input[type=checkbox] {
 }
 
 #texto-botao-esconder {
+  display: none;
+}
+
+#campanhas_editar_salvar {
+  display: none;
+}
+
+#personagens_listar_inserir {
+  display: none;
+}
+
+#campanhas_editar_permissao {
   display: none;
 }
 
