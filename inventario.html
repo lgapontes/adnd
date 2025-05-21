@@ -95,6 +95,7 @@
 
       <div class="linha linha-editar">
         <input type="hidden" value="" id="campanhas_editar_uuid">
+        <input type="hidden" value="" id="campanhas_editar_hash">
 
         <div class="bloco">
           <label for="campanhas_editar_nome">Nome</label>
@@ -150,10 +151,14 @@
             <select id="campanhas_editar_uuid_medida_padrao" name="campanhas_editar_uuid_medida_padrao"></select>
           </div>
 
-          <div class="bloco">
+          <div class="bloco bloco-atencao">
+            <label>Caso não seja selecionada nenhuma moeda, a campanha terá Peças de Ouro, Prata e Cobre por padrão.</label>
+          </div>
+
+          <div class="bloco bloco-subtitulo">
             <label class="subtitulo">Moedas disponíveis na campanha</label>
           </div>
-          <div class="lista" id="campanhas_editar_lista_moedas">
+          <div class="lista" id="campanhas_editar_moedas_utilizadas">
             <!--
             <div class="bloco menor bloco-checkbox">
               <input type="checkbox">
@@ -164,6 +169,49 @@
               <label>Peça de Cobre (pc)</label>
             </div>
             -->
+          </div>
+
+          <div class="bloco bloco-atencao">
+            <label>Atenção: salve o "Link do Narrador". Somente por ele você poderá acessar esta página de configuração.</label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link do Narrador</label>
+            <button type="button" id="campanhas_editar_url_narrador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" hash="" id="campanhas_editar_url_narrador"></a>
+            </label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link dos Jogadores</label>
+            <button type="button" id="campanhas_editar_url_jogador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" hash="" id="campanhas_editar_url_jogador"></a>
+            </label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link de Visualização</label>
+            <button type="button" id="campanhas_editar_url_visualizador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" hash="" id="campanhas_editar_url_visualizador"></a>
+            </label>
           </div>
 
           <!-- Permissão -->

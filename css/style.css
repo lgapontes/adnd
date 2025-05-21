@@ -697,14 +697,27 @@ div.inventario div.linha div.bloco {
 div.inventario div.linha div.bloco > label.subtitulo {
   display: block;
   float: left;
-  width: 100%;
+  width: 75%;
   box-sizing: border-box;
   padding: 0;
   line-height: 30px;
   font-weight: bold;
   background-color: rgba(0, 0, 0, 0);
   font-size: 1.2em;
+}
+
+div.inventario div.linha div.bloco-subtitulo {
   margin-top: 10px;
+}
+
+div.inventario div.linha div.bloco-cor {
+  background-color: rgba(59, 39, 11, .1);
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+div.inventario div.linha div.bloco-link {
+  margin-top: 0;
 }
 
 div.inventario div.linha div.lista {
@@ -736,6 +749,16 @@ div.inventario div.linha div.bloco > label {
 
 div.inventario div.linha div.bloco > label.maior {
   width: 30%;
+}
+
+div.inventario div.linha div.bloco > label.link {
+  width: 100%;
+  background-color: rgba(59, 39, 11, .1);
+}
+
+div.inventario div.linha div.bloco > label.link > a {
+  text-decoration: underline;
+  color: #1565c0;
 }
 
 div.inventario div.linha div.bloco > input[type=text],
@@ -791,6 +814,32 @@ div.inventario div.linha div.bloco-checkbox > input[type=checkbox] {
   width: 15px;
   height: 15px;
   margin: 6px 2px 0 5px;
+}
+
+div.inventario div.linha div.bloco > button[type=button] {
+  float: right;
+}
+
+div.inventario div.linha div.bloco > button[type=button]:focus {
+  float: right;
+  background-color: #df562c;
+}
+
+div.inventario div.linha div.bloco-atencao {
+  background-color: rgba(191, 54, 12, 0.5);
+  padding: 5px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+div.inventario div.linha div.bloco-atencao > label {
+  display: block;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1em;
 }
 
 /* Inventário - render */
@@ -877,6 +926,10 @@ div.inventario div.linha div.bloco-checkbox > input[type=checkbox] {
 
   div.inventario div.linha div.bloco > label {
     width: 10%;
+  }
+
+  div.inventario div.linha div.bloco-atencao > label {
+    width: 100%;
   }
 
   div.inventario div.linha div.bloco > label.maior {

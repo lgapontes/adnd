@@ -99,6 +99,43 @@ function obterHash() {
   }
 }
 
+function adicionarValorNoJSON(json,id,valor) {
+  let field = id.replace("campanhas_editar_", "");
+  json[field] = valor;
+}
+
+function obterValorCheckbox(json,id) {
+  let valor = document.getElementById(id).checked;
+  adicionarValorNoJSON(json,id,valor);
+}
+
+function obterValorInputText(json,id) {
+  let valor = document.getElementById(id).value;
+  adicionarValorNoJSON(json,id,valor);
+}
+
+function obterValorSelect(json,id) {
+  let select = document.getElementById(id);
+  let valor = select.options[select.selectedIndex].value;
+  adicionarValorNoJSON(json,id,valor);
+}
+
+function obterValorListaCheckbox(json,id) {
+  let lista = [...document.querySelectorAll(`#${id} input[type=checkbox]`)];
+  let valores = lista.filter(checkbox => {if (checkbox.checked) return checkbox; }).map(checkbox => checkbox.id);
+  adicionarValorNoJSON(json,id,valores);
+}
+
+function obterValorLink(json,id) {
+  let link = document.getElementById(id);
+  let valor = link.getAttribute('hash');
+  adicionarValorNoJSON(json,id,valor);
+}
+
+function copiarParaClipboard(value) {
+  navigator.clipboard.writeText(value);
+}
+
 /******************************************************************************/
 /******************************      API       ********************************/
 /******************************************************************************/
@@ -660,7 +697,12 @@ function render_campanhas_editar_campo(propriedade,valor,callback) {
     let nome_tag = `campanhas_editar_${propriedade}`;
     let tag = document.getElementById(nome_tag);
 
-    if (propriedade === 'uuid_medida_padrao') {
+    if ( (propriedade === 'url_narrador') || (propriedade === 'url_jogador') || (propriedade === 'url_visualizador') ) {
+      let url = `https://flechamagica.com.br/aded2/inventario.html?hash=${valor}`;
+      tag.href = url;
+      tag.innerHTML = url;
+      tag.setAttribute('hash',valor);
+    } else if (propriedade === 'uuid_medida_padrao') {
       callback();
     } else {
       if (tag.type === 'checkbox') {
@@ -716,14 +758,6 @@ function renderLista(id,lista,campoChaveLista,campoTextoLista,selecionados,campo
   });
 }
 
-/*
-  TODO
-  Lista de personagens
-  Colocar rota pra hash até de personagens
-  opcao de salvar campanha deve validar hash salvo no localStorage
-  criar opçao de salvar campanha
-*/
-
 function render_campanhas_editar_permissoes(json) {
   document.getElementById('campanhas_editar_atualizar').addEventListener('click',campanhas_editar_atualizar);
 
@@ -734,6 +768,9 @@ function render_campanhas_editar_permissoes(json) {
     document.getElementById('campanhas_editar_permissao').style.display = 'block';
     document.getElementById('personagens_listar_inserir').style.display = 'block';
     document.getElementById('campanhas_editar_salvar').addEventListener('click',campanhas_editar_salvar);
+    document.getElementById('campanhas_editar_url_narrador_botao').addEventListener('click',campanhas_editar_botao_narrador);
+    document.getElementById('campanhas_editar_url_jogador_botao').addEventListener('click',campanhas_editar_botao_jogador);
+    document.getElementById('campanhas_editar_url_visualizador_botao').addEventListener('click',campanhas_editar_botao_visualizador);
   } else if (itsTrue(json.campanha.eh_jogador)) {
     document.getElementById('campanhas_editar_salvar').style.display = 'none';
     disableInput('campanhas_editar_nome');
@@ -762,7 +799,7 @@ function render_campanhas_editar(json,callback) {
           render_campanhas_editar_campo(propriedade,valor,()=>{
             if (index === (propriedades.length - 1)) {
               renderLista(
-                'campanhas_editar_lista_moedas',
+                'campanhas_editar_moedas_utilizadas',
                 json.moedas,
                 'uuid','moeda',
                 json.moedas_utilizadas,
@@ -798,9 +835,73 @@ function campanhas_editar_atualizar(event) {
   location.reload();
 }
 
+function campanhas_editar_botoes_copiar(event,id) {
+  event.preventDefault();
+  let url = document.getElementById(id).href;
+  copiarParaClipboard(url);
+}
+
+function campanhas_editar_botao_narrador(event) {
+  campanhas_editar_botoes_copiar(event,'campanhas_editar_url_narrador');
+}
+
+function campanhas_editar_botao_jogador(event) {
+  campanhas_editar_botoes_copiar(event,'campanhas_editar_url_jogador');
+}
+
+function campanhas_editar_botao_visualizador(event) {
+  campanhas_editar_botoes_copiar(event,'campanhas_editar_url_visualizador');
+}
+
 function campanhas_editar_salvar(event) {
   event.preventDefault();
-  console.log('blz');
+  let hash = document.getElementById('campanhas_editar_hash').value;
+  let eh_nova_campanha = ( (hash === undefined) || (hash === null) || (hash === '') );
+
+  let json = {
+    hash: hash
+  };
+  obterValorInputText(json,'campanhas_editar_uuid');
+
+  obterValorInputText(json,'campanhas_editar_nome');
+  obterValorInputText(json,'campanhas_editar_narrador');
+  obterValorInputText(json,'campanhas_editar_data_cadastro');
+
+  obterValorCheckbox(json,'campanhas_editar_controlar_peso');
+  obterValorCheckbox(json,'campanhas_editar_permitir_incluir_item');
+  obterValorCheckbox(json,'campanhas_editar_permitir_alterar_item');
+  obterValorCheckbox(json,'campanhas_editar_permitir_alterar_quantidade_item');
+  obterValorCheckbox(json,'campanhas_editar_permitir_excluir_item');
+  obterValorCheckbox(json,'campanhas_editar_permitir_entregar_item');
+  obterValorCheckbox(json,'campanhas_editar_permitir_alterar_moedas');
+  obterValorCheckbox(json,'campanhas_editar_permitir_entregar_moedas');
+
+  obterValorSelect(json,'campanhas_editar_uuid_medida_padrao');
+
+  obterValorListaCheckbox(json,'campanhas_editar_moedas_utilizadas');
+
+  obterValorLink(json,'campanhas_editar_url_narrador');
+  obterValorLink(json,'campanhas_editar_url_jogador');
+  obterValorLink(json,'campanhas_editar_url_visualizador');
+
+  openLoading();
+  if (eh_nova_campanha) {
+
+  } else {
+    alterar(
+      'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+      json,
+      (json)=>{
+        let url = `${window.location.pathname}?hash=${json.url_narrador}`;
+        window.location.href = url;
+        closeLoading();
+      },
+      (erro)=>{
+        console.error(erro);
+        closeLoading();
+      },
+    );
+  }
 }
 
 /******************************************************************************/
@@ -821,6 +922,7 @@ function iniciar() {
       'hash',
       hash,
       (json)=>{
+        document.getElementById('campanhas_editar_hash').value = hash;
         render_campanhas_editar(json,()=>{
           console.log(json);
           closeLoading();
