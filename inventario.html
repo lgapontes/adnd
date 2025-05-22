@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="css/vanilla-toast.css">
     <link rel="stylesheet" type="text/css" href="css/ficha.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -25,6 +26,9 @@
     <div class="loading" id="loading"></div>
 
     <header>
+      <button type="button" id="header-botao-voltar">
+        <img src="img/arrow-left-solid.svg">
+      </button>
       <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed">
     </header>
 
@@ -51,13 +55,42 @@
 
     <div class="inventario">
 
+      <div class="shimmer shimmer-menor shimmer-effect"></div>
+      <div class="shimmer shimmer-maior shimmer-effect"></div>
+
+      <div class="erro" id="inventario-erro">
+        <label>Sorry, o site rolou um erro crítico :(</label>
+      </div>
+
       <!-- Campanhas Listar -->
       <div class="titulo" id="campanhas_titulo">
         <h2>Campanhas</h2>
-        <button>
+        <button id="campanhas_nova_abrir">
           <img src="img/plus-solid.svg" />
           <span>Inserir Campanha</span>
         </button>
+      </div>
+
+      <div class="linha" id="campanhas_nova">
+        <div class="bloco">
+          <label>Nome</label>
+          <input type="text" value="" id="campanhas_nova_nome">
+        </div>
+        <div class="bloco">
+          <label>Narrador</label>
+          <input type="text" value="" id="campanhas_nova_narrador">
+        </div>
+        <div class="bloco bloco-botoes">
+          <button type="button" class="cancelar" id="campanhas_nova_cancelar">
+  					<img src="img/xmark-solid.svg">
+  					<span>Cancelar</span>
+  				</button>
+
+          <button type="button" id="campanhas_nova_salvar">
+  					<img src="img/floppy-disk-solid.svg">
+  					<span>Salvar</span>
+  				</button>
+        </div>
       </div>
 
       <div class="linhas" id="campanhas_listar">
@@ -93,9 +126,9 @@
         </button>
       </div>
 
-      <div class="linha linha-editar">
+      <div class="linha linha-editar" id="campanhas_editar_form">
         <input type="hidden" value="" id="campanhas_editar_uuid">
-        <input type="hidden" value="" id="campanhas_editar_hash">
+        <input type="hidden" value="" id="campanhas_editar_url">
 
         <div class="bloco">
           <label for="campanhas_editar_nome">Nome</label>
@@ -184,7 +217,7 @@
           </div>
           <div class="bloco bloco-link">
             <label class="link">
-              <a href="" hash="" id="campanhas_editar_url_narrador"></a>
+              <a href="" url="" id="campanhas_editar_url_narrador"></a>
             </label>
           </div>
 
@@ -197,7 +230,7 @@
           </div>
           <div class="bloco bloco-link">
             <label class="link">
-              <a href="" hash="" id="campanhas_editar_url_jogador"></a>
+              <a href="" url="" id="campanhas_editar_url_jogador"></a>
             </label>
           </div>
 
@@ -210,7 +243,7 @@
           </div>
           <div class="bloco bloco-link">
             <label class="link">
-              <a href="" hash="" id="campanhas_editar_url_visualizador"></a>
+              <a href="" url="" id="campanhas_editar_url_visualizador"></a>
             </label>
           </div>
 
@@ -232,6 +265,8 @@
 
     </div>
 
+    <script src="js/palavras-proibidas.js"></script>
+    <script src="js/vanilla-toast.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/rolador-inventario.js"></script>
   </body>

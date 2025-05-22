@@ -594,6 +594,45 @@ main.menu > a.menu > span {
 
 /* Inventário */
 
+.shimmer-effect {
+  color: grey;
+  display: inline-block;
+  mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/350% 100%;
+  animation: shimmer 1.5s infinite;
+  animation-delay: 0;
+  font-size: 50px;
+  max-width: 200px;
+}
+
+@keyframes shimmer {
+  100% {
+    mask-position: left
+  }
+}
+
+div.inventario > div.shimmer {
+  display: block;
+  width: 800px;
+  max-width: 95%;
+  min-width: 380px;
+  box-sizing: border-box;
+
+  background-color: #dddddd;
+  margin: 5px auto 10px auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+}
+
+div.inventario > div.shimmer-maior {
+  height: 120px;
+}
+
+div.inventario > div.shimmer-menor {
+  height: 40px;
+}
+
 div.inventario > div.titulo {
   display: block;
   width: 800px;
@@ -662,6 +701,41 @@ div.inventario > div.linhas {
   width: 100%;
 }
 
+div.inventario div.erro {
+  display: none;
+  width: 800px;
+  height: 863px;
+  max-width: 95%;
+  min-width: 380px;
+  box-sizing: border-box;
+
+  background-image: url(../img/erro.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 -240px;
+
+  margin: 5px auto 5px auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0 15px 5px 15px;
+
+  border: 2px solid #000000; /* rgba(59, 39, 11, .3); */
+}
+
+div.inventario div.erro > label {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  text-align: center;
+  margin: 30px auto 0 auto;
+  line-height: 30px;
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, .2);
+  font-size: 1.3em;
+  color: #af2600;
+}
+
 div.inventario div.linha {
   display: block;
   width: 800px;
@@ -669,13 +743,17 @@ div.inventario div.linha {
   min-width: 380px;
   box-sizing: border-box;
 
-  background-image: linear-gradient(#edecd1, #dbdabd);
+  background-image: url(../img/background.jpg);
   margin: 5px auto 5px auto;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 0 15px 5px 15px;
 
   border: 2px solid #000000; /* rgba(59, 39, 11, .3); */
+}
+
+div.inventario div.linha-link:hover {
+  background-image: linear-gradient(#fdfce1, #ebeacd);
 }
 
 div.inventario div.linha-editar {
@@ -761,6 +839,20 @@ div.inventario div.linha div.bloco > label.link > a {
   color: #1565c0;
 }
 
+div.inventario div.linha div.bloco > div.input-like {
+  display: block;
+  float: left;
+  width: 80%;
+  line-height: 22px;
+  text-indent: 3px;
+  box-sizing: border-box;
+  padding-top: 4px;
+  font-family: "Oregon-LDO", sans-serif;
+  font-size: 1.1em;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 div.inventario div.linha div.bloco > input[type=text],
 div.inventario div.linha div.bloco > input[type=number] {
   display: block;
@@ -842,6 +934,15 @@ div.inventario div.linha div.bloco-atencao > label {
   font-size: 1em;
 }
 
+div.inventario > div.linha > div.bloco-botoes > button.cancelar {
+  float: left;
+  background-color: #ff865c;
+}
+
+div.inventario > div.linha > div.bloco-botoes > button.cancelar:hover {
+  background-color: #ef764c;
+}
+
 /* Inventário - render */
 
 #campanhas_titulo {
@@ -849,6 +950,18 @@ div.inventario div.linha div.bloco-atencao > label {
 }
 
 #campanhas_listar {
+  display: none;
+}
+
+#campanhas_editar {
+  display: none;
+}
+
+#campanhas_editar_form {
+  display: none;
+}
+
+#personagens_listar {
   display: none;
 }
 
@@ -869,6 +982,18 @@ div.inventario div.linha div.bloco-atencao > label {
 }
 
 #campanhas_editar_permissao {
+  display: none;
+}
+
+#toast-container > div {
+    opacity:1;
+}
+
+#campanhas_nova {
+  display: none;
+}
+
+#inventario-erro {
   display: none;
 }
 
@@ -940,6 +1065,10 @@ div.inventario div.linha div.bloco-atencao > label {
     width: 80%;
   }
 
+  div.inventario div.linha div.bloco > div.input-like {
+    width: 90%;
+  }
+
   div.inventario div.linha div.bloco > input[type=text],
   div.inventario div.linha div.bloco > input[type=number] {
     width: 90%;
@@ -947,6 +1076,10 @@ div.inventario div.linha div.bloco-atencao > label {
 
   div.inventario div.linha div.menor > label {
     width: 20%;
+  }
+
+  div.inventario div.linha div.menor > div.input-like {
+    width: 80%;
   }
 
   div.inventario div.linha div.menor > input[type=text],

@@ -5,6 +5,8 @@
 document.getElementById('texto-formulario-versao').innerHTML = versao_texto;
 
 function openLoading() {
+  esconder_todos();
+  mostrar_shimmer();
   document.getElementById('loading').style.display = 'block';
 }
 
@@ -65,10 +67,10 @@ function enableInput(id) {
   document.getElementById(id).removeAttribute('readonly');
 }
 
-function hashEhValido(hash) {
-  if ( (hash !== undefined) && (hash !== null) && (hash !== '') ) {
-    if (typeof hash === 'string' || hash instanceof String) {
-      if (hash.length === 36) {
+function uuidEhValido(uuid) {
+  if ( (uuid !== undefined) && (uuid !== null) && (uuid !== '') ) {
+    if (typeof uuid === 'string' || uuid instanceof String) {
+      if (uuid.length === 36) {
         return true;
       }
     }
@@ -76,31 +78,42 @@ function hashEhValido(hash) {
   return false;
 }
 
-function salvarHash(hash) {
-  if (hashEhValido(hash)) {
-    localStorage.setItem('hash', hash);
+function stringEhValida(s) {
+  if ( (s !== undefined) && (s !== null) && (s !== '') ) {
+    if (typeof s === 'string' || s instanceof String) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function salvarUrl(url) {
+  if (uuidEhValido(url)) {
+    localStorage.setItem('url', url);
     return true;
   } else {
-    limparHash();
+    limparUrl();
     return false;
   }
 }
 
-function limparHash() {
-  localStorage.removeItem('hash');
+function limparUrl() {
+  localStorage.removeItem('url');
 }
 
-function obterHash() {
-  let hash = localStorage.getItem('hash');
-  if (hash !== null) {
-    return {valido: true, valor: hash};
+function obterUrlStorage() {
+  let url = localStorage.getItem('url');
+  if (url !== null) {
+    return {valido: true, valor: url};
   } else {
     return {valido: false, valor: null};
   }
 }
 
 function adicionarValorNoJSON(json,id,valor) {
-  let field = id.replace("campanhas_editar_", "");
+  let field = id;
+  field = field.replace("campanhas_nova_", "");
+  field = field.replace("campanhas_editar_", "");
   json[field] = valor;
 }
 
@@ -128,12 +141,71 @@ function obterValorListaCheckbox(json,id) {
 
 function obterValorLink(json,id) {
   let link = document.getElementById(id);
-  let valor = link.getAttribute('hash');
+  let valor = link.getAttribute('url');
   adicionarValorNoJSON(json,id,valor);
 }
 
 function copiarParaClipboard(value) {
   navigator.clipboard.writeText(value);
+}
+
+const TEMPO_DURACAO_TOAST = 3000;
+
+function renderErrorToast(msg) {
+  vanillaToast.error(msg,{
+    duration: TEMPO_DURACAO_TOAST,
+    closeButton: false,
+  });
+}
+
+function renderWarningToast(msg) {
+  vanillaToast.warning(msg,{
+    duration: TEMPO_DURACAO_TOAST,
+    closeButton: false,
+  });
+}
+
+function renderToast(msg) {
+  vanillaToast.default(msg,{
+    duration: TEMPO_DURACAO_TOAST,
+    closeButton: false,
+  });
+}
+
+/******************************************************************************/
+/******************************    VALIDAÇÃO   ********************************/
+/******************************************************************************/
+
+function palavraEhProibida(text) {
+  if (PALAVRAS_PROIBIDAS.some(word => text.includes(word))) {
+    return true;
+  }
+  if (FRASES_PROIBIDAS.some(v => text.includes(v))) {
+    return true;
+  }
+  return false;
+}
+
+function validarCampanha(json) {
+  if (!stringEhValida(json.nome)) {
+    renderWarningToast('O campo Nome está inválido!');
+    return false;
+  }
+  if (palavraEhProibida(json.nome)) {
+    renderWarningToast('Há palavras proibidas no campo Nome!');
+    return false;
+  }
+
+  if (!stringEhValida(json.narrador)) {
+    renderWarningToast('O campo Narrador está inválido!');
+    return false;
+  }
+  if (palavraEhProibida(json.narrador)) {
+    renderWarningToast('Há palavras proibidas no campo Narrador!');
+    return false;
+  }
+
+  return true;
 }
 
 /******************************************************************************/
@@ -199,14 +271,16 @@ function obter(url,uuid,sucesso,falha) {
     );
 }
 
-function obterCampanha(url,hash,sucesso,falha) {
+/*
+function obterCampanha(url,url,sucesso,falha) {
     consumirAPI(
         'GET',
-        `${url}?uuid=${uuid}`,
+        `${url}?url=${url}`,
         sucesso,
         falha
     );
 }
+*/
 
 function obterItensPorPersonagem(url,personagem,sucesso,falha) {
     consumirAPI(
@@ -367,18 +441,6 @@ excluir(
 
 listar(
   'https://www.flechamagica.com.br/aded2/api/campanhas.php',
-  (json)=>{
-    console.log(json);
-  },
-  (erro)=>{
-    console.error(erro);
-  },
-);
-
-obter_com_parametro(
-  'https://www.flechamagica.com.br/aded2/api/campanhas.php',
-  'hash',
-  'df901cea-04cf-40f1-900c-bf32d6689e78',
   (json)=>{
     console.log(json);
   },
@@ -634,26 +696,32 @@ document.getElementById('texto-botao-esconder').addEventListener('click',(event)
   document.getElementById('texto-bloco').style.display = 'none';
 });
 
-function renderBloco(textLabel,inputType,inputDisabled,inputValue,blocoMenor) {
+function renderBloco(textLabel,inputType,inputDisabled,inputValue,blocoMenor,blocoDireita) {
   let bloco = document.createElement('div');
   bloco.classList.add('bloco');
 
   if (blocoMenor) {
     bloco.classList.add('menor');
   }
+  if (blocoDireita) {
+    bloco.classList.add('menor-direita');
+  }
 
   let label = document.createElement('label');
   label.innerHTML = textLabel;
 
-  let input = document.createElement('input');
-  input.setAttribute('type',inputType);
+  let input = document.createElement('div');
+  input.classList.add('input-like');
+  input.innerHTML = inputValue;
 
+  /*
+  input.setAttribute('type',inputType);
   if (inputDisabled) {
     input.setAttribute('readonly','readonly');
     input.setAttribute('disabled','disabled');
   }
-
   input.value = inputValue;
+  */
 
   bloco.appendChild(label);
   bloco.appendChild(input);
@@ -661,16 +729,22 @@ function renderBloco(textLabel,inputType,inputDisabled,inputValue,blocoMenor) {
   return bloco;
 }
 
-function renderLinhaCampanha(nome,narrador,criacao) {
+function renderLinhaCampanha(nome,narrador,criacao,url_visualizador) {
   let linha = document.createElement('div');
   linha.classList.add('linha');
-  linha.appendChild(renderBloco('Nome','text',true,nome,false));
-  linha.appendChild(renderBloco('Narrador','text',true,narrador,true));
-  linha.appendChild(renderBloco('Criação','text',true,criacao,true));
+  linha.classList.add('linha-link');
+  linha.appendChild(renderBloco('Nome','text',true,nome,false,false));
+  linha.appendChild(renderBloco('Narrador','text',true,narrador,true,false));
+  linha.appendChild(renderBloco('Criação','text',true,criacao,true,true));
+  linha.addEventListener('click',(event)=>{
+    campanhas_listar_exibir(event,url_visualizador);
+  });
   return linha;
 }
 
 function renderCampanhas(lista,callback) {
+  console.log(lista);
+
   let linhas = document.getElementById('campanhas_listar');
   linhas.innerHTML = '';
 
@@ -678,7 +752,7 @@ function renderCampanhas(lista,callback) {
     callback();
   } else {
     lista.forEach((entry, index) => {
-      let linha = renderLinhaCampanha(entry.nome,entry.narrador,entry.cadastro);
+      let linha = renderLinhaCampanha(entry.nome,entry.narrador,entry.cadastro,entry.url_visualizador);
       linhas.appendChild(linha);
 
       if (index == (lista.length - 1)) {
@@ -698,10 +772,10 @@ function render_campanhas_editar_campo(propriedade,valor,callback) {
     let tag = document.getElementById(nome_tag);
 
     if ( (propriedade === 'url_narrador') || (propriedade === 'url_jogador') || (propriedade === 'url_visualizador') ) {
-      let url = `https://flechamagica.com.br/aded2/inventario.html?hash=${valor}`;
+      let url = `https://flechamagica.com.br/aded2/inventario.html?url=${valor}`;
       tag.href = url;
       tag.innerHTML = url;
-      tag.setAttribute('hash',valor);
+      tag.setAttribute('url',valor);
     } else if (propriedade === 'uuid_medida_padrao') {
       callback();
     } else {
@@ -830,6 +904,77 @@ function render_campanhas_editar(json,callback) {
 /******************************     EVENTOS     *******************************/
 /******************************************************************************/
 
+document.getElementById('header-botao-voltar').addEventListener('click',(event)=>{
+  event.preventDefault();
+  let url = `${window.location.pathname}`;
+  window.location.href = url;
+});
+
+document.getElementById('campanhas_nova_cancelar').addEventListener('click',(event)=>{
+  event.preventDefault();
+  document.getElementById('campanhas_nova_nome').value = '';
+  document.getElementById('campanhas_nova_narrador').value = '';
+  esconder_elemento('campanhas_nova');
+});
+
+document.getElementById('campanhas_nova_salvar').addEventListener('click',(event)=>{
+  event.preventDefault();
+
+  let url_narrador = generateUUID();
+  let json = {
+    url_narrador: url_narrador
+  };
+  obterValorInputText(json,'campanhas_nova_nome');
+  obterValorInputText(json,'campanhas_nova_narrador');
+
+  if (validarCampanha(json)) {
+    openLoading();
+    inserir(
+      'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+      json,
+      ()=>{
+        /* Campanha SALVA, obter dados */
+        obter_com_parametro(
+          'https://www.flechamagica.com.br/aded2/api/campanhas.php',
+          'url',
+          url_narrador,
+          (json_retorno)=>{
+            history.pushState({}, "narrador", `?url=${url_narrador}`);
+            router('campanhas_editar');
+            document.getElementById('campanhas_editar_url').value = url_narrador;
+            render_campanhas_editar(json_retorno,()=>{
+              closeLoading();
+            });
+          },
+          (erro)=>{
+            router('campanhas_listar');
+            console.error(erro);
+            closeLoading();
+            renderErrorToast('Ocorreu um erro ao obter os dados!');
+          },
+        );
+        /* Campanha SALVA, obter dados */
+      },
+      (erro)=>{
+        console.error(erro);
+        closeLoading();
+        renderErrorToast('Ocorreu um erro ao salvar os dados!');
+      },
+    );
+  }
+});
+
+document.getElementById('campanhas_nova_abrir').addEventListener('click',(event)=>{
+  event.preventDefault();
+  mostrar_elemento('campanhas_nova');
+});
+
+function campanhas_listar_exibir(event,url_visualizador) {
+  event.preventDefault();
+  let url = `${window.location.pathname}?url=${url_visualizador}`;
+  window.location.href = url;
+}
+
 function campanhas_editar_atualizar(event) {
   event.preventDefault();
   location.reload();
@@ -855,11 +1000,10 @@ function campanhas_editar_botao_visualizador(event) {
 
 function campanhas_editar_salvar(event) {
   event.preventDefault();
-  let hash = document.getElementById('campanhas_editar_hash').value;
-  let eh_nova_campanha = ( (hash === undefined) || (hash === null) || (hash === '') );
+  let url = document.getElementById('campanhas_editar_url').value;
 
   let json = {
-    hash: hash
+    url: url
   };
   obterValorInputText(json,'campanhas_editar_uuid');
 
@@ -884,24 +1028,86 @@ function campanhas_editar_salvar(event) {
   obterValorLink(json,'campanhas_editar_url_jogador');
   obterValorLink(json,'campanhas_editar_url_visualizador');
 
-  openLoading();
-  if (eh_nova_campanha) {
-
-  } else {
+  if (validarCampanha(json)) {
+    openLoading();
     alterar(
       'https://www.flechamagica.com.br/aded2/api/campanhas.php',
       json,
-      (json)=>{
-        let url = `${window.location.pathname}?hash=${json.url_narrador}`;
-        window.location.href = url;
-        closeLoading();
+      (json_retorno)=>{
+        router('campanhas_editar');
+        render_campanhas_editar(json_retorno,()=>{
+          closeLoading();
+          renderToast('Campanha atualizada com sucesso!');
+        });
       },
       (erro)=>{
+        router('campanhas_editar');
         console.error(erro);
         closeLoading();
+        renderErrorToast('Ocorreu um erro ao salvar os dados!');
       },
     );
   }
+}
+
+/******************************************************************************/
+/******************************     ROUTER      *******************************/
+/******************************************************************************/
+
+function obterUrl() {
+  let url_pagina = new URLSearchParams(window.location.search);
+  let url = url_pagina.get('url');
+  let possui_url = salvarUrl(url);
+
+  return {
+    url: url,
+    possui_url: possui_url,
+  };
+}
+
+function mostrar_shimmer() {
+  document.querySelector('div.shimmer-menor').style.display = 'block';
+  document.querySelector('div.shimmer-maior').style.display = 'block';
+}
+
+function esconder_shimmer() {
+  document.querySelector('div.shimmer-menor').style.display = 'none';
+  document.querySelector('div.shimmer-maior').style.display = 'none';
+}
+
+function esconder_todos() {
+  esconder_elemento('inventario-erro');
+  esconder_elemento('campanhas_editar');
+  esconder_elemento('campanhas_editar_form');
+  esconder_elemento('personagens_listar');
+  esconder_elemento('header-botao-voltar');
+  esconder_elemento('campanhas_titulo');
+  esconder_elemento('campanhas_nova');
+  esconder_elemento('campanhas_listar');
+}
+
+function router(rota,mensagem) {
+  esconder_todos();
+
+  if (rota === 'erro') {
+    mostrar_elemento('inventario-erro');
+    if (stringEhValida(mensagem)) {
+      document.querySelector('#inventario-erro > label').innerHTML = mensagem;
+    } else {
+      document.querySelector('#inventario-erro > label').innerHTML = 'Sorry, o site rolou um erro crítico :(';
+    }
+  } else if (rota === 'campanhas_editar') {
+    mostrar_elemento('campanhas_editar');
+    mostrar_elemento('campanhas_editar_form');
+    mostrar_elemento('personagens_listar');
+
+    mostrar_elemento('header-botao-voltar');
+  } else if (rota === 'campanhas_listar') {
+    mostrar_elemento('campanhas_titulo');
+    mostrar_elemento('campanhas_listar');
+  }
+
+  esconder_shimmer();
 }
 
 /******************************************************************************/
@@ -909,44 +1115,45 @@ function campanhas_editar_salvar(event) {
 /******************************************************************************/
 
 function iniciar() {
-  openLoading();
-
   console.log(`Versão ${VERSION}`);
-  let url = new URLSearchParams(window.location.search);
-  let hash = url.get('hash');
-  let possui_hash = salvarHash(hash);
 
-  if (possui_hash) {
+  openLoading();
+  let pagina = obterUrl();
+
+  if (pagina.possui_url) {
     obter_com_parametro(
       'https://www.flechamagica.com.br/aded2/api/campanhas.php',
-      'hash',
-      hash,
+      'url',
+      pagina.url,
       (json)=>{
-        document.getElementById('campanhas_editar_hash').value = hash;
+        router('campanhas_editar');
+        document.getElementById('campanhas_editar_url').value = pagina.url;
         render_campanhas_editar(json,()=>{
-          console.log(json);
           closeLoading();
         });
       },
       (erro)=>{
+        router('erro','Sorry, mas sua campanha não foi encontrada :(');
         console.error(erro);
         closeLoading();
+        renderErrorToast('Ocorreu um erro ao obter os dados!');
       },
     );
   } else {
-    mostrar_elemento('campanhas_titulo');
-    mostrar_elemento('campanhas_listar');
 
     listar(
       'https://www.flechamagica.com.br/aded2/api/campanhas.php',
       (json)=>{
+        router('campanhas_listar');
         renderCampanhas(json,()=>{
           closeLoading();
         });
       },
       (erro)=>{
+        router('campanhas_listar');
         console.error(erro);
         closeLoading();
+        renderErrorToast('Ocorreu um erro ao obter os dados!');
       },
     );
   }
