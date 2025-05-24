@@ -1079,7 +1079,7 @@ function esconder_todos() {
   esconder_elemento('inventario-erro');
   esconder_elemento('campanhas_editar');
   esconder_elemento('campanhas_editar_form');
-  esconder_elemento('personagens_listar');
+  esconder_elemento('personagens_listar_titulo');
   esconder_elemento('header-botao-voltar');
   esconder_elemento('campanhas_titulo');
   esconder_elemento('campanhas_nova');
@@ -1099,7 +1099,7 @@ function router(rota,mensagem) {
   } else if (rota === 'campanhas_editar') {
     mostrar_elemento('campanhas_editar');
     mostrar_elemento('campanhas_editar_form');
-    mostrar_elemento('personagens_listar');
+    mostrar_elemento('personagens_listar_titulo');
 
     mostrar_elemento('header-botao-voltar');
   } else if (rota === 'campanhas_listar') {
