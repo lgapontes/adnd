@@ -829,6 +829,17 @@ div.inventario div.linha div.bloco > label.maior {
   width: 30%;
 }
 
+div.inventario div.linha div.bloco > label.enviar {
+  width: 20%;
+}
+
+div.inventario div.linha div.bloco > label.sem-registros {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 1.1em;
+  text-align: center;
+}
+
 div.inventario div.linha div.bloco > label.link {
   width: 100%;
   background-color: rgba(59, 39, 11, .1);
@@ -837,6 +848,10 @@ div.inventario div.linha div.bloco > label.link {
 div.inventario div.linha div.bloco > label.link > a {
   text-decoration: underline;
   color: #1565c0;
+}
+
+div.inventario div.linha div.bloco > label.moeda {
+  width: 70%;
 }
 
 div.inventario div.linha div.bloco > div.input-like {
@@ -870,6 +885,23 @@ div.inventario div.linha div.bloco > input[type=number] {
   background-color: rgba(59, 39, 11, .1);
 }
 
+div.inventario div.linha div.bloco > input[type=text].menor,
+div.inventario div.linha div.bloco > input[type=number].menor {
+  width: 70%;
+}
+
+div.inventario div.linha div.bloco > input[type=number].moeda {
+  width: 30%;
+  text-align: center;
+  text-indent: 0;
+}
+
+div.inventario div.linha div.bloco > input[type=number].enviar {
+  width: 20%;
+  text-align: center;
+  text-indent: 0;
+}
+
 div.inventario div.linha div.bloco > input[disabled] {
   background-color: #cccccc;
   color: #666666;
@@ -888,6 +920,17 @@ div.inventario div.linha div.bloco > select > option {
   font-size: 1.1em;
   font-family: "Oregon-LDO", sans-serif;
   color: #423c2b;
+}
+
+div.inventario div.linha div.bloco > select.enviar {
+  width: 60%;
+  border-left: 4px solid rgba(59, 39, 11, .3);
+  box-sizing: border-box;
+}
+
+div.inventario div.linha div.menor-direita > select.enviar {
+  width: 80%;
+  border: 0;
 }
 
 div.inventario div.linha div.bloco-checkbox {
@@ -934,12 +977,14 @@ div.inventario div.linha div.bloco-atencao > label {
   font-size: 1em;
 }
 
-div.inventario > div.linha > div.bloco-botoes > button.cancelar {
+div.inventario > div.linha > div.bloco-botoes > button[type=button].cancelar {
   float: left;
   background-color: #ff865c;
 }
 
-div.inventario > div.linha > div.bloco-botoes > button.cancelar:hover {
+div.inventario > div.linha > div.bloco-botoes > button[type=button].cancelar:focus,
+div.inventario > div.linha > div.bloco-botoes > button[type=button].cancelar:hover {
+  float: left;
   background-color: #ef764c;
 }
 
@@ -994,6 +1039,50 @@ div.inventario > div.linha > div.bloco-botoes > button.cancelar:hover {
 }
 
 #inventario-erro {
+  display: none;
+}
+
+#personagens_listar_sem_registros {
+  display: none;
+}
+
+#personagens_editar {
+  display: none;
+}
+
+#personagens_editar_form {
+  display: none;
+}
+
+#personagens_editar_permissao_mensagem {
+  display: none;
+}
+
+#personagens_editar_permissao_narrador {
+  display: none;
+}
+
+#personagens_editar_permissao_jogador {
+  display: none;
+}
+
+#personagens_editar_salvar {
+  display: none;
+}
+
+#personagens_editar_controlar_peso {
+  display: none;
+}
+
+#personagens_novo {
+  display: none;
+}
+
+#personagens_editar_enviar_moedas {
+  display: none;
+}
+
+#personagens_editar_form_enviar_moedas {
   display: none;
 }
 
@@ -1058,11 +1147,15 @@ div.inventario > div.linha > div.bloco-botoes > button.cancelar:hover {
   }
 
   div.inventario div.linha div.bloco > label.maior {
-    width: 20%;
+    width: 30%;
+  }
+
+  div.inventario div.linha div.bloco > label.moeda {
+    width: 70%;
   }
 
   div.inventario div.linha div.bloco > select {
-    width: 80%;
+    width: 70%;
   }
 
   div.inventario div.linha div.bloco > div.input-like {
@@ -1085,6 +1178,17 @@ div.inventario > div.linha > div.bloco-botoes > button.cancelar:hover {
   div.inventario div.linha div.menor > input[type=text],
   div.inventario div.linha div.menor > input[type=number] {
     width: 80%;
+  }
+
+  div.inventario div.linha div.bloco > input[type=text].menor,
+  div.inventario div.linha div.bloco > input[type=number].menor {
+    width: 70%;
+  }
+
+  div.inventario div.linha div.bloco > input[type=number].moeda {
+    width: 30%;
+    text-align: center;
+    text-indent: 0;
   }
 
   div.inventario div.linha div.bloco-checkbox > label {

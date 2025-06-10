@@ -27,6 +27,7 @@
 
     <header>
       <button type="button" id="header-botao-voltar">
+        <input type="hidden" value="" id="header-botao-voltar-url">
         <img src="img/arrow-left-solid.svg">
       </button>
       <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed">
@@ -262,9 +263,175 @@
         </button>
       </div>
 
-      <div class="linhas" id="personagens_listar">        
+      <div class="linha" id="personagens_novo">
+        <div class="bloco">
+          <label>Nome</label>
+          <input type="text" value="" id="personagens_novo_nome">
+        </div>
+        <div class="bloco">
+          <label>Jogador</label>
+          <input type="text" value="" id="personagens_novo_jogador">
+        </div>
+        <div class="bloco bloco-botoes">
+          <button type="button" class="cancelar" id="personagens_novo_cancelar">
+  					<img src="img/xmark-solid.svg">
+  					<span>Cancelar</span>
+  				</button>
+
+          <button type="button" id="personagens_novo_salvar">
+  					<img src="img/floppy-disk-solid.svg">
+  					<span>Salvar</span>
+  				</button>
+        </div>
+      </div>
+
+      <div class="linhas" id="personagens_listar">
+        <!--
+        <div class="linha" id="personagens_listar_sem_registros">
+          <div class="bloco">
+            <label class="sem-registros">Campanha sem personagens</label>
+          </div>
+        </div>
+        -->
       </div>
       <!-- Personagens Listar -->
+
+      <!-- Personagens Editar -->
+      <div class="titulo titulo-editar" id="personagens_editar">
+        <h2>Personagem</h2>
+        <button id="personagens_editar_salvar">
+          <img src="img/floppy-disk-solid.svg" />
+          <span>Salvar</span>
+        </button>
+        <button id="personagens_editar_atualizar">
+          <img src="img/rotate-right-solid.svg" />
+          <span>Atualizar</span>
+        </button>
+      </div>
+
+      <div class="linha linha-editar" id="personagens_editar_form">
+
+        <input type="hidden" value="" id="personagens_editar_uuid">
+        <input type="hidden" value="" id="personagens_editar_url">
+        <input type="hidden" value="" id="personagens_editar_uuid_campanha">
+
+        <div class="bloco menor">
+          <label for="personagens_editar_nome">Nome</label>
+          <input type="text" value="" id="personagens_editar_nome" name="personagens_editar_nome" readonly disabled>
+        </div>
+        <div class="bloco menor menor-direita">
+          <label for="personagens_editar_jogador">Jogador</label>
+          <input type="text" value="" id="personagens_editar_jogador" name="personagens_editar_jogador" readonly disabled>
+        </div>
+
+        <div class="permissao" id="personagens_editar_controlar_peso">
+          <!-- Permissão -->
+
+          <div class="bloco menor">
+            <label for="personagens_editar_peso_maximo" class="maior">Peso Máximo</label>
+            <input type="text" class="menor" value="" id="personagens_editar_peso_maximo" name="personagens_editar_peso_maximo" readonly disabled>
+          </div>
+          <div class="bloco menor menor-direita">
+            <label for="personagens_editar_medida">Medida</label>
+            <input type="text" value="" id="personagens_editar_medida" name="personagens_editar_medida" readonly disabled>
+          </div>
+
+          <!-- Permissão -->
+        </div>
+
+        <div class="bloco bloco-subtitulo">
+          <label class="subtitulo">Moedas do Personagem</label>
+        </div>
+        <div class="lista" id="personagens_editar_moedas">
+          <!--
+          <div class="bloco menor">
+            <label class="moeda">Peça de Cerâmica (pc)</label>
+            <input class="moeda" type="number" value="">
+          </div>
+          <div class="bloco menor menor-direita">
+            <label class="moeda">Bits (1/10 Peça de Cerâmica)</label>
+            <input class="moeda" type="number" value="">
+          </div>
+          -->
+        </div>
+
+        <div class="permissao" id="personagens_editar_permissao">
+          <!-- Permissão -->
+
+          <div class="bloco bloco-atencao">
+            <label>Atenção: passe o "Link do Jogador" para o jogador para que ele possa gerenciar seus itens.</label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link do Narrador</label>
+            <button type="button" id="personagens_editar_url_narrador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" url="" id="personagens_editar_url_narrador"></a>
+            </label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link do Jogador</label>
+            <button type="button" id="personagens_editar_url_jogador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" url="" id="personagens_editar_url_jogador"></a>
+            </label>
+          </div>
+
+          <div class="bloco bloco-subtitulo bloco-cor">
+            <label class="subtitulo">Link de Visualização</label>
+            <button type="button" id="personagens_editar_url_visualizador_botao">
+    					<img src="img/copy-regular.svg">
+    					<span>Copiar</span>
+    				</button>
+          </div>
+          <div class="bloco bloco-link">
+            <label class="link">
+              <a href="" url="" id="personagens_editar_url_visualizador"></a>
+            </label>
+          </div>
+
+          <!-- Permissão -->
+        </div>
+
+      </div>
+
+      <div class="titulo titulo-editar" id="personagens_editar_enviar_moedas">
+        <h2>Enviar moedas</h2>
+        <button id="personagens_editar_enviar_moedas_button">
+          <img src="img/share-from-square-solid.svg" />
+          <span>Enviar</span>
+        </button>
+      </div>
+
+      <div class="linha linha-editar" id="personagens_editar_form_enviar_moedas">
+
+        <div class="bloco menor">
+          <label class="enviar" for="personagens_editar_form_enviar_moedas_quantidade">Moedas</label>
+          <input class="enviar" type="number" min="0" value="0" id="personagens_editar_form_enviar_moedas_quantidade" name="personagens_editar_form_enviar_moedas_quantidade">
+          <select class="enviar" id="personagens_editar_form_enviar_moedas_moeda" name="personagens_editar_form_enviar_moedas_moeda">
+            <option>Selecione</option>
+          </select>
+        </div>
+        <div class="bloco menor menor-direita">
+          <label class="enviar" for="personagens_editar_form_enviar_moedas_personagem">Para</label>
+          <select class="enviar" id="personagens_editar_form_enviar_moedas_personagem" name="personagens_editar_form_enviar_moedas_personagem">
+            <option>Selecione</option>
+          </select>
+        </div>
+
+      </div>
+      <!-- Personagens Editar -->
 
     </div>
 
