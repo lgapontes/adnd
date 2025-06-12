@@ -117,6 +117,29 @@
 
     /* Router */
 
+    /* Sistemas */
+
+    function obterSistemas($conexao) {
+        $registros = array();
+
+        $query = "select * from sistemas where data_exclusao is null order by nome";
+
+        $resultado = $conexao->query($query);
+        if (!$resultado) {
+            throw new Exception("Erro no banco de dados: " . $conexao->error);
+        }
+
+        if ($resultado->num_rows > 0) {
+            while($registro = $resultado->fetch_assoc()) {
+                array_push($registros,$registro);
+            }
+        }
+
+        return $registros;
+    }
+
+    /* Sistemas */
+
     /* Moedas */
 
     function obterMoedas($conexao) {
@@ -318,7 +341,8 @@
             uuid_medida_padrao,
             url_narrador,
             url_jogador,
-            url_visualizador
+            url_visualizador,
+            uuid_sistema
         ) VALUES (
             ?,
             ?,
@@ -333,6 +357,7 @@
             '542fc103-6cbd-4ecc-b457-2959dd0ffe7f',
             ?,
             ?,
+            ?,
             ?
         )
         QUERY;
@@ -343,7 +368,8 @@
             $registro['narrador'],
             $registro['url_narrador'],
             $registro['url_jogador'],
-            $registro['url_visualizador']
+            $registro['url_visualizador'],
+            $registro['sistema']
         ]);
 
         if (!$resultado) {
@@ -404,7 +430,8 @@
             permitir_entregar_item = ?,
             permitir_alterar_moedas = ?,
             permitir_entregar_moedas = ?,
-            uuid_medida_padrao = ?
+            uuid_medida_padrao = ?,
+            uuid_sistema = ?
         where uuid = ?
         QUERY;
 
@@ -420,6 +447,7 @@
             $registro['permitir_alterar_moedas'],
             $registro['permitir_entregar_moedas'],
             $registro['uuid_medida_padrao'],
+            $registro['sistema'],
             $registro['uuid']
         ]);
 
@@ -434,9 +462,60 @@
     function obterCampanhas($conexao) {
         $registros = array();
 
-        $query = "select nome, narrador, url_visualizador, DATE_FORMAT(data_cadastro, '%d/%m/%Y %H:%i:%s') as cadastro from campanhas where data_exclusao is null order by data_cadastro desc";
+        $query = <<<QUERY
+          select
+            campanhas.uuid as uuid,
+            campanhas.nome as nome,
+            campanhas.narrador as narrador,
+            campanhas.url_visualizador as url_visualizador,
+            DATE_FORMAT(campanhas.data_cadastro, '%d/%m/%Y %H:%i:%s') as cadastro,
+            sistemas.uuid as uuid_sistema,
+            sistemas.nome as sistema
+          from
+            campanhas
+            inner join sistemas on sistemas.uuid = campanhas.uuid_sistema
+          where campanhas.data_exclusao is null
+          order by campanhas.data_cadastro desc
+        QUERY;
 
         $resultado = $conexao->query($query);
+        if (!$resultado) {
+            throw new Exception("Erro no banco de dados: " . $conexao->error);
+        }
+
+        if ($resultado->num_rows > 0) {
+            while($registro = $resultado->fetch_assoc()) {
+                array_push($registros,$registro);
+            }
+        }
+
+        return $registros;
+    }
+
+    function obterCampanhasPorSistema($conexao,$uuid_campanha) {
+        $registros = array();
+
+        $query = <<<QUERY
+          select
+            campanhas.uuid as uuid,
+            campanhas.nome as nome,
+            campanhas.narrador as narrador,
+            campanhas.url_visualizador as url_visualizador,
+            DATE_FORMAT(campanhas.data_cadastro, '%d/%m/%Y %H:%i:%s') as cadastro,
+            sistemas.uuid as uuid_sistema,
+            sistemas.nome as sistema
+          from
+            campanhas
+            inner join sistemas on sistemas.uuid = campanhas.uuid_sistema
+          where
+            campanhas.data_exclusao is null and
+            campanhas.uuid_sistema = (select uuid_sistema from campanhas where uuid = ?)
+          order by campanhas.data_cadastro desc
+        QUERY;
+
+        // $resultado = $conexao->query($query);
+        $resultado = $conexao->execute_query($query, [$uuid_campanha]);
+
         if (!$resultado) {
             throw new Exception("Erro no banco de dados: " . $conexao->error);
         }
@@ -478,14 +557,17 @@
             THEN true ELSE false END as eh_jogador,
             CASE WHEN url_visualizador = ?
             THEN true ELSE false END as eh_visualizador,
-            DATE_FORMAT(campanhas.data_cadastro, '%d/%m/%Y %H:%i:%s') as data_cadastro
+            DATE_FORMAT(campanhas.data_cadastro, '%d/%m/%Y %H:%i:%s') as data_cadastro,
+            sistemas.uuid as uuid_sistema,
+            sistemas.nome as sistema
         from campanhas
         inner join medidas on medidas.uuid = campanhas.uuid_medida_padrao
+        inner join sistemas on sistemas.uuid = campanhas.uuid_sistema
         where
         	(url_narrador = ? or
             url_jogador = ? or
             url_visualizador = ?) AND
-            data_exclusao is null
+            campanhas.data_exclusao is null
         QUERY;
 
         $resultado = $conexao->execute_query($query, [$url,$url,$url,$url,$url,$url]);
@@ -586,6 +668,26 @@
         }
 
         return $registro["uuid"];
+    }
+
+    function alterarCampanhaPersonagem($conexao,$url,$uuid_personagem,$uuid_campanha) {
+
+        $query = <<<QUERY
+          update personagens set
+            uuid_campanha=?
+          where uuid=?
+        QUERY;
+
+        $resultado = $conexao->execute_query($query,[
+            $uuid_campanha,
+            $uuid_personagem
+        ]);
+
+        if (!$resultado) {
+            throw new Exception("Erro no banco de dados: " . $conexao->error);
+        }
+
+        return obterPersonagem($conexao,$url);
     }
 
     function alterarPersonagem($conexao,$registro) {

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8">
-    <title>Advanced Dungeon & Dragons 2ed</title>
+    <title>Gerenciador de Inventários</title>
 		<link rel="icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -14,10 +14,10 @@
     <link rel="stylesheet" type="text/css" href="css/ficha.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <meta property="og:title" content="Advanced Dungeon & Dragons 2ed" />
-    <meta property="og:image" content="img/adnd.jpg" />
-    <meta property="og:description" content="Rolador de personagens, NPCs, itens e Grimórios de AD&D 2ed."/>
-    <meta property="og:url" content="https://flechamagica.com.br/aded/"/>
+    <meta property="og:title" content="Gerenciador de Inventários" />
+    <meta property="og:image" content="img/inventario.jpg" />
+    <meta property="og:description" content="Gerenciador de Inventários do Flecha Mágica!"/>
+    <meta property="og:url" content="https://flechamagica.com.br/inventario/"/>
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="627" />
     <meta property="og:type" content="website"/>
@@ -25,16 +25,16 @@
   <body>
     <div class="loading" id="loading"></div>
 
-    <header>
+    <header class="black">
       <button type="button" id="header-botao-voltar">
         <input type="hidden" value="" id="header-botao-voltar-url">
         <img src="img/arrow-left-solid.svg">
       </button>
-      <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed">
+      <!-- <img src="img/logo.png" alt="Advanced Dungeon & Dragons 2ed"> -->
     </header>
 
     <main class="texto">
-      <h2>Inventário de AD&D 2ed</h2>
+      <h2>Gerenciador de Inventários</h2>
       <div class="em-construcao" id="texto-formulario-versao">Versão 0.0.1</div>
 
       <br>
@@ -50,7 +50,7 @@
 
       <br>
       <div class="bloco-texto" id="texto-bloco">
-        Este é um gerenciador de inventário de itens de personagens para <b>Advanced Dungeons and Dragons 2ª edição</b>. Crie suas campanhas, configure os jogadores e organize o inventário para facilitar o consumo e manutenção dos itens durante os jogos. Ao criar sua campanha <b>SALVE</b> os links indicados, principalmente o <b>Link do Narrador</b> - somente através dele você poderá modificar os dados de sua campanha. Caso o perca não será possível acessá-la como narrador. O <b>Link dos Jogadores</b> pode ser distribuído aos jogadores. O <b>Link de Visualização</b> é acessível por todos neste site e é útil para acompanhar as alterações dos inventários (como por exemplo em uma Stream).
+        Este é um gerenciador de inventários de itens de personagens para campanhas medievais. Crie suas campanhas, configure os jogadores e organize o inventário para facilitar o consumo e manutenção dos itens durante os jogos. Ao criar sua campanha <b>SALVE</b> os links indicados, principalmente o <b>Link do Narrador</b> - somente através dele você poderá modificar os dados de sua campanha. Caso o perca não será possível acessá-la como narrador. O <b>Link dos Jogadores</b> pode ser distribuído aos jogadores. O <b>Link de Visualização</b> é acessível por todos neste site e é útil para acompanhar as alterações dos inventários (como por exemplo em uma Stream).
       </div>
     </main>
 
@@ -80,6 +80,10 @@
         <div class="bloco">
           <label>Narrador</label>
           <input type="text" value="" id="campanhas_nova_narrador">
+        </div>
+        <div class="bloco">
+          <label>Sistema</label>
+          <select id="campanhas_nova_sistema" class="sistema"></select>
         </div>
         <div class="bloco bloco-botoes">
           <button type="button" class="cancelar" id="campanhas_nova_cancelar">
@@ -131,10 +135,16 @@
         <input type="hidden" value="" id="campanhas_editar_uuid">
         <input type="hidden" value="" id="campanhas_editar_url">
 
-        <div class="bloco">
+        <div class="bloco menor">
           <label for="campanhas_editar_nome">Nome</label>
           <input type="text" value="" id="campanhas_editar_nome" name="campanhas_editar_nome" readonly disabled>
         </div>
+        <div class="bloco menor menor-direita">
+          <label>Sistema</label>
+          <!-- <input type="text" value="" id="campanhas_editar_sistema" readonly disabled> -->
+          <select id="campanhas_editar_sistema" class="sistema"></select>
+        </div>
+
         <div class="bloco menor">
           <label for="campanhas_editar_narrador">Narrador</label>
           <input type="text" value="" id="campanhas_editar_narrador" name="campanhas_editar_narrador" readonly disabled>
@@ -430,6 +440,23 @@
           </select>
         </div>
 
+      </div>
+
+      <div class="titulo titulo-editar" id="personagens_editar_alterar_campanhas">
+        <h2>Alterar Campanha</h2>
+        <button id="personagens_editar_alterar_campanhas_button">
+          <img src="img/share-from-square-solid.svg" />
+          <span>Alterar</span>
+        </button>
+      </div>
+
+      <div class="linha linha-editar" id="personagens_editar_form_alterar_campanhas">
+        <div class="bloco">
+          <label class="maior" for="personagens_editar_form_alterar_campanhas_campanha">Campanha</label>
+          <select id="personagens_editar_form_alterar_campanhas_campanha" name="personagens_editar_form_alterar_campanhas_campanha">
+            <option>Selecione</option>
+          </select>
+        </div>
       </div>
       <!-- Personagens Editar -->
 

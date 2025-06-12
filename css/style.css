@@ -60,6 +60,12 @@ header img {
   height: 40px;
 }
 
+header.black {
+  background-image: none;
+  background: #211707;
+  background: linear-gradient(#4b3921, #000000);
+}
+
 /* HEADER */
 
 /* MAIN */
@@ -933,6 +939,14 @@ div.inventario div.linha div.menor-direita > select.enviar {
   border: 0;
 }
 
+div.inventario div.linha div.bloco > select.sistema {
+  width: 80%;
+}
+
+div.inventario div.linha div.menor > select.sistema {
+  width: 80% !important;
+}
+
 div.inventario div.linha div.bloco-checkbox {
   width: 100%;
   background-color: rgba(59, 39, 11, .3);
@@ -1086,6 +1100,14 @@ div.inventario > div.linha > div.bloco-botoes > button[type=button].cancelar:hov
   display: none;
 }
 
+#personagens_editar_alterar_campanhas {
+  display: none;
+}
+
+#personagens_editar_form_alterar_campanhas {
+  display: none;
+}
+
 /* Configurações por IDs */
 
 @media (min-width: 800px) {
@@ -1156,6 +1178,10 @@ div.inventario > div.linha > div.bloco-botoes > button[type=button].cancelar:hov
 
   div.inventario div.linha div.bloco > select {
     width: 70%;
+  }
+
+  div.inventario div.linha div.bloco > select.sistema {
+    width: 90%;
   }
 
   div.inventario div.linha div.bloco > div.input-like {

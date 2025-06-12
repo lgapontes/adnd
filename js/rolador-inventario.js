@@ -136,6 +136,7 @@ function adicionarValorNoJSON(json,id,valor) {
   field = field.replace("personagens_novo_", "");
   field = field.replace("personagens_editar_", "");
   field = field.replace("form_enviar_moedas_", "");
+  field = field.replace("form_alterar_campanhas_", "");
   json[field] = valor;
 }
 
@@ -242,6 +243,11 @@ function validarCampanha(json) {
   }
   if (palavraEhProibida(json.narrador)) {
     renderWarningToast('Há palavras proibidas no campo Narrador!');
+    return false;
+  }
+
+  if (!uuidEhValido(json.sistema)) {
+    renderWarningToast('Sistema não selecionado!');
     return false;
   }
 
@@ -645,11 +651,12 @@ function renderBloco(textLabel,inputType,inputDisabled,inputValue,blocoMenor,blo
   return bloco;
 }
 
-function renderLinhaCampanha(nome,narrador,criacao,url_visualizador) {
+function renderLinhaCampanha(nome,narrador,criacao,url_visualizador,sistema) {
   let linha = document.createElement('div');
   linha.classList.add('linha');
   linha.classList.add('linha-link');
-  linha.appendChild(renderBloco('Nome','text',true,nome,false,false));
+  linha.appendChild(renderBloco('Nome','text',true,nome,true,false));
+  linha.appendChild(renderBloco('Sistema','text',true,sistema,true,true));
   linha.appendChild(renderBloco('Narrador','text',true,narrador,true,false));
   linha.appendChild(renderBloco('Criação','text',true,criacao,true,true));
   linha.addEventListener('click',(event)=>{
@@ -658,23 +665,39 @@ function renderLinhaCampanha(nome,narrador,criacao,url_visualizador) {
   return linha;
 }
 
-function renderCampanhas(lista,callback) {
+function renderCampanhas(lista,sistemas,callback) {
   let linhas = document.getElementById('campanhas_listar');
   linhas.innerHTML = '';
 
-  if (lista.length == 0) {
-    callback();
-  } else {
-    lista.forEach((entry, index) => {
-      let linha = renderLinhaCampanha(entry.nome,entry.narrador,entry.cadastro,entry.url_visualizador);
-      linhas.appendChild(linha);
-
-      if (index == (lista.length - 1)) {
+  preecherSelect(
+    'campanhas_nova_sistema',
+    sistemas,
+    'uuid',
+    (entry)=>`${entry.nome}`,
+    '',
+    ()=>{
+      // Sistemas preenchidos
+      if (lista.length == 0) {
         callback();
-      }
-    });
+      } else {
+        lista.forEach((entry, index) => {
+          let linha = renderLinhaCampanha(
+            entry.nome,
+            entry.narrador,
+            entry.cadastro,
+            entry.url_visualizador,
+            entry.sistema
+          );
+          linhas.appendChild(linha);
 
-  }
+          if (index == (lista.length - 1)) {
+            callback();
+          }
+        });
+      }
+      // Sistemas preenchidos
+    }
+  );
 }
 
 function render_alterar_link_gerar_url(valor) {
@@ -690,7 +713,7 @@ function render_alterar_link(tag,valor) {
 }
 
 function render_campanhas_editar_campo(propriedade,valor,callback) {
-  let ignorar_propriedades = ['medida','sigla','eh_narrador','eh_jogador','eh_visualizador'];
+  let ignorar_propriedades = ['medida','sigla','eh_narrador','eh_jogador','eh_visualizador','sistema'];
   if (ignorar_propriedades.includes(propriedade)) {
     callback();
   } else {
@@ -701,6 +724,8 @@ function render_campanhas_editar_campo(propriedade,valor,callback) {
       render_alterar_link(tag,valor);
       callback();
     } else if (propriedade === 'uuid_medida_padrao') {
+      callback();
+    } else if (propriedade === 'uuid_sistema') {
       callback();
     } else {
       if (tag.type === 'checkbox') {
@@ -867,10 +892,19 @@ function render_campanhas_editar(json,callback) {
                 json.moedas_utilizadas,
                 'uuid_moeda',
                 ()=>{
-                  listarPersonagens(()=>{
-                    closeLoading();
-                    callback();
-                  });
+                  preecherSelect(
+                    'campanhas_editar_sistema',
+                    json.sistemas,
+                    'uuid',
+                    (entry)=>`${entry.nome}`,
+                    json.campanha.uuid_sistema,
+                    ()=>{
+                      listarPersonagens(()=>{
+                        closeLoading();
+                        callback();
+                      });
+                    }
+                  );
                 }
               );
             }
@@ -945,7 +979,7 @@ function renderListaMoedas(json,callback) {
 }
 
 function render_personagens_editar_campo(propriedade,valor,callback) {
-  let ignorar_propriedades = ['eh_jogador','eh_narrador','eh_visualizador','sigla','uuid_medida_peso_maximo','url_campanha','permissoes','personagens_campanha'];
+  let ignorar_propriedades = ['eh_jogador','eh_narrador','eh_visualizador','sigla','uuid_medida_peso_maximo','url_campanha','permissoes','personagens_campanha','campanhas'];
   if (ignorar_propriedades.includes(propriedade)) {
     callback();
   } else {
@@ -988,6 +1022,8 @@ function render_personagens_editar_permissoes(json) {
       mostrar_elemento('personagens_editar_enviar_moedas');
       mostrar_elemento('personagens_editar_form_enviar_moedas');
     }
+    mostrar_elemento('personagens_editar_alterar_campanhas');
+    mostrar_elemento('personagens_editar_form_alterar_campanhas');
   } else if (itsTrue(json.eh_jogador)) {
     mostrar_elemento('personagens_editar_salvar');
     enableInput('personagens_editar_nome');
@@ -1026,19 +1062,31 @@ function render_personagens_editar(json,callback) {
           '',
           ()=>{
             // Combo personagens preenchido
-            let propriedades = Object.keys(json);
-            propriedades.forEach((propriedade, index) => {
-              let valor = json[propriedade];
 
-              render_personagens_editar_campo(propriedade,valor,()=>{
-                if (index === (propriedades.length - 1)) {
-                  renderListaMoedas(json,()=>{
-                    closeLoading();
-                    callback();
+            preecherSelect(
+              'personagens_editar_form_alterar_campanhas_campanha',
+              json.campanhas,
+              'uuid',
+              (entry)=>`${entry.campanha}`,
+              '',
+              ()=>{
+                // Combo campanhas preenchido
+                let propriedades = Object.keys(json);
+                propriedades.forEach((propriedade, index) => {
+                  let valor = json[propriedade];
+
+                  render_personagens_editar_campo(propriedade,valor,()=>{
+                    if (index === (propriedades.length - 1)) {
+                      renderListaMoedas(json,()=>{
+                        closeLoading();
+                        callback();
+                      });
+                    }
                   });
-                }
-              });
-            });
+                });
+                // Combo campanhas preenchido
+              }
+            );
             // Combo personagens preenchido
           }
         );
@@ -1090,6 +1138,7 @@ function campanhas_editar_salvar(event) {
   obterValorInputText(json,'campanhas_editar_uuid');
 
   obterValorInputText(json,'campanhas_editar_nome');
+  obterValorSelect(json,'campanhas_editar_sistema');
   obterValorInputText(json,'campanhas_editar_narrador');
   obterValorInputText(json,'campanhas_editar_data_cadastro');
 
@@ -1175,6 +1224,7 @@ function campanhas_nova_salvar_listener(event) {
   };
   obterValorInputText(json,'campanhas_nova_nome');
   obterValorInputText(json,'campanhas_nova_narrador');
+  obterValorSelect(json,'campanhas_nova_sistema');
 
   if (validarCampanha(json)) {
     openLoading();
@@ -1392,6 +1442,7 @@ function personagens_editar_enviar_moedas_button(event) {
         json,
         (json_retorno)=>{
           /* Moedas enviadas com sucesso */
+          document.getElementById('personagens_editar_form_enviar_moedas_quantidade').value = 0;
           router('personagens_editar');
 
           /* Permissões */
@@ -1417,6 +1468,19 @@ function personagens_editar_enviar_moedas_button(event) {
       // Enviar moedas válido
     }
   });
+}
+
+function personagens_editar_alterar_campanhas_button(event) {
+  event.preventDefault();
+  let url = document.getElementById('personagens_editar_url').value;
+
+  let json = {
+    url: url
+  };
+  obterValorSelect(json,'personagens_editar_form_alterar_campanhas_campanha');
+
+  console.log(json);
+  // AQUI
 }
 
 function definirListeners() {
@@ -1446,6 +1510,7 @@ function definirListeners() {
   document.getElementById('personagens_editar_url_jogador_botao').addEventListener('click',personagens_editar_url_jogador_botao);
   document.getElementById('personagens_editar_url_visualizador_botao').addEventListener('click',personagens_editar_url_visualizador_botao);
   document.getElementById('personagens_editar_enviar_moedas_button').addEventListener('click',personagens_editar_enviar_moedas_button);
+  document.getElementById('personagens_editar_alterar_campanhas_button').addEventListener('click',personagens_editar_alterar_campanhas_button);
 }
 
 /******************************************************************************/
@@ -1497,8 +1562,12 @@ function esconder_todos() {
   esconder_elemento('personagens_editar_form');
   esconder_elemento('personagens_editar_permissao');
   esconder_elemento('personagens_novo');
+
   esconder_elemento('personagens_editar_enviar_moedas');
   esconder_elemento('personagens_editar_form_enviar_moedas');
+
+  esconder_elemento('personagens_editar_alterar_campanhas');
+  esconder_elemento('personagens_editar_form_alterar_campanhas');
 }
 
 function router(rota,mensagem) {
@@ -1559,10 +1628,25 @@ function listarCampanhas() {
   listar(
     createURL('campanhas.php'),
     (json)=>{
-      router('campanhas_listar');
-      renderCampanhas(json,()=>{
-        closeLoading();
-      });
+
+      listar(
+        createURL('sistemas.php'),
+        (sistemas)=>{
+          /* Listar campanhas */
+          router('campanhas_listar');
+          renderCampanhas(json,sistemas,()=>{
+            closeLoading();
+          });
+          /* Listar campanhas */
+        },
+        (erro)=>{
+          router('campanhas_listar');
+          console.error(erro);
+          closeLoading();
+          renderErrorToast('Ocorreu um erro ao obter os dados!');
+        },
+      );
+
     },
     (erro)=>{
       router('campanhas_listar');

@@ -1,36 +1,6 @@
 <?php
-    
-    include("banco.php");
-    
-    function obterDadosCampanha($conexao,$url) {
-        $lista = obterCampanha($conexao,$url);
-                
-        if (count($lista) == 1) {
-            header('Content-Type: application/json');
-            
-            $campanha = $lista[0];
-            
-            if ($campanha['eh_visualizador']) {
-                $campanha['url_narrador'] = '';
-                $campanha['url_jogador'] = '';
-            } else if ($campanha['eh_jogador']) {
-                $campanha['url_narrador'] = '';
-            }
-            
-            $retorno = array();
-            $retorno['campanha'] = $campanha;
-            $retorno['personagens'] = obterPersonagensPorCampanha($conexao,$campanha['uuid']);
-            $retorno['moedas'] = obterMoedas($conexao);
-            $retorno['moedas_utilizadas'] = obterMoedasUtilizadas($conexao,$campanha['uuid']);
-            $retorno['medidas'] = obterMedidas($conexao);
-            
-            echo json_encode($retorno, JSON_UNESCAPED_UNICODE);
-            die();
-        } else {
-            header("HTTP/1.1 404");
-            die();
-        }
-    }
+
+    include("services.php");
 
     try {
 
@@ -40,15 +10,16 @@
 
             header("Access-Control-Allow-Methods: GET,POST,OPTIONS,DELETE,PUT");
             die();
-        
+
         } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $body = file_get_contents("php://input");
             $entrada = json_decode($body,true);
-            
+
             if (
                 !array_key_exists("nome",$entrada) ||
                 !array_key_exists("narrador",$entrada) ||
+                !array_key_exists("sistema",$entrada) ||
                 !array_key_exists("url_narrador",$entrada)
             ) {
                 header("HTTP/1.1 400");
@@ -58,17 +29,18 @@
             inserirCampanha($conexao,$entrada);
 
             header("HTTP/1.1 200");
-            die();       
-        
+            die();
+
         } else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
 
             $body = file_get_contents("php://input");
             $entrada = json_decode($body,true);
-            
+
             if (
                 !array_key_exists("url",$entrada) ||
                 !array_key_exists("uuid",$entrada) ||
                 !array_key_exists("nome",$entrada) ||
+                !array_key_exists("sistema",$entrada) ||
                 !array_key_exists("narrador",$entrada) ||
                 !array_key_exists("data_cadastro",$entrada) ||
                 !array_key_exists("controlar_peso",$entrada) ||
@@ -93,27 +65,27 @@
             if (count($lista) == 1) {
                 $campanha = $lista[0];
                 if ($campanha['eh_narrador'] && ($entrada['uuid'] == $campanha['uuid'])) {
-                 
+
                     $url_narrador = alterarCampanha($conexao,$entrada);
 
                     if ($url_narrador) {
-                        
+
                         obterDadosCampanha($conexao,$url_narrador);
-                        
+
                         /*
                         $retorno = array();
                         $retorno['url_narrador'] = $url_narrador;
-                        
+
                         header('Content-Type: application/json');
                         echo json_encode($retorno,JSON_UNESCAPED_UNICODE);
                         die();
                         */
-                        
+
                     } else {
                         header("HTTP/1.1 400");
                         die();
-                    }       
-                    
+                    }
+
                 } else {
                     header("HTTP/1.1 401");
                     die();
@@ -134,13 +106,13 @@
                 die();
             } else {
                 obterDadosCampanha($conexao,$_GET['url']);
-                
+
                 /*
                 $lista = obterCampanha($conexao,$_GET['url']);
-                
+
                 if (count($lista) == 1) {
                     header('Content-Type: application/json');
-                    
+
                     $campanha = $lista[0];
                     $retorno = array();
                     $retorno['campanha'] = $campanha;
@@ -148,7 +120,7 @@
                     $retorno['moedas'] = obterMoedas($conexao);
                     $retorno['moedas_utilizadas'] = obterMoedasUtilizadas($conexao,$campanha['uuid']);
                     $retorno['medidas'] = obterMedidas($conexao);
-                    
+
                     echo json_encode($retorno, JSON_UNESCAPED_UNICODE);
                     die();
                 } else {
@@ -157,7 +129,7 @@
                 }
                 */
             }
-            
+
 
         } else if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
 
@@ -168,7 +140,7 @@
                 die();
             } else {
                 excluirCampanha($conexao,$_GET['uuid']);
-                
+
                 header("HTTP/1.1 200");
                 die();
             }
